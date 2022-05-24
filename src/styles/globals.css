@@ -5,6 +5,12 @@
 @layer base {
   body {
     background: conic-gradient(from 180deg at 50% 50%, #8e269f 0deg, #131d38 88.12deg, #8e269f 360deg);
+    min-height: 100vh;
+    min-height: stretch;
+  }
+
+  html {
+    min-height: stretch;
   }
 }
 
