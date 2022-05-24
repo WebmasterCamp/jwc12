@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    background: conic-gradient(from 180deg at 50% 50%, #8e269f 0deg, #131d38 88.12deg, #8e269f 360deg);
+  }
+}
+
+#tsparticles {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}

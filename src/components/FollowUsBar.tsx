@@ -13,18 +13,18 @@ export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
   return (
     <div className={clsx('inline-block text-xl space-x-4', className)}>
       <span>ติดต่อเราที่</span>
-      <span>
-        <Icon icon={FacebookIcon} className="text-3xl sm:text-4xl inline mr-3" inline />
+      <a href="https://www.facebook.com/jwcth" className="hover:text-gray-200">
+        <Icon icon={FacebookIcon} className="text-2xl sm:text-3xl inline mr-3" inline />
         <span className="hidden md:inline-block font-bold">Junior Webmaster Camp</span>
-      </span>
-      <span>
-        <Icon icon={TwitterIcon} className="text-3xl sm:text-4xl inline mr-3" inline />
+      </a>
+      <a href="https://twitter.com/jwcth" className="hover:text-gray-200">
+        <Icon icon={TwitterIcon} className="text-2xl sm:text-3xl inline mr-3" inline />
         <span className="hidden md:inline-block font-bold">@jwcth</span>
-      </span>
-      <span>
-        <Icon icon={InstagramIcon} className="text-3xl sm:text-4xl inline mr-3" inline />
+      </a>
+      <a href="https://www.instagram.com/jwcth/" className="hover:text-gray-200">
+        <Icon icon={InstagramIcon} className="text-2xl sm:text-3xl inline mr-3" inline />
         <span className="hidden md:inline-block font-bold">@jwcth</span>
-      </span>
+      </a>
     </div>
   )
 }
