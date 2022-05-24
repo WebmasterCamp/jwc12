@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import Particles from 'react-tsparticles'
 import { loadFull } from 'tsparticles'
 import { FollowUsBar } from '../components/FollowUsBar'
@@ -67,11 +66,6 @@ const Home: NextPage = () => {
           detectRetina: true,
         }}
       />
-      <Head>
-        <title>JWC 12 Landing Page</title>
-        <meta name="description" content="JWC" />
-      </Head>
-
       <FollowUsBar className="right-0 top-0 absolute m-3 mt-5 sm:my-5 sm:mx-10" />
 
       <div className="max-w-screen-md mt-32 sm:mt-0 w-full">
