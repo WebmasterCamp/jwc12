@@ -1,0 +1,65 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+permissions:
+  actions: read
+  checks: read
+  contents: write
+  deployments: read
+  issues: write
+  discussions: read
+  packages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: read
+  statuses: write
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+
+      - name: Cahce node_modules
+        uses: c-hive/gha-yarn-cache@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --prefer-offline
+
+      - name: Build Application
+        run: yarn build
+        env:
+          CI: false
+
+      - name: Deploy to Firebase Hosting, Production
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting:production
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Deploy to Firebase Hosting, Staging
+        if: ${{ github.ref == 'refs/heads/yu/feat/staging' }}
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting:staging
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

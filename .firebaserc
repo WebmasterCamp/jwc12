@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "jwc12-landing-63400"
+  },
+  "targets": {
+    "jwc12-landing-63400": {
+      "hosting": {
+        "production": [
+          "jwc12-landing-63400"
+        ],
+        "staging": [
+          "staging-jwc12-landing-63400"
+        ]
+      }
+    }
+  }
+}
