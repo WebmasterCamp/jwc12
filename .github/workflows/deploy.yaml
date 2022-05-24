@@ -57,7 +57,7 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Deploy to Firebase Hosting, Staging
-        if: ${{ github.ref == 'refs/heads/yu/feat/staging' }}
+        if: ${{ github.ref == 'refs/heads/staging' }}
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting:staging
