@@ -15,7 +15,7 @@ export const DefaultSeoConfig: DefaultSeoProps = {
     url: BASE_URL,
     images: [
       {
-        url: `${BASE_URL}/images/og/og_image.png`,
+        url: `${BASE_URL}/images/og/og_image.jpg`,
       },
     ],
   },
@@ -27,7 +27,7 @@ export const DefaultSeoConfig: DefaultSeoProps = {
   additionalMetaTags: [
     {
       property: 'twitter:image',
-      content: `${BASE_URL}/images/og/twitter_card.png`,
+      content: `${BASE_URL}/images/og/twitter_card.jpg`,
     },
   ],
 }
