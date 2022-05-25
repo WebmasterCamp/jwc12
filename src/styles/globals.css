@@ -4,12 +4,23 @@
 
 @layer base {
   body {
-    background: conic-gradient(
-      from 180deg at 50% 50%,
-      #8e269f 0deg,
-      #131d38 88.12deg,
-      #8e269f 360deg
-    );
+    background-image: url('/images/line.png'),
+      conic-gradient(
+        from 180deg at 50% 50%,
+        #8e269f 0deg,
+        #131d38 88.12deg,
+        #8e269f 360deg
+      );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+}
+
+@layer utilities {
+  .min-h-screen {
+    /* min-height: '100vh'; */
+    min-height: '100dvh';
   }
 }
 
@@ -18,4 +29,37 @@
   height: 100%;
   position: absolute;
   z-index: -1;
+}
+
+#document {
+  h2 {
+    @apply mt-4 mb-2 font-sans text-xl font-bold;
+  }
+
+  p {
+    @apply my-2;
+  }
+
+  ul {
+    @apply list-inside list-disc;
+  }
+
+  ol {
+    @apply list-inside list-decimal;
+  }
+
+  ul > ul,
+  ul > ol,
+  ol > ul,
+  ol > ol {
+    @apply ml-6;
+  }
+
+  li {
+    @apply my-1;
+  }
+
+  a {
+    @apply underline;
+  }
 }
