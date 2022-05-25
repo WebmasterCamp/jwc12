@@ -43,10 +43,9 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile --prefer-offline
 
-      - name: Build Application
+      - name: Build Application, Production
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: yarn build
-        env:
-          CI: false
 
       - name: Deploy to Firebase Hosting, Production
         if: ${{ github.ref == 'refs/heads/main' }}
@@ -56,6 +55,12 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
+      - name: Build Application, Staging
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        run: yarn build
+        env:
+          STAGING: '1'
+
       - name: Deploy to Firebase Hosting, Staging
         if: ${{ github.ref == 'refs/heads/staging' }}
         uses: w9jds/firebase-action@master
@@ -63,4 +68,3 @@ jobs:
           args: deploy --only hosting:staging
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          STAGING: '1'
