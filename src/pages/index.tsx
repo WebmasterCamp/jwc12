@@ -14,8 +14,9 @@ const Home: NextPage = () => {
   }
   return (
     <div
-      className="bg-cover relative text-white w-full flex items-center sm:justify-center flex-col px-5"
+      className="bg-cover relative text-white w-full flex items-center min-h-screen sm:justify-center flex-col px-5"
       style={{
+        minHeight: '100dvh',
         backgroundImage: 'url(/line.png)',
       }}
     >

@@ -17,6 +17,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;400;500;700&amp;display=swap"
             rel="stylesheet"
           />
+          <meta name="theme-color" content="#8E269F"></meta>
         </Head>
         <body>
           <Main />
