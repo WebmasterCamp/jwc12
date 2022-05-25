@@ -55,6 +55,7 @@ jobs:
           args: deploy --only hosting:production
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          MODE: 'PRODUCTION'
 
       - name: Deploy to Firebase Hosting, Staging
         if: ${{ github.ref == 'refs/heads/staging' }}
@@ -63,3 +64,4 @@ jobs:
           args: deploy --only hosting:staging
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          MODE: 'STAGING'
