@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   }
   return (
     <div
-      className="bg-cover relative text-white w-full flex items-center min-h-screen sm:justify-center flex-col px-5"
+      className="relative flex min-h-screen w-full flex-col items-center bg-cover px-5 text-white sm:justify-center"
       style={{
         minHeight: '100dvh',
         backgroundImage: 'url(/line.png)',
@@ -67,27 +67,29 @@ const Home: NextPage = () => {
           detectRetina: true,
         }}
       />
-      <FollowUsBar className="right-0 top-0 absolute m-3 mt-5 sm:my-5 sm:mx-10" />
+      <FollowUsBar className="absolute right-0 top-0 m-3 mt-5 sm:my-5 sm:mx-10" />
 
-      <div className="max-w-screen-md mt-32 sm:mt-0 w-full">
-        <div className="mb-10 w-full max-w-xl relative xl:max-w-screen-2xl mx-auto">
-          <img src="/jwc12-temp-logo.png" alt="" className="w-full mx-auto" />
-          <div className="text-3xl font-medium mx-auto text-center sm:absolute sm:bottom-2 w-full leading-7">
+      <div className="mt-32 w-full max-w-screen-md sm:mt-0">
+        <div className="relative mx-auto mb-10 w-full max-w-xl xl:max-w-screen-2xl">
+          <img src="/jwc12-temp-logo.png" alt="" className="mx-auto w-full" />
+          <div className="mx-auto w-full text-center text-3xl font-medium leading-7 sm:absolute sm:bottom-2">
             เราจะกลับมาอีกใน
             <br className="sm:hidden" />
-            <span className="font-bold text-4xl">อนาคต</span>อันใกล้นี้
+            <span className="text-4xl font-bold">อนาคต</span>อันใกล้นี้
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-5 w-full md:w-2/3 mt-10 max-w-screen-sm mx-auto">
+        <div className="mx-auto mt-10 flex w-full max-w-screen-sm flex-col gap-5 sm:flex-row md:w-2/3">
           <input
             type="text"
             placeholder="กรอกอีเมลของคุณ"
-            className="py-2 px-3 rounded-md w-full sm:w-2/3 text-center text-black"
+            className="w-full rounded-md py-2 px-3 text-center text-black sm:w-2/3"
           />
-          <button className="bg-green-500 px-5 rounded-md w-full sm:w-1/3 py-2">รับสมัครข่าวสาร</button>
+          <button className="w-full rounded-md bg-green-500 px-5 py-2 sm:w-1/3">
+            รับสมัครข่าวสาร
+          </button>
         </div>
       </div>
-      <div className="text-sm leading-6 sm:text-lg mx-5 text-center sm:leading-8 mt-12 mb-5 sm:my-0 sm:absolute sm:bottom-10">
+      <div className="mx-5 mt-12 mb-5 text-center text-sm leading-6 sm:absolute sm:bottom-10 sm:my-0 sm:text-lg sm:leading-8">
         Copyright 2022, Young Webmaster Camp,
         <br />
         in associate with Thai Webmaster Association. All right reserved.
