@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { NextPage } from 'next'
 import { DocumentLayout } from '../layouts/document'
 import { ContentWrapper } from '../layouts/document/components/ContentWrap'
@@ -132,6 +133,70 @@ const Page: NextPage = () => {
               &quot;ระยะเวลาในการประมวลผลข้อมูลส่วนบุคคล&quot;
             </li>
           </ul>
+
+          <h2>Data Retention Period</h2>
+
+          <table className="w-full table-auto">
+            <thead className="bg-gray-300">
+              <th className="w-2/12 border px-5 py-3 text-center lg:w-1/12">
+                ลำดับที่
+              </th>
+              <th className="w-auto border px-5 py-3 text-center">
+                ประเภท / รายการข้อมูลส่วนบุคคล
+              </th>
+              <th className="w-3/12 border px-5 py-3 text-center lg:w-2/12">
+                ระยะเวลาประมวลผล
+              </th>
+            </thead>
+            <tbody>
+              {[
+                [
+                  1,
+                  'ข้อมูลที่บ่งชี้ตัวตน อาทิ ชื่อ อายุ สัญชาติ วันเกิด อายุ',
+                  '1 ปี',
+                ],
+                [
+                  2,
+                  'ข้อมูลช่องทางการติดต่อ อาทิ ที่อยู่ สถานที่ติดต่อ เบอร์โทร อีเมล',
+                  '1 ปี',
+                ],
+                [
+                  3,
+                  'ข้อมูลบัญชี อาทิ รายละเอียดการชำระเงิน และบัญชีธนาคาร',
+                  '1 ปี',
+                ],
+                [
+                  4,
+                  'ข้อมูลทางธุรกรรม อาทิ ประวัติการรับบริการต่าง ๆ ประวัติการซื้อขาย',
+                  '1 ปี',
+                ],
+                [
+                  5,
+                  'ข้อมูลส่วนตัว อาทิ ชื่อบัญชีผู้ใช้ รหัสผ่าน การสั่งซื้อ ความสนใจของท่านที่มีต่อบริการต่างๆของผู้ให้บริการ',
+                  '1 ปี',
+                ],
+                [
+                  6,
+                  'ข้อมูลทางการตลาด อาทิ ความพึงพอใจของท่านต่อบริการที่ได้รับ และความเห็นต่อการให้บริการของบุคลากร',
+                  '1 ปี',
+                ],
+              ].map((item, index) => (
+                <tr key={index} className="hover:bg-gray-100">
+                  {item.map((itemDetail, i) => (
+                    <td
+                      className={clsx(
+                        'border px-5 py-3',
+                        i === 0 || i === 2 ? 'text-center' : null
+                      )}
+                      key={`${index}-${i}`}
+                    >
+                      {itemDetail}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
           <h2>สิทธิของเจ้าของข้อมูล</h2>
           <ul>
