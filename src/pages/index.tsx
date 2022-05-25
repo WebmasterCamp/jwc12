@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import Particles from 'react-tsparticles'
 import { loadFull } from 'tsparticles'
 import { FollowUsBar } from '../components/FollowUsBar'
@@ -11,7 +12,7 @@ const Home: NextPage = () => {
       <FollowUsBar className="absolute right-0 top-0 m-3 mt-5 sm:my-5 sm:mx-10" />
 
       <div className="mt-32 w-full max-w-screen-md sm:mt-0">
-        <div className="relative mx-auto mb-10 w-full max-w-xl xl:max-w-screen-2xl">
+        <div className="relative mx-auto mb-8 w-full max-w-xl xl:max-w-screen-2xl">
           <picture>
             <source srcSet="/images/jwc12-logo.avif" type="image/avif" />
             <source srcSet="/images/jwc12-logo.webp" type="image/webp" />
@@ -38,10 +39,19 @@ const Home: NextPage = () => {
             </button>
           </div> */}
       </div>
-      <div className="mx-5 mt-12 mb-5 text-center text-sm leading-6 sm:absolute sm:bottom-10 sm:my-0 sm:text-lg sm:leading-8">
+      <div className="mx-5 mt-12 mb-3 text-center text-sm leading-6 sm:absolute sm:bottom-10 sm:my-0 sm:text-lg sm:leading-8">
         Copyright 2022, Young Webmaster Camp,
         <br />
         in associate with Thai Webmaster Association. All right reserved.
+        <div className="mt-3 text-sm">
+          <Link href="/policy">
+            <a className="underline">Privacy Policy</a>
+          </Link>{' '}
+          |{' '}
+          <Link href="/terms">
+            <a className="underline">Terms and Conditions</a>
+          </Link>
+        </div>
       </div>
     </div>
   )

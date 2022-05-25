@@ -51,7 +51,9 @@
   ul > ul,
   ul > ol,
   ol > ul,
-  ol > ol {
+  ol > ol,
+  li > ul,
+  li > ol {
     @apply ml-6;
   }
 
