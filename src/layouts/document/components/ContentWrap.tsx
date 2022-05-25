@@ -1,0 +1,13 @@
+import { FunctionComponent, ReactNode } from 'react'
+
+interface Props {
+  children: ReactNode
+}
+
+export const ContentWrapper: FunctionComponent<Props> = ({ children }) => {
+  return (
+    <div className="mt-10 rounded-2xl bg-white py-8 px-10 font-serif">
+      {children}
+    </div>
+  )
+}
