@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { NextPage } from 'next'
+import { NextSeo } from 'next-seo'
 import { DocumentLayout } from '../layouts/document'
 import { ContentWrapper } from '../layouts/document/components/ContentWrap'
 import { SectionTitle } from '../layouts/document/components/SectionTitle'
@@ -7,6 +8,7 @@ import { SectionTitle } from '../layouts/document/components/SectionTitle'
 const Page: NextPage = () => {
   return (
     <DocumentLayout>
+      <NextSeo title="นโยบายคุ้มครองข้อมูลส่วนบุคคล" />
       <div className="mb-20">
         <SectionTitle
           title="PRIVACY POLICY"

@@ -6,6 +6,7 @@ const isNoFollow = MODE === 'DEVELOPMENT' || MODE === 'STAGING'
 
 export const DefaultSeoConfig: DefaultSeoProps = {
   defaultTitle: 'Junior Webmaster Camp 12',
+  titleTemplate: '%s | Junior Webmaster Camp 12',
   description: 'JWC 12',
   dangerouslySetAllPagesToNoFollow: isNoFollow,
   dangerouslySetAllPagesToNoIndex: isNoFollow,

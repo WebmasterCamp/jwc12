@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 import { DocumentLayout } from '../layouts/document'
 import { ContentWrapper } from '../layouts/document/components/ContentWrap'
@@ -7,6 +8,7 @@ import { SectionTitle } from '../layouts/document/components/SectionTitle'
 const Page: NextPage = () => {
   return (
     <DocumentLayout>
+      <NextSeo title="ข้อกำหนดและเงื่อนไขการเข้าร่วมโครงการ" />
       <div>
         <SectionTitle
           title="Terms and Conditions"
