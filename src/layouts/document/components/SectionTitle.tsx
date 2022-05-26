@@ -7,9 +7,9 @@ interface Props {
 
 export const SectionTitle: FunctionComponent<Props> = ({ title, subtitle }) => {
   return (
-    <div className="space-y-3 text-center font-sans font-bold text-white">
+    <div className="text-center text-white">
       <h1 className="text-4xl">{title}</h1>
-      {subtitle && <p className="text-xl">{subtitle}</p>}
+      {subtitle && <p className="!mt-5 font-serif text-xl">{subtitle}</p>}
     </div>
   )
 }

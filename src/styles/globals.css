@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'FC Neo Classic';
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassic.eot)
+    format('embedded-opentype');
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassic.woff2) format('woff2'),
+    url(../assets/fonts/FCNeoClassic/FCNeoClassic.woff) format('woff');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FC Neo Classic';
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.eot)
+    format('embedded-opentype');
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.woff2)
+      format('woff2'),
+    url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.woff) format('woff');
+  font-style: italic;
+  font-display: swap;
+}
+
 @layer base {
   body {
     background-image: url('/images/line.png'),
@@ -32,8 +53,12 @@
 }
 
 #document {
+  h1 {
+    @apply font-heading;
+  }
+
   h2 {
-    @apply mt-4 mb-2 font-sans text-xl font-bold;
+    @apply mt-8 mb-5 font-heading text-xl font-bold;
   }
 
   p {
