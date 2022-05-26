@@ -12,14 +12,14 @@ interface Props {
 export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
   return (
     <div className={clsx('inline-block space-x-4 text-xl', className)}>
-      <span>ติดต่อเราที่</span>
+      <span>ติดตามเราที่</span>
       <a href="https://www.facebook.com/jwcth" className="hover:text-[#E4D0A2]">
         <Icon
           icon={FacebookIcon}
           className="mr-3 inline text-2xl sm:text-3xl"
           inline
         />
-        <span className="hidden font-bold md:inline-block">
+        <span className="hidden font-medium md:inline-block">
           Junior Webmaster Camp
         </span>
       </a>
@@ -29,7 +29,7 @@ export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
           className="mr-3 inline text-2xl sm:text-3xl"
           inline
         />
-        <span className="hidden font-bold md:inline-block">@jwcth</span>
+        <span className="hidden font-medium md:inline-block">@jwcth</span>
       </a>
       <a
         href="https://www.instagram.com/jwcth/"
@@ -40,7 +40,7 @@ export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
           className="mr-3 inline text-2xl sm:text-3xl"
           inline
         />
-        <span className="hidden font-bold md:inline-block">@jwcth</span>
+        <span className="hidden font-medium md:inline-block">@jwcth</span>
       </a>
     </div>
   )

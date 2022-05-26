@@ -6,7 +6,7 @@ interface Props {
 
 export const ContentWrapper: FunctionComponent<Props> = ({ children }) => {
   return (
-    <div className="mt-10 rounded-2xl bg-white py-8 px-10 font-serif">
+    <div className="mt-10 rounded-2xl bg-white py-8 px-10 font-serif md:px-16 md:py-14">
       {children}
     </div>
   )
