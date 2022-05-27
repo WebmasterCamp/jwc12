@@ -16,7 +16,7 @@ export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
       <a
         href="https://www.facebook.com/jwcth"
         target="_blank"
-        className="hover:text-[#E4D0A2]"
+        className="hover:text-gold"
         rel="noreferrer"
       >
         <Icon
@@ -30,7 +30,7 @@ export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
       </a>
       <a
         href="https://twitter.com/jwcth"
-        className="hover:text-[#E4D0A2]"
+        className="hover:text-gold"
         target="_blank"
         rel="noreferrer"
       >
@@ -44,7 +44,7 @@ export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
       <a
         href="https://www.instagram.com/jwcth/"
         target="_blank"
-        className="hover:text-[#E4D0A2]"
+        className="hover:text-gold"
         rel="noreferrer"
       >
         <Icon

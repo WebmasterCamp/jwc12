@@ -71,7 +71,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
                   <div className="border p-4">
                     <div className="flex justify-between font-medium">
                       <div>คุกกี้ที่จำเป็น</div>
-                      <div className="text-[#940FA3]">เปิดใช้งานตลอด</div>
+                      <div className="text-primary">เปิดใช้งานตลอด</div>
                     </div>
                     <div className="mt-3 text-sm">
                       คุกกี้มีความจำเป็นสำหรับการทำงานของเว็บไซต์
@@ -87,7 +87,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
                         onChange={() => setGAnalytics(!g_analytics)}
                         className={clsx(
                           'relative inline-flex h-[24px] w-[50px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75',
-                          g_analytics ? 'bg-[#940FA3]' : 'bg-[#D1D5DB]'
+                          g_analytics ? 'bg-primary' : 'bg-gray-300'
                         )}
                       >
                         <span className="sr-only">
@@ -118,7 +118,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
                         onChange={() => setMtPixel(!mt_pixel)}
                         className={clsx(
                           'relative inline-flex h-[24px] w-[50px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75',
-                          mt_pixel ? 'bg-[#940FA3]' : 'bg-[#D1D5DB]'
+                          mt_pixel ? 'bg-primary' : 'bg-gray-300'
                         )}
                       >
                         <span className="sr-only">Meta Pixel Setting</span>
@@ -143,7 +143,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
                 <div className="mt-4 flex justify-end gap-5">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-[#940FA3] px-4 py-2 text-sm font-medium text-white hover:bg-[#660A70] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#940FA3] focus-visible:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                     onClick={handleSubmitConsent}
                   >
                     บันทึกการตั้งค่า

@@ -7,6 +7,15 @@ const config = {
       heading: ['FC Neo Classic', ...fontFamily.sans],
       sans: ['IBM Plex Sans Thai Looped', ...fontFamily.sans],
     },
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#940FA3',
+          accent: '#660A70',
+        },
+        gold: '#E4D0A2',
+      },
+    },
   },
   plugins: [],
 }
