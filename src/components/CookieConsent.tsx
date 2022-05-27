@@ -16,7 +16,7 @@ export const CookieConsent: FunctionComponent<Props> = ({
 }) => {
   const [isSettingDialogOpen, setIsSettingDialogOpen] = useState<boolean>(false)
 
-  console.log(consent)
+  // console.log(consent)
 
   return (
     <>

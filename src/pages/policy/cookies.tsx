@@ -174,7 +174,7 @@ const Page: NextPage = () => {
             <b>ช่องทางการติดต่อ:</b>
             <li>
               อีเมล:{' '}
-              <a href="mailto:ywc@webmaster.or.th">ywc@webmaster.or.th</a>
+              <a href="mailto:jwc@webmaster.or.th">jwc@webmaster.or.th</a>
             </li>
             <li>
               เว็บไซต์:{' '}
