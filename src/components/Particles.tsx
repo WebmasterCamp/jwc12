@@ -46,7 +46,7 @@ export const ParticlesWidget = () => {
             type: 'image',
             options: {
               image: {
-                src: 'images/particle-star.svg',
+                src: '/images/particle-star.svg',
                 replaceColor: true,
                 height: 100,
                 width: 100,
