@@ -6,7 +6,7 @@ import { PDPAConsentCookies } from '../utils/pdpa'
 interface Props {
   isOpen: boolean
   closeModal: () => void
-  consent: PDPAConsentCookies
+  consent: PDPAConsentCookies | undefined
   setConsent: (consent: PDPAConsentCookies) => void
 }
 
@@ -17,13 +17,15 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
   setConsent,
 }) => {
   const [g_analytics, setGAnalytics] = useState<boolean>(
-    consent.g_analytics || true
+    (consent || {}).g_analytics || true
   )
-  const [mt_pixel, setMtPixel] = useState<boolean>(consent.mt_pixel || true)
+  const [mt_pixel, setMtPixel] = useState<boolean>(
+    (consent || {}).mt_pixel || true
+  )
 
   useEffect(() => {
-    setGAnalytics(consent.g_analytics ?? true)
-    setMtPixel(consent.mt_pixel ?? true)
+    setGAnalytics((consent || {}).g_analytics ?? true)
+    setMtPixel((consent || {}).mt_pixel ?? true)
   }, [consent])
 
   const handleSubmitConsent = () => {

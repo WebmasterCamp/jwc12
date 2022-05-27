@@ -6,7 +6,7 @@ import { PDPAConsentCookies, SetPDPAConsentCookie } from '../utils/pdpa'
 import { CookieConsentSettingDialog } from './CookieConsentSettingDialog'
 
 interface Props {
-  consent: PDPAConsentCookies
+  consent: PDPAConsentCookies | undefined
   setConsent: (consent: PDPAConsentCookies) => void
 }
 
@@ -15,6 +15,9 @@ export const CookieConsent: FunctionComponent<Props> = ({
   setConsent,
 }) => {
   const [isSettingDialogOpen, setIsSettingDialogOpen] = useState<boolean>(false)
+
+  console.log(consent)
+
   return (
     <>
       <CookieConsentSettingDialog
@@ -24,7 +27,9 @@ export const CookieConsent: FunctionComponent<Props> = ({
         setConsent={setConsent}
       />
       <Transition
-        show={!consent.g_analytics || !consent.mt_pixel}
+        show={
+          consent !== undefined && (!consent.g_analytics || !consent.mt_pixel)
+        }
         enter="transition-opacity duration-75"
         enterFrom="opacity-0"
         enterTo="opacity-100"

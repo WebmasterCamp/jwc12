@@ -5,7 +5,6 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document'
-import { FB_PIXEL_ID } from '../lib/fpixel'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -30,15 +29,6 @@ class MyDocument extends Document {
           />
           <meta name="theme-color" content="#8E269F" />
           <link rel="icon" href="/images/favicon-4.svg" type="image/svg+xml" />
-          <noscript>
-            <img
-              height="1"
-              width="1"
-              alt="Facebook Pixel"
-              style={{ display: 'none' }}
-              src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
-            />
-          </noscript>
         </Head>
         <body>
           <Main />

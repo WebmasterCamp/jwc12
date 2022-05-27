@@ -41,7 +41,7 @@ const Home: NextPage = () => {
       <div className="mx-5 mt-12 mb-3 text-center text-sm leading-6 sm:absolute sm:bottom-10 sm:my-0 sm:text-lg sm:leading-8">
         Copyright 2022, Young Webmaster Camp,
         <br />
-        in associate with Thai Webmaster Association. All right reserved.
+        in association with Thai Webmaster Association, All rights reserved.
         <div className="mt-3 text-sm">
           <Link href="/policy/privacy">
             <a className="underline">Privacy Policy</a>
