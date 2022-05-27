@@ -1,6 +1,6 @@
 import { DefaultSeoProps } from 'next-seo'
 
-const BASE_URL = process.env.BASE_URL || 'https://jwc.in.th'
+const BASE_URL = process.env.BASE_URL || 'https://12.jwc.in.th'
 const MODE = process.env.MODE || 'production'
 const isNoFollow = MODE === 'DEVELOPMENT' || MODE === 'STAGING'
 
