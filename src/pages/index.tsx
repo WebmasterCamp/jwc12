@@ -43,12 +43,12 @@ const Home: NextPage = () => {
         <br />
         in associate with Thai Webmaster Association. All right reserved.
         <div className="mt-3 text-sm">
-          <Link href="/policy">
+          <Link href="/policy/privacy">
             <a className="underline">Privacy Policy</a>
           </Link>{' '}
           |{' '}
-          <Link href="/terms">
-            <a className="underline">Terms and Conditions</a>
+          <Link href="/policy/cookies">
+            <a className="underline">Cookie Policy</a>
           </Link>
         </div>
       </div>
