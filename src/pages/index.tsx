@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { CookieConsent } from '../components/CookieConsent'
 import { FollowUsBar } from '../components/FollowUsBar'
 import { ParticlesWidget } from '../components/Particles'
+import { Footer } from '../layouts/document/components/Footer'
 
 const Home: NextPage = () => {
   return (
@@ -38,20 +39,7 @@ const Home: NextPage = () => {
             </button>
           </div> */}
       </div>
-      <div className="mx-5 mt-12 mb-3 text-center text-sm leading-6 sm:absolute sm:bottom-10 sm:my-0 sm:text-lg sm:leading-8">
-        Copyright 2022, Young Webmaster Camp,
-        <br />
-        in association with Thai Webmaster Association, All rights reserved.
-        <div className="mt-3 text-sm">
-          <Link href="/policy/privacy">
-            <a className="underline">Privacy Policy</a>
-          </Link>{' '}
-          |{' '}
-          <Link href="/policy/cookies">
-            <a className="underline">Cookie Policy</a>
-          </Link>
-        </div>
-      </div>
+      <Footer className="sm:absolute sm:bottom-10 sm:my-0" />
     </div>
   )
 }
