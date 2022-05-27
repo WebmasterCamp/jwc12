@@ -7,11 +7,13 @@ import { Footer } from '../layouts/document/components/Footer'
 
 const Home: NextPage = () => {
   return (
-    <div className="text-white relative flex min-h-screen w-full flex-col items-center px-5 sm:justify-center">
+    <div className="relative flex min-h-screen w-full flex-col px-5 text-white">
       <ParticlesWidget />
-      <FollowUsBar className="absolute right-0 top-0 m-3 mt-5 sm:my-5 sm:mx-10" />
+      <div className="flex justify-end">
+        <FollowUsBar className="m-3 mt-5 sm:my-5 sm:mx-10" />
+      </div>
 
-      <div className="mt-32 w-full max-w-screen-md sm:mt-0">
+      <div className="my-10 mx-auto flex min-h-max w-full max-w-screen-md grow flex-col items-center justify-center">
         <div className="relative mx-auto mb-8 w-full max-w-xl xl:max-w-screen-2xl">
           <picture>
             <source srcSet="/images/jwc12-logo.avif" type="image/avif" />
@@ -29,7 +31,7 @@ const Home: NextPage = () => {
           <span className="text-4xl font-bold">อนาคต</span>อันใกล้นี้
         </div>
       </div>
-      <Footer className="sm:absolute sm:bottom-10 sm:my-0" />
+      <Footer />
     </div>
   )
 }
