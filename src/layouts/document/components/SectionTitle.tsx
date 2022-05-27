@@ -9,7 +9,7 @@ export const SectionTitle: FunctionComponent<Props> = ({ title, subtitle }) => {
   return (
     <div className="text-center text-white">
       <h1 className="text-4xl">{title}</h1>
-      {subtitle && <p className="!mt-5 font-serif text-xl">{subtitle}</p>}
+      {subtitle && <p className="!mt-5 text-xl">{subtitle}</p>}
     </div>
   )
 }

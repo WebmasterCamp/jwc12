@@ -5,8 +5,7 @@ const config = {
   theme: {
     fontFamily: {
       heading: ['FC Neo Classic', ...fontFamily.sans],
-      sans: ['IBM Plex Sans Thai', ...fontFamily.sans],
-      serif: ['IBM Plex Sans Thai Looped', ...fontFamily.serif],
+      sans: ['IBM Plex Sans Thai Looped', ...fontFamily.sans],
     },
   },
   plugins: [],

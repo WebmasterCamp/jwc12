@@ -7,7 +7,7 @@ import { Footer } from '../layouts/document/components/Footer'
 
 const Home: NextPage = () => {
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center bg-cover px-5 font-serif text-white sm:justify-center">
+    <div className="relative flex min-h-screen w-full flex-col items-center bg-cover px-5 text-white sm:justify-center">
       <ParticlesWidget />
       <FollowUsBar className="absolute right-0 top-0 m-3 mt-5 sm:my-5 sm:mx-10" />
 

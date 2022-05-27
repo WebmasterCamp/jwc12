@@ -73,7 +73,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
                       <div>คุกกี้ที่จำเป็น</div>
                       <div className="text-[#940FA3]">เปิดใช้งานตลอด</div>
                     </div>
-                    <div className="mt-3 font-serif text-sm">
+                    <div className="mt-3 text-sm">
                       คุกกี้มีความจำเป็นสำหรับการทำงานของเว็บไซต์
                       เพื่อให้คุณสามารถใช้ได้อย่างเป็นปกติ และเข้าชมเว็บไซต์
                       คุณไม่สามารถปิดการทำงานของคุกกี้นี้ในระบบเว็บไซต์ของเราได้
@@ -102,7 +102,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
                         />
                       </Switch>
                     </div>
-                    <div className="mt-3 font-serif text-sm">
+                    <div className="mt-3 text-sm">
                       คุกกี้ประเภทนี้จะทำการเก็บข้อมูลการใช้งานเว็บไซต์ของคุณ
                       เพื่อเป็นประโยชน์ในการวัดผล ปรับปรุง
                       และพัฒนาประสบการณ์ที่ดีในการใช้งานเว็บไซต์
@@ -131,7 +131,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
                         />
                       </Switch>
                     </div>
-                    <div className="mt-3 font-serif text-sm">
+                    <div className="mt-3 text-sm">
                       คุกกี้ประเภทนี้จะเก็บข้อมูลต่าง ๆ
                       รวมทั้งข้อมูลวส่วนบุคคลเกี่ยวกับตัวคุณเพื่อเราสามารถนำมาวิเคราะห์
                       และนำเสนอเนื้อหา ให้ตรงกับความเหมาะสมกับความสนใจของคุณ
