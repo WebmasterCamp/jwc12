@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
-import Particles from 'react-tsparticles'
-import { loadFull } from 'tsparticles'
+import { CookieConsent } from '../components/CookieConsent'
 import { FollowUsBar } from '../components/FollowUsBar'
 import { ParticlesWidget } from '../components/Particles'
 

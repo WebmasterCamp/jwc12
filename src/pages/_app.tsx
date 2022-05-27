@@ -3,12 +3,25 @@ import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
 import { DefaultSeoConfig } from '../utils/defaultSeoConfig'
 import Script from 'next/script'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import * as fbq from '../lib/fpixel'
+import {
+  GetPDPAConsentCookie,
+  PDPAConsentCookies,
+  SetPDPAConsentCookie,
+} from '../utils/pdpa'
+import { CookieConsent } from '../components/CookieConsent'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
+  const [PDPAConsent, setPDPAConsent] = useState<PDPAConsentCookies>({})
+
+  useEffect(() => {
+    const pdpaConsent = GetPDPAConsentCookie()
+    setPDPAConsent(pdpaConsent)
+  }, [])
+
   // useEffect(() => {
   //   // This pageview only triggers the first time (it's important for Pixel to have real information)
   //   fbq.pageview()
@@ -34,8 +47,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
+          
+          gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'analytics_storage': 'denied'
+          });          
+          
           gtag('js', new Date());
-
           gtag('config', 'UA-42284958-3');
         `}
       </Script>
@@ -51,6 +69,13 @@ function MyApp({ Component, pageProps }: AppProps) {
             fbq('init', ${fbq.FB_PIXEL_ID});
           `}
       </Script>
+      <CookieConsent
+        consent={PDPAConsent}
+        setConsent={(consent) => {
+          setPDPAConsent(consent)
+          SetPDPAConsentCookie(consent)
+        }}
+      />
       <DefaultSeo {...DefaultSeoConfig} />
       <Component {...pageProps} />
     </>
