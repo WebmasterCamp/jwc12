@@ -2,9 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'FC Neo Classic';
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassic.eot)
+    format('embedded-opentype');
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassic.woff2) format('woff2'),
+    url(../assets/fonts/FCNeoClassic/FCNeoClassic.woff) format('woff');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FC Neo Classic';
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.eot)
+    format('embedded-opentype');
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.woff2)
+      format('woff2'),
+    url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.woff) format('woff');
+  font-style: italic;
+  font-display: swap;
+}
+
 @layer base {
   body {
-    background: conic-gradient(from 180deg at 50% 50%, #8e269f 0deg, #131d38 88.12deg, #8e269f 360deg);
+    background-image: url('/images/line.png'),
+      conic-gradient(
+        from 180deg at 50% 50%,
+        #8e269f 0deg,
+        #131d38 88.12deg,
+        #8e269f 360deg
+      );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover, cover;
+  }
+}
+
+@layer utilities {
+  .min-h-screen {
+    /* min-height: '100vh'; */
+    min-height: '100dvh';
   }
 }
 
@@ -13,4 +50,43 @@
   height: 100%;
   position: absolute;
   z-index: -1;
+}
+
+#document {
+  h1 {
+    @apply font-heading;
+  }
+
+  h2 {
+    @apply mt-8 mb-5 font-heading text-xl font-bold;
+  }
+
+  p {
+    @apply my-2;
+  }
+
+  ul {
+    @apply list-inside list-disc;
+  }
+
+  ol {
+    @apply list-inside list-decimal;
+  }
+
+  ul > ul,
+  ul > ol,
+  ol > ul,
+  ol > ol,
+  li > ul,
+  li > ol {
+    @apply ml-6;
+  }
+
+  li {
+    @apply my-1;
+  }
+
+  a {
+    @apply underline;
+  }
 }

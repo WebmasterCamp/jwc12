@@ -11,19 +11,48 @@ interface Props {
 
 export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
   return (
-    <div className={clsx('inline-block text-xl space-x-4', className)}>
-      <span>ติดต่อเราที่</span>
-      <a href="https://www.facebook.com/jwcth" className="hover:text-gray-200">
-        <Icon icon={FacebookIcon} className="text-2xl sm:text-3xl inline mr-3" inline />
-        <span className="hidden md:inline-block font-bold">Junior Webmaster Camp</span>
+    <div className={clsx('inline-block space-x-4 text-xl', className)}>
+      <span>ติดตามเราที่</span>
+      <a
+        href="https://www.facebook.com/jwcth"
+        target="_blank"
+        className="hover:text-gold"
+        rel="noreferrer"
+      >
+        <Icon
+          icon={FacebookIcon}
+          className="mr-3 inline text-2xl sm:text-3xl"
+          inline
+        />
+        <span className="hidden font-medium md:inline-block">
+          Junior Webmaster Camp
+        </span>
       </a>
-      <a href="https://twitter.com/jwcth" className="hover:text-gray-200">
-        <Icon icon={TwitterIcon} className="text-2xl sm:text-3xl inline mr-3" inline />
-        <span className="hidden md:inline-block font-bold">@jwcth</span>
+      <a
+        href="https://twitter.com/jwcth"
+        className="hover:text-gold"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Icon
+          icon={TwitterIcon}
+          className="mr-3 inline text-2xl sm:text-3xl"
+          inline
+        />
+        <span className="hidden font-medium md:inline-block">@jwcth</span>
       </a>
-      <a href="https://www.instagram.com/jwcth/" className="hover:text-gray-200">
-        <Icon icon={InstagramIcon} className="text-2xl sm:text-3xl inline mr-3" inline />
-        <span className="hidden md:inline-block font-bold">@jwcth</span>
+      <a
+        href="https://www.instagram.com/jwcth/"
+        target="_blank"
+        className="hover:text-gold"
+        rel="noreferrer"
+      >
+        <Icon
+          icon={InstagramIcon}
+          className="mr-3 inline text-2xl sm:text-3xl"
+          inline
+        />
+        <span className="hidden font-medium md:inline-block">@jwcth</span>
       </a>
     </div>
   )
