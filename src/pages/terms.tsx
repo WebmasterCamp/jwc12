@@ -9,7 +9,7 @@ const Page: NextPage = () => {
   return (
     <DocumentLayout>
       <NextSeo title="ข้อกำหนดและเงื่อนไขการเข้าร่วมโครงการ" />
-      <div>
+      {/* <div>
         <SectionTitle
           title="Terms and Conditions"
           subtitle="ข้อกำหนดและเงื่อนไขการเข้าร่วมโครงการ"
@@ -136,7 +136,7 @@ const Page: NextPage = () => {
             </li>
           </ol>
         </ContentWrapper>
-      </div>
+      </div> */}
     </DocumentLayout>
   )
 }

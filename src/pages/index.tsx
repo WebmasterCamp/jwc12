@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
-import Particles from 'react-tsparticles'
-import { loadFull } from 'tsparticles'
+import { CookieConsent } from '../components/CookieConsent'
 import { FollowUsBar } from '../components/FollowUsBar'
 import { ParticlesWidget } from '../components/Particles'
 
@@ -42,14 +41,14 @@ const Home: NextPage = () => {
       <div className="mx-5 mt-12 mb-3 text-center text-sm leading-6 sm:absolute sm:bottom-10 sm:my-0 sm:text-lg sm:leading-8">
         Copyright 2022, Young Webmaster Camp,
         <br />
-        in associate with Thai Webmaster Association. All right reserved.
+        in association with Thai Webmaster Association, All rights reserved.
         <div className="mt-3 text-sm">
-          <Link href="/policy">
+          <Link href="/policy/privacy">
             <a className="underline">Privacy Policy</a>
           </Link>{' '}
           |{' '}
-          <Link href="/terms">
-            <a className="underline">Terms and Conditions</a>
+          <Link href="/policy/cookies">
+            <a className="underline">Cookie Policy</a>
           </Link>
         </div>
       </div>
