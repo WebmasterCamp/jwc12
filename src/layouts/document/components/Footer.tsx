@@ -10,7 +10,7 @@ export const Footer: FC<Props> = ({ className }) => {
   return (
     <footer
       className={clsx(
-        'text-md mx-5 mt-12 mb-5 text-center leading-8 text-white lg:text-lg',
+        'text-md mx-5 mb-5 text-center leading-8 text-white lg:text-lg',
         className
       )}
     >
