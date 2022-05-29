@@ -8,11 +8,7 @@ export const Header = () => {
           <picture>
             <source srcSet="/images/jwc12-logo.avif" type="image/avif" />
             <source srcSet="/images/jwc12-logo.webp" type="image/webp" />
-            <img
-              src="/images/jwc12-logo.png"
-              alt="Junior Webmaster Camp 12"
-              className="h-28"
-            />
+            <img src="/images/jwc12-logo.png" alt="Junior Webmaster Camp 12" className="h-28" />
           </picture>
         </a>
       </Link>

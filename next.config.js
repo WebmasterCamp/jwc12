@@ -1,13 +1,9 @@
-const {
-  PHASE_DEVELOPMENT_SERVER,
-  PHASE_PRODUCTION_BUILD,
-} = require('next/constants')
+const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants')
 
 const nextConfig = (phase) => {
   const isDev = phase === PHASE_DEVELOPMENT_SERVER
   const isProd = phase === PHASE_PRODUCTION_BUILD && process.env.STAGING !== '1'
-  const isStaging =
-    phase === PHASE_PRODUCTION_BUILD && process.env.STAGING === '1'
+  const isStaging = phase === PHASE_PRODUCTION_BUILD && process.env.STAGING === '1'
 
   const env = {
     BASE_URL: (() => {

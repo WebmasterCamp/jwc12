@@ -1,6 +1,8 @@
+import { Fragment, FunctionComponent, useEffect, useState } from 'react'
+
 import { Dialog, Switch, Transition } from '@headlessui/react'
 import clsx from 'clsx'
-import { Fragment, FunctionComponent, useEffect, useState } from 'react'
+
 import { PDPAConsentCookies } from '../utils/pdpa'
 
 interface Props {
@@ -16,12 +18,8 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
   consent,
   setConsent,
 }) => {
-  const [g_analytics, setGAnalytics] = useState<boolean>(
-    (consent || {}).g_analytics || true
-  )
-  const [mt_pixel, setMtPixel] = useState<boolean>(
-    (consent || {}).mt_pixel || true
-  )
+  const [g_analytics, setGAnalytics] = useState<boolean>((consent || {}).g_analytics || true)
+  const [mt_pixel, setMtPixel] = useState<boolean>((consent || {}).mt_pixel || true)
 
   useEffect(() => {
     setGAnalytics((consent || {}).g_analytics ?? true)
@@ -60,10 +58,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <Dialog.Title
-                  as="h3"
-                  className="mb-5 text-lg font-medium leading-6 text-gray-900"
-                >
+                <Dialog.Title as="h3" className="mb-5 text-lg font-medium leading-6 text-gray-900">
                   ตั้งค่าความเป็นส่วนตัว
                 </Dialog.Title>
 
@@ -90,9 +85,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
                           g_analytics ? 'bg-primary' : 'bg-gray-300'
                         )}
                       >
-                        <span className="sr-only">
-                          Google Analytics Settings
-                        </span>
+                        <span className="sr-only">Google Analytics Settings</span>
                         <span
                           aria-hidden="true"
                           className={clsx(

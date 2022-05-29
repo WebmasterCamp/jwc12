@@ -1,7 +1,10 @@
+import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react'
+
+import Link from 'next/link'
+
 import { Transition } from '@headlessui/react'
 import { setCookies } from 'cookies-next'
-import Link from 'next/link'
-import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react'
+
 import { PDPAConsentCookies, SetPDPAConsentCookie } from '../utils/pdpa'
 import { CookieConsentSettingDialog } from './CookieConsentSettingDialog'
 
@@ -10,10 +13,7 @@ interface Props {
   setConsent: (consent: PDPAConsentCookies) => void
 }
 
-export const CookieConsent: FunctionComponent<Props> = ({
-  consent,
-  setConsent,
-}) => {
+export const CookieConsent: FunctionComponent<Props> = ({ consent, setConsent }) => {
   const [isSettingDialogOpen, setIsSettingDialogOpen] = useState<boolean>(false)
 
   // console.log(consent)
@@ -27,9 +27,7 @@ export const CookieConsent: FunctionComponent<Props> = ({
         setConsent={setConsent}
       />
       <Transition
-        show={
-          consent !== undefined && (!consent.g_analytics || !consent.mt_pixel)
-        }
+        show={consent !== undefined && (!consent.g_analytics || !consent.mt_pixel)}
         enter="transition-opacity duration-75"
         enterFrom="opacity-0"
         enterTo="opacity-100"
@@ -40,8 +38,7 @@ export const CookieConsent: FunctionComponent<Props> = ({
         <div className="fixed bottom-5 z-30 w-full px-4">
           <div className="mx-auto flex max-w-xl flex-col rounded-md bg-white p-4 px-5 text-sm text-black shadow-lg">
             <p>
-              เราใช้คุกกี้เพื่อพัฒนาประสิทธิภาพ
-              และประสบการณ์ที่ดีในการใช้เว็บไซต์ของคุณ
+              เราใช้คุกกี้เพื่อพัฒนาประสิทธิภาพ และประสบการณ์ที่ดีในการใช้เว็บไซต์ของคุณ
               คุณสามารถศึกษารายละเอียดได้ที่{' '}
               <Link href={'/policy'}>
                 <a className="underline">นโยบายความเป็นส่วนตัว</a>
@@ -59,9 +56,7 @@ export const CookieConsent: FunctionComponent<Props> = ({
               <button
                 type="button"
                 className="rounded-md bg-primary px-5 py-2 font-medium text-white hover:bg-primary-accent"
-                onClick={() =>
-                  setConsent({ g_analytics: true, mt_pixel: true })
-                }
+                onClick={() => setConsent({ g_analytics: true, mt_pixel: true })}
               >
                 ยอมรับ
               </button>

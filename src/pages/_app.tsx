@@ -1,24 +1,20 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { DefaultSeo } from 'next-seo'
-import { DefaultSeoConfig } from '../utils/defaultSeoConfig'
-import Script from 'next/script'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import * as fbq from '../lib/fpixel'
-import {
-  GetPDPAConsentCookie,
-  PDPAConsentCookies,
-  SetPDPAConsentCookie,
-} from '../utils/pdpa'
-import { CookieConsent } from '../components/CookieConsent'
+
+import { DefaultSeo } from 'next-seo'
+import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import Script from 'next/script'
+
+import { CookieConsent } from '../components/CookieConsent'
+import * as fbq from '../lib/fpixel'
+import '../styles/globals.css'
+import { DefaultSeoConfig } from '../utils/defaultSeoConfig'
+import { GetPDPAConsentCookie, PDPAConsentCookies, SetPDPAConsentCookie } from '../utils/pdpa'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const [PDPAConsent, setPDPAConsent] = useState<
-    PDPAConsentCookies | undefined
-  >(undefined)
+  const [PDPAConsent, setPDPAConsent] = useState<PDPAConsentCookies | undefined>(undefined)
 
   useEffect(() => {
     const pdpaConsent = GetPDPAConsentCookie()
