@@ -1,4 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react'
+
 import { ParticlesWidget } from '../../components/Particles'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'

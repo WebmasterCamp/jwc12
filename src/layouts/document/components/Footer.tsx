@@ -1,6 +1,8 @@
-import clsx from 'clsx'
-import Link from 'next/link'
 import { FC } from 'react'
+
+import Link from 'next/link'
+
+import clsx from 'clsx'
 
 interface Props {
   className?: string
@@ -9,10 +11,7 @@ interface Props {
 export const Footer: FC<Props> = ({ className }) => {
   return (
     <footer
-      className={clsx(
-        'text-md mx-5 mb-5 text-center leading-8 text-white lg:text-lg',
-        className
-      )}
+      className={clsx('text-md mx-5 mb-5 text-center leading-8 text-white lg:text-lg', className)}
     >
       Copyright 2022, Young Webmaster Camp,
       <br />

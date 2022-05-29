@@ -1,8 +1,9 @@
-import { Icon } from '@iconify/react'
-import FacebookIcon from '@iconify/icons-fa6-brands/facebook'
-import TwitterIcon from '@iconify/icons-fa6-brands/twitter'
-import InstagramIcon from '@iconify/icons-fa6-brands/instagram'
 import { FunctionComponent } from 'react'
+
+import FacebookIcon from '@iconify/icons-fa6-brands/facebook'
+import InstagramIcon from '@iconify/icons-fa6-brands/instagram'
+import TwitterIcon from '@iconify/icons-fa6-brands/twitter'
+import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 
 interface Props {
@@ -19,14 +20,8 @@ export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
         className="hover:text-gold"
         rel="noreferrer"
       >
-        <Icon
-          icon={FacebookIcon}
-          className="mr-3 inline text-2xl sm:text-3xl"
-          inline
-        />
-        <span className="hidden font-medium md:inline-block">
-          Junior Webmaster Camp
-        </span>
+        <Icon icon={FacebookIcon} className="mr-3 inline text-2xl sm:text-3xl" inline />
+        <span className="hidden font-medium md:inline-block">Junior Webmaster Camp</span>
       </a>
       <a
         href="https://twitter.com/jwcth"
@@ -34,11 +29,7 @@ export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
         target="_blank"
         rel="noreferrer"
       >
-        <Icon
-          icon={TwitterIcon}
-          className="mr-3 inline text-2xl sm:text-3xl"
-          inline
-        />
+        <Icon icon={TwitterIcon} className="mr-3 inline text-2xl sm:text-3xl" inline />
         <span className="hidden font-medium md:inline-block">@jwcth</span>
       </a>
       <a
@@ -47,11 +38,7 @@ export const FollowUsBar: FunctionComponent<Props> = ({ className = '' }) => {
         className="hover:text-gold"
         rel="noreferrer"
       >
-        <Icon
-          icon={InstagramIcon}
-          className="mr-3 inline text-2xl sm:text-3xl"
-          inline
-        />
+        <Icon icon={InstagramIcon} className="mr-3 inline text-2xl sm:text-3xl" inline />
         <span className="hidden font-medium md:inline-block">@jwcth</span>
       </a>
     </div>

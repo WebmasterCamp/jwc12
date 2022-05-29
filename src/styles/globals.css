@@ -4,8 +4,7 @@
 
 @font-face {
   font-family: 'FC Neo Classic';
-  src: url(../assets/fonts/FCNeoClassic/FCNeoClassic.eot)
-    format('embedded-opentype');
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassic.eot) format('embedded-opentype');
   src: url(../assets/fonts/FCNeoClassic/FCNeoClassic.woff2) format('woff2'),
     url(../assets/fonts/FCNeoClassic/FCNeoClassic.woff) format('woff');
   font-style: normal;
@@ -14,10 +13,8 @@
 
 @font-face {
   font-family: 'FC Neo Classic';
-  src: url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.eot)
-    format('embedded-opentype');
-  src: url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.woff2)
-      format('woff2'),
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.eot) format('embedded-opentype');
+  src: url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.woff2) format('woff2'),
     url(../assets/fonts/FCNeoClassic/FCNeoClassicItalic.woff) format('woff');
   font-style: italic;
   font-display: swap;
@@ -26,12 +23,7 @@
 @layer base {
   body {
     background-image: url('/images/line.png'),
-      conic-gradient(
-        from 180deg at 50% 50%,
-        #8e269f 0deg,
-        #131d38 88.12deg,
-        #8e269f 360deg
-      );
+      conic-gradient(from 180deg at 50% 50%, #8e269f 0deg, #131d38 88.12deg, #8e269f 360deg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover, cover;

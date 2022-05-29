@@ -1,36 +1,26 @@
+import { Fragment, FunctionComponent } from 'react'
+
 import { Dialog, Switch, Transition } from '@headlessui/react'
 import clsx from 'clsx'
-import { Fragment, FunctionComponent, useEffect, useState } from 'react'
-import { PDPAConsentCookies } from '../utils/pdpa'
+
+import { ConsentTypes, useConsentStore } from '@/stores/consents'
+
+import { CookieConsentSection } from './CookieSection'
 
 interface Props {
   isOpen: boolean
   closeModal: () => void
-  consent: PDPAConsentCookies | undefined
-  setConsent: (consent: PDPAConsentCookies) => void
 }
 
-export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
-  isOpen,
-  closeModal,
-  consent,
-  setConsent,
-}) => {
-  const [g_analytics, setGAnalytics] = useState<boolean>(
-    (consent || {}).g_analytics || true
-  )
-  const [mt_pixel, setMtPixel] = useState<boolean>(
-    (consent || {}).mt_pixel || true
-  )
-
-  useEffect(() => {
-    setGAnalytics((consent || {}).g_analytics ?? true)
-    setMtPixel((consent || {}).mt_pixel ?? true)
-  }, [consent])
+export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, closeModal }) => {
+  const { consents, setConsentCookie, setOpenSettings } = useConsentStore()
 
   const handleSubmitConsent = () => {
-    setConsent({ g_analytics, mt_pixel })
-    closeModal()
+    setOpenSettings(false)
+  }
+
+  const handleChangeConsent = (name: ConsentTypes) => (checked: boolean) => {
+    setConsentCookie({ ...consents, [name]: checked })
   }
 
   return (
@@ -60,13 +50,9 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <Dialog.Title
-                  as="h3"
-                  className="mb-5 text-lg font-medium leading-6 text-gray-900"
-                >
+                <Dialog.Title as="h3" className="mb-5 text-lg font-medium leading-6 text-gray-900">
                   ตั้งค่าความเป็นส่วนตัว
                 </Dialog.Title>
-
                 <div className="flex flex-col">
                   <div className="border p-4">
                     <div className="flex justify-between font-medium">
@@ -79,67 +65,19 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({
                       คุณไม่สามารถปิดการทำงานของคุกกี้นี้ในระบบเว็บไซต์ของเราได้
                     </div>
                   </div>
-                  <div className="border p-4">
-                    <div className="flex justify-between font-medium">
-                      <div>คุกกี้เพื่อการวิเคราะห์</div>
-                      <Switch
-                        checked={g_analytics}
-                        onChange={() => setGAnalytics(!g_analytics)}
-                        className={clsx(
-                          'relative inline-flex h-[24px] w-[50px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75',
-                          g_analytics ? 'bg-primary' : 'bg-gray-300'
-                        )}
-                      >
-                        <span className="sr-only">
-                          Google Analytics Settings
-                        </span>
-                        <span
-                          aria-hidden="true"
-                          className={clsx(
-                            'pointer-events-none inline-block h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out',
-                            g_analytics ? 'translate-x-[26px]' : 'translate-x-0'
-                          )}
-                        />
-                      </Switch>
-                    </div>
-                    <div className="mt-3 text-sm">
-                      คุกกี้ประเภทนี้จะทำการเก็บข้อมูลการใช้งานเว็บไซต์ของคุณ
-                      เพื่อเป็นประโยชน์ในการวัดผล ปรับปรุง
-                      และพัฒนาประสบการณ์ที่ดีในการใช้งานเว็บไซต์
-                      ถ้าหากท่านไม่ยินยอมให้เราใช้คุกกี้นี้ เราจะไม่สามารถวัดผล
-                      ปรังปรุงและพัฒนาเว็บไซต์ได้
-                    </div>
-                  </div>
-                  <div className="border p-4">
-                    <div className="flex items-center justify-between font-medium">
-                      <div>คุกกี้เพื่อปรับเนื้อหาให้เข้ากับกลุ่มเป้าหมาย</div>
-                      <Switch
-                        checked={mt_pixel}
-                        onChange={() => setMtPixel(!mt_pixel)}
-                        className={clsx(
-                          'relative inline-flex h-[24px] w-[50px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75',
-                          mt_pixel ? 'bg-primary' : 'bg-gray-300'
-                        )}
-                      >
-                        <span className="sr-only">Meta Pixel Setting</span>
-                        <span
-                          aria-hidden="true"
-                          className={clsx(
-                            'pointer-events-none inline-block h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out',
-                            mt_pixel ? 'translate-x-[26px]' : 'translate-x-0'
-                          )}
-                        />
-                      </Switch>
-                    </div>
-                    <div className="mt-3 text-sm">
-                      คุกกี้ประเภทนี้จะเก็บข้อมูลต่าง ๆ
-                      รวมทั้งข้อมูลวส่วนบุคคลเกี่ยวกับตัวคุณเพื่อเราสามารถนำมาวิเคราะห์
-                      และนำเสนอเนื้อหา ให้ตรงกับความเหมาะสมกับความสนใจของคุณ
-                      ถ้าหากคุณไม่ยินยอมเราจะไม่สามารถนำเสนอเนื้อหาและโฆษณาได้ไม่ตรงกับความสนใจของคุณ
-                    </div>
-                  </div>
+                  <CookieConsentSection
+                    checked={consents.ad_storage ?? false}
+                    onChange={handleChangeConsent('ad_storage')}
+                    title="คุกกี้เพื่อการวิเคราะห์"
+                    content="คุกกี้ประเภทนี้จะทำการเก็บข้อมูลการใช้งานเว็บไซต์ของคุณ เพื่อเป็นประโยชน์ในการวัดผล ปรับปรุงและพัฒนาประสบการณ์ที่ดีในการใช้งานเว็บไซต์ ถ้าหากท่านไม่ยินยอมให้เราใช้คุกกี้นี้เราจะไม่สามารถวัดผล ปรังปรุงและพัฒนาเว็บไซต์ได้"
+                  />
+                  <CookieConsentSection
+                    checked={consents.mt_pixel ?? false}
+                    onChange={handleChangeConsent('mt_pixel')}
+                    title="คุกกี้เพื่อปรับเนื้อหาให้เข้ากับกลุ่มเป้าหมาย"
+                    content="คุกกี้ประเภทนี้จะเก็บข้อมูลต่าง ๆ รวมทั้งข้อมูลวส่วนบุคคลเกี่ยวกับตัวคุณเพื่อเราสามารถนำมาวิเคราะห์ และนำเสนอเนื้อหา ให้ตรงกับความเหมาะสมกับความสนใจของคุณ ถ้าหากคุณไม่ยินยอมเราจะไม่สามารถนำเสนอเนื้อหาและโฆษณาได้ไม่ตรงกับความสนใจของคุณ"
+                  />
                 </div>
-
                 <div className="mt-4 flex justify-end gap-5">
                   <button
                     type="button"
