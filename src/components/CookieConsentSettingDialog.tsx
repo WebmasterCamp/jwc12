@@ -1,9 +1,9 @@
 import { Fragment, FunctionComponent } from 'react'
 
-import { Dialog, Switch, Transition } from '@headlessui/react'
-import clsx from 'clsx'
+import { Dialog, Transition } from '@headlessui/react'
 
-import { ConsentTypes, useConsentStore } from '@/stores/consents'
+import { ConsentKeys } from '@/lib/gtm'
+import { useConsentStore } from '@/stores/consents'
 
 import { CookieConsentSection } from './CookieSection'
 
@@ -19,8 +19,8 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, c
     setOpenSettings(false)
   }
 
-  const handleChangeConsent = (name: ConsentTypes) => (checked: boolean) => {
-    setConsentCookie({ ...consents, [name]: checked })
+  const handleChangeConsent = (name: ConsentKeys) => (checked: boolean) => {
+    setConsentCookie({ ...consents, [name]: checked ? 'granted' : 'denied' })
   }
 
   return (
@@ -66,13 +66,19 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, c
                     </div>
                   </div>
                   <CookieConsentSection
-                    checked={consents.ad_storage ?? false}
+                    checked={consents.ad_storage === 'granted' ?? false}
                     onChange={handleChangeConsent('ad_storage')}
                     title="คุกกี้เพื่อการวิเคราะห์"
                     content="คุกกี้ประเภทนี้จะทำการเก็บข้อมูลการใช้งานเว็บไซต์ของคุณ เพื่อเป็นประโยชน์ในการวัดผล ปรับปรุงและพัฒนาประสบการณ์ที่ดีในการใช้งานเว็บไซต์ ถ้าหากท่านไม่ยินยอมให้เราใช้คุกกี้นี้เราจะไม่สามารถวัดผล ปรังปรุงและพัฒนาเว็บไซต์ได้"
                   />
                   <CookieConsentSection
-                    checked={consents.mt_pixel ?? false}
+                    checked={consents.analytics_storage === 'granted' ?? false}
+                    onChange={handleChangeConsent('analytics_storage')}
+                    title="คุกกี้เพื่อการวิเคราะห์"
+                    content="คุกกี้ประเภทนี้จะทำการเก็บข้อมูลการใช้งานเว็บไซต์ของคุณ เพื่อเป็นประโยชน์ในการวัดผล ปรับปรุงและพัฒนาประสบการณ์ที่ดีในการใช้งานเว็บไซต์ ถ้าหากท่านไม่ยินยอมให้เราใช้คุกกี้นี้เราจะไม่สามารถวัดผล ปรังปรุงและพัฒนาเว็บไซต์ได้"
+                  />
+                  <CookieConsentSection
+                    checked={consents.mt_pixel === 'granted' ?? false}
                     onChange={handleChangeConsent('mt_pixel')}
                     title="คุกกี้เพื่อปรับเนื้อหาให้เข้ากับกลุ่มเป้าหมาย"
                     content="คุกกี้ประเภทนี้จะเก็บข้อมูลต่าง ๆ รวมทั้งข้อมูลวส่วนบุคคลเกี่ยวกับตัวคุณเพื่อเราสามารถนำมาวิเคราะห์ และนำเสนอเนื้อหา ให้ตรงกับความเหมาะสมกับความสนใจของคุณ ถ้าหากคุณไม่ยินยอมเราจะไม่สามารถนำเสนอเนื้อหาและโฆษณาได้ไม่ตรงกับความสนใจของคุณ"

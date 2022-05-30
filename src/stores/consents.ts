@@ -1,29 +1,21 @@
 import { getCookie, setCookies } from 'cookies-next'
 import create from 'zustand'
 
-export interface ConsentCookies {
-  mt_pixel?: boolean
-  ad_storage?: boolean
-  analytics_storage?: boolean
-}
-
-export type ConsentTypes = keyof ConsentCookies
+import { ConsentParams, GTM } from '@/lib/gtm'
 
 export interface ConsentStoreProps {
   open: boolean
   openSettings: boolean
-  consents: ConsentCookies
+  consents: ConsentParams
   setOpen: (open: boolean) => void
   setOpenSettings: (open: boolean) => void
-  setConsentCookie: (payload: ConsentCookies) => void
+  setConsentCookie: (payload: ConsentParams) => void
 }
 
 export const useConsentStore = create<ConsentStoreProps>((set) => {
-  const setConsentCookie = (payload: ConsentCookies): void => {
-    const expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
-    setCookies('mt_pixel', payload?.mt_pixel ? 'granted' : 'denied', { expires })
-    setCookies('ad_storage', payload?.ad_storage ? 'granted' : 'denied', { expires })
-    setCookies('analytics_storage', payload?.analytics_storage ? 'granted' : 'denied', { expires })
+  const setConsentCookie = (payload: ConsentParams): void => {
+    setCookies('consents', JSON.stringify(payload))
+    GTM.consentUpdate()
     set((state) => ({ ...state, consents: payload }))
   }
 
@@ -35,13 +27,15 @@ export const useConsentStore = create<ConsentStoreProps>((set) => {
     set((state) => ({ ...state, openSettings }))
   }
 
+  const consents = JSON.parse((getCookie('consents') as string) || '{}') as Partial<ConsentParams>
+
   return {
     open: true,
     openSettings: false,
     consents: {
-      mt_pixel: getCookie('mt_pixel') === 'granted',
-      ad_storage: getCookie('ad_storage') === 'granted',
-      analytics_storage: getCookie('analytics_storage') === 'granted',
+      mt_pixel: consents?.mt_pixel || 'denied',
+      ad_storage: consents?.ad_storage || 'denied',
+      analytics_storage: consents?.analytics_storage || 'denied',
     },
     setOpen,
     setOpenSettings,

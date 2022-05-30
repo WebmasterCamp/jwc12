@@ -13,9 +13,9 @@ export const CookieConsent: FunctionComponent = () => {
 
   const handleSubmit = () => {
     setConsentCookie({
-      mt_pixel: true,
-      ad_storage: true,
-      analytics_storage: true,
+      mt_pixel: 'granted',
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
     })
     setOpen(false)
   }
