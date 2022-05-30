@@ -6,6 +6,7 @@ import { Transition } from '@headlessui/react'
 
 import { useConsentStore } from '@/stores/consents'
 
+import { Button } from './Button'
 import { CookieConsentSettingDialog } from './CookieConsentSettingDialog'
 
 export const CookieConsent: FunctionComponent = () => {
@@ -41,7 +42,7 @@ export const CookieConsent: FunctionComponent = () => {
         leaveTo="opacity-0"
       >
         <div className="fixed bottom-5 z-30 w-full px-4">
-          <div className="mx-auto flex max-w-xl flex-col rounded-md bg-white p-4 px-5 text-sm text-black shadow-lg">
+          <div className="mx-auto flex max-w-xl flex-col rounded-md bg-white p-4 px-5 text-sm text-black shadow-2xl">
             <p>
               เราใช้คุกกี้เพื่อพัฒนาประสิทธิภาพ และประสบการณ์ที่ดีในการใช้เว็บไซต์ของคุณ
               คุณสามารถศึกษารายละเอียดได้ที่{' '}
@@ -51,20 +52,10 @@ export const CookieConsent: FunctionComponent = () => {
               และสามารถจัดการความเป็นส่วนตัวเองได้ของคุณได้เองโดยคลิกที่ตั้งค่า
             </p>
             <div className="mt-3 flex flex-row justify-end gap-5">
-              <button
-                type="button"
-                className="rounded-md border border-primary bg-white px-5 py-2 font-medium text-primary-accent hover:bg-purple-50"
-                onClick={handleOpen}
-              >
+              <Button variant="outlined" onClick={handleOpen}>
                 ตั้งค่า
-              </button>
-              <button
-                type="button"
-                className="rounded-md bg-primary px-5 py-2 font-medium text-white hover:bg-primary-accent"
-                onClick={handleSubmit}
-              >
-                ยอมรับ
-              </button>
+              </Button>
+              <Button onClick={handleSubmit}>ยอมรับ</Button>
             </div>
           </div>
         </div>
