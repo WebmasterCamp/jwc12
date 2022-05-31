@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - staging
+  pull_request:
+    branches:
+      - main
+      - staging
   workflow_dispatch:
 
 permissions:
@@ -59,14 +63,21 @@ jobs:
           echo "TARGET = ${{ env.TARGET }}"
           echo "FROM ${{ github.ref }}"
 
-      - name: Build Application, Production
+      - name: Build Application
         run: yarn build
         env:
           STAGING: ${{ env.STAGING }}
 
-      - name: Deploy to Firebase Hosting, Staging
+      - name: Deploy to Firebase Hosting
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting:${{ env.TARGET }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        if: ${{ github.event_name == 'pull_requests' }}
+        with:
+          repoToken: '${{ github.token }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          expires: 7d
