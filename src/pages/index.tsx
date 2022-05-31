@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
 
 import { FollowUsBar } from '@/components/FollowUsBar'
+import { Footer } from '@/components/Footer'
 import { ParticlesWidget } from '@/components/Particles'
-import { Footer } from '@/layouts/document/components/Footer'
 
 const Home: NextPage = () => {
   return (
