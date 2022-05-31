@@ -68,8 +68,8 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, c
                   <CookieConsentSection
                     checked={consents.ad_storage === 'granted' ?? false}
                     onChange={handleChangeConsent('ad_storage')}
-                    title="คุกกี้เพื่อการวิเคราะห์"
-                    content="คุกกี้ประเภทนี้จะทำการเก็บข้อมูลการใช้งานเว็บไซต์ของคุณ เพื่อเป็นประโยชน์ในการวัดผล ปรับปรุงและพัฒนาประสบการณ์ที่ดีในการใช้งานเว็บไซต์ ถ้าหากท่านไม่ยินยอมให้เราใช้คุกกี้นี้เราจะไม่สามารถวัดผล ปรังปรุงและพัฒนาเว็บไซต์ได้"
+                    title="คุกกี้โฆษณาและการตลาด"
+                    content="คุกกี้ประเภทนี้จัดเก็บตัวเลือกการเข้าถึงเว็บไซต์ของผู้ใช้ และใช้เป็นพื้นฐานในการปรับแต่งหน้าของเว็บไซต์เพื่อนำเสนอโฆษณาที่เกี่ยวข้องกับคุณมากที่สุด เช่น โดยการเลือกแสดงโฆษณาสำหรับสินค้าที่คุณสนใจ การป้องกันหรือจำกัดจำนวนครั้งที่โฆษณาปรากฏบนหน้าเว็บไซต์เพื่อประเมินประสิทธิภาพของโฆษณาได้ดียิ่งขึ้น"
                   />
                   <CookieConsentSection
                     checked={consents.analytics_storage === 'granted' ?? false}
@@ -77,6 +77,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, c
                     title="คุกกี้เพื่อการวิเคราะห์"
                     content="คุกกี้ประเภทนี้จะทำการเก็บข้อมูลการใช้งานเว็บไซต์ของคุณ เพื่อเป็นประโยชน์ในการวัดผล ปรับปรุงและพัฒนาประสบการณ์ที่ดีในการใช้งานเว็บไซต์ ถ้าหากท่านไม่ยินยอมให้เราใช้คุกกี้นี้เราจะไม่สามารถวัดผล ปรังปรุงและพัฒนาเว็บไซต์ได้"
                   />
+
                   <CookieConsentSection
                     checked={consents.mt_pixel === 'granted' ?? false}
                     onChange={handleChangeConsent('mt_pixel')}
