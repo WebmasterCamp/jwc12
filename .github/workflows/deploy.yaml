@@ -45,10 +45,10 @@ jobs:
 
       - name: Set up environments
         run: |
-          if [[ ${{ github.ref == 'refs/heads/main' }} ]]; then
+          if ${{ github.ref == 'refs/heads/main' }}; then
             echo "STAGING=0" >> $GITHUB_ENV
             echo "TARGET=production" >> $GITHUB_ENV
-          elif [[ ${{ github.ref == 'refs/heads/staging' }} ]]; then
+          elif ${{ github.ref == 'refs/heads/staging' }}; then
             echo "STAGING=1" >> $GITHUB_ENV
             echo "TARGET=staging" >> $GITHUB_ENV
           fi
