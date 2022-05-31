@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 export type ButtonVariants = 'primary' | 'outlined'
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariants
 }
 
@@ -12,6 +12,7 @@ export const Button: FunctionComponent<ButtonProps> = forwardRef<HTMLButtonEleme
   ({ variant = 'primary', children, ...rest }, ref) => {
     return (
       <button
+        type="button"
         {...rest}
         ref={ref}
         className={clsx(

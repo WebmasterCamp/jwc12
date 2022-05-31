@@ -1,11 +1,6 @@
 import { FunctionComponent } from 'react'
 
-import Link from 'next/link'
-
-import Tippy from '@tippyjs/react'
 import clsx from 'clsx'
-
-import { Tooltip } from '../Tooltip'
 
 export interface TabItem {
   label: string
@@ -17,7 +12,7 @@ export const TabItem: FunctionComponent<TabItem> = ({ label, index, active }) =>
   return (
     <div
       className={clsx(
-        'px-4 py-2 flex flex-1 items-center space-x-2 transition-colors',
+        'px-4 py-2 flex flex-1 items-center justify-center md:justify-start space-x-2 transition-colors',
         active ? 'bg-primary hover:bg-primary-accent' : 'bg-white hover:bg-gray-100'
       )}
     >
@@ -38,17 +33,6 @@ export const TabItem: FunctionComponent<TabItem> = ({ label, index, active }) =>
       >
         {label}
       </span>
-      <div
-        id={label}
-        role="tooltip"
-        className={clsx(
-          'inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700',
-          ''
-        )}
-      >
-        {label}
-        <div className="tooltip-arrow" />
-      </div>
     </div>
   )
 }
