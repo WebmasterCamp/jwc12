@@ -12,7 +12,7 @@ on:
 
 permissions:
   actions: read
-  checks: read
+  checks: write
   contents: write
   deployments: read
   issues: write
@@ -70,13 +70,15 @@ jobs:
 
       - name: Deploy to Firebase Hosting
         uses: w9jds/firebase-action@master
+        if: ${{ github.event_name == 'push' }}
         with:
           args: deploy --only hosting:${{ env.TARGET }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        if: ${{ github.event_name == 'pull_requests' }}
+      - name: Preview Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        if: ${{ github.event_name == 'pull_request' }}
         with:
           repoToken: '${{ github.token }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'

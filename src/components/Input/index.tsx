@@ -28,3 +28,5 @@ export const Input: FunctionComponent<InputProps> = forwardRef<HTMLInputElement,
     )
   }
 )
+
+Input.displayName = 'button'

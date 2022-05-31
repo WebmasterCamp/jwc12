@@ -3,7 +3,7 @@ import { FunctionComponent, ReactNode } from 'react'
 import { Footer } from '@/components/Footer'
 import { ParticlesWidget } from '@/components/Particles'
 
-import { Header } from './document/components/Header'
+import { Header } from './components/Header'
 
 interface Props {
   children: ReactNode
