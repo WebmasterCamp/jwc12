@@ -13,6 +13,9 @@ import { Tab, TabItem } from '@/components/Tab'
 
 const stepItems = ['ข้อมูลพื้นฐาน', 'ข้อมูลเพิ่มเติม', 'คำถามจากส่วนกลาง', 'คำถามประจำสาขา', 'สรุป']
 
+/**
+ * WIP
+ */
 const StepPage: NextPage = () => {
   // const method = useForm<AnswerModel>({
   //   resolver: yupResolver(answerSchema),
