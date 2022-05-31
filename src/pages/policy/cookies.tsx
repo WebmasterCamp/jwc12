@@ -1,9 +1,9 @@
 import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
 
-import { DocumentLayout } from '@/layouts'
-import { SectionTitle } from '@/layouts/document/SectionTitle'
+import { DocumentLayout } from '@/layouts/document'
 import { ContentWrapper } from '@/layouts/document/components/ContenWrap'
+import { SectionTitle } from '@/layouts/document/components/SectionTitle'
 
 const Page: NextPage = () => {
   return (

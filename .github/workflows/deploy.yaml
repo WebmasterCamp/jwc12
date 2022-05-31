@@ -12,7 +12,7 @@ on:
 
 permissions:
   actions: read
-  checks: read
+  checks: write
   contents: write
   deployments: read
   issues: write
@@ -38,6 +38,19 @@ jobs:
 
       - name: Cahce node_modules
         uses: c-hive/gha-yarn-cache@v2
+
+      - name: Cache NextJS build
+        uses: actions/cache@v2
+        with:
+          # See here for caching with `yarn` https://github.com/actions/cache/blob/main/examples.md#node---yarn or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
+          path: |
+            ~/.yarn
+            ${{ github.workspace }}/.next/cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
 
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -70,14 +83,17 @@ jobs:
 
       - name: Deploy to Firebase Hosting
         uses: w9jds/firebase-action@master
+        if: ${{ github.event_name == 'push' }}
         with:
           args: deploy --only hosting:${{ env.TARGET }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        if: ${{ github.event_name == 'pull_requests' }}
+      - name: Preview Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        if: ${{ github.event_name == 'pull_request' }}
         with:
           repoToken: '${{ github.token }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           expires: 7d
+          target: ${{ env.TARGET }}
