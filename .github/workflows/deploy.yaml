@@ -3,8 +3,17 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main
       - staging
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'The trigger branch'
+        required: true
+        default: 'main'
+        type: choice
+        options:
+          - main
+          - staging
 
 permissions:
   actions: read
@@ -43,28 +52,29 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile --prefer-offline
 
+      - name: Set up environments
+        run: |
+          if [[ ${{ github.event.inputs.branch  == 'main' }} ]]; then
+            echo "STAGING=0" >> $GITHUB_ENV
+            echo "TARGET=production" >> $GITHUB_ENV
+          else
+            echo "STAGING=1" >> $GITHUB_ENV
+            echo "TARGET=staging" >> $GITHUB_ENV
+          fi
+
+      - name: Print Public env
+        run: |
+          echo "STAGING = ${{env.STAGING}}"
+          echo "TARGET = ${{env.TARGET}}"
+
       - name: Build Application, Production
-        if: ${{ github.ref == 'refs/heads/main' }}
-        run: yarn build
-
-      - name: Deploy to Firebase Hosting, Production
-        if: ${{ github.ref == 'refs/heads/main' }}
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting:production
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
-      - name: Build Application, Staging
-        if: ${{ github.ref == 'refs/heads/staging' }}
         run: yarn build
         env:
-          STAGING: '1'
+          STAGING: ${{env.STAGING}}
 
       - name: Deploy to Firebase Hosting, Staging
-        if: ${{ github.ref == 'refs/heads/staging' }}
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:staging
+          args: deploy --only hosting:${{env.TARGET}}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
