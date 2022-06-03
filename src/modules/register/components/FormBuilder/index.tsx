@@ -25,6 +25,8 @@ const InputContainer = (props: { children: React.ReactNode; className?: string }
 export const FormBuilder = () => {
   const router = useRouter()
   const { form, step, question, submit } = useRegister()
+  if (!form) return null
+
   const {
     register,
     control,
@@ -37,7 +39,7 @@ export const FormBuilder = () => {
 
   return (
     <form noValidate onSubmit={submit} className="text-black flex flex-wrap gap-y-2">
-      {question.inputs.map((input, index) => {
+      {question?.inputs.map((input, index) => {
         switch (input.type) {
           case InputType.NONE: {
             return (

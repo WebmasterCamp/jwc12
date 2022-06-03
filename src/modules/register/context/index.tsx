@@ -1,8 +1,6 @@
 import { BaseSyntheticEvent, createContext, useContext, useMemo } from 'react'
 import { SubmitErrorHandler, SubmitHandler, UseFormReturn, useForm } from 'react-hook-form'
 
-import { useRouter } from 'next/router'
-
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import {
@@ -28,9 +26,9 @@ import { BranchType, Question } from '../types'
 
 interface RegisterContextData {
   step: number
-  form: UseFormReturn<CoreQuestionModel>
-  question: Question
-  submit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
+  form?: UseFormReturn<CoreQuestionModel>
+  question?: Question
+  submit?: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
 }
 
 interface RegisterProviderProps {
@@ -48,6 +46,9 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
    * First Step form
    */
   const basicForm = useForm<BasicQuestionModel>({
+    defaultValues: {
+      // TODO
+    },
     resolver: yupResolver(BasicQuestionSchema),
   })
 
@@ -55,6 +56,9 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
    * Second Step form
    */
   const addionalForm = useForm<AdditionalQuestionModel>({
+    defaultValues: {
+      // TODO
+    },
     resolver: yupResolver(AdditionalQuestionSchema),
   })
 
@@ -62,6 +66,9 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
    * Third Step form
    */
   const coreQuestionForm = useForm<CoreQuestionModel>({
+    defaultValues: {
+      // TODO
+    },
     resolver: yupResolver(CoreQuestionSchema),
   })
 
@@ -69,19 +76,32 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
    * 4 Branches Questions
    */
   const programmingQuestionForm = useForm<ProgrammingQuestionModel>({
+    defaultValues: {
+      // TODO
+    },
     resolver: yupResolver(ProgrammingQuestionSchema),
   })
   const designQuestionForm = useForm<DesignQuestionModel>({
+    defaultValues: {
+      // TODO
+    },
     resolver: yupResolver(DesignQuestionSchema),
   })
   const contentQuestionForm = useForm<ContentQuestionModel>({
+    defaultValues: {
+      // TODO
+    },
     resolver: yupResolver(ContentQuestionSchema),
   })
   const marketingQuestionForm = useForm<MarketingQuestionModel>({
+    defaultValues: {
+      // TODO
+    },
     resolver: yupResolver(MarketingQuestionSchema),
   })
 
   const form = useMemo(() => {
+    if (step === 1) return basicForm
     if (step === 2) return addionalForm
     if (step === 3) return coreQuestionForm
     if (step === 4) {
@@ -90,10 +110,10 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
       if (branch === BranchType.CONTENT) return contentQuestionForm
       if (branch === BranchType.MARKETING) return marketingQuestionForm
     }
-    return basicForm
   }, [step, branch])
 
   const question = useMemo(() => {
+    if (step === 1) return basicQuestions
     if (step === 2) return additionalQuestions
     if (step === 3) return coreQuestions
     if (step === 4) {
@@ -102,7 +122,6 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
       if (branch === BranchType.CONTENT) return contentQuestions
       if (branch === BranchType.MARKETING) return marketingQuestions
     }
-    return basicQuestions
   }, [step, branch])
 
   const success: SubmitHandler<CoreQuestionModel> = (data) => {
@@ -119,7 +138,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
         step,
         form,
         question,
-        submit: form.handleSubmit(success, error),
+        submit: form?.handleSubmit(success, error),
       }}
     >
       {children}
