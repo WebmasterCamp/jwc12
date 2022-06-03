@@ -1,26 +1,41 @@
 import * as yup from 'yup'
 
-import { Question } from '../types'
+import { InputType, Question } from '../types'
 
 export const buildYupObject = (form: Question) => {
   const schema: {
-    [key: string]: yup.StringSchema | yup.ObjectSchema<Record<string, yup.BooleanSchema>>
+    [key: string]:
+      | yup.StringSchema
+      | yup.ObjectSchema<Record<string, yup.BooleanSchema>>
+      | yup.DateSchema
   } = {}
   form.inputs.forEach((input) => {
-    if (input.type === 'none') return
+    if (input.type === InputType.NONE) return
     switch (input.type) {
-      case 'text':
-      case 'textarea':
-        schema[input.name] = input.required
-          ? yup.string().trim().required(input.required)
-          : yup.string().trim()
+      case InputType.TEXT:
+      case InputType.TEXTAREA:
+      case InputType.RADIO:
+      case InputType.UPLOAD:
+      case InputType.EMAIL: {
+        let s = yup.string().trim()
+        if (input.required) s = s.required(input.required)
+        if (input.type === InputType.EMAIL) s = s.email('กรุณากรอก email ให้ถูกต้อง')
+        if (input.type === InputType.UPLOAD) s = s.url('กรุณากรอก URL ให้ถูกต้อง')
+        if (input.type === InputType.RADIO)
+          s = s.test('invalid', 'กรุณาเลือกให้ถูกต้อง', (value) => {
+            return !!value && input.choices.includes(value)
+          })
+        if (input.validate) s = s.test(input.validate)
+        schema[input.name] = s
         break
-      case 'radio':
+      }
+      case InputType.DATE: {
         schema[input.name] = input.required
-          ? yup.string().trim().required(input.required)
-          : yup.string().trim()
+          ? yup.date().typeError('กรุณากรอกวันที่ให้ถูกต้อง').required(input.required)
+          : yup.date().typeError('กรุณากรอกวันที่ให้ถูกต้อง')
         break
-      case 'checkbox':
+      }
+      case InputType.CHECKBOX:
         const schemaChoice: { [key: string]: yup.BooleanSchema } = {}
         input.choices.forEach((choice) => {
           schemaChoice[choice.name] = yup.boolean()
@@ -40,11 +55,7 @@ export const buildYupObject = (form: Question) => {
               })
           : yup.object(schemaChoice)
         break
-      case 'upload':
-        schema[input.name] = input.required
-          ? yup.string().trim().url().required(input.required)
-          : yup.string().trim().url()
-        break
+
       default:
         break
     }

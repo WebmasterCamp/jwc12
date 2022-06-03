@@ -1,3 +1,5 @@
+import yup from 'yup'
+
 export enum BranchType {
   PROGRAMMING = 'programming',
   DESIGN = 'design',
@@ -11,6 +13,8 @@ export enum InputType {
   RADIO = 'radio',
   CHECKBOX = 'checkbox',
   UPLOAD = 'upload',
+  EMAIL = 'email',
+  DATE = 'date',
   NONE = 'none',
 }
 
@@ -23,6 +27,7 @@ export interface WeakSimpleInput {
   question: React.ReactNode
   name?: string
   required?: string
+  validate?: yup.TestConfig<any>
 }
 
 export interface SimpleInput extends WeakSimpleInput {
@@ -40,13 +45,18 @@ export interface ChoiceInput extends Omit<WeakChoiceInput, 'choices'> {
   choices: Choice[]
 }
 
-export interface RadioInput extends Omit<WeakChoiceInput, 'choices'> {
+export interface RadioInput extends WeakChoiceInput {
   name: string
 }
 
 export type WeakQuestionInputProps =
   | ({
-      type: InputType.TEXTAREA | InputType.TEXT
+      type:
+        | InputType.TEXTAREA
+        | InputType.TEXT
+        | InputType.UPLOAD
+        | InputType.EMAIL
+        | InputType.DATE
     } & WeakSimpleInput)
   | ({
       type: InputType.RADIO
@@ -54,9 +64,6 @@ export type WeakQuestionInputProps =
   | ({
       type: InputType.CHECKBOX
     } & WeakChoiceInput)
-  | ({
-      type: InputType.UPLOAD
-    } & WeakSimpleInput)
   | {
       type: InputType.NONE
       title: React.ReactNode
@@ -64,7 +71,12 @@ export type WeakQuestionInputProps =
 
 export type QuestionInputProps =
   | ({
-      type: InputType.TEXTAREA | InputType.TEXT
+      type:
+        | InputType.TEXTAREA
+        | InputType.TEXT
+        | InputType.UPLOAD
+        | InputType.EMAIL
+        | InputType.DATE
     } & SimpleInput)
   | ({
       type: InputType.RADIO
@@ -72,9 +84,6 @@ export type QuestionInputProps =
   | ({
       type: InputType.CHECKBOX
     } & ChoiceInput)
-  | ({
-      type: InputType.UPLOAD
-    } & SimpleInput)
   | {
       type: InputType.NONE
       title: React.ReactNode

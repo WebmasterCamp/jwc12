@@ -1,13 +1,9 @@
-import { FormProvider, SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
-
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { FormCard } from '@/components/FormCard'
 import { Tab, TabItem } from '@/components/Tab'
-import { FormStep1 } from '@/layouts/register/FormStep1'
 import { FormBuilder } from '@/modules/register/components/FormBuilder'
 import { RegisterProvider } from '@/modules/register/context'
 
