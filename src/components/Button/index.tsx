@@ -29,4 +29,4 @@ export const Button: FunctionComponent<ButtonProps> = forwardRef<HTMLButtonEleme
   }
 )
 
-Button.displayName = 'button'
+Button.displayName = 'Button'
