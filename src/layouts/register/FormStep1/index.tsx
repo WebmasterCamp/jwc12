@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { Input } from '../Input'
+import { Input } from '@/components/Input'
 
 export const FormStep1 = () => {
   const { register } = useForm()
