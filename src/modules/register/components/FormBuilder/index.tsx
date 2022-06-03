@@ -56,6 +56,7 @@ export const FormBuilder = () => {
                   {...register(input.name)}
                   type={input.type}
                   error={errors[input.name]?.message as string}
+                  placeholder={input.placeholder}
                 />
               </InputContainer>
             )

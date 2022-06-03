@@ -18,16 +18,12 @@ export enum InputType {
   NONE = 'none',
 }
 
-export interface Choice {
-  name: string
-  value: string
-}
-
 export interface WeakSimpleInput {
   question: React.ReactNode
   name?: string
   required?: string
   validate?: yup.TestConfig<any>
+  placeholder?: string
 }
 
 export interface SimpleInput extends WeakSimpleInput {
@@ -38,6 +34,11 @@ export interface WeakChoiceInput extends WeakSimpleInput {
   choices: string[]
   min?: number
   max?: number
+}
+
+export interface Choice {
+  name: string
+  value: string
 }
 
 export interface ChoiceInput extends Omit<WeakChoiceInput, 'choices'> {
