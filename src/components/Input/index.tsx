@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 export type InputVariants = 'outlined'
 
-export interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant?: InputVariants
   label?: string
   error?: string
@@ -32,4 +32,4 @@ export const Input: FunctionComponent<InputProps> = forwardRef<HTMLInputElement,
   }
 )
 
-Input.displayName = 'button'
+Input.displayName = 'Input'
