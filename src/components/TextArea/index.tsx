@@ -2,6 +2,8 @@ import { FunctionComponent, forwardRef } from 'react'
 
 import clsx from 'clsx'
 
+import { ErrorMessage } from '../ErrorMessage'
+
 export type TextAreaVariants = 'outlined'
 
 export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -28,7 +30,7 @@ export const TextArea: FunctionComponent<TextAreaProps> = forwardRef<
           !!error ? 'border-red-500' : 'border-gray-300'
         )}
       />
-      {!!error && <div className="text-red-500 text-xs italic">{error}</div>}
+      <ErrorMessage message={error} />
     </div>
   )
 })

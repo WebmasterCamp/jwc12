@@ -2,6 +2,8 @@ import { FunctionComponent, forwardRef } from 'react'
 
 import clsx from 'clsx'
 
+import { ErrorMessage } from '../ErrorMessage'
+
 export type InputVariants = 'outlined'
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -26,7 +28,7 @@ export const Input: FunctionComponent<InputProps> = forwardRef<HTMLInputElement,
             !!error ? 'border-red-500' : 'border-gray-300'
           )}
         />
-        {!!error && <div className="text-red-500 text-xs italic">{error}</div>}
+        <ErrorMessage message={error} />
       </div>
     )
   }
