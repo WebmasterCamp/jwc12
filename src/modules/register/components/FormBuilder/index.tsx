@@ -8,6 +8,7 @@ import clsx from 'clsx'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Radio, RadioGroup } from '@/components/Radio'
+import { RequireMark } from '@/components/RequireMark/indext'
 import { TextArea } from '@/components/TextArea'
 
 import { useRegister } from '../../context'
@@ -50,8 +51,8 @@ export const FormBuilder = () => {
           case InputType.DATE: {
             return (
               <InputContainer key={input.name}>
-                {input.question}{' '}
-                {!!input.required && <span className="text-red-500 inline-block">*</span>}
+                {input.question}
+                {!!input.required && <RequireMark />}
                 <Input
                   {...register(input.name)}
                   type={input.type}
@@ -73,6 +74,7 @@ export const FormBuilder = () => {
                       onChange={onChange}
                       error={errors[input.name]?.message as string}
                       label={input.question}
+                      required={!!input.required}
                     >
                       {input.choices.map((choice) => (
                         <Radio key={`${input.name}_${choice}`} value={choice} label={choice} />

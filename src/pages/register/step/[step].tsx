@@ -19,7 +19,7 @@ const StepPage: NextPage = () => {
 
   return (
     <RegisterProvider step={step}>
-      <Container>
+      <Container className="mb-24">
         <Tab>
           {stepItems.map((item, index) => (
             <TabItem key={index} label={item} index={index + 1} active={step === index + 1} />

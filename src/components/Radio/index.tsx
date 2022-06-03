@@ -3,6 +3,7 @@ import React, { FunctionComponent, forwardRef } from 'react'
 import clsx from 'clsx'
 
 import { ErrorMessage } from '../ErrorMessage'
+import { RequireMark } from '../RequireMark/indext'
 
 export interface RadioGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value?: string
@@ -14,7 +15,7 @@ export interface RadioGroupProps extends React.InputHTMLAttributes<HTMLInputElem
 export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
   HTMLInputElement,
   RadioGroupProps
->(({ direction = 'inline', value, label, error, children, onChange }, ref) => {
+>(({ direction = 'inline', value, label, error, children, required, onChange }, ref) => {
   return (
     <div
       className={clsx(
@@ -23,8 +24,12 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
       )}
       ref={ref}
     >
-      {label && <label className="whitespace-nowrap">{label}</label>}
-      <div className="flex gap-x-2 sm:gap-x-5 flex-wrap flex-col sm:flex-row">
+      {label && (
+        <label className="whitespace-nowrap">
+          {label} {required && <RequireMark />}
+        </label>
+      )}
+      <div className="flex gap-x-2 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between">
         {React.Children.map(children, (child, _) => {
           const radioValue = (child?.valueOf() as any)?.props.value
           return React.cloneElement(child as React.ReactElement<RadioProps>, {
