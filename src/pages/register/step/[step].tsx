@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import { Container } from '@/components/Container'
+import { Footer } from '@/components/Footer'
 import { FormCard } from '@/components/FormCard'
 import { Tab, TabItem } from '@/components/Tab'
 import { FormBuilder } from '@/modules/register/components/FormBuilder'
@@ -19,7 +20,7 @@ const StepPage: NextPage = () => {
 
   return (
     <RegisterProvider step={step}>
-      <Container className="mb-24">
+      <Container className="mb-12">
         <Tab>
           {stepItems.map((item, index) => (
             <TabItem key={index} label={item} index={index + 1} active={step === index + 1} />
@@ -29,6 +30,7 @@ const StepPage: NextPage = () => {
           <FormBuilder />
         </FormCard>
       </Container>
+      <Footer />
     </RegisterProvider>
   )
 }
