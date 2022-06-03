@@ -1,4 +1,5 @@
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
+import { Controller } from 'react-hook-form'
 
 import { useRouter } from 'next/router'
 
@@ -6,6 +7,7 @@ import clsx from 'clsx'
 
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import { Radio, RadioGroup } from '@/components/Radio'
 import { TextArea } from '@/components/TextArea'
 
 import { useRegister } from '../../context'
@@ -24,6 +26,7 @@ export const FormBuilder = () => {
   const { form, step, question, submit } = useRegister()
   const {
     register,
+    control,
     formState: { errors },
   } = form
 
@@ -58,7 +61,26 @@ export const FormBuilder = () => {
             )
           }
           case InputType.RADIO: {
-            return null
+            return (
+              <InputContainer key={input.name} className="sm:basis-auto">
+                <Controller
+                  control={control}
+                  name={input.name}
+                  render={({ field: { onChange, value }, formState: { errors } }) => (
+                    <RadioGroup
+                      value={value as string}
+                      onChange={onChange}
+                      error={errors[input.name]?.message as string}
+                      label={input.question}
+                    >
+                      {input.choices.map((choice) => (
+                        <Radio key={`${input.name}_${choice}`} value={choice} label={choice} />
+                      ))}
+                    </RadioGroup>
+                  )}
+                />
+              </InputContainer>
+            )
           }
           case InputType.TEXTAREA: {
             return (

@@ -105,6 +105,52 @@ const basicWeakQuestions: WeakQuestion = {
       question: <p className="inline">เขต/อำเภอ</p>,
       required: 'กรุณากรอกข้อมูล',
     },
+    {
+      type: InputType.TEXT,
+      name: 'province',
+      question: <p className="inline">จังหวัด</p>,
+      required: 'กรุณากรอกข้อมูล',
+    },
+    {
+      type: InputType.TEXT,
+      name: 'postalCode',
+      question: <p className="inline">รหัสไปรษณี</p>,
+      required: 'กรุณากรอกข้อมูล',
+      validate: {
+        name: 'invalid',
+        message: 'รหัสไปรณีไม่ถูกต้อง',
+        test: (value: string) => /^[0-9]$/.test(value),
+      },
+    },
+    // Education Section ------------------------------------------------------------
+    {
+      type: InputType.NONE,
+      title: <h2>ข้อมูลการศึกษา</h2>,
+    },
+    {
+      type: InputType.RADIO,
+      name: 'educationLevel',
+      question: <p className="inline">กำลังศึกษาอยู่ในระดับ</p>,
+      choices: [
+        'มัธยมศึกษาปีที่ 4',
+        'มัธยมศึกษาปีที่ 5',
+        'มัธยมศึกษาปีที่ 6',
+        'กำลังขึ้นปริญาตรีปีที่ 1',
+      ],
+      required: 'กรุณากรอกข้อมูล',
+    },
+    {
+      type: InputType.TEXT,
+      name: 'school',
+      question: <p className="inline">โรงเรียน</p>,
+      required: 'กรุณากรอกข้อมูล',
+    },
+    {
+      type: InputType.TEXT,
+      name: 'schoolProvince',
+      question: <p className="inline">จังหวัด</p>,
+      required: 'กรุณากรอกข้อมูล',
+    },
   ],
 }
 
