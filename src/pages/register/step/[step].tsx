@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
+import { withAuth } from '@/auth/withAuth'
 import { Container } from '@/components/Container'
 import { Footer } from '@/components/Footer'
 import { FormCard } from '@/components/FormCard'
@@ -36,4 +37,4 @@ const StepPage: NextPage = () => {
   )
 }
 
-export default StepPage
+export default withAuth(StepPage)

@@ -1,7 +1,9 @@
 import type { NextPage } from 'next'
 
+import { withAuth } from '@/auth/withAuth'
+
 const RegisterPage: NextPage = () => {
   return <>RegisterPage</>
 }
 
-export default RegisterPage
+export default withAuth(RegisterPage)
