@@ -12,7 +12,7 @@ interface Props {
 
 export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
   return (
-    <nav className={clsx('flex px-4 py-2 justify-between items-center sticky', className)}>
+    <nav className={clsx('flex px-4 py-2 justify-between items-center sticky top-0', className)}>
       <Link href={'/'}>
         <a>
           <picture>
