@@ -23,6 +23,6 @@ export function Redirect({ to, replace = false, shallow, scroll }: RedirectProps
         scroll,
       })
     }
-  }, [to, replace, shallow, scroll])
+  }, [router, to, replace, shallow, scroll])
   return null
 }
