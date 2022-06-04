@@ -1,5 +1,4 @@
-import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
 import { withAuth } from '@/auth/withAuth'
 import { Container } from '@/components/Container'
@@ -12,14 +11,11 @@ import { BranchType } from '@/modules/register/types'
 
 const stepItems = ['ข้อมูลพื้นฐาน', 'ข้อมูลเพิ่มเติม', 'คำถามจากส่วนกลาง', 'คำถามประจำสาขา', 'สรุป']
 
-const StepPage: NextPage = () => {
-  const router = useRouter()
-  const step = parseInt(router.query.step as string)
+interface StepPageProps {
+  step: number
+}
 
-  if (step > stepItems.length || step <= 0) {
-    return <>Not found</>
-  }
-
+const StepPage: NextPage<StepPageProps> = ({ step }) => {
   return (
     <RegisterProvider step={step} branch={BranchType.PROGRAMMING}>
       <Container className="mb-12 max-w-4xl self-center m-auto">
@@ -35,6 +31,24 @@ const StepPage: NextPage = () => {
       <Footer />
     </RegisterProvider>
   )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: { params: { step: string } }[] = []
+  for (let i = 1; i <= stepItems.length; i++) {
+    paths.push({ params: { step: i.toString() } })
+  }
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps: GetStaticProps<StepPageProps> = async (ctx) => {
+  const step = parseInt(ctx.params?.step as string)
+  return {
+    props: { step },
+  }
 }
 
 export default withAuth(StepPage)
