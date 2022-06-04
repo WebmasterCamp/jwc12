@@ -9,7 +9,7 @@ import { Section } from '@/components/Section'
 
 const Home: NextPage = () => {
   return (
-    <div className="relative flex min-h-screen w-full flex-col px-5 text-white">
+    <div className="relative flex min-h-screen w-full flex-col px-5 text-white scroll-smooth">
       <Navbar />
       <ParticlesWidget />
       <div className="w-full lg:w-1/2 mx-auto">
@@ -47,6 +47,16 @@ const Home: NextPage = () => {
         </h2>
         <p>TODO: Insert schedule</p>
       </Section>
+      <Section className="rounded-xl border grid grid-cols-2 border-gold lg:w-10/12">
+        <div className="hidden lg:block">Map here</div>
+        <div>
+          <h2 className="text-3xl font-heading mb-4 font-semibold">สถานที่</h2>
+          <h3 className="text-gold font-heading font-semibold">
+            คณะเทคโนโลยีสารสนเทศ <br></br> สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+          </h3>
+          <p>เลขที่ 1 ซอยฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพฯ</p>
+        </div>
+      </Section>
       <Section className="text-center">
         <h2 className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
           เลือกสาขาที่ต้องการสมัคร
@@ -60,7 +70,7 @@ const Home: NextPage = () => {
         </div>
       </Section>
       <Section>
-        <h2 className="text-3xl font-heading lg:text-4xl mb-4 font-semibold text-center">
+        <h2 id="faq" className="text-3xl font-heading lg:text-4xl mb-4 font-semibold text-center">
           คำถามที่พบบ่อย
         </h2>
         <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
@@ -68,6 +78,7 @@ const Home: NextPage = () => {
         <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
         <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
       </Section>
+      <Section></Section>
       <Footer />
     </div>
   )
