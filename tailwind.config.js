@@ -18,6 +18,7 @@ const config = {
           dark: '#413313',
           light: '#6b541f',
         },
+        ct: '#1dc5b2',
       },
     },
   },
