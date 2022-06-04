@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useState,
 } from 'react'
 import { SubmitErrorHandler, SubmitHandler, UseFormReturn, useForm } from 'react-hook-form'
 
@@ -34,6 +35,7 @@ import {
 import { BranchType, Question } from '../types'
 
 interface RegisterContextData {
+  ready: boolean
   step: number
   form?: UseFormReturn<CoreQuestionModel>
   question?: Question
@@ -136,8 +138,11 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
     throw new Error('Invalid step or branch')
   }, [step, branch])
 
+  const [ready, setReady] = useState(false)
+
   useEffect(() => {
     async function restoreForm() {
+      setReady(false)
       const { answers } = await getRegistration()
       const keys = Object.keys(form.getValues())
       keys.forEach((key) => {
@@ -145,14 +150,16 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
           form.setValue(key, answers[key])
         }
       })
+      // setReady(true)
     }
     restoreForm()
   }, [form])
 
   const saveAnswers = useCallback(() => {
+    if (!ready) return
     const values = form.getValues()
     updateAnswers(values)
-  }, [form.getValues])
+  }, [ready, form.getValues])
 
   const success: SubmitHandler<CoreQuestionModel> = (data) => {
     console.log('Submit Success', data)
@@ -165,6 +172,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
   return (
     <RegisterContext.Provider
       value={{
+        ready,
         step,
         form,
         question,
