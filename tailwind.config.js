@@ -14,6 +14,10 @@ const config = {
           accent: '#660A70',
         },
         gold: '#E4D0A2',
+        brown: {
+          dark: '#413313',
+          light: '#6b541f',
+        },
       },
     },
   },
