@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
 
 import { DefaultSeo } from 'next-seo'
 import type { AppProps } from 'next/app'
 
 import { CookieConsent } from '@/components/CookieConsent'
+import '@/lib/firebase'
 import { GTM } from '@/lib/gtm'
 import { GOOGLE_TAG_MANAGER_CONTAINER_ID } from '@/utils/env'
 
