@@ -44,6 +44,19 @@ const Home: NextPage = () => {
         <h2 id="schedule" className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
           กำหนดการ
         </h2>
+        <p>TODO: Insert schedule</p>
+      </Section>
+      <Section className="text-center">
+        <h2 className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
+          เลือกสาขาที่ต้องการสมัคร
+        </h2>
+        <div className="grid grid-cols-4 gap-4 text-brown-dark font-heading font-bold text-3xl">
+          {/* TODO: Use actual cards */}
+          <div className="bg-white p-8">Card</div>
+          <div className="bg-white p-8">Card</div>
+          <div className="bg-white p-8">Card</div>
+          <div className="bg-white p-8">Card</div>
+        </div>
       </Section>
       <Footer />
     </div>
