@@ -280,6 +280,13 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@iconify/icons-akar-icons@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@iconify/icons-akar-icons/-/icons-akar-icons-1.2.6.tgz#da935f71e1b7376dc8be03f0e2e73c2b8ea20514"
+  integrity sha512-EElFUA4NRknpWvd/2u43RX6woUVs4GcyKKs+Bc+sbo256uIH7AIhXptTomKNayFr9efpCpwa7nXC+SRqKMEaQA==
+  dependencies:
+    "@iconify/types" "^1.1.0"
+
 "@iconify/icons-fa6-brands@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@iconify/icons-fa6-brands/-/icons-fa6-brands-1.2.3.tgz#a891efebaf4cac42355879c498ce97e4d979e56f"
