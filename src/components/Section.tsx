@@ -8,5 +8,5 @@ interface Props {
 }
 
 export const Section: FunctionComponent<Props> = ({ className = '', children }) => {
-  return <div className={clsx('w-full p-4 lg:p-8 mx-auto', className)}>{children}</div>
+  return <div className={clsx('w-full p-4 lg:p-8 mx-auto my-16', className)}>{children}</div>
 }
