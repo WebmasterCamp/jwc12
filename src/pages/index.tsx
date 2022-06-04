@@ -64,6 +64,9 @@ const Home: NextPage = () => {
           คำถามที่พบบ่อย
         </h2>
         <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
+        <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
+        <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
+        <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
       </Section>
       <Footer />
     </div>
