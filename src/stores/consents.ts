@@ -30,7 +30,7 @@ export const useConsentStore = create<ConsentStoreProps>((set) => {
   const consents = JSON.parse((getCookie('consents') as string) || '{}') as Partial<ConsentParams>
 
   return {
-    open: true,
+    open: typeof window !== 'undefined' ? !getCookie('consents') : false,
     openSettings: false,
     consents: {
       mt_pixel: consents?.mt_pixel || 'denied',
