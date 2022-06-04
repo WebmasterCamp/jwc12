@@ -35,19 +35,18 @@ export async function hasRegistration() {
 }
 
 export async function getRegistration() {
-  if (!(await hasRegistration())) {
+  const docSnap = await getDoc(getRegistrationRef())
+  if (!docSnap.exists()) {
     await setDoc(getRegistrationRef(), {
       answers: {},
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })
   }
-  const docSnap = await getDoc(getRegistrationRef())
   return docSnap.data() as Registration
 }
 
 export async function updateRegistration(data: Partial<Registration>) {
-  await getRegistration()
   return await updateDoc(getRegistrationRef(), {
     ...data,
     updatedAt: serverTimestamp(),
@@ -56,7 +55,12 @@ export async function updateRegistration(data: Partial<Registration>) {
 
 export async function updateAnswers(newAnswers: any) {
   const { answers } = await getRegistration()
+  if (!areAnswersChanged(answers, newAnswers)) return
   return await updateRegistration({
     answers: { ...answers, ...newAnswers },
   })
+}
+
+function areAnswersChanged(oldAnswers: any, newAnswers: any) {
+  return Object.keys(newAnswers).some((key) => oldAnswers[key] !== newAnswers[key])
 }
