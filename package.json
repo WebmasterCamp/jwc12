@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^2.8.10",
     "@iconify/icons-akar-icons": "^1.2.6",
     "@iconify/icons-fa6-brands": "^1.2.3",
+    "@iconify/icons-fa6-solid": "^1.2.4",
     "@iconify/react": "^3.2.1",
     "axios": "^0.27.2",
     "clsx": "^1.1.1",
