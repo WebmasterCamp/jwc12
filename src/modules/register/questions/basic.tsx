@@ -136,13 +136,13 @@ const basicWeakQuestions: WeakQuestion = {
     {
       type: InputType.TEXT,
       name: 'postalCode',
-      question: 'รหัสไปรษณี',
-      placeholder: 'รหัสไปรษณี',
+      question: 'รหัสไปรษณีย์',
+      placeholder: 'รหัสไปรษณีย์',
       required: true,
       validate: {
         name: 'invalid',
-        message: 'รหัสไปรณีไม่ถูกต้อง',
-        test: (value: string) => /^[0-9]$/.test(value),
+        message: 'รหัสไปรษณีย์ไม่ถูกต้อง',
+        test: (value: string) => /^[0-9]{5}$/.test(value),
       },
     },
     // Education Section ------------------------------------------------------------
