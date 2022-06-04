@@ -150,7 +150,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
           form.setValue(key, answers[key])
         }
       })
-      // setReady(true)
+      setReady(true)
     }
     restoreForm()
   }, [form])

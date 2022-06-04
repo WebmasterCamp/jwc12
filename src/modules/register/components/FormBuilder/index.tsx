@@ -26,7 +26,7 @@ const InputContainer = (props: { children: React.ReactNode; className?: string }
 
 export const FormBuilder = () => {
   const router = useRouter()
-  const { form, step, question, submit, saveAnswers } = useRegister()
+  const { ready, form, step, question, submit, saveAnswers } = useRegister()
   if (!form) return null
 
   const {
@@ -38,6 +38,8 @@ export const FormBuilder = () => {
   const onClickPrev = () => {
     router.push(`/register/step/${step - 1}`)
   }
+
+  const disabled = !ready
 
   return (
     <form
@@ -71,6 +73,7 @@ export const FormBuilder = () => {
                   type={input.type}
                   error={errors[input.name]?.message as string}
                   placeholder={input.placeholder}
+                  disabled={disabled}
                 />
               </InputContainer>
             )
@@ -95,7 +98,12 @@ export const FormBuilder = () => {
                       direction={input.direction}
                     >
                       {input.choices.map((choice) => (
-                        <Radio key={`${input.name}_${choice}`} value={choice} label={choice} />
+                        <Radio
+                          key={`${input.name}_${choice}`}
+                          value={choice}
+                          label={choice}
+                          disabled={disabled}
+                        />
                       ))}
                     </RadioGroup>
                   )}
@@ -118,6 +126,7 @@ export const FormBuilder = () => {
                       onChange={onChange}
                       value={value as string}
                       error={errors[input.name]?.message as string}
+                      disabled={disabled}
                     />
                   )}
                 />
@@ -147,6 +156,7 @@ export const FormBuilder = () => {
                             label={choice.value}
                             name={choice.name}
                             checked={value as unknown as boolean}
+                            disabled={disabled}
                           />
                         )
                       }}
@@ -166,6 +176,7 @@ export const FormBuilder = () => {
                   error={errors[input.name]?.message as string}
                   className="mt-4"
                   placeholder={input.placeholder}
+                  disabled={disabled}
                 />
               </InputContainer>
             )

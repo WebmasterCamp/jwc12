@@ -59,17 +59,22 @@ export interface RadioProps {
   selected?: boolean
   className?: string
   onChange?: (event: any) => void
+  disabled?: boolean
 }
 
 export const Radio: FunctionComponent<RadioProps> = forwardRef<HTMLInputElement, RadioProps>(
-  ({ name, value, label, selected, className, onChange, ...rest }, ref) => {
+  ({ name, value, label, selected, className, onChange, disabled = false, ...rest }, ref) => {
     const handleClick = (e: any) => {
+      if (disabled) return
       e.target.value = value
       onChange?.(e)
     }
 
     return (
-      <div className="flex flex-row gap-x-1 items-center cursor-pointer p-1" onClick={handleClick}>
+      <div
+        className={clsx('flex flex-row gap-x-1 items-center p-1', !disabled && 'cursor-pointer')}
+        onClick={handleClick}
+      >
         <span
           {...rest}
           ref={ref}
@@ -83,11 +88,7 @@ export const Radio: FunctionComponent<RadioProps> = forwardRef<HTMLInputElement,
             className
           )}
         />
-        {label && (
-          <label onClick={handleClick} className="cursor-pointer">
-            {label}
-          </label>
-        )}
+        {label && <label onClick={handleClick}>{label}</label>}
       </div>
     )
   }

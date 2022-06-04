@@ -21,6 +21,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   error,
   placeholder,
   onChange,
+  disabled,
 }) => {
   const handleChange = useCallback(
     (option: string) => (e: any) => {
@@ -40,6 +41,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
             'shadow-sm px-4 py-2 bg-white text-sm hover:bg-gray-50 focus:outline-none',
             !!value ? 'text-black' : 'text-gray-300'
           )}
+          disabled={disabled}
         >
           {value ? value : placeholder}
           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5 text-gray-500" aria-hidden="true" />
