@@ -1,5 +1,8 @@
 import { InferType } from 'yup'
 
+import { ExternalLink } from '@/components/ExternalLink'
+
+import { QuestionWithNumber } from '../components/QuestionWithNumber'
 import { BranchType, InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
@@ -8,14 +11,25 @@ const designWeakQuestions: WeakQuestion = {
   name: BranchType.DESIGN,
   inputs: [
     {
+      type: InputType.NONE,
+      title: (
+        <h2>
+          คำถามประจำสาขา <span className="text-primary">(Design)</span>
+        </h2>
+      ),
+    },
+    {
       type: InputType.TEXTAREA,
       question: (
-        <>
+        <QuestionWithNumber number={1}>
           <p>
             วันหนึ่ง{' '}
-            <a href="https://thepeople.co/pamela-colman-smith-and-her-universal-rider-waite/">
+            <ExternalLink
+              href="https://thepeople.co/pamela-colman-smith-and-her-universal-rider-waite/"
+              target="_blank"
+            >
               พาเมลา โคลแมน สมิธ
-            </a>
+            </ExternalLink>{' '}
             นักออกแบบไพ่ทาโรต์ผู้โด่งดังมีความใฝ่ฝันต้องการ<b>เปิดวางขายสำรับไพ่</b>
             เพื่อเป็นของสะสมให้กับ<b>กลุ่มลูกค้าทั่วโลก</b>
             พร้อมพลิกโฉมไพ่ของเธอให้<b>ก้าวเข้าสู่โลกดิจิตอล</b>ที่ใคร ๆ ก็สามารถ
@@ -27,14 +41,15 @@ const designWeakQuestions: WeakQuestion = {
             ฟังหน่อย
           </p>
           <p>Hint: Design Process, Digital Transformation</p>
-        </>
+        </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
+      placeholder: 'ตอบอะไรดีนะ...',
     },
     {
       type: InputType.TEXTAREA,
       question: (
-        <>
+        <QuestionWithNumber number={2}>
           <p>
             หากน้อง ๆ ได้รับคำทำนายหมายมั่นให้เป็นผู้กำหนดภาพลักษณ์ของเว็บขาย NFT Art
             สัญชาติไทยที่กำลังจะเปิดตัวเร็ว ๆ นี้ โดยน้อง ๆ จะต้องนำเสนอ Web Design Moodboard
@@ -48,14 +63,15 @@ const designWeakQuestions: WeakQuestion = {
           <p>
             Hint: Color Palette, Typography, Design Adjectives, References e.g. image, illustration
           </p>
-        </>
+        </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
+      placeholder: 'ตอบอะไรดีนะ...',
     },
     {
       type: InputType.TEXTAREA,
       question: (
-        <>
+        <QuestionWithNumber number={3}>
           <p>
             ถ้าน้อง ๆ
             ได้รับคำไหว้วานจากนักอ่านดวงชะตาให้ประดิษฐ์คิดค้นไอเทมทำนายอนาคตที่มีความแปลกใหม่
@@ -68,9 +84,10 @@ const designWeakQuestions: WeakQuestion = {
             พร้อมสอนวิธีการใช้งานไอเทมชิ้นนั้นให้พี่ ๆ เข้าใจด้วยนะ
           </p>
           <p>Hint: Creative Thinking, Innovative Design</p>
-        </>
+        </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
+      placeholder: 'ตอบอะไรดีนะ...',
     },
   ],
 }
