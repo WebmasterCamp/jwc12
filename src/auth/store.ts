@@ -41,21 +41,23 @@ export const useAuthStore = create<AuthStore>((set) => {
     await firebaseSignOut(auth)
   }
 
-  onAuthStateChanged(auth, (user) => {
-    const authUser = user
-      ? {
-          uid: user.uid,
-          displayName: user.displayName ?? user.uid,
-          photoURL: user.photoURL,
-        }
-      : null
-    set((state) => ({
-      ...state,
-      pending: false,
-      uid: user?.uid ?? null,
-      user: authUser,
-    }))
-  })
+  if (typeof window !== 'undefined') {
+    onAuthStateChanged(auth, (user) => {
+      const authUser = user
+        ? {
+            uid: user.uid,
+            displayName: user.displayName ?? user.uid,
+            photoURL: user.photoURL,
+          }
+        : null
+      set((state) => ({
+        ...state,
+        pending: false,
+        uid: user?.uid ?? null,
+        user: authUser,
+      }))
+    })
+  }
 
   return {
     pending: true,
