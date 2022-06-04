@@ -1,7 +1,16 @@
-import { BaseSyntheticEvent, createContext, useContext, useMemo } from 'react'
+import {
+  BaseSyntheticEvent,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+} from 'react'
 import { SubmitErrorHandler, SubmitHandler, UseFormReturn, useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
+
+import { getRegistration, updateAnswers } from '@/lib/db'
 
 import {
   AdditionalQuestionModel,
@@ -28,7 +37,8 @@ interface RegisterContextData {
   step: number
   form?: UseFormReturn<CoreQuestionModel>
   question?: Question
-  submit?: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
+  submit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
+  handleBlur: () => void
 }
 
 interface RegisterProviderProps {
@@ -110,6 +120,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
       if (branch === BranchType.CONTENT) return contentQuestionForm
       if (branch === BranchType.MARKETING) return marketingQuestionForm
     }
+    throw new Error('Invalid step or branch')
   }, [step, branch])
 
   const question = useMemo(() => {
@@ -122,7 +133,26 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
       if (branch === BranchType.CONTENT) return contentQuestions
       if (branch === BranchType.MARKETING) return marketingQuestions
     }
+    throw new Error('Invalid step or branch')
   }, [step, branch])
+
+  useEffect(() => {
+    async function restoreForm() {
+      const { answers } = await getRegistration()
+      const keys = Object.keys(form.getValues())
+      keys.forEach((key) => {
+        if (key in answers) {
+          form.setValue(key, answers[key])
+        }
+      })
+    }
+    restoreForm()
+  }, [form])
+
+  const handleBlur = useCallback(() => {
+    const values = form.getValues()
+    updateAnswers(values)
+  }, [form.getValues])
 
   const success: SubmitHandler<CoreQuestionModel> = (data) => {
     console.log('Submit Success', data)
@@ -138,7 +168,8 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
         step,
         form,
         question,
-        submit: form?.handleSubmit(success, error),
+        submit: form.handleSubmit(success, error),
+        handleBlur,
       }}
     >
       {children}

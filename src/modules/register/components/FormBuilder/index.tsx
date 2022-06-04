@@ -24,7 +24,7 @@ const InputContainer = (props: { children: React.ReactNode; className?: string }
 
 export const FormBuilder = () => {
   const router = useRouter()
-  const { form, step, question, submit } = useRegister()
+  const { form, step, question, submit, handleBlur } = useRegister()
   if (!form) return null
 
   const {
@@ -38,7 +38,12 @@ export const FormBuilder = () => {
   }
 
   return (
-    <form noValidate onSubmit={submit} className="text-black flex flex-wrap gap-y-2">
+    <form
+      noValidate
+      onSubmit={submit}
+      onBlur={handleBlur}
+      className="text-black flex flex-wrap gap-y-2"
+    >
       {question?.inputs.map((input, index) => {
         switch (input.type) {
           case InputType.NONE: {
@@ -70,6 +75,7 @@ export const FormBuilder = () => {
                 <Controller
                   control={control}
                   name={input.name}
+                  defaultValue=""
                   render={({ field: { onChange, value }, formState: { errors } }) => (
                     <RadioGroup
                       value={value as string}
