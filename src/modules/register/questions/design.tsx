@@ -2,6 +2,7 @@ import { InferType } from 'yup'
 
 import { ExternalLink } from '@/components/ExternalLink'
 
+import { Gap } from '../components/Gap'
 import { QuestionWithNumber } from '../components/QuestionWithNumber'
 import { BranchType, InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
@@ -14,7 +15,7 @@ const designWeakQuestions: WeakQuestion = {
       type: InputType.NONE,
       title: (
         <h2>
-          คำถามประจำสาขา <span className="text-primary">(Design)</span>
+          คำถามประจำสาขา <span className="text-gold-darker">(Design)</span>
         </h2>
       ),
     },
@@ -40,12 +41,13 @@ const designWeakQuestions: WeakQuestion = {
             พร้อมอธิบายขั้นตอนการทำงานต่าง ๆ จนกว่าจะออกมาเป็นผลลัพธ์ที่น้อง ๆ คาดหวังไว้ให้พี่ ๆ
             ฟังหน่อย
           </p>
-          <p>Hint: Design Process, Digital Transformation</p>
+          <p className="italic text-xs">Hint: Design Process, Digital Transformation</p>
         </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
     },
+    { type: InputType.NONE, title: <Gap /> },
     {
       type: InputType.TEXTAREA,
       question: (
@@ -61,6 +63,10 @@ const designWeakQuestions: WeakQuestion = {
             ที่น้อง ๆ ต้องการรวบรวมเข้าไว้ด้วยกันให้พี่ ๆ เข้าใจด้วยนะ
           </p>
           <p>
+            สามารถส่งรูปภาพหรือไฟล์ Moodboard มาได้เลย โดยการส่งลิงก์ Google Drive, Google Docs หรือ
+            Figma เป็นต้น ตามวิธีการหรือเครื่องมือที่น้อง ๆ สะดวก
+          </p>
+          <p className="italic text-xs">
             Hint: Color Palette, Typography, Design Adjectives, References e.g. image, illustration
           </p>
         </QuestionWithNumber>
@@ -68,6 +74,7 @@ const designWeakQuestions: WeakQuestion = {
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
     },
+    { type: InputType.NONE, title: <Gap /> },
     {
       type: InputType.TEXTAREA,
       question: (
@@ -83,7 +90,7 @@ const designWeakQuestions: WeakQuestion = {
             ลองอธิบายไอเดียของน้อง ๆ อย่างละเอียดมากที่สุดเท่าที่จะเป็นไปได้
             พร้อมสอนวิธีการใช้งานไอเทมชิ้นนั้นให้พี่ ๆ เข้าใจด้วยนะ
           </p>
-          <p>Hint: Creative Thinking, Innovative Design</p>
+          <p className="italic text-xs">Hint: Creative Thinking, Innovative Design</p>
         </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',

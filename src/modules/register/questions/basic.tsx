@@ -174,6 +174,7 @@ const basicWeakQuestions: WeakQuestion = {
       type: InputType.TEXT,
       name: 'schoolProvince',
       question: 'จังหวัด',
+      placeholder: 'จังหวัด',
       required: true,
     },
   ],

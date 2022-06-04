@@ -1,5 +1,8 @@
 import { InferType } from 'yup'
 
+import { ExternalLink } from '@/components/ExternalLink'
+
+import { Gap } from '../components/Gap'
 import { QuestionWithNumber } from '../components/QuestionWithNumber'
 import { BranchType, InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
@@ -12,7 +15,7 @@ const marketingWeakQuestions: WeakQuestion = {
       type: InputType.NONE,
       title: (
         <h2>
-          คำถามประจำสาขา <span className="text-primary">(Marketing)</span>
+          คำถามประจำสาขา <span className="text-gold-darker">(Marketing)</span>
         </h2>
       ),
     },
@@ -27,7 +30,9 @@ const marketingWeakQuestions: WeakQuestion = {
         </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
+      placeholder: 'ตอบอะไรดีนะ...',
     },
+    { type: InputType.NONE, title: <Gap /> },
     {
       type: InputType.TEXTAREA,
       question: (
@@ -36,14 +41,17 @@ const marketingWeakQuestions: WeakQuestion = {
             แม่หมอต้องการให้น้อง ๆ สังเกตภาพด้านบนนี้ เมื่อเห็นภาพนี้แล้วเห็นโอกาสอะไร
             ถ้าคิดธุรกิจมาได้อยากทำธุรกิจอะไร พร้อมให้เหตุผล
           </p>
-          <a href="https://www.scg.com/sdsymposium/2020/wp-content/uploads/2020/10/IMG_9567.jpg / ที่มาของภาพ: https://www.scg.com/sdsymposium/2020/pillar/%E0%B8%95%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%A2%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B9%80%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%8D/">
-            รูปอยู่ตรงนี้
-          </a>
+          <div>
+            <ExternalLink href="https://www.scg.com/sdsymposium/2020/wp-content/uploads/2020/10/IMG_9567.jpg / ที่มาของภาพ: https://www.scg.com/sdsymposium/2020/pillar/%E0%B8%95%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%A2%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B9%80%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%8D/">
+              รูปอยู่ตรงนี้
+            </ExternalLink>
+          </div>
         </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
     },
+    { type: InputType.NONE, title: <Gap /> },
     {
       type: InputType.TEXTAREA,
       question: (
@@ -57,6 +65,7 @@ const marketingWeakQuestions: WeakQuestion = {
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
     },
+    { type: InputType.NONE, title: <Gap /> },
     {
       type: InputType.TEXTAREA,
       question: (

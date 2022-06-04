@@ -139,17 +139,16 @@ const additionalWeakQuestions: WeakQuestion = {
     {
       type: InputType.CHECKBOX,
       name: 'branchConfirm',
-      question: (
-        <>
-          <h2 className="text-xl font-bold">ยืนยันการเลือกสาขา</h2>
-          <p className="text-sm text-red-500">
-            **หากยืนยันการเลือกสาขาแล้ว จะไม่สามารถเปลี่ยนสาขาได้ภายหลัง
-          </p>
-        </>
+      question: null,
+      afterQuestion: (
+        <p className="text-sm text-red-500">
+          **หากยืนยันการเลือกสาขาแล้ว จะไม่สามารถเปลี่ยนสาขาได้ภายหลัง
+        </p>
       ),
-      choices: ['ยืนยัน'],
+      choices: ['ยืนยันการเลือกสาขา'],
       required: true,
       direction: 'column',
+      position: 'center',
     },
   ],
 }

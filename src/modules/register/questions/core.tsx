@@ -1,5 +1,6 @@
 import { InferType } from 'yup'
 
+import { Gap } from '../components/Gap'
 import { QuestionWithNumber } from '../components/QuestionWithNumber'
 import { InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
@@ -27,6 +28,7 @@ export const coreWeakQuestions: WeakQuestion = {
       ),
       required: 'กรุณาตอบคำถามนี้',
     },
+    { type: InputType.NONE, title: <Gap /> },
     {
       type: InputType.TEXTAREA,
       question: (
@@ -43,6 +45,7 @@ export const coreWeakQuestions: WeakQuestion = {
       ),
       required: 'กรุณาตอบคำถามนี้',
     },
+    { type: InputType.NONE, title: <Gap /> },
     {
       type: InputType.TEXTAREA,
       question: (
@@ -59,6 +62,7 @@ export const coreWeakQuestions: WeakQuestion = {
       ),
       required: 'กรุณาตอบคำถามนี้',
     },
+    { type: InputType.NONE, title: <Gap /> },
     {
       type: InputType.TEXTAREA,
       question: (
@@ -70,6 +74,7 @@ export const coreWeakQuestions: WeakQuestion = {
         </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
+      afterQuestion: <div className="mb-4" />,
     },
   ],
 }

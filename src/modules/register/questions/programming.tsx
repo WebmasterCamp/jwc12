@@ -2,6 +2,7 @@ import { InferType } from 'yup'
 
 import { ExternalLink } from '@/components/ExternalLink'
 
+import { Gap } from '../components/Gap'
 import { QuestionWithNumber } from '../components/QuestionWithNumber'
 import { BranchType, InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
@@ -14,7 +15,7 @@ const programmingWeakQuestions: WeakQuestion = {
       type: InputType.NONE,
       title: (
         <h2>
-          คำถามประจำสาขา <span className="text-primary">(Programming)</span>
+          คำถามประจำสาขา <span className="text-gold-darker">(Programming)</span>
         </h2>
       ),
     },
@@ -49,6 +50,7 @@ const programmingWeakQuestions: WeakQuestion = {
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
     },
+    { type: InputType.NONE, title: <Gap /> },
     {
       type: InputType.TEXTAREA,
       question: (
