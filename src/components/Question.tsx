@@ -15,7 +15,7 @@ export const Question: React.FunctionComponent<Props> = ({ title = '', children 
   return (
     <div>
       <div
-        className="flex justify-between items-center font-heading border-white border-y py-4"
+        className="flex justify-between items-center font-heading border-white border-y py-4 cursor-pointer"
         onClick={toggle}
       >
         <h3 className="text-2xl">{title}</h3>
