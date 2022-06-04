@@ -89,12 +89,14 @@ export const FormBuilder = () => {
           }
           case InputType.TEXTAREA: {
             return (
-              <InputContainer key={input.name} className="sm:basis-auto">
+              <InputContainer key={input.name} className="sm:basis-auto mb-8">
                 {input.question}
                 <TextArea
                   {...register(input.name)}
                   rows={4}
                   error={errors[input.name]?.message as string}
+                  className="mt-4"
+                  placeholder={input.placeholder}
                 />
               </InputContainer>
             )
