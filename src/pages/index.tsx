@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 
 import { Button } from '@/components/Button'
 import { Footer } from '@/components/Footer'
+import { Map } from '@/components/Map'
 import { Navbar } from '@/components/Navbar'
 import { ParticlesWidget } from '@/components/Particles'
 import { Question } from '@/components/Question'
@@ -47,8 +48,10 @@ const Home: NextPage = () => {
         </h2>
         <p>TODO: Insert schedule</p>
       </Section>
-      <Section className="rounded-xl border grid grid-cols-2 border-gold lg:w-10/12">
-        <div className="hidden lg:block">Map here</div>
+      <Section className="rounded-xl lg:border grid grid-cols-1 lg:grid-cols-2 border-gold lg:w-10/12">
+        <div className="hidden lg:block">
+          <Map />
+        </div>
         <div>
           <h2 className="text-3xl font-heading mb-4 font-semibold">สถานที่</h2>
           <h3 className="text-gold font-heading font-semibold">
