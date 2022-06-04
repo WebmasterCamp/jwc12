@@ -1,5 +1,10 @@
 import type { NextPage } from 'next'
 
+import FacebookIcon from '@iconify/icons-fa6-brands/facebook'
+import InstagramIcon from '@iconify/icons-fa6-brands/instagram'
+import TwitterIcon from '@iconify/icons-fa6-brands/twitter'
+import { Icon } from '@iconify/react'
+
 import { Button } from '@/components/Button'
 import { Footer } from '@/components/Footer'
 import { Map } from '@/components/Map'
@@ -82,7 +87,39 @@ const Home: NextPage = () => {
         <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
         <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
       </Section>
-      <Section></Section>
+      <Section className="text-center">
+        <h2 className="text-3xl lg:text-4l font-semibold font-heading mb-4">ภาพกิจกรรม</h2>
+        <p>TODO: ใส่ภาพกิจกรรม</p>
+      </Section>
+      <Section className="text-center">
+        <h2 className="text-3xl lg:text-4l font-semibold font-heading mb-4">ติดตามข่าวสารของเรา</h2>
+        <div className="space-x-8">
+          <a
+            href="https://www.facebook.com/jwcth"
+            target="_blank"
+            className="hover:text-gold"
+            rel="noreferrer"
+          >
+            <Icon icon={FacebookIcon} className="mr-3 inline text-3xl sm:text-5xl" inline />
+          </a>
+          <a
+            href="https://twitter.com/jwcth"
+            className="hover:text-gold"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Icon icon={TwitterIcon} className="mr-3 inline text-3xl sm:text-5xl" inline />
+          </a>
+          <a
+            href="https://www.instagram.com/jwcth/"
+            target="_blank"
+            className="hover:text-gold"
+            rel="noreferrer"
+          >
+            <Icon icon={InstagramIcon} className="mr-3 inline text-3xl sm:text-5xl" inline />
+          </a>
+        </div>
+      </Section>
       <Footer />
     </div>
   )
