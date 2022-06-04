@@ -47,9 +47,9 @@ interface RegisterProviderProps {
   branch?: BranchType
 }
 
-export const RegiserContext = createContext<RegisterContextData>({} as RegisterContextData)
+export const RegisterContext = createContext<RegisterContextData>({} as RegisterContextData)
 
-export const useRegister = () => useContext(RegiserContext)
+export const useRegister = () => useContext(RegisterContext)
 
 export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch, children }) => {
   /**
@@ -163,7 +163,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
   }
 
   return (
-    <RegiserContext.Provider
+    <RegisterContext.Provider
       value={{
         step,
         form,
@@ -173,6 +173,6 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
       }}
     >
       {children}
-    </RegiserContext.Provider>
+    </RegisterContext.Provider>
   )
 }

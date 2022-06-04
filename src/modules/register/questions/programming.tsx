@@ -54,25 +54,6 @@ const programmingWeakQuestions: WeakQuestion = {
       question: (
         <QuestionWithNumber number={2}>
           <p>
-            แม่หมอต้องการให้น้อง ๆ สังเกตภาพด้านล่างนี้ เมื่อเห็นภาพนี้แล้วเห็นโอกาสอะไร
-            ถ้าคิดธุรกิจมาได้อยากทำธุรกิจอะไร พร้อมให้เหตุผล
-          </p>
-          <ExternalLink
-            href="https://www.scg.com/sdsymposium/2020/wp-content/uploads/2020/10/IMG_9567.jpg / ที่มาของภาพ: https://www.scg.com/sdsymposium/2020/pillar/%E0%B8%95%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%A2%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B9%80%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%8D/"
-            target="_blank"
-          >
-            รูปอยู่ตรงนี้
-          </ExternalLink>
-        </QuestionWithNumber>
-      ),
-      required: 'กรุณาตอบคำถามนี้',
-      placeholder: 'ตอบอะไรดีนะ...',
-    },
-    {
-      type: InputType.TEXTAREA,
-      question: (
-        <QuestionWithNumber number={3}>
-          <p>
             แม่หมออยากให้ลองยกตัวอย่างเว็บไซต์หรือแอปพลิเคชันที่ชอบ และอยากลองสร้างขึ้นมาบ้าง
             พร้อมบอกเหตุผลว่า ทำไมถึงอยากทำเว็บไซต์หรือแอปพลิเคชันนั้น
           </p>

@@ -1,4 +1,18 @@
+import { ReactNode } from 'react'
+
 import { Choice, InputType, Question, WeakQuestion } from '../types'
+
+const getRequiredMessage = (
+  required: string | boolean | undefined,
+  question: ReactNode
+): string | undefined => {
+  if (typeof required === 'string') return required
+  if (required === true) {
+    required = `กรุณากรอกข้อมูล`
+    if (typeof question === 'string') required = `กรุณากรอก ${question}`
+  }
+  return undefined
+}
 
 export function makeQuestion(question: WeakQuestion): Question {
   return {
@@ -7,13 +21,15 @@ export function makeQuestion(question: WeakQuestion): Question {
       if (input.type === InputType.NONE) return input
       if (input.type === InputType.CHECKBOX) {
         const { choices, name, ...rest } = input
-        const newChoices: Choice[] = choices.map((choice, cIndex) => ({
-          name: `${question.name}_Q${index}_C${cIndex}`,
+        const checkboxName = name ? name : `${question.name}_Q${index}`
+        const newChoices: Choice[] = choices.map((choice) => ({
+          name: `${checkboxName}.${choice}`,
           value: choice,
         }))
         return {
           ...rest,
-          name: name ? name : `${question.name}_Q${index}`,
+          name: checkboxName,
+          required: getRequiredMessage(input.required, input.question),
           choices: newChoices,
         }
       }
@@ -21,6 +37,7 @@ export function makeQuestion(question: WeakQuestion): Question {
       return {
         ...input,
         name: key,
+        required: getRequiredMessage(input.required, input.question),
       }
     }),
   }

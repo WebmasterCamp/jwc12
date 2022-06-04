@@ -21,19 +21,22 @@ export enum InputType {
 export interface WeakSimpleInput {
   question: React.ReactNode
   name?: string
-  required?: string
+  required?: string | boolean
   validate?: yup.TestConfig<any>
   placeholder?: string
 }
 
 export interface SimpleInput extends WeakSimpleInput {
   name: string
+  required?: string
 }
 
 export interface WeakChoiceInput extends WeakSimpleInput {
   choices: string[]
   min?: number
   max?: number
+  direction?: 'row' | 'column'
+  position?: 'start' | 'center' | 'end'
 }
 
 export interface Choice {
@@ -44,10 +47,12 @@ export interface Choice {
 export interface ChoiceInput extends Omit<WeakChoiceInput, 'choices'> {
   name: string
   choices: Choice[]
+  required?: string
 }
 
 export interface RadioInput extends WeakChoiceInput {
   name: string
+  required?: string
 }
 
 export type WeakQuestionInputProps =

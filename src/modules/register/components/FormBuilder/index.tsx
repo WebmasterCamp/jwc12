@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import clsx from 'clsx'
 
 import { Button } from '@/components/Button'
+import { Checkbox, CheckboxGroup } from '@/components/Checkbox'
 import { Input } from '@/components/Input'
 import { Radio, RadioGroup } from '@/components/Radio'
 import { RequireMark } from '@/components/RequireMark/indext'
@@ -58,7 +59,11 @@ export const FormBuilder = () => {
           case InputType.DATE: {
             return (
               <InputContainer key={input.name}>
-                {input.question}
+                {typeof input.question === 'string' ? (
+                  <p className="inline">{input.question}</p>
+                ) : (
+                  input.question
+                )}
                 {!!input.required && <RequireMark />}
                 <Input
                   {...register(input.name)}
@@ -83,6 +88,7 @@ export const FormBuilder = () => {
                       error={errors[input.name]?.message as string}
                       label={input.question}
                       required={!!input.required}
+                      direction={input.direction}
                     >
                       {input.choices.map((choice) => (
                         <Radio key={`${input.name}_${choice}`} value={choice} label={choice} />
@@ -93,9 +99,41 @@ export const FormBuilder = () => {
               </InputContainer>
             )
           }
+          case InputType.CHECKBOX: {
+            return (
+              <InputContainer key={input.name} className="sm:basis-auto">
+                <CheckboxGroup
+                  error={errors[input.name]?.message as string}
+                  label={input.question}
+                  required={!!input.required}
+                  direction={input.direction}
+                  position={input.position}
+                >
+                  {input.choices.map((choice) => (
+                    <Controller
+                      control={control}
+                      name={choice.name}
+                      render={({ field: { onChange, value } }) => {
+                        return (
+                          <Checkbox
+                            key={`${input.name}_${choice.name}`}
+                            onChange={onChange}
+                            value={choice.value}
+                            label={choice.value}
+                            name={choice.name}
+                            checked={value as unknown as boolean}
+                          />
+                        )
+                      }}
+                    />
+                  ))}
+                </CheckboxGroup>
+              </InputContainer>
+            )
+          }
           case InputType.TEXTAREA: {
             return (
-              <InputContainer key={input.name} className="sm:basis-auto mb-8">
+              <InputContainer key={input.name} className="sm:basis-auto">
                 {input.question}
                 <TextArea
                   {...register(input.name)}
