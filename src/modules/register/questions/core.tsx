@@ -1,17 +1,18 @@
 import { InferType } from 'yup'
 
 import { Gap } from '../components/Gap'
+import { Header } from '../components/Header'
 import { QuestionWithNumber } from '../components/QuestionWithNumber'
 import { InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
 
 export const coreWeakQuestions: WeakQuestion = {
-  name: 'core',
+  stepName: 'core',
   inputs: [
     {
       type: InputType.NONE,
-      title: 'คำถามจากส่วนกลาง',
+      title: <Header>คำถามจากส่วนกลาง</Header>,
     },
     {
       type: InputType.TEXTAREA,
@@ -74,7 +75,6 @@ export const coreWeakQuestions: WeakQuestion = {
         </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
-      afterQuestion: <div className="mb-4" />,
     },
   ],
 }

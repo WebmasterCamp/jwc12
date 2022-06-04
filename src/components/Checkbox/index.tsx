@@ -12,7 +12,6 @@ export interface CheckboxGroupProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value'> {
   value?: ObjectBoolean
   label?: React.ReactNode
-  bottomLabel?: React.ReactNode
   direction?: 'row' | 'column'
   position?: 'start' | 'center' | 'end'
   error?: string
@@ -21,36 +20,30 @@ export interface CheckboxGroupProps
 export const CheckboxGroup: React.FC<CheckboxGroupProps> = forwardRef<
   HTMLInputElement,
   CheckboxGroupProps
->(
-  (
-    { direction = 'row', position = 'start', label, bottomLabel, required, error, children },
-    ref
-  ) => {
-    return (
-      <div
-        className={clsx(
-          `flex gap-x-7 gap-y-2 w-full flex-wrap`,
-          position === 'start' && `items-start`,
-          position === 'center' && `items-center`,
-          position === 'end' && `items-end`,
-          direction === 'row' ? 'flex-col sm:flex-row sm:items-center' : 'flex-col'
-        )}
-        ref={ref}
-      >
-        {label && (
-          <label className="whitespace-nowrap">
-            {label} {required && <RequireMark />}
-          </label>
-        )}
-        <div className="flex gap-x-1 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between">
-          {children}
-          <ErrorMessage message={error} />
-        </div>
-        {bottomLabel && <label className="whitespace-nowrap">{bottomLabel}</label>}
+>(({ direction = 'row', position = 'start', label, required, error, children }, ref) => {
+  return (
+    <div
+      className={clsx(
+        `flex gap-x-7 gap-y-2 w-full flex-wrap`,
+        position === 'start' && `items-start`,
+        position === 'center' && `items-center`,
+        position === 'end' && `items-end`,
+        direction === 'row' ? 'flex-col sm:flex-row sm:items-center' : 'flex-col'
+      )}
+      ref={ref}
+    >
+      {label && (
+        <label className="whitespace-nowrap">
+          {label} {required && <RequireMark />}
+        </label>
+      )}
+      <div className="flex gap-x-1 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between">
+        {children}
+        <ErrorMessage message={error} />
       </div>
-    )
-  }
-)
+    </div>
+  )
+})
 
 CheckboxGroup.displayName = 'CheckboxGroup'
 

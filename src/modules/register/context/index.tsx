@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react'
 import { SubmitErrorHandler, SubmitHandler, UseFormReturn, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -167,6 +168,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
 
   const error: SubmitErrorHandler<CoreQuestionModel> = (data, error) => {
     console.log('Error', data)
+    toast.error('คุณกรอกข้อมูลไม่ครบถ้วน')
   }
 
   return (

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Toaster } from 'react-hot-toast'
 
 import { DefaultSeo } from 'next-seo'
 import type { AppProps } from 'next/app'
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <DefaultSeo {...DefaultSeoConfig} />
       <Component {...pageProps} />
       <CookieConsent />
+      <Toaster />
     </>
   )
 }

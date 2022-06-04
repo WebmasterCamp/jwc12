@@ -1,16 +1,17 @@
 import { InferType } from 'yup'
 
+import { Header } from '../components/Header'
 import { InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
 
 const basicWeakQuestions: WeakQuestion = {
-  name: 'basic',
+  stepName: 'basic',
   inputs: [
     // Information Section ------------------------------------------------------------
     {
       type: InputType.NONE,
-      title: <h2>ข้อมูลพื้นฐาน</h2>,
+      title: <Header>ข้อมูลพื้นฐาน</Header>,
     },
     {
       type: InputType.DROPDOWN,
@@ -50,7 +51,7 @@ const basicWeakQuestions: WeakQuestion = {
     },
     {
       type: InputType.TEXT,
-      name: 'nickName',
+      name: 'nickname',
       question: 'ชื่อเล่น',
       placeholder: 'ชื่อเล่น',
       required: true,
@@ -96,7 +97,7 @@ const basicWeakQuestions: WeakQuestion = {
     // Address Section ------------------------------------------------------------
     {
       type: InputType.NONE,
-      title: <h2>ที่อยู่ปัจจุบัน</h2>,
+      title: <Header>ที่อยู่ปัจจุบัน</Header>,
     },
     {
       type: InputType.TEXT,
@@ -148,7 +149,7 @@ const basicWeakQuestions: WeakQuestion = {
     // Education Section ------------------------------------------------------------
     {
       type: InputType.NONE,
-      title: <h2>ข้อมูลการศึกษา</h2>,
+      title: <Header>ข้อมูลการศึกษา</Header>,
     },
     {
       type: InputType.RADIO,
@@ -165,14 +166,14 @@ const basicWeakQuestions: WeakQuestion = {
     },
     {
       type: InputType.TEXT,
-      name: 'school',
+      name: 'educationSchool',
       question: 'โรงเรียน',
       placeholder: 'โรงเรียน',
       required: true,
     },
     {
       type: InputType.TEXT,
-      name: 'schoolProvince',
+      name: 'educationProvince',
       question: 'จังหวัด',
       placeholder: 'จังหวัด',
       required: true,

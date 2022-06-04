@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Controller } from 'react-hook-form'
 
 import { useRouter } from 'next/router'
@@ -30,7 +30,6 @@ export const FormBuilder = () => {
   if (!form) return null
 
   const {
-    register,
     control,
     formState: { errors },
   } = form
@@ -51,11 +50,7 @@ export const FormBuilder = () => {
       {question?.inputs.map((input, index) => {
         switch (input.type) {
           case InputType.NONE: {
-            return (
-              <div key={`${question.name}_${index}`} className="w-full text-xl font-bold p-2">
-                {input.title}
-              </div>
-            )
+            return <Fragment key={`${question.stepName}_${index}`}>{input.title}</Fragment>
           }
           case InputType.TEXT:
           case InputType.EMAIL:
@@ -68,14 +63,22 @@ export const FormBuilder = () => {
                   input.question
                 )}
                 {!!input.required && <RequireMark />}
-                <Input
-                  {...register(input.name)}
-                  type={input.type}
-                  error={errors[input.name]?.message as string}
-                  placeholder={input.placeholder}
-                  disabled={disabled}
+                <Controller
+                  control={control}
+                  name={input.name}
+                  defaultValue=""
+                  render={({ field: { value, ...rest }, formState: { errors } }) => (
+                    <Input
+                      {...rest}
+                      value={value as string}
+                      name={input.name}
+                      type={input.type}
+                      error={errors[input.name]?.message as string}
+                      placeholder={input.placeholder}
+                      disabled={disabled}
+                    />
+                  )}
                 />
-                {input.afterQuestion}
               </InputContainer>
             )
           }
@@ -95,7 +98,6 @@ export const FormBuilder = () => {
                       }}
                       error={errors[input.name]?.message as string}
                       label={input.question}
-                      bottomLabel={input.afterQuestion}
                       required={!!input.required}
                       direction={input.direction}
                     >
@@ -124,7 +126,6 @@ export const FormBuilder = () => {
                     <Dropdown
                       name={input.name}
                       label={input.question}
-                      bottomLabel={input.afterQuestion}
                       placeholder={input.placeholder}
                       options={input.choices}
                       onChange={onChange}
@@ -143,20 +144,19 @@ export const FormBuilder = () => {
                 <CheckboxGroup
                   error={errors[input.name]?.message as string}
                   label={input.question}
-                  bottomLabel={input.afterQuestion}
                   required={!!input.required}
                   direction={input.direction}
                   position={input.position}
                 >
                   {input.choices.map((choice) => (
                     <Controller
+                      key={`${input.name}_${choice.name}`}
                       control={control}
                       name={choice.name}
                       defaultValue=""
                       render={({ field: { onChange, value } }) => {
                         return (
                           <Checkbox
-                            key={`${input.name}_${choice.name}`}
                             onChange={onChange}
                             value={choice.value}
                             label={choice.value}
@@ -176,15 +176,23 @@ export const FormBuilder = () => {
             return (
               <InputContainer key={input.name} className="sm:basis-auto">
                 {input.question}
-                <TextArea
-                  {...register(input.name)}
-                  rows={4}
-                  error={errors[input.name]?.message as string}
-                  className="mt-4"
-                  placeholder={input.placeholder}
-                  disabled={disabled}
+                <Controller
+                  control={control}
+                  name={input.name}
+                  defaultValue=""
+                  render={({ field: { value, ...rest }, formState: { errors } }) => (
+                    <TextArea
+                      {...rest}
+                      name={input.name}
+                      value={value as string}
+                      rows={4}
+                      error={errors[input.name]?.message as string}
+                      className="mt-4"
+                      placeholder={input.placeholder}
+                      disabled={disabled}
+                    />
+                  )}
                 />
-                {input.afterQuestion}
               </InputContainer>
             )
           }

@@ -1,48 +1,55 @@
 import { InferType } from 'yup'
 
+import { Header } from '../components/Header'
 import { InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
 
 const additionalWeakQuestions: WeakQuestion = {
-  name: 'additional',
+  stepName: 'additional',
   inputs: [
     {
       type: InputType.NONE,
-      title: <h2>ข้อมูลเพิ่มเติม</h2>,
+      title: <Header>ข้อมูลเพิ่มเติม</Header>,
     },
     {
       type: InputType.TEXT,
+      name: 'health.congenitalDisease',
       question: 'โรคประจำตัว',
       placeholder: 'ex. ภูมิแพ้',
       required: true,
     },
     {
       type: InputType.TEXT,
+      name: 'health.drug',
       question: 'ยาประจำตัว',
       placeholder: 'ยาประจำตัว',
       required: true,
     },
     {
       type: InputType.TEXT,
+      name: 'health.allergicDrug',
       question: 'ยาที่แพ้',
       placeholder: 'ยาที่แพ้',
       required: true,
     },
     {
       type: InputType.TEXT,
+      name: 'health.allergicThing',
       question: 'สิ่งที่แพ้',
       placeholder: 'ex. ขนสัตว์, กุ้ง',
       required: true,
     },
     {
       type: InputType.TEXT,
+      name: 'health.dietaryRestriction',
       question: 'ข้อจำกัดด้านอาหาร',
       placeholder: 'ex. มังสวิรัติ, อาหารคาว, อาหารเผ็ด, ฮาลาล',
       required: true,
     },
     {
       type: InputType.DROPDOWN,
+      name: 'shirtSize',
       question: 'ไซส์เสื้อ',
       placeholder: 'ไซส์เสื้อ',
       choices: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -50,91 +57,93 @@ const additionalWeakQuestions: WeakQuestion = {
     },
     {
       type: InputType.TEXTAREA,
+      name: 'activity',
       question: 'กิจกรรมที่เข้าร่วมหรือผลงานที่เคยทำ',
       placeholder: 'ex. งานแข่งขัน การประกวด การแสดง ฯลฯ',
       required: true,
     },
     {
       type: InputType.CHECKBOX,
-      question: 'รู้จักค่าย YWC จากไหน',
       name: 'knowFrom',
+      question: 'รู้จักค่าย YWC จากไหน',
       choices: ['Facebook', 'Instagram', 'Twitter', 'เพื่อน', 'ผู้ปกครอง', 'สถานศึกษา', 'อื่น ๆ'],
       placeholder: 'ex. งานแข่งขัน การประกวด การแสดง ฯลฯ',
       required: true,
     },
     {
       type: InputType.TEXTAREA,
+      name: 'remark',
       question: 'มีอะไรอยากบอกไหม (ข้อมูลอื่นๆ ที่จำเป็น)',
       placeholder: 'มีอะไรอยากบอกไหม (ข้อมูลอื่นๆ ที่จำเป็น)',
       required: true,
     },
     {
       type: InputType.NONE,
-      title: <h2>ข้อมูลผู้ปกครอง</h2>,
+      title: <Header>ข้อมูลผู้ปกครอง</Header>,
     },
     {
       type: InputType.TEXT,
-      name: 'parentFirstName',
+      name: 'parent.firstName',
       question: 'ชื่อจริง',
       placeholder: 'ชื่อจริง',
       required: true,
     },
     {
       type: InputType.TEXT,
-      name: 'parentLastName',
+      name: 'parent.lastName',
       question: 'นามสกุล',
       placeholder: 'นามสกุล',
       required: true,
     },
     {
       type: InputType.TEXT,
-      name: 'parentPhone',
+      name: 'parent.phone',
       question: 'เบอร์โทรติดต่อ',
       placeholder: 'xxxxxxxxxx',
       required: true,
     },
     {
       type: InputType.TEXT,
-      name: 'parentReleationship',
+      name: 'parent.releationship',
       question: 'ความสัมพันธ์',
       placeholder: 'ex. มารดา, บิดา',
       required: true,
     },
     {
       type: InputType.NONE,
-      title: <h2>ข้อมูลติดต่อฉุกเฉิน</h2>,
+      title: <Header>ข้อมูลติดต่อฉุกเฉิน</Header>,
     },
     {
       type: InputType.TEXT,
-      name: 'emergencyFirstName',
+      name: 'emergency.firstName',
       question: 'ชื่อจริง',
       placeholder: 'ชื่อจริง',
       required: true,
     },
     {
       type: InputType.TEXT,
-      name: 'emergencyLastName',
+      name: 'emergency.lastName',
       question: 'นามสกุล',
       placeholder: 'นามสกุล',
       required: true,
     },
     {
       type: InputType.TEXT,
-      name: 'emergencyPhone',
+      name: 'emergency.phone',
       question: 'เบอร์โทรติดต่อ',
       placeholder: 'xxxxxxxxxx',
       required: true,
     },
     {
       type: InputType.TEXT,
-      name: 'emergencyReleationship',
+      name: 'emergency.releationship',
       question: 'ความสัมพันธ์',
       placeholder: 'ex. มารดา, บิดา',
       required: true,
     },
     {
       type: InputType.NONE,
-      title: <h2>เลือกสาขา</h2>,
+      title: <Header>เลือกสาขา</Header>,
     },
     {
       type: InputType.RADIO,
@@ -149,15 +158,18 @@ const additionalWeakQuestions: WeakQuestion = {
       type: InputType.CHECKBOX,
       name: 'branchConfirm',
       question: null,
-      afterQuestion: (
-        <p className="text-sm text-red-500">
-          **หากยืนยันการเลือกสาขาแล้ว จะไม่สามารถเปลี่ยนสาขาได้ภายหลัง
-        </p>
-      ),
       choices: ['ยืนยันการเลือกสาขา'],
       required: true,
       direction: 'column',
       position: 'center',
+    },
+    {
+      type: InputType.NONE,
+      title: (
+        <p className="text-sm text-red-500 text-center w-full">
+          **หากยืนยันการเลือกสาขาแล้ว จะไม่สามารถเปลี่ยนสาขาได้ภายหลัง
+        </p>
+      ),
     },
   ],
 }

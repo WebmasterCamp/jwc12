@@ -3,20 +3,21 @@ import { InferType } from 'yup'
 import { ExternalLink } from '@/components/ExternalLink'
 
 import { Gap } from '../components/Gap'
+import { Header } from '../components/Header'
 import { QuestionWithNumber } from '../components/QuestionWithNumber'
 import { BranchType, InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
 
 const marketingWeakQuestions: WeakQuestion = {
-  name: BranchType.MARKETING,
+  stepName: BranchType.MARKETING,
   inputs: [
     {
       type: InputType.NONE,
       title: (
-        <h2>
+        <Header>
           คำถามประจำสาขา <span className="text-gold-darker">(Marketing)</span>
-        </h2>
+        </Header>
       ),
     },
     {

@@ -8,7 +8,6 @@ import { RequireMark } from '../RequireMark/indext'
 export interface RadioGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value?: string
   label?: React.ReactNode
-  bottomLabel?: React.ReactNode
   direction?: 'row' | 'column'
   position?: 'start' | 'center' | 'end'
   error?: string
@@ -19,17 +18,7 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
   RadioGroupProps
 >(
   (
-    {
-      direction = 'row',
-      position = 'start',
-      value,
-      label,
-      bottomLabel,
-      error,
-      children,
-      required,
-      onChange,
-    },
+    { direction = 'row', position = 'start', value, label, error, children, required, onChange },
     ref
   ) => {
     return (
@@ -56,7 +45,6 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
               selected: value === radioValue,
             })
           })}
-          {bottomLabel && <label className="whitespace-nowrap">{bottomLabel}</label>}
           <ErrorMessage message={error} />
         </div>
       </div>

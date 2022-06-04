@@ -18,7 +18,8 @@ export const buildYupObject = (form: Question) => {
       case InputType.DROPDOWN:
       case InputType.UPLOAD:
       case InputType.EMAIL: {
-        let s = yup.string().trim()
+        let s = yup.string()
+        console.log(input.name, input.required)
         if (input.required) s = s.required(input.required)
         if (input.type === InputType.EMAIL) s = s.email('กรุณากรอก email ให้ถูกต้อง')
         if (input.type === InputType.UPLOAD) s = s.url('กรุณากรอก URL ให้ถูกต้อง')
@@ -41,6 +42,7 @@ export const buildYupObject = (form: Question) => {
         input.choices.forEach((choice) => {
           schemaChoice[choice.name] = yup.boolean()
         })
+
         schema[input.name] = input.required
           ? yup
               .object(schemaChoice)

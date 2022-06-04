@@ -1,3 +1,4 @@
+import equal from 'fast-deep-equal'
 import {
   Timestamp,
   connectFirestoreEmulator,
@@ -34,7 +35,7 @@ export async function hasRegistration() {
   return docSnap.exists()
 }
 
-export async function getRegistration() {
+export async function getRegistration(): Promise<Registration> {
   const docSnap = await getDoc(getRegistrationRef())
   if (!docSnap.exists()) {
     await setDoc(getRegistrationRef(), {
@@ -42,6 +43,7 @@ export async function getRegistration() {
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })
+    return await getRegistration()
   }
   return docSnap.data() as Registration
 }
@@ -62,5 +64,5 @@ export async function updateAnswers(newAnswers: any) {
 }
 
 function areAnswersChanged(oldAnswers: any, newAnswers: any) {
-  return Object.keys(newAnswers).some((key) => oldAnswers[key] !== newAnswers[key])
+  return !equal(oldAnswers, newAnswers)
 }

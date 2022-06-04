@@ -1,20 +1,21 @@
 import { InferType } from 'yup'
 
 import { Gap } from '../components/Gap'
+import { Header } from '../components/Header'
 import { QuestionWithNumber } from '../components/QuestionWithNumber'
 import { BranchType, InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
 
 export const contentWeakQuestions: WeakQuestion = {
-  name: BranchType.CONTENT,
+  stepName: BranchType.CONTENT,
   inputs: [
     {
       type: InputType.NONE,
       title: (
-        <h2>
+        <Header>
           คำถามประจำสาขา <span className="text-gold-darker">(Content)</span>
-        </h2>
+        </Header>
       ),
     },
     {

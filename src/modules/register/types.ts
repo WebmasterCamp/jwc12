@@ -21,7 +21,6 @@ export enum InputType {
 
 export interface WeakSimpleInput {
   question: React.ReactNode
-  afterQuestion?: React.ReactNode
   name?: string
   required?: string | boolean
   validate?: yup.TestConfig<any>
@@ -104,11 +103,11 @@ export type QuestionInputProps =
     }
 
 export type WeakQuestion = {
-  name: string
+  stepName: string
   inputs: WeakQuestionInputProps[]
 }
 
 export type Question = {
-  name: string
+  stepName: string
   inputs: QuestionInputProps[]
 }
