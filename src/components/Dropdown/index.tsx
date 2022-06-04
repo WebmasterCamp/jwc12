@@ -1,4 +1,4 @@
-import { Fragment, MouseEventHandler, ReactNode, useCallback } from 'react'
+import { Fragment, ReactNode, useCallback } from 'react'
 
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
@@ -11,12 +11,14 @@ export interface DropdownProps extends React.SelectHTMLAttributes<HTMLSelectElem
   label: ReactNode
   options: string[]
   error?: string
+  bottomLabel?: React.ReactNode
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
   value,
   name,
   label,
+  bottomLabel,
   options,
   error,
   placeholder,
@@ -46,6 +48,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           {value ? value : placeholder}
           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5 text-gray-500" aria-hidden="true" />
         </Menu.Button>
+        {bottomLabel}
         <ErrorMessage message={error} />
       </div>
       <Transition

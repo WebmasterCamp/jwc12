@@ -12,6 +12,7 @@ export interface CheckboxGroupProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value'> {
   value?: ObjectBoolean
   label?: React.ReactNode
+  bottomLabel?: React.ReactNode
   direction?: 'row' | 'column'
   position?: 'start' | 'center' | 'end'
   error?: string
@@ -20,27 +21,36 @@ export interface CheckboxGroupProps
 export const CheckboxGroup: React.FC<CheckboxGroupProps> = forwardRef<
   HTMLInputElement,
   CheckboxGroupProps
->(({ direction = 'row', position = 'start', label, required, error, children }, ref) => {
-  return (
-    <div
-      className={clsx(
-        `flex justify-${position} gap-x-7 gap-y-5 w-full flex-wrap`,
-        direction === 'row' ? 'flex-col sm:flex-row sm:items-center' : 'flex-col'
-      )}
-      ref={ref}
-    >
-      {label && (
-        <label className="whitespace-nowrap">
-          {label} {required && <RequireMark />}
-        </label>
-      )}
-      <div className="flex gap-x-2 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between">
-        {children}
-        <ErrorMessage message={error} />
+>(
+  (
+    { direction = 'row', position = 'start', label, bottomLabel, required, error, children },
+    ref
+  ) => {
+    return (
+      <div
+        className={clsx(
+          `flex gap-x-7 gap-y-2 w-full flex-wrap`,
+          position === 'start' && `items-start`,
+          position === 'center' && `items-center`,
+          position === 'end' && `items-end`,
+          direction === 'row' ? 'flex-col sm:flex-row sm:items-center' : 'flex-col'
+        )}
+        ref={ref}
+      >
+        {label && (
+          <label className="whitespace-nowrap">
+            {label} {required && <RequireMark />}
+          </label>
+        )}
+        <div className="flex gap-x-1 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between">
+          {children}
+          <ErrorMessage message={error} />
+        </div>
+        {bottomLabel && <label className="whitespace-nowrap">{bottomLabel}</label>}
       </div>
-    </div>
-  )
-})
+    )
+  }
+)
 
 CheckboxGroup.displayName = 'CheckboxGroup'
 
@@ -53,7 +63,7 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export const Checkbox: React.FC<CheckboxProps> = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ name, label, checked, className, onChange, ...rest }, ref) => {
     return (
-      <div className="flex flex-row gap-x-1 items-center cursor-pointer p-1 select-none">
+      <div className="flex flex-row gap-x-2 items-center cursor-pointer p-1 select-none">
         <input
           {...rest}
           ref={ref}
@@ -62,15 +72,16 @@ export const Checkbox: React.FC<CheckboxProps> = forwardRef<HTMLInputElement, Ch
           type="checkbox"
           checked={checked}
           onChange={onChange}
-          // className={clsx(
-          //   'transition-colors ease-in-out duration-200',
-          //   'rounded-full mr-2 w-4 h-4 relative text-sm border-2  focus:border-primary',
-          //   'before:absolute before:top-1/2 before:left-1/2 before:w-2 before:h-2 before:rounded-full',
-          //   'before:transform before:-translate-x-1/2 before:-translate-y-1/2',
-          //   'before:transition-colors before:ease-in-out before:duration-200',
-          //   checked ? 'border-primary before:bg-primary' : 'border-gray-300 before:bg-white',
-          //   className
-          // )}
+          className={clsx(
+            `accent-white w-4 h-4 relative cursor-pointer checked:bg-gold-darker checked:border-gold-darker`,
+            `appearance-none bg-white rounded-sm border-2 border-gray-300`,
+            `before:content-['✓'] before:absolute before:bg-transparent before:text-white before:font-bold before:text-xs`,
+            `before:w-2 before:h-2 before:flex before:items-center before:justify-center`,
+            'before:top-1/2 before:left-1/2',
+            'before:transform before:-translate-x-1/2 before:-translate-y-1/2',
+            `transition-colors ease-out duration-100`,
+            className
+          )}
         />
         {label && (
           <label className="cursor-pointer" htmlFor={name}>

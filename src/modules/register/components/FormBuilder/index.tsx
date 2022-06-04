@@ -75,6 +75,7 @@ export const FormBuilder = () => {
                   placeholder={input.placeholder}
                   disabled={disabled}
                 />
+                {input.afterQuestion}
               </InputContainer>
             )
           }
@@ -94,6 +95,7 @@ export const FormBuilder = () => {
                       }}
                       error={errors[input.name]?.message as string}
                       label={input.question}
+                      bottomLabel={input.afterQuestion}
                       required={!!input.required}
                       direction={input.direction}
                     >
@@ -117,10 +119,12 @@ export const FormBuilder = () => {
                 <Controller
                   control={control}
                   name={input.name}
+                  defaultValue=""
                   render={({ field: { onChange, value }, formState: { errors } }) => (
                     <Dropdown
                       name={input.name}
                       label={input.question}
+                      bottomLabel={input.afterQuestion}
                       placeholder={input.placeholder}
                       options={input.choices}
                       onChange={onChange}
@@ -139,6 +143,7 @@ export const FormBuilder = () => {
                 <CheckboxGroup
                   error={errors[input.name]?.message as string}
                   label={input.question}
+                  bottomLabel={input.afterQuestion}
                   required={!!input.required}
                   direction={input.direction}
                   position={input.position}
@@ -147,6 +152,7 @@ export const FormBuilder = () => {
                     <Controller
                       control={control}
                       name={choice.name}
+                      defaultValue=""
                       render={({ field: { onChange, value } }) => {
                         return (
                           <Checkbox
@@ -178,6 +184,7 @@ export const FormBuilder = () => {
                   placeholder={input.placeholder}
                   disabled={disabled}
                 />
+                {input.afterQuestion}
               </InputContainer>
             )
           }

@@ -21,6 +21,7 @@ export enum InputType {
 
 export interface WeakSimpleInput {
   question: React.ReactNode
+  afterQuestion?: React.ReactNode
   name?: string
   required?: string | boolean
   validate?: yup.TestConfig<any>

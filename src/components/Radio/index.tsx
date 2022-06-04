@@ -8,6 +8,7 @@ import { RequireMark } from '../RequireMark/indext'
 export interface RadioGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value?: string
   label?: React.ReactNode
+  bottomLabel?: React.ReactNode
   direction?: 'row' | 'column'
   position?: 'start' | 'center' | 'end'
   error?: string
@@ -18,13 +19,26 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
   RadioGroupProps
 >(
   (
-    { direction = 'row', position = 'start', value, label, error, children, required, onChange },
+    {
+      direction = 'row',
+      position = 'start',
+      value,
+      label,
+      bottomLabel,
+      error,
+      children,
+      required,
+      onChange,
+    },
     ref
   ) => {
     return (
       <div
         className={clsx(
-          `flex justify-${position} gap-x-7 gap-y-5 w-full flex-wrap`,
+          `flex sm:justify-between gap-x-7 gap-y-2 w-full flex-wrap`,
+          position === 'start' && `items-start`,
+          position === 'center' && `items-center`,
+          position === 'end' && `items-end`,
           direction === 'row' ? 'flex-col sm:flex-row sm:items-center' : 'flex-col'
         )}
         ref={ref}
@@ -34,7 +48,7 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
             {label} {required && <RequireMark />}
           </label>
         )}
-        <div className="flex gap-x-2 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between flex-1">
+        <div className="flex gap-x-2 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between w-full">
           {React.Children.map(children, (child, _) => {
             const radioValue: string = (child?.valueOf() as any)?.props.value
             return React.cloneElement(child as React.ReactElement<RadioProps>, {
@@ -42,6 +56,7 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
               selected: value === radioValue,
             })
           })}
+          {bottomLabel && <label className="whitespace-nowrap">{bottomLabel}</label>}
           <ErrorMessage message={error} />
         </div>
       </div>
@@ -84,7 +99,9 @@ export const Radio: FunctionComponent<RadioProps> = forwardRef<HTMLInputElement,
             'before:absolute before:top-1/2 before:left-1/2 before:w-2 before:h-2 before:rounded-full',
             'before:transform before:-translate-x-1/2 before:-translate-y-1/2',
             'before:transition-colors before:ease-in-out before:duration-200',
-            selected ? 'border-primary before:bg-primary' : 'border-gray-300 before:bg-white',
+            selected
+              ? 'border-gold-darker before:bg-gold-darker'
+              : 'border-gray-300 before:bg-white',
             className
           )}
         />

@@ -25,7 +25,7 @@ export const TextArea: FunctionComponent<TextAreaProps> = forwardRef<
         className={clsx(
           rest.className,
           'px-3 py-2 placeholder-gray-300 text-slate-600 relative bg-white',
-          'rounded-md text-sm border-2 border-gray-300 focus:border-primary w-full',
+          'rounded-md text-sm border-2 border-gray-300 focus:border-gold-darker w-full',
           'outline-none focus:outline-none transition-colors',
           !!error ? 'border-red-500' : 'border-gray-300'
         )}

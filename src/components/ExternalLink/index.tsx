@@ -9,7 +9,7 @@ export const ExternalLink: React.FC<ExternalLinkProps> = (props) => {
       target="_blank"
       rel="noreferrer"
       {...props}
-      className={clsx('underline text-primary', props.className)}
+      className={clsx('underline text-gold-darker', props.className)}
     />
   )
 }
