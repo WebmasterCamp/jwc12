@@ -13,7 +13,17 @@ const config = {
           DEFAULT: '#940FA3',
           accent: '#660A70',
         },
-        gold: '#E4D0A2',
+        gold: {
+          DEFAULT: '#E4D0A2',
+          dark: '#CEB273',
+          darker: '#AF8633',
+        },
+        brown: {
+          DEFAULT: '#6B541F',
+          dark: '#413313',
+        },
+        black: '#0A101E',
+        'cool-gray': '#2A3551',
       },
     },
   },
