@@ -54,7 +54,8 @@ const Home: NextPage = () => {
           <h3 className="text-gold font-heading font-semibold">
             คณะเทคโนโลยีสารสนเทศ <br></br> สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
           </h3>
-          <p>เลขที่ 1 ซอยฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพฯ</p>
+          <p className="mb-4">เลขที่ 1 ซอยฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพฯ</p>
+          <h3 className="text-3xl font-heading mb-4 font-semibold">วิธีการเดินทาง</h3>
         </div>
       </Section>
       <Section className="text-center">
