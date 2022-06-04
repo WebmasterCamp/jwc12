@@ -120,6 +120,9 @@ const Home: NextPage = () => {
           </a>
         </div>
       </Section>
+      <Section className="text-center">
+        <h2 className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">ผู้สนับสนุน</h2>
+      </Section>
       <Footer />
     </div>
   )
