@@ -2,7 +2,7 @@ import { FunctionComponent, forwardRef } from 'react'
 
 import clsx from 'clsx'
 
-export type ButtonVariants = 'primary' | 'outlined' | 'gold'
+export type ButtonVariants = 'primary' | 'outlined' | 'gold' | 'outlined-gold'
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariants
@@ -21,7 +21,8 @@ export const Button: FunctionComponent<ButtonProps> = forwardRef<HTMLButtonEleme
           variant === 'outlined' &&
             'border border-primary bg-white text-primary-accent hover:bg-purple-50',
           variant === 'primary' && 'bg-primary text-white hover:bg-primary-accent',
-          variant === 'gold' && 'bg-gold text-brown-dark'
+          variant === 'gold' && 'bg-gold text-brown-dark',
+          variant === 'outlined-gold' && 'bg-transparent text-gold border border-gold'
         )}
       >
         {children}
