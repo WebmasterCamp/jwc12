@@ -9,6 +9,7 @@ const Home: NextPage = () => {
   return (
     <div className="relative flex min-h-screen w-full flex-col px-5 text-white">
       <Navbar />
+      <ParticlesWidget />
       <div className="w-full lg:w-1/2 mx-auto">
         <h1 className="text-4xl lg:text-5xl text-center mt-16 space-y-4 font-heading">
           Make Your site,
@@ -21,7 +22,7 @@ const Home: NextPage = () => {
           <Button variant="outlined-gold">รู้จักกับค่าย</Button>
         </div>
       </div>
-      <ParticlesWidget />
+      <div className="w-full lg:w-1/2 mx-auto"></div>
       <Footer />
     </div>
   )
