@@ -4,6 +4,7 @@ import { Button } from '@/components/Button'
 import { Footer } from '@/components/Footer'
 import { Navbar } from '@/components/Navbar'
 import { ParticlesWidget } from '@/components/Particles'
+import { Question } from '@/components/Question'
 import { Section } from '@/components/Section'
 
 const Home: NextPage = () => {
@@ -50,13 +51,19 @@ const Home: NextPage = () => {
         <h2 className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
           เลือกสาขาที่ต้องการสมัคร
         </h2>
-        <div className="grid grid-cols-4 gap-4 text-brown-dark font-heading font-bold text-3xl">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 text-brown-dark font-heading font-bold text-3xl">
           {/* TODO: Use actual cards */}
           <div className="bg-white p-8">Card</div>
           <div className="bg-white p-8">Card</div>
           <div className="bg-white p-8">Card</div>
           <div className="bg-white p-8">Card</div>
         </div>
+      </Section>
+      <Section>
+        <h2 className="text-3xl font-heading lg:text-4xl mb-4 font-semibold text-center">
+          คำถามที่พบบ่อย
+        </h2>
+        <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
       </Section>
       <Footer />
     </div>
