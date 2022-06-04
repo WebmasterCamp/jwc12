@@ -9,7 +9,7 @@ import { Section } from '@/components/Section'
 
 const Home: NextPage = () => {
   return (
-    <div className="relative flex min-h-screen w-full flex-col px-5 text-white scroll-smooth">
+    <div className="relative flex min-h-screen w-full flex-col px-5 text-white">
       <Navbar />
       <ParticlesWidget />
       <div className="w-full lg:w-1/2 mx-auto">
