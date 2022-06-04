@@ -18,7 +18,7 @@ export const Question: React.FunctionComponent<Props> = ({ title = '', children 
         className="flex justify-between items-center font-heading border-white border-y py-4"
         onClick={toggle}
       >
-        <h3 className="font-bold text-2xl">{title}</h3>
+        <h3 className="text-2xl">{title}</h3>
         <Icon className="text-2xl" icon={shown ? Cross : Plus}></Icon>
       </div>
       {shown && <div className="p-4">{children}</div>}

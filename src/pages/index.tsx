@@ -6,6 +6,7 @@ import TwitterIcon from '@iconify/icons-fa6-brands/twitter'
 import { Icon } from '@iconify/react'
 
 import { Button } from '@/components/Button'
+import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
 import { Map } from '@/components/Map'
 import { Navbar } from '@/components/Navbar'
@@ -78,15 +79,7 @@ const Home: NextPage = () => {
           <div className="bg-white p-8">Card</div>
         </div>
       </Section>
-      <Section>
-        <h2 id="faq" className="text-3xl font-heading lg:text-4xl mb-4 font-semibold text-center">
-          คำถามที่พบบ่อย
-        </h2>
-        <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
-        <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
-        <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
-        <Question title="Lorem ipsum dolor amend">rinrinirtnritni</Question>
-      </Section>
+      <FaqSection />
       <Section className="text-center">
         <h2 className="text-3xl lg:text-4l font-semibold font-heading mb-4">ภาพกิจกรรม</h2>
         <p>TODO: ใส่ภาพกิจกรรม</p>
