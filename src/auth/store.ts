@@ -1,4 +1,5 @@
 import {
+  GithubAuthProvider,
   connectAuthEmulator,
   signOut as firebaseSignOut,
   getAuth,
@@ -13,8 +14,15 @@ import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 export interface AuthStore {
   pending: boolean
   uid: string | null
+  user: AuthUser | null
   signIn: () => Promise<void>
   signOut: () => Promise<void>
+}
+
+export interface AuthUser {
+  uid: string
+  displayName: string
+  photoURL: string | null
 }
 
 const auth = getAuth()
@@ -34,16 +42,25 @@ export const useAuthStore = create<AuthStore>((set) => {
   }
 
   onAuthStateChanged(auth, (user) => {
+    const authUser = user
+      ? {
+          uid: user.uid,
+          displayName: user.displayName ?? user.uid,
+          photoURL: user.photoURL,
+        }
+      : null
     set((state) => ({
       ...state,
       pending: false,
       uid: user?.uid ?? null,
+      user: authUser,
     }))
   })
 
   return {
     pending: true,
     uid: null,
+    user: null,
     signIn,
     signOut,
   }
