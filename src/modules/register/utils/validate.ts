@@ -15,6 +15,7 @@ export const buildYupObject = (form: Question) => {
       case InputType.TEXT:
       case InputType.TEXTAREA:
       case InputType.RADIO:
+      case InputType.DROPDOWN:
       case InputType.UPLOAD:
       case InputType.EMAIL: {
         let s = yup.string().trim()

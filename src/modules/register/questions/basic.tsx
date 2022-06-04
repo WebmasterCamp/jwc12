@@ -13,6 +13,14 @@ const basicWeakQuestions: WeakQuestion = {
       title: <h2>ข้อมูลพื้นฐาน</h2>,
     },
     {
+      type: InputType.DROPDOWN,
+      name: 'title',
+      question: 'คำนำหน้าชื่อ',
+      placeholder: 'คำนำหน้าชื่อ',
+      choices: ['เด็กชาย', 'เด็กหญิง', 'นาย', 'นางสาว'],
+      required: true,
+    },
+    {
       type: InputType.TEXT,
       name: 'firstName',
       question: 'ชื่อจริง',
@@ -145,12 +153,13 @@ const basicWeakQuestions: WeakQuestion = {
     {
       type: InputType.RADIO,
       name: 'educationLevel',
-      question: 'กำลังศึกษาอยู่ในระดับ',
+      question: 'กำลังศึกษาอยู่ในระดับชั้น',
+      placeholder: 'กำลังศึกษาอยู่ในระดับชั้น',
       choices: [
         'มัธยมศึกษาปีที่ 4',
         'มัธยมศึกษาปีที่ 5',
         'มัธยมศึกษาปีที่ 6',
-        'กำลังขึ้นปริญาตรีปีที่ 1',
+        'กำลังขึ้นปริญญาตรีปีที่ 1',
       ],
       required: true,
     },

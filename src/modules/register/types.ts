@@ -15,6 +15,7 @@ export enum InputType {
   UPLOAD = 'upload',
   EMAIL = 'email',
   DATE = 'date',
+  DROPDOWN = 'dropdown',
   NONE = 'none',
 }
 
@@ -50,7 +51,7 @@ export interface ChoiceInput extends Omit<WeakChoiceInput, 'choices'> {
   required?: string
 }
 
-export interface RadioInput extends WeakChoiceInput {
+export interface SingleChoiceInput extends WeakChoiceInput {
   name: string
   required?: string
 }
@@ -66,6 +67,9 @@ export type WeakQuestionInputProps =
     } & WeakSimpleInput)
   | ({
       type: InputType.RADIO
+    } & WeakChoiceInput)
+  | ({
+      type: InputType.DROPDOWN
     } & WeakChoiceInput)
   | ({
       type: InputType.CHECKBOX
@@ -86,7 +90,10 @@ export type QuestionInputProps =
     } & SimpleInput)
   | ({
       type: InputType.RADIO
-    } & RadioInput)
+    } & SingleChoiceInput)
+  | ({
+      type: InputType.DROPDOWN
+    } & SingleChoiceInput)
   | ({
       type: InputType.CHECKBOX
     } & ChoiceInput)

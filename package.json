@@ -10,6 +10,7 @@
     "format": "yarn prettier --write ."
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "@hookform/resolvers": "^2.9.0",
     "@iconify/icons-fa6-brands": "^1.2.3",
     "@iconify/react": "^3.2.1",

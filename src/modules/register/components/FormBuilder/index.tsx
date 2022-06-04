@@ -7,6 +7,7 @@ import clsx from 'clsx'
 
 import { Button } from '@/components/Button'
 import { Checkbox, CheckboxGroup } from '@/components/Checkbox'
+import { Dropdown } from '@/components/Dropdown'
 import { Input } from '@/components/Input'
 import { Radio, RadioGroup } from '@/components/Radio'
 import { RequireMark } from '@/components/RequireMark/indext'
@@ -94,6 +95,27 @@ export const FormBuilder = () => {
                         <Radio key={`${input.name}_${choice}`} value={choice} label={choice} />
                       ))}
                     </RadioGroup>
+                  )}
+                />
+              </InputContainer>
+            )
+          }
+          case InputType.DROPDOWN: {
+            return (
+              <InputContainer key={input.name}>
+                <Controller
+                  control={control}
+                  name={input.name}
+                  render={({ field: { onChange, value }, formState: { errors } }) => (
+                    <Dropdown
+                      name={input.name}
+                      label={input.question}
+                      placeholder={input.placeholder}
+                      options={input.choices}
+                      onChange={onChange}
+                      value={value as string}
+                      error={errors[input.name]?.message as string}
+                    />
                   )}
                 />
               </InputContainer>
