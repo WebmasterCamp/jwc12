@@ -8,40 +8,46 @@ import { RequireMark } from '../RequireMark/indext'
 export interface RadioGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value?: string
   label?: React.ReactNode
-  direction?: 'inline' | 'verticle'
+  direction?: 'row' | 'column'
+  position?: 'start' | 'center' | 'end'
   error?: string
 }
 
 export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
   HTMLInputElement,
   RadioGroupProps
->(({ direction = 'inline', value, label, error, children, required, onChange }, ref) => {
-  return (
-    <div
-      className={clsx(
-        'flex justify-start sm:justify-between gap-x-7 gap-y-5 w-full flex-wrap',
-        direction === 'inline' ? 'flex-col sm:flex-row sm:items-center' : 'flex-col'
-      )}
-      ref={ref}
-    >
-      {label && (
-        <label className="whitespace-nowrap">
-          {label} {required && <RequireMark />}
-        </label>
-      )}
-      <div className="flex gap-x-2 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between">
-        {React.Children.map(children, (child, _) => {
-          const radioValue = (child?.valueOf() as any)?.props.value
-          return React.cloneElement(child as React.ReactElement<RadioProps>, {
-            onChange,
-            selected: value === radioValue,
-          })
-        })}
-        <ErrorMessage message={error} />
+>(
+  (
+    { direction = 'row', position = 'start', value, label, error, children, required, onChange },
+    ref
+  ) => {
+    return (
+      <div
+        className={clsx(
+          `flex justify-${position} gap-x-7 gap-y-5 w-full flex-wrap`,
+          direction === 'row' ? 'flex-col sm:flex-row sm:items-center' : 'flex-col'
+        )}
+        ref={ref}
+      >
+        {label && (
+          <label className="whitespace-nowrap">
+            {label} {required && <RequireMark />}
+          </label>
+        )}
+        <div className="flex gap-x-2 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between flex-1">
+          {React.Children.map(children, (child, _) => {
+            const radioValue: string = (child?.valueOf() as any)?.props.value
+            return React.cloneElement(child as React.ReactElement<RadioProps>, {
+              onChange,
+              selected: value === radioValue,
+            })
+          })}
+          <ErrorMessage message={error} />
+        </div>
       </div>
-    </div>
-  )
-})
+    )
+  }
+)
 
 RadioGroup.displayName = 'RadioGroup'
 
