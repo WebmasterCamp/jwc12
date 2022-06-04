@@ -38,7 +38,7 @@ interface RegisterContextData {
   form?: UseFormReturn<CoreQuestionModel>
   question?: Question
   submit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
-  handleBlur: () => void
+  saveAnswers: () => void
 }
 
 interface RegisterProviderProps {
@@ -149,7 +149,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
     restoreForm()
   }, [form])
 
-  const handleBlur = useCallback(() => {
+  const saveAnswers = useCallback(() => {
     const values = form.getValues()
     updateAnswers(values)
   }, [form.getValues])
@@ -169,7 +169,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
         form,
         question,
         submit: form.handleSubmit(success, error),
-        handleBlur,
+        saveAnswers,
       }}
     >
       {children}
