@@ -21,7 +21,8 @@ const auth = getAuth()
 if (USE_FIRESTORE_EMULATOR) {
   connectAuthEmulator(auth, 'http://localhost:9099')
 }
-const provider = new FacebookAuthProvider()
+const provider =
+  process.env.MODE !== 'DEVELOPMENT' ? new FacebookAuthProvider() : new GithubAuthProvider()
 
 export const useAuthStore = create<AuthStore>((set) => {
   const signIn = async () => {
