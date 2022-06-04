@@ -7,7 +7,7 @@ export function Login() {
   const { signIn } = useAuthStore()
 
   return (
-    <Container className="mb-12 max-w-4xl self-center m-auto flex-1 flex flex-col justify-center">
+    <Container maxWidth="4xl" className="self-center m-auto flex flex-col justify-center">
       <div className="bg-white rounded-md w-full text-center p-4 py-[86px] md:py-[116px]">
         <div className="inline-block w-[212px] h-[104px] md:w-[320px] md:h-[158px]">
           <Image src="/images/login-logo.png" width={320} height={158} />

@@ -18,7 +18,7 @@ interface StepPageProps {
 const StepPage: NextPage<StepPageProps> = ({ step }) => {
   return (
     <RegisterProvider step={step} branch={BranchType.PROGRAMMING}>
-      <Container className="mb-12 max-w-4xl self-center m-auto">
+      <Container maxWidth="4xl" className="mb-12 self-center m-auto">
         <Tab>
           {stepItems.map((item, index) => (
             <TabItem key={index} label={item} index={index + 1} active={step === index + 1} />
