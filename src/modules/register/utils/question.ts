@@ -4,7 +4,7 @@ import { marketingQuestions } from '../questions/marketing'
 import { programmingQuestions } from '../questions/programming'
 import { BranchType } from '../types'
 
-export const selectBranchQuestion = (branch?: BranchType) => {
+export const selectBranchQuestion = (branch: BranchType | null) => {
   if (branch === BranchType.PROGRAMMING) return programmingQuestions
   if (branch === BranchType.DESIGN) return designQuestions
   if (branch === BranchType.CONTENT) return contentQuestions

@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAuthStore } from '@/auth/store'
-import { confirmBranch, getRegistration, updateAnswers } from '@/lib/db'
+import { getRegistration, updateAnswers } from '@/lib/db'
 
 import { stepNames } from '../questions'
 import {
@@ -24,29 +24,21 @@ import {
   additionalQuestions,
 } from '../questions/additional'
 import { BasicQuestionModel, BasicQuestionSchema, basicQuestions } from '../questions/basic'
-import { ContentQuestionModel, ContentQuestionSchema, contentQuestions } from '../questions/content'
+import { ContentQuestionModel, ContentQuestionSchema } from '../questions/content'
 import { CoreQuestionModel, CoreQuestionSchema, coreQuestions } from '../questions/core'
-import { DesignQuestionModel, DesignQuestionSchema, designQuestions } from '../questions/design'
-import {
-  MarketingQuestionModel,
-  MarketingQuestionSchema,
-  marketingQuestions,
-} from '../questions/marketing'
-import {
-  ProgrammingQuestionModel,
-  ProgrammingQuestionSchema,
-  programmingQuestions,
-} from '../questions/programming'
+import { DesignQuestionModel, DesignQuestionSchema } from '../questions/design'
+import { MarketingQuestionModel, MarketingQuestionSchema } from '../questions/marketing'
+import { ProgrammingQuestionModel, ProgrammingQuestionSchema } from '../questions/programming'
 import { BranchType, Question } from '../types'
 import { selectBranchQuestion } from '../utils/question'
 import { SPECIAL_FIELD } from './constants'
 
 interface RegisterContextData {
+  branch: BranchType | null
   ready: boolean
   step: number
   form?: UseFormReturn<CoreQuestionModel>
   question?: Question
-  branch?: BranchType
   submit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
   saveAnswers: () => void
 }
@@ -62,8 +54,7 @@ export const useRegister = () => useContext(RegisterContext)
 
 export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, children }) => {
   const router = useRouter()
-  const { updateStep } = useAuthStore()
-  const [branch, setBranch] = useState<BranchType | undefined>()
+  const { branch, updateStep, confirmBranch } = useAuthStore()
 
   /**
    * First Step form
@@ -106,12 +97,13 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
     if (step === 1) return basicForm
     if (step === 2) return addionalForm
     if (step === 3) return coreQuestionForm
-    if (step === 4) {
+    if ((step === 4 || step === 5) && branch) {
       if (branch === BranchType.PROGRAMMING) return programmingQuestionForm
       if (branch === BranchType.DESIGN) return designQuestionForm
       if (branch === BranchType.CONTENT) return contentQuestionForm
       if (branch === BranchType.MARKETING) return marketingQuestionForm
     }
+    console.log(step, branch)
     throw new Error('Invalid step or branch')
   }, [step, branch])
 
@@ -119,8 +111,8 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
     if (step === 1) return basicQuestions
     if (step === 2) return additionalQuestions
     if (step === 3) return coreQuestions
-    if (step === 4) {
-      selectBranchQuestion(branch)
+    if ((step === 4 || step === 5) && branch) {
+      return selectBranchQuestion(branch)
     }
     throw new Error('Invalid step or branch')
   }, [step, branch])
@@ -131,8 +123,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
   useEffect(() => {
     async function restoreForm() {
       setReady(false)
-      const { answers, confirmedBranch } = await getRegistration()
-      if (confirmedBranch) setBranch(confirmedBranch)
+      const { answers } = await getRegistration()
       const keys = Object.keys(form.getValues())
       const stepAnswers = answers[stepName]
       keys.forEach((key) => {

@@ -10,6 +10,7 @@ import { FacebookAuthProvider } from 'firebase/auth'
 import create from 'zustand'
 
 import { getRegistration, updateRegistration } from '@/lib/db'
+import { BranchType } from '@/modules/register/types'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
 export interface AuthStore {
@@ -19,10 +20,12 @@ export interface AuthStore {
   currentStep: number
   farthestStep: number
   consented: boolean
+  branch: BranchType | null
   signIn: () => Promise<void>
   signOut: () => Promise<void>
   updateStep: (current: number, furthest?: number) => Promise<void>
   updateConsent: (consent: boolean) => Promise<void>
+  confirmBranch: (branch: BranchType) => Promise<void>
 }
 
 export interface AuthUser {
@@ -63,12 +66,15 @@ export const useAuthStore = create<AuthStore>((set, get) => {
         user: authUser,
       }
       if (user) {
-        const { farthestStep, currentStep, consented } = await getRegistration(user.uid)
+        const { farthestStep, currentStep, consented, confirmedBranch } = await getRegistration(
+          user.uid
+        )
         data = {
           ...data,
           currentStep,
           farthestStep,
           consented,
+          branch: confirmedBranch,
         }
       }
       set((state) => ({
@@ -92,6 +98,11 @@ export const useAuthStore = create<AuthStore>((set, get) => {
     set((state) => ({ ...state, consented }))
   }
 
+  const confirmBranch = async (branch: BranchType) => {
+    await updateRegistration({ confirmedBranch: branch })
+    set((state) => ({ ...state, branch }))
+  }
+
   return {
     pending: true,
     uid: null,
@@ -99,10 +110,12 @@ export const useAuthStore = create<AuthStore>((set, get) => {
     currentStep: 0,
     farthestStep: 0,
     consented: false,
+    branch: null,
     signIn,
     signOut,
     updateStep,
     updateConsent,
+    confirmBranch,
   }
 })
 

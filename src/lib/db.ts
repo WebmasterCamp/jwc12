@@ -116,12 +116,6 @@ export async function downloadImage(name: string) {
   return response
 }
 
-export async function confirmBranch(branch: BranchType) {
-  return await updateRegistration({
-    confirmedBranch: branch,
-  })
-}
-
 function areAnswersChanged(oldAnswers: any, newAnswers: any) {
   return !equal(oldAnswers, newAnswers)
 }
