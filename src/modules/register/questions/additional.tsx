@@ -1,6 +1,7 @@
 import { InferType } from 'yup'
 
 import { Header } from '../components/Header'
+import { SPECIAL_FIELD } from '../context/constants'
 import { InputType, WeakQuestion } from '../types'
 import { buildYupObject } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
@@ -148,7 +149,7 @@ const additionalWeakQuestions: WeakQuestion = {
     },
     {
       type: InputType.RADIO,
-      name: 'branch',
+      name: SPECIAL_FIELD.BRANCH,
       question: (
         <img src="https://i.pinimg.com/originals/e2/06/64/e206645f3d2b5438ac9423bcc6934a4b.jpg" />
       ),
@@ -158,7 +159,7 @@ const additionalWeakQuestions: WeakQuestion = {
     },
     {
       type: InputType.CHECKBOX,
-      name: 'branchConfirm',
+      name: SPECIAL_FIELD.BRANCH,
       question: null,
       choices: ['ยืนยันการเลือกสาขา'],
       required: true,

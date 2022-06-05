@@ -10,8 +10,6 @@ import {
 import { SubmitErrorHandler, SubmitHandler, UseFormReturn, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
-import { useRouter } from 'next/router'
-
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAuthStore } from '@/auth/store'
