@@ -36,7 +36,7 @@ export const MovingCard: React.FunctionComponent<Props> = ({ angle = 0, variant 
       translateY={translateY}
       rotateZ={rotateZ}
       easing="ease"
-      onProgressChange={(e) => console.log(e)}
+      // onProgressChange={(e) => console.log(e)}
       //   disabled={true}
     >
       <div
