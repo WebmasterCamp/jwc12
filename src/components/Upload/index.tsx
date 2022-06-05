@@ -1,7 +1,6 @@
-import { ReactNode, forwardRef } from 'react'
+import { ReactNode, forwardRef, useCallback } from 'react'
+import { useDropzone } from 'react-dropzone'
 import toast from 'react-hot-toast'
-
-import Image from 'next/image'
 
 import clsx from 'clsx'
 import useSWR from 'swr'
@@ -22,10 +21,21 @@ interface UploadProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 
 
 const MAX_IMAGE_SIZE = 2 * 1024 * 1024 // 2MB
 
-export const Upload = forwardRef<HTMLInputElement, UploadProps>(
-  ({ label, error, className, onChange, uid, value, name, ...props }, ref) => {
-    const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
-      const file = event.target.files?.[0]
+export function Upload({
+  label,
+  error,
+  className,
+  onChange,
+  uid,
+  value,
+  name,
+  ...props
+}: UploadProps) {
+  const { data: imageUrl } = useSWR(value, downloadImage)
+
+  const onDrop = useCallback(
+    async (files: File[]) => {
+      const file = files[0]
       if (!file) return
       if (file.size > MAX_IMAGE_SIZE) return toast.error('รูปภาพมีขนาดเกิน 2MB')
       const extension = file.name.split('.').pop() ?? '.jpg'
@@ -38,37 +48,34 @@ export const Upload = forwardRef<HTMLInputElement, UploadProps>(
       } catch (err) {
         throw new Error('upload faield')
       }
-    }
+    },
+    [name, onChange, uid]
+  )
 
-    const { data: imageUrl } = useSWR(value, downloadImage)
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: {
+      'image/jpeg': [],
+      'image/png': [],
+    },
+    maxFiles: 1,
+    onDrop,
+  })
 
-    return (
-      <div className={clsx('relative h-48 flex flex-col gap-2', className)}>
-        <label
-          htmlFor={name}
-          className={clsx(
-            'relative border-gray-300 flex flex-1 justify-center items-center cursor-pointer rounded-md',
-            'bg-gray-100 border-2 border-dashed',
-            value && 'border-2 bg-transparent'
-          )}
-        >
-          {!imageUrl ? label : <Image src={imageUrl} alt="" layout="fill" objectFit="contain" />}
-        </label>
-        <ErrorMessage message={error} />
-        <input
-          {...props}
-          ref={ref}
-          id={name}
-          name={name}
-          type="file"
-          defaultValue=""
-          onChange={handleChange}
-          className={clsx(className, 'hidden')}
-          accept="image/*"
-        />
-      </div>
-    )
-  }
-)
-
-Upload.displayName = 'Upload'
+  return (
+    <div className={clsx('relative h-48 flex flex-col gap-2', className)}>
+      <label
+        className={clsx(
+          'relative border-gray-300 flex flex-1 justify-center items-center cursor-pointer rounded-md',
+          'bg-gray-100 border-2 border-dashed',
+          isDragActive && 'border-blue-500',
+          value && 'border-2 bg-transparent'
+        )}
+        {...getRootProps()}
+      >
+        {!imageUrl ? label : <img className="h-48 object-contain" src={imageUrl} alt="" />}
+      </label>
+      <input {...props} id={name} name={name} {...getInputProps()} />
+      <ErrorMessage message={error} />
+    </div>
+  )
+}

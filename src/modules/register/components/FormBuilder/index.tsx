@@ -90,14 +90,15 @@ export const FormBuilder = () => {
                   control={control}
                   name={input.name}
                   defaultValue=""
-                  render={({ field: { value, onChange, ...rest }, formState: { errors } }) => (
+                  render={({ field: { name, value, onChange, onBlur }, formState: { errors } }) => (
                     <Upload
-                      {...rest}
                       uid={uid}
+                      name={name}
                       onChange={(e) => {
                         onChange(e)
                         saveAnswers()
                       }}
+                      onBlur={onBlur}
                       value={value as string}
                       label={input.question}
                       placeholder={input.placeholder}
