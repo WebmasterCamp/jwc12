@@ -25,6 +25,7 @@ export interface WeakSimpleInput {
   required?: string | boolean
   validate?: yup.TestConfig<any>
   placeholder?: string
+  noMark?: boolean
 }
 
 export interface SimpleInput extends WeakSimpleInput {

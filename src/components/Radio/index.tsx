@@ -12,6 +12,7 @@ export interface RadioGroupProps extends React.InputHTMLAttributes<HTMLInputElem
   direction?: 'row' | 'column'
   position?: 'start' | 'center' | 'end'
   error?: string
+  noMark?: boolean
   onChange: (...event: any[]) => void
 }
 
@@ -20,7 +21,17 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
   RadioGroupProps
 >(
   (
-    { direction = 'row', position = 'start', value, label, error, children, required, onChange },
+    {
+      direction = 'row',
+      position = 'start',
+      value,
+      label,
+      error,
+      children,
+      required,
+      onChange,
+      noMark,
+    },
     ref
   ) => {
     return (
@@ -36,7 +47,7 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
       >
         {label && (
           <label className="whitespace-nowrap">
-            {label} {required && <RequireMark />}
+            {label} {required && !noMark && <RequireMark />}
           </label>
         )}
         <div className="flex gap-x-2 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between w-full">
@@ -92,7 +103,8 @@ export const Radio: FunctionComponent<RadioProps> = forwardRef<HTMLInputElement,
             'before:transition-colors before:ease-in-out before:duration-200',
             selected
               ? 'border-gold-darker before:bg-gold-darker'
-              : 'border-gray-300 before:bg-white',
+              : 'border-gray-300 before:bg-transparent',
+            disabled && selected && 'before:bg-gray-500 border-gray-500',
             className
           )}
         />

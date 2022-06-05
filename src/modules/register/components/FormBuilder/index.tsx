@@ -118,7 +118,7 @@ export const FormBuilder = () => {
                   control={control}
                   name={input.name}
                   defaultValue=""
-                  render={({ field: { onChange, onBlur, value }, formState: { errors } }) => (
+                  render={({ field: { onChange, value }, formState: { errors } }) => (
                     <RadioGroup
                       value={value as string}
                       onChange={(e) => {
@@ -128,6 +128,7 @@ export const FormBuilder = () => {
                       error={errors[input.name]?.message as string}
                       label={input.question}
                       required={!!input.required}
+                      noMark={!!input.noMark}
                       direction={input.direction}
                     >
                       {input.choices.map((choice) => (

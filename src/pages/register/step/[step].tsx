@@ -22,7 +22,7 @@ const StepPage: NextPage<StepPageProps> = ({ step }) => {
 
   return (
     <RegisterProvider step={step} branch={BranchType.PROGRAMMING}>
-      <Container maxWidth="4xl" className="mb-12 self-center m-auto">
+      <Container maxWidth="4xl" className="mb-6 self-center m-auto">
         <RegisterTopBar displayName={user?.displayName} signOut={signOut} />
         <Tab farthestStep={farthestStep} currentStep={step}>
           {stepItems.map((item, index) => (
