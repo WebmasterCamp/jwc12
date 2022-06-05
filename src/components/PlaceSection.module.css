@@ -1,0 +1,6 @@
+@media screen(lg) {
+    .placeSection {
+        background-image: url(/images/map-bg.svg);
+        aspect-ratio: 1075/727;
+    }
+}
