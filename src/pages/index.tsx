@@ -9,7 +9,7 @@ import { BranchesSection } from '@/components/BranchesSection'
 import { Button } from '@/components/Button'
 import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
-import { Map } from '@/components/Map'
+import { GoogleMap } from '@/components/Map'
 import { MovingCard } from '@/components/MovingCard'
 import { Navbar } from '@/components/Navbar'
 import { ParticlesWidget } from '@/components/Particles'
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
         <ScheduleSection />
         <Section className="rounded-xl lg:border grid grid-cols-1 lg:grid-cols-2 border-gold lg:w-10/12">
           <div className="hidden lg:block">
-            <Map />
+            <GoogleMap />
           </div>
           <div>
             <h2 className="text-3xl font-heading mb-4 font-semibold">สถานที่</h2>
