@@ -2,6 +2,8 @@ import { Fragment, useEffect, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
+import useSWR from 'swr'
+
 import { useAuthStore } from '@/auth/store'
 import { Button } from '@/components/Button'
 import { Loading } from '@/components/Loading'
@@ -60,17 +62,10 @@ const SummaryBuilder: React.FC<SummaryBuilderProps> = ({ question, answer }) => 
 
 export const FormSummary = () => {
   const router = useRouter()
-  const { branch } = useAuthStore()
+  const { uid, branch } = useAuthStore()
 
-  const [answers, setAnswers] = useState<Answers>()
-
-  useEffect(() => {
-    async function fetchAnswer() {
-      const { answers } = await getRegistration()
-      setAnswers(answers)
-    }
-    fetchAnswer()
-  }, [])
+  const { data: registration } = useSWR(uid, getRegistration)
+  const answers = registration?.answers
 
   const handleSubmit = () => {
     // TODO save confirmation

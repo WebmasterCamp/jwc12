@@ -1,9 +1,10 @@
-import { ReactNode, forwardRef, useEffect, useMemo, useState } from 'react'
+import { ReactNode, forwardRef } from 'react'
 import toast from 'react-hot-toast'
 
 import Image from 'next/image'
 
 import clsx from 'clsx'
+import useSWR from 'swr'
 
 import { downloadImage, uploadImage } from '@/lib/db'
 
@@ -23,8 +24,6 @@ const MAX_IMAGE_SIZE = 2 * 1024 * 1024 // 2MB
 
 export const Upload = forwardRef<HTMLInputElement, UploadProps>(
   ({ label, error, className, onChange, uid, value, name, ...props }, ref) => {
-    const [url, setUrl] = useState('')
-
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
       const file = event.target.files?.[0]
       if (!file) return
@@ -41,18 +40,7 @@ export const Upload = forwardRef<HTMLInputElement, UploadProps>(
       }
     }
 
-    useEffect(() => {
-      async function getUrl() {
-        if (!value) return
-        try {
-          const url = await downloadImage(value)
-          setUrl(url)
-        } catch (err) {
-          throw new Error('download failed')
-        }
-      }
-      getUrl()
-    }, [value])
+    const { data: imageUrl } = useSWR(value, downloadImage)
 
     return (
       <div className={clsx('relative h-48 flex flex-col gap-2', className)}>
@@ -64,7 +52,7 @@ export const Upload = forwardRef<HTMLInputElement, UploadProps>(
             value && 'border-2 bg-transparent'
           )}
         >
-          {!url ? label : <Image src={url} layout="fill" objectFit="contain" />}
+          {!imageUrl ? label : <Image src={imageUrl} alt="" layout="fill" objectFit="contain" />}
         </label>
         <ErrorMessage message={error} />
         <input
