@@ -5,10 +5,12 @@ import InstagramIcon from '@iconify/icons-fa6-brands/instagram'
 import TwitterIcon from '@iconify/icons-fa6-brands/twitter'
 import { Icon } from '@iconify/react'
 
+import { BranchesSection } from '@/components/BranchesSection'
 import { Button } from '@/components/Button'
 import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
 import { Map } from '@/components/Map'
+import { MovingCard } from '@/components/MovingCard'
 import { Navbar } from '@/components/Navbar'
 import { ParticlesWidget } from '@/components/Particles'
 import { Question } from '@/components/Question'
@@ -18,7 +20,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Navbar className="text-white" />
-      <div className="relative flex min-h-screen w-full flex-col px-5 text-white">
+      <div className="relative flex min-h-screen overflow-hidden w-full flex-col px-5 text-white">
         <ParticlesWidget />
         <div className="w-full lg:w-1/2 mx-auto">
           <h1 className="text-4xl lg:text-5xl text-center mt-16 space-y-4 font-heading">
@@ -30,6 +32,12 @@ const Home: NextPage = () => {
           <div className="flex flex-col gap-4 lg:gap-8 lg:flex-row lg:justify-center">
             <Button variant="gold">สมัครค่าย</Button>
             <Button variant="outlined-gold">รู้จักกับค่าย</Button>
+          </div>
+          <div className="w-1/2 mx-auto min-h-[30vh] relative mt-[20vh] border">
+            <MovingCard angle={-30} variant="ct" />
+            <MovingCard angle={-10} variant="ds" />
+            <MovingCard angle={10} variant="mk" />
+            <MovingCard angle={30} variant="pg" />
           </div>
         </div>
         <Section className="flex flex-col-reverse lg:flex-row">
@@ -69,18 +77,7 @@ const Home: NextPage = () => {
             <h3 className="text-3xl font-heading mb-4 font-semibold">วิธีการเดินทาง</h3>
           </div>
         </Section>
-        <Section className="text-center">
-          <h2 className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
-            เลือกสาขาที่ต้องการสมัคร
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 text-brown-dark font-heading font-bold text-3xl">
-            {/* TODO: Use actual cards */}
-            <div className="bg-white p-8">Card</div>
-            <div className="bg-white p-8">Card</div>
-            <div className="bg-white p-8">Card</div>
-            <div className="bg-white p-8">Card</div>
-          </div>
-        </Section>
+        <BranchesSection />
         <FaqSection />
         <Section className="text-center">
           <h2 className="text-3xl lg:text-4l font-semibold font-heading mb-4">ภาพกิจกรรม</h2>

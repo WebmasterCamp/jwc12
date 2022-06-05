@@ -23,6 +23,9 @@ const config = {
         mk: '#7423dc',
         ds: '#a1dd40',
       },
+      aspectRatio: {
+        card: '0.6111',
+      },
     },
   },
   plugins: [],
