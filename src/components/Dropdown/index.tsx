@@ -62,7 +62,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       >
         <Menu.Items
           className={clsx(
-            'origin-top absolute right-0 -mt-4 w-full rounded-md',
+            'origin-top absolute right-0 mt-2 w-full rounded-md',
             'shadow-lg bg-white ring-2 ring-black ring-opacity-5 focus:outline-none z-50'
           )}
         >

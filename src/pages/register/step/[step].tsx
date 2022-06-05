@@ -1,10 +1,13 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
+import { useAuthStore } from '@/auth/store'
 import { withAuth } from '@/auth/withAuth'
 import { Container } from '@/components/Container'
 import { Footer } from '@/components/Footer'
 import { FormCard } from '@/components/FormCard'
+import { Logo } from '@/components/Logo'
 import { Tab, TabItem } from '@/components/Tab'
+import { UserBar } from '@/components/UserBar'
 import { FormBuilder } from '@/modules/register/components/FormBuilder'
 import { RegisterProvider } from '@/modules/register/context'
 import { BranchType } from '@/modules/register/types'
@@ -16,9 +19,15 @@ interface StepPageProps {
 }
 
 const StepPage: NextPage<StepPageProps> = ({ step }) => {
+  const { user, signOut } = useAuthStore()
+
   return (
     <RegisterProvider step={step} branch={BranchType.PROGRAMMING}>
       <Container maxWidth="4xl" className="mb-12 self-center m-auto">
+        <div className="w-full flex items-center justify-between mb-4">
+          <Logo />
+          <UserBar displayName={user?.displayName} signOut={signOut} />
+        </div>
         <Tab>
           {stepItems.map((item, index) => (
             <TabItem key={index} label={item} index={index + 1} active={step === index + 1} />
