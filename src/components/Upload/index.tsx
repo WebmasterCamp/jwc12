@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef, useCallback } from 'react'
+import { ReactNode, forwardRef, useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import toast from 'react-hot-toast'
 
@@ -8,6 +8,7 @@ import useSWR from 'swr'
 import { downloadImage, uploadImage } from '@/lib/db'
 
 import { ErrorMessage } from '../ErrorMessage'
+import { LoadingAnimation } from '../Loading'
 
 interface UploadProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   uid: string | null
@@ -31,25 +32,36 @@ export function Upload({
   name,
   ...props
 }: UploadProps) {
-  const { data: imageUrl } = useSWR(value, downloadImage)
+  const [uploading, setUploading] = useState(false)
+  const [uploadCount, setUploadCount] = useState(0)
+  const { data: imageUrl, isValidating } = useSWR([value, uploadCount], downloadImage, {
+    revalidateOnFocus: false,
+  })
+  const pending = uploading || isValidating
 
   const onDrop = useCallback(
     async (files: File[]) => {
+      if (uploading) return
       const file = files[0]
       if (!file) return
       if (file.size > MAX_IMAGE_SIZE) return toast.error('รูปภาพมีขนาดเกิน 2MB')
       const extension = file.name.split('.').pop() ?? '.jpg'
       const fileName = `/users/${uid}/${name}.${extension}`
+      setUploading(true)
       try {
         await uploadImage(fileName, file)
         onChange?.({
           target: { value: fileName, name },
         })
+        // hack: force revalidate
+        setTimeout(() => setUploadCount((count) => count + 1), 0)
       } catch (err) {
         throw new Error('upload faield')
+      } finally {
+        setUploading(false)
       }
     },
-    [name, onChange, uid]
+    [name, onChange, uid, uploading]
   )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -58,8 +70,11 @@ export function Upload({
       'image/png': [],
     },
     maxFiles: 1,
+    noClick: uploading,
     onDrop,
   })
+
+  const content = !imageUrl ? label : <img className="h-48 object-contain" src={imageUrl} alt="" />
 
   return (
     <div className={clsx('relative h-48 flex flex-col gap-2', className)}>
@@ -72,7 +87,7 @@ export function Upload({
         )}
         {...getRootProps()}
       >
-        {!imageUrl ? label : <img className="h-48 object-contain" src={imageUrl} alt="" />}
+        {pending ? <LoadingAnimation className="w-[148px] h-[148px]" /> : content}
       </label>
       <input {...props} id={name} name={name} {...getInputProps()} />
       <ErrorMessage message={error} />
