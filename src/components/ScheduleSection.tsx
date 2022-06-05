@@ -111,7 +111,7 @@ export const ScheduleSection: React.FunctionComponent = () => {
         {schedules.map((task) => {
           return (
             <div key={task.title} className="flex flex-col items-center p-4">
-              <picture>
+              <picture className="rounded-full bg-primary p-0">
                 <img src={task.imageUrl} alt={task.title} />
               </picture>
               <h3 className="font-heading font-bold text-2xl text-gold">{task.title}</h3>
