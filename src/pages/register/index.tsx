@@ -38,7 +38,7 @@ const RegisterPage: NextPage = () => {
   }
 
   if (consented) {
-    return <Redirect to={`/register/step/${currentStep}`} replace />
+    return <Redirect to={`/register/step/${currentStep ?? 1}`} replace />
   }
 
   return (
