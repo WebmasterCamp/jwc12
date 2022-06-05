@@ -60,26 +60,32 @@ const schedules = [
   {
     title: 'รับสมัคร',
     date: '8 - 24 มิถุนายน',
+    imageUrl: '/images/รับสมัคร.png',
   },
   {
     title: 'ประกาศผลผู้มีสิทธิ์สัมภาษณ์',
     date: ' 26 มิถุนายน',
+    imageUrl: '/images/2-ประกาศรอบ1.png',
   },
   {
     title: 'สัมภาษณ์ออนไลน์',
     date: '28 มิถุนายน',
+    imageUrl: '/images/3-สัมออนไลน์2.png',
   },
   {
     title: 'ประกาศผลผู้ผ่านการคัดเลือก',
     date: '29 มิถุนายน',
+    imageUrl: '/images/4-ประกาศรอบ2.png',
   },
   {
     title: 'ยืนยันสิทธิ์',
     date: '29 - 30 มิถุนายน',
+    imageUrl: '/images/5-ยืนยันสิทธิ์.png',
   },
   {
     title: 'วันค่าย',
     date: '8 - 10 กรกฎาคม',
+    imageUrl: '/images/6-วันค่าย.png',
   },
 ]
 
@@ -104,7 +110,10 @@ export const ScheduleSection: React.FunctionComponent = () => {
       >
         {schedules.map((task) => {
           return (
-            <div key={task.title} className="p-4">
+            <div key={task.title} className="flex flex-col items-center p-4">
+              <picture>
+                <img src={task.imageUrl} alt={task.title} />
+              </picture>
               <h3 className="font-heading font-bold text-2xl text-gold">{task.title}</h3>
               <p>{task.date}</p>
             </div>
