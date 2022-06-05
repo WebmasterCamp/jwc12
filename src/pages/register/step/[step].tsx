@@ -9,7 +9,6 @@ import { RegisterTopBar } from '@/components/RegisterTopBar'
 import { Tab, TabItem } from '@/components/Tab'
 import { FormBuilder } from '@/modules/register/components/FormBuilder'
 import { RegisterProvider } from '@/modules/register/context'
-import { BranchType } from '@/modules/register/types'
 
 const stepItems = ['ข้อมูลพื้นฐาน', 'ข้อมูลเพิ่มเติม', 'คำถามจากส่วนกลาง', 'คำถามประจำสาขา', 'สรุป']
 
@@ -21,7 +20,7 @@ const StepPage: NextPage<StepPageProps> = ({ step }) => {
   const { farthestStep, user, signOut } = useAuthStore()
 
   return (
-    <RegisterProvider step={step} branch={BranchType.PROGRAMMING}>
+    <RegisterProvider step={step}>
       <Container maxWidth="4xl" className="mb-6 self-center m-auto">
         <RegisterTopBar displayName={user?.displayName} signOut={signOut} />
         <Tab farthestStep={farthestStep} currentStep={step}>

@@ -10,6 +10,7 @@ import { FacebookAuthProvider } from 'firebase/auth'
 import create from 'zustand'
 
 import { getRegistration, updateRegistration } from '@/lib/db'
+import { BranchType } from '@/modules/register/types'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
 export interface AuthStore {
@@ -18,7 +19,7 @@ export interface AuthStore {
   user: AuthUser | null
   currentStep: number
   farthestStep: number
-  consent: boolean
+  consented: boolean
   signIn: () => Promise<void>
   signOut: () => Promise<void>
   updateStep: (current: number, furthest?: number) => Promise<void>
@@ -63,12 +64,12 @@ export const useAuthStore = create<AuthStore>((set, get) => {
         user: authUser,
       }
       if (user) {
-        const { farthestStep, currentStep, consent } = await getRegistration(user.uid)
+        const { farthestStep, currentStep, consented } = await getRegistration(user.uid)
         data = {
           ...data,
           currentStep,
           farthestStep,
-          consent,
+          consented,
         }
       }
       set((state) => ({
@@ -88,7 +89,7 @@ export const useAuthStore = create<AuthStore>((set, get) => {
   }
 
   const updateConsent = async (consent: boolean) => {
-    await updateRegistration({ consent })
+    await updateRegistration({ consented: consent })
     set((state) => ({ ...state, consent }))
   }
 
@@ -98,7 +99,7 @@ export const useAuthStore = create<AuthStore>((set, get) => {
     user: null,
     currentStep: 0,
     farthestStep: 0,
-    consent: false,
+    consented: false,
     signIn,
     signOut,
     updateStep,

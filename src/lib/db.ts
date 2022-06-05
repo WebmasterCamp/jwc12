@@ -18,6 +18,8 @@ import {
 } from 'firebase/storage'
 
 import { getUid } from '@/auth/store'
+import { SPECIAL_FIELD } from '@/modules/register/context/constants'
+import { BranchType } from '@/modules/register/types'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
 import { app } from './firebase'
@@ -44,7 +46,8 @@ interface Registration {
   updatedAt: Timestamp
   currentStep: number
   farthestStep: number
-  consent: boolean
+  consented: boolean
+  confirmedBranch: BranchType
 }
 
 export async function hasRegistration(uid?: string) {
@@ -62,6 +65,7 @@ export async function getRegistration(uid?: string): Promise<Registration> {
       consent: false,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
+      confirmed: {},
     })
     return await getRegistration(uid)
   }
@@ -83,10 +87,6 @@ export async function updateAnswers(newAnswers: any) {
   })
 }
 
-function areAnswersChanged(oldAnswers: any, newAnswers: any) {
-  return !equal(oldAnswers, newAnswers)
-}
-
 export async function uploadImage(name: string, file: File) {
   const storageRef = getStorageRef(name)
   await uploadBytes(storageRef, file)
@@ -96,4 +96,14 @@ export async function downloadImage(name: string) {
   const storageRef = getStorageRef(name)
   const response = await getDownloadURL(storageRef)
   return response
+}
+
+export async function confirmBranch(branch: BranchType) {
+  return await updateRegistration({
+    confirmedBranch: branch,
+  })
+}
+
+function areAnswersChanged(oldAnswers: any, newAnswers: any) {
+  return !equal(oldAnswers, newAnswers)
 }

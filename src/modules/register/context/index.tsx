@@ -13,7 +13,7 @@ import toast from 'react-hot-toast'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAuthStore } from '@/auth/store'
-import { getRegistration, updateAnswers } from '@/lib/db'
+import { confirmBranch, getRegistration, updateAnswers } from '@/lib/db'
 
 import {
   AdditionalQuestionModel,
@@ -35,12 +35,14 @@ import {
   programmingQuestions,
 } from '../questions/programming'
 import { BranchType, Question } from '../types'
+import { SPECIAL_FIELD } from './constants'
 
 interface RegisterContextData {
   ready: boolean
   step: number
   form?: UseFormReturn<CoreQuestionModel>
   question?: Question
+  branch?: BranchType
   submit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
   saveAnswers: () => void
 }
@@ -48,15 +50,16 @@ interface RegisterContextData {
 interface RegisterProviderProps {
   step: number
   children: React.ReactNode
-  branch?: BranchType
 }
 
 export const RegisterContext = createContext<RegisterContextData>({} as RegisterContextData)
 
 export const useRegister = () => useContext(RegisterContext)
 
-export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch, children }) => {
+export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, children }) => {
   const { updateStep } = useAuthStore()
+  const [branch, setBranch] = useState<BranchType | undefined>()
+
   /**
    * First Step form
    */
@@ -125,7 +128,8 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
   useEffect(() => {
     async function restoreForm() {
       setReady(false)
-      const { answers } = await getRegistration()
+      const { answers, confirmedBranch } = await getRegistration()
+      if (confirmedBranch) setBranch(confirmedBranch)
       const keys = Object.keys(form.getValues())
       keys.forEach((key) => {
         if (key in answers) {
@@ -151,6 +155,9 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
   const success: SubmitHandler<CoreQuestionModel> = (data) => {
     console.log('Submit Success', data)
     updateStep(step + 1, step + 1)
+    if (SPECIAL_FIELD.BRANCH in data && !!data[SPECIAL_FIELD.BRANCH]) {
+      confirmBranch(data[SPECIAL_FIELD.BRANCH] as BranchType)
+    }
   }
 
   const error: SubmitErrorHandler<CoreQuestionModel> = (data, error) => {
@@ -165,6 +172,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
         step,
         form,
         question,
+        branch,
         submit: form.handleSubmit(success, error),
         saveAnswers,
       }}
