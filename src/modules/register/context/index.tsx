@@ -17,6 +17,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useAuthStore } from '@/auth/store'
 import { confirmBranch, getRegistration, updateAnswers } from '@/lib/db'
 
+import { stepNames } from '../questions'
 import {
   AdditionalQuestionModel,
   AdditionalQuestionSchema,
@@ -128,32 +129,35 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
 
   const [ready, setReady] = useState(false)
 
+  const stepName = stepNames[step - 1]
   useEffect(() => {
     async function restoreForm() {
       setReady(false)
       const { answers, confirmedBranch } = await getRegistration()
       if (confirmedBranch) setBranch(confirmedBranch)
       const keys = Object.keys(form.getValues())
+      const stepAnswers = answers[stepName]
       keys.forEach((key) => {
-        if (key in answers) {
-          form.setValue(key, answers[key])
+        if (key in stepAnswers) {
+          form.setValue(key, stepAnswers[key])
         }
       })
       setReady(true)
     }
     restoreForm()
-  }, [form])
+  }, [form, stepName])
 
   useEffect(() => {
     // update current step
     updateStep(step)
-  }, [step])
+  }, [updateStep, step])
 
+  const { getValues } = form
   const saveAnswers = useCallback(() => {
     if (!ready) return
-    const values = form.getValues()
-    updateAnswers(values)
-  }, [ready, form.getValues])
+    const values = getValues()
+    updateAnswers(stepName, values)
+  }, [ready, getValues, stepName])
 
   const success: SubmitHandler<CoreQuestionModel> = (data) => {
     console.log('Submit Success', data)

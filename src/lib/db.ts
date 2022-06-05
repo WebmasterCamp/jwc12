@@ -1,5 +1,6 @@
 import equal from 'fast-deep-equal'
 import {
+  DocumentReference,
   Timestamp,
   connectFirestoreEmulator,
   doc,
@@ -18,7 +19,7 @@ import {
 } from 'firebase/storage'
 
 import { getUid } from '@/auth/store'
-import { SPECIAL_FIELD } from '@/modules/register/context/constants'
+import type { StepName } from '@/modules/register/questions'
 import { BranchType } from '@/modules/register/types'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
@@ -33,21 +34,25 @@ if (USE_FIRESTORE_EMULATOR) {
 }
 
 function getRegistrationRef(uid?: string) {
-  return doc(db, 'registrations', uid ? uid : getUid())
+  return doc(db, 'registrations', uid ? uid : getUid()) as DocumentReference<Registration>
 }
 
 function getStorageRef(filename: string) {
   return ref(storage, filename)
 }
 
+type Answers = {
+  [key in StepName]: any
+}
+
 interface Registration {
-  answers: any
+  answers: Answers
   createdAt: Timestamp
   updatedAt: Timestamp
   currentStep: number
   farthestStep: number
   consented: boolean
-  confirmedBranch: BranchType
+  confirmedBranch: BranchType | null
 }
 
 export async function hasRegistration(uid?: string) {
@@ -59,13 +64,18 @@ export async function getRegistration(uid?: string): Promise<Registration> {
   const docSnap = await getDoc(getRegistrationRef(uid))
   if (!docSnap.exists()) {
     await setDoc(getRegistrationRef(uid), {
-      answers: {},
+      answers: {
+        basic: {},
+        additional: {},
+        core: {},
+        branch: {},
+      },
       currentStep: 1,
       farthestStep: 1,
-      consent: false,
+      consented: false,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
-      confirmed: {},
+      confirmedBranch: null,
     })
     return await getRegistration(uid)
   }
@@ -79,12 +89,19 @@ export async function updateRegistration(data: Partial<Registration>) {
   })
 }
 
-export async function updateAnswers(newAnswers: any) {
-  const { answers } = await getRegistration()
-  if (!areAnswersChanged(answers, newAnswers)) return
-  return await updateRegistration({
-    answers: { ...answers, ...newAnswers },
+export async function updateAnswers(stepName: StepName, newAnswers: any) {
+  const answers = (await getRegistration()).answers[stepName]
+  let shouldUpdate = false
+  const updateObject = {} as any
+  Object.keys(newAnswers).forEach((key) => {
+    const oldAnswer = answers[key]
+    const newAnswer = newAnswers[key]
+    if (equal(oldAnswer, newAnswer)) return
+    shouldUpdate = true
+    updateObject[`answers.${stepName}.${key}`] = newAnswer
   })
+  if (!shouldUpdate) return
+  return await updateRegistration(updateObject)
 }
 
 export async function uploadImage(name: string, file: File) {
