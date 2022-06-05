@@ -19,7 +19,7 @@ interface StepPageProps {
 }
 
 const StepPage: NextPage<StepPageProps> = ({ step }) => {
-  const { user, signOut } = useAuthStore()
+  const { user, signOut, farthestStep } = useAuthStore()
 
   return (
     <RegisterProvider step={step} branch={BranchType.PROGRAMMING}>
@@ -28,9 +28,9 @@ const StepPage: NextPage<StepPageProps> = ({ step }) => {
           <Logo />
           <UserBar displayName={user?.displayName} signOut={signOut} />
         </div>
-        <Tab>
+        <Tab farthestStep={farthestStep} currentStep={step}>
           {stepItems.map((item, index) => (
-            <TabItem key={index} label={item} index={index + 1} active={step === index + 1} />
+            <TabItem key={index} label={item} index={index + 1} />
           ))}
         </Tab>
         <FormCard className="flex flex-1 flex-col">

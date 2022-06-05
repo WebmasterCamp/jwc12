@@ -44,6 +44,7 @@ interface Registration {
   updatedAt: Timestamp
   currentStep: number
   farthestStep: number
+  consent: boolean
 }
 
 export async function hasRegistration(uid?: string) {
@@ -58,6 +59,7 @@ export async function getRegistration(uid?: string): Promise<Registration> {
       answers: {},
       currentStep: 1,
       farthestStep: 1,
+      consent: false,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })
@@ -87,13 +89,11 @@ function areAnswersChanged(oldAnswers: any, newAnswers: any) {
 
 export async function uploadImage(name: string, file: File) {
   const storageRef = getStorageRef(name)
-  const snapshot = await uploadBytes(storageRef, file)
-  console.log('U', snapshot)
+  await uploadBytes(storageRef, file)
 }
 
 export async function downloadImage(name: string) {
   const storageRef = getStorageRef(name)
   const response = await getDownloadURL(storageRef)
-  console.log('D', response)
   return response
 }

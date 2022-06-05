@@ -69,6 +69,7 @@ const additionalWeakQuestions: WeakQuestion = {
       choices: ['Facebook', 'Instagram', 'Twitter', 'เพื่อน', 'ผู้ปกครอง', 'สถานศึกษา', 'อื่น ๆ'],
       placeholder: 'ex. งานแข่งขัน การประกวด การแสดง ฯลฯ',
       required: true,
+      direction: 'column',
     },
     {
       type: InputType.TEXTAREA,

@@ -64,7 +64,7 @@ export const FormBuilder = () => {
                   <p className="inline">{input.question}</p>
                 ) : (
                   input.question
-                )}
+                )}{' '}
                 {!!input.required && <RequireMark />}
                 <Controller
                   control={control}
@@ -103,6 +103,7 @@ export const FormBuilder = () => {
                       label={input.question}
                       placeholder={input.placeholder}
                       error={errors[input.name]?.message as string}
+                      required={!!input.required}
                       disabled={disabled}
                     />
                   )}
@@ -160,6 +161,7 @@ export const FormBuilder = () => {
                       value={value as string}
                       error={errors[input.name]?.message as string}
                       disabled={disabled}
+                      required={!!input.required}
                     />
                   )}
                 />

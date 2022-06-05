@@ -18,9 +18,11 @@ export interface AuthStore {
   user: AuthUser | null
   currentStep: number
   farthestStep: number
+  consent: boolean
   signIn: () => Promise<void>
   signOut: () => Promise<void>
   updateStep: (current: number, furthest?: number) => Promise<void>
+  updateConsent: (consent: boolean) => Promise<void>
 }
 
 export interface AuthUser {
@@ -33,6 +35,7 @@ const auth = getAuth()
 if (USE_FIRESTORE_EMULATOR) {
   connectAuthEmulator(auth, 'http://localhost:9099')
 }
+
 const provider =
   process.env.MODE !== 'DEVELOPMENT' ? new FacebookAuthProvider() : new GithubAuthProvider()
 
@@ -54,14 +57,23 @@ export const useAuthStore = create<AuthStore>((set) => {
             photoURL: user.photoURL,
           }
         : null
-      const { farthestStep, currentStep } = await getRegistration(user?.uid)
-      set((state) => ({
-        ...state,
+      let data: Partial<AuthStore> = {
         pending: false,
         uid: user?.uid ?? null,
         user: authUser,
-        currentStep,
-        farthestStep,
+      }
+      if (user) {
+        const { farthestStep, currentStep, consent } = await getRegistration(user.uid)
+        data = {
+          ...data,
+          currentStep,
+          farthestStep,
+          consent,
+        }
+      }
+      set((state) => ({
+        ...state,
+        ...data,
       }))
     })
   }
@@ -73,15 +85,22 @@ export const useAuthStore = create<AuthStore>((set) => {
     set((state) => ({ ...state, ...data }))
   }
 
+  const updateConsent = async (consent: boolean) => {
+    await updateRegistration({ consent })
+    set((state) => ({ ...state, consent }))
+  }
+
   return {
     pending: true,
     uid: null,
     user: null,
     currentStep: 0,
     farthestStep: 0,
+    consent: false,
     signIn,
     signOut,
     updateStep,
+    updateConsent,
   }
 })
 

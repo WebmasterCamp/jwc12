@@ -6,6 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 import clsx from 'clsx'
 
 import { ErrorMessage } from '../ErrorMessage'
+import { RequireMark } from '../RequireMark/indext'
 
 export interface DropdownProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   name: string
@@ -24,6 +25,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   placeholder,
   onChange,
   disabled,
+  required,
 }) => {
   const handleChange = useCallback(
     (option: string) => () => {
@@ -37,7 +39,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   return (
     <Menu as="div" className={clsx('relative inline-block text-left w-full')}>
       <div>
-        {label}
+        {label} {required && <RequireMark />}
         <div className="flex flex-col gap-2 w-full">
           <Menu.Button
             className={clsx(

@@ -1,25 +1,37 @@
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
+
+import { useRouter } from 'next/router'
 
 import clsx from 'clsx'
 
 export interface TabItem {
   label: string
   index: number
-  active: boolean
+  active?: boolean
+  disabled?: boolean
 }
 
-export const TabItem: FunctionComponent<TabItem> = ({ label, index, active }) => {
+export const TabItem: FunctionComponent<TabItem> = ({ label, index, active, disabled }) => {
+  const router = useRouter()
+
+  const handleClick = () => {
+    if (!disabled) router.push(`/register/step/${index}`)
+  }
+
   return (
     <div
       className={clsx(
         'px-4 py-2 flex flex-1 items-center justify-center md:justify-start space-x-2 transition-colors',
-        active ? 'bg-gold sm:text-brown-dark text-brown-dark font-bold' : 'bg-white text-black'
+        active ? 'bg-gold hover:bg-gold-dark text-brown-dark font-bold' : 'bg-white text-black',
+        disabled && 'cursor-default hover:bg-white',
+        !disabled && !active && 'cursor-pointer hover:bg-gray-200'
       )}
+      onClick={handleClick}
     >
       <span
         className={clsx(
-          'rounded-full p-4 text-md md:text-sm leading-none flex items-center justify-center w-5 h-5',
-          active ? 'font-bold' : 'text-gray-500 bg-white'
+          'rounded-full p-4 text-md md:text-sm leading-none flex items-center justify-center w-5 h-5 bg-transparent',
+          active ? 'font-bold' : 'text-gray-500'
         )}
       >
         {index}
@@ -30,13 +42,21 @@ export const TabItem: FunctionComponent<TabItem> = ({ label, index, active }) =>
 }
 
 export interface TabProps {
+  farthestStep: number
+  currentStep: number
   children: React.ReactNode
 }
 
-export const Tab: FunctionComponent<TabProps> = ({ children }) => {
+export const Tab: FunctionComponent<TabProps> = ({ children, farthestStep, currentStep }) => {
   return (
     <div className="flex flex-row w-full divide-x-0 sm:divide-x divide-solid divide-gray-300 mb-6 rounded-md overflow-x-hidden">
-      {children}
+      {React.Children.map(children, (child, index) => {
+        const step = index + 1
+        return React.cloneElement(child as React.ReactElement, {
+          active: currentStep === step,
+          disabled: step > farthestStep,
+        })
+      })}
     </div>
   )
 }

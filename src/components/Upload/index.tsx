@@ -45,7 +45,6 @@ export const Upload = forwardRef<HTMLInputElement, UploadProps>(
       async function getUrl() {
         if (!value) return
         try {
-          console.log(value)
           const url = await downloadImage(value)
           setUrl(url)
         } catch (err) {
