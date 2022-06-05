@@ -52,7 +52,7 @@ interface Registration {
   currentStep: number
   farthestStep: number
   consented: boolean
-  confirmedBranch: BranchType | null
+  confirmedBranch?: BranchType | null
 }
 
 export async function hasRegistration(uid?: string) {
@@ -63,7 +63,7 @@ export async function hasRegistration(uid?: string) {
 export async function getRegistration(uid?: string): Promise<Registration> {
   const docSnap = await getDoc(getRegistrationRef(uid))
   if (!docSnap.exists()) {
-    await setDoc(getRegistrationRef(uid), {
+    const data: Partial<Registration> = {
       answers: {
         basic: {},
         additional: {},
@@ -73,10 +73,11 @@ export async function getRegistration(uid?: string): Promise<Registration> {
       currentStep: 1,
       farthestStep: 1,
       consented: false,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
+      createdAt: serverTimestamp() as Timestamp,
+      updatedAt: serverTimestamp() as Timestamp,
       confirmedBranch: null,
-    })
+    }
+    await setDoc(getRegistrationRef(uid), data)
     return await getRegistration(uid)
   }
   return docSnap.data() as Registration

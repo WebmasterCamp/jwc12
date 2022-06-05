@@ -1,5 +1,4 @@
-import { ChangeEventHandler, Fragment, ReactNode, useCallback } from 'react'
-import { ChangeHandler } from 'react-hook-form'
+import { Fragment, ReactNode, useCallback } from 'react'
 
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
@@ -30,7 +29,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   const handleChange = useCallback(
     (option: string) => () => {
       onChange?.({
-        target: { value: option, name },
+        target: { value: option, name: name },
       })
     },
     []

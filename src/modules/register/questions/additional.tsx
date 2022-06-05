@@ -67,7 +67,14 @@ const additionalWeakQuestions: WeakQuestion = {
       type: InputType.CHECKBOX,
       name: 'knowFrom',
       question: 'รู้จักค่าย YWC จากไหน',
-      choices: ['Facebook', 'Instagram', 'Twitter', 'เพื่อน', 'ผู้ปกครอง', 'สถานศึกษา', 'อื่น ๆ'],
+      choices: [
+        { value: 'Facebook', name: 'facebook' },
+        { value: 'Instagram', name: 'instagram' },
+        { value: 'Twitter', name: 'twitter' },
+        { value: 'เพื่อน', name: 'friend' },
+        { value: 'สถานศึกษา', name: 'school' },
+        { value: 'อื่นๆ', name: 'other' },
+      ],
       placeholder: 'ex. งานแข่งขัน การประกวด การแสดง ฯลฯ',
       required: true,
       direction: 'column',
@@ -153,7 +160,12 @@ const additionalWeakQuestions: WeakQuestion = {
       question: (
         <img src="https://i.pinimg.com/originals/e2/06/64/e206645f3d2b5438ac9423bcc6934a4b.jpg" />
       ),
-      choices: ['สาขา Content', 'สาขา Design', 'สาขา Marketing', 'สาขา Programming'],
+      choices: [
+        { value: 'สาขา Content', name: 'content' },
+        { value: 'สาขา Design', name: 'design' },
+        { value: 'สาขา Marketing', name: 'marketing' },
+        { value: 'สาขา Programming', name: 'programming' },
+      ],
       required: true,
       noMark: true,
     },
@@ -161,7 +173,7 @@ const additionalWeakQuestions: WeakQuestion = {
       type: InputType.CHECKBOX,
       name: SPECIAL_FIELD.BRANCH_CONIRM,
       question: null,
-      choices: ['ยืนยันการเลือกสาขา'],
+      choices: [{ value: 'ยืนยันการเลือกสาขา', name: 'confirm' }],
       required: true,
       direction: 'column',
       position: 'center',

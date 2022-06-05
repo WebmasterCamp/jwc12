@@ -16,7 +16,7 @@ import { Redirect } from '@/components/Redirect'
 import { RegisterTopBar } from '@/components/RegisterTopBar'
 
 const ConsentSchema = object({
-  consent: boolean().test('required', 'ยอมรับเดี๋ยวนี้', (value) => !!value),
+  consented: boolean().test('required', 'ยอมรับเดี๋ยวนี้', (value) => !!value),
 })
 
 type ConsentModel = InferType<typeof ConsentSchema>
@@ -30,7 +30,7 @@ const RegisterPage: NextPage = () => {
   })
 
   const onSubmit: SubmitHandler<ConsentModel> = async (data) => {
-    updateConsent(data.consent ?? false)
+    updateConsent(data.consented ?? false)
   }
 
   const onError: SubmitErrorHandler<ConsentModel> = () => {
@@ -107,7 +107,7 @@ const RegisterPage: NextPage = () => {
         >
           <Controller
             control={control}
-            name="consent"
+            name="consented"
             defaultValue={false}
             render={({ field: { value, ...rest } }) => (
               <Checkbox value="ยอมรับเงื่อนไข" label="ยอมรับเงื่อนไข" {...rest} />

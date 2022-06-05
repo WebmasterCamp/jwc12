@@ -20,27 +20,54 @@ export function makeQuestion(question: WeakQuestion): Question {
   return {
     ...question,
     inputs: question.inputs.map((input) => {
-      if (input.type === InputType.NONE) return input
-      inputCount += 1
-      if (input.type === InputType.CHECKBOX) {
-        const { choices, name, ...rest } = input
-        const checkboxName = name ? `${name}` : `${question.stepName}_Q${inputCount}`
-        const newChoices: Choice[] = choices.map((choice) => ({
-          name: `${checkboxName}.${choice}`,
-          value: choice,
-        }))
-        return {
-          ...rest,
-          name: checkboxName,
-          required: getRequiredMessage(input.required, input.question),
-          choices: newChoices,
+      switch (input.type) {
+        case InputType.NONE: {
+          return input
         }
-      }
-      const key = input.name ? `${input.name}` : `${question.stepName}_Q${inputCount}`
-      return {
-        ...input,
-        name: key,
-        required: getRequiredMessage(input.required, input.question),
+        case InputType.DROPDOWN:
+        case InputType.RADIO: {
+          const key = input.name ? `${input.name}` : `${question.stepName}_Q${inputCount}`
+          const choices: string[] = input.choices.map((choice) => {
+            if (typeof choice === 'string') return choice
+            return choice.value
+          })
+          return {
+            ...input,
+            name: key,
+            choices: choices,
+            required: getRequiredMessage(input.required, input.question),
+          }
+        }
+        case InputType.CHECKBOX: {
+          const { choices, name, ...rest } = input
+          const checkboxName = name ? `${name}` : `${question.stepName}_Q${inputCount}`
+          const newChoices: Choice[] = choices.map((choice) => {
+            if (typeof choice !== 'string') {
+              return {
+                ...choice,
+                name: `${checkboxName}.${choice.name}`,
+              }
+            }
+            return {
+              name: `${checkboxName}.${choice}`,
+              value: choice,
+            }
+          })
+          return {
+            ...rest,
+            name: checkboxName,
+            required: getRequiredMessage(input.required, input.question),
+            choices: newChoices,
+          }
+        }
+        default: {
+          const key = input.name ? `${input.name}` : `${question.stepName}_Q${inputCount}`
+          return {
+            ...input,
+            name: key,
+            required: getRequiredMessage(input.required, input.question),
+          }
+        }
       }
     }),
   }

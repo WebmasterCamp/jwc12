@@ -33,28 +33,29 @@ export interface SimpleInput extends WeakSimpleInput {
   required?: string
 }
 
+export interface Choice {
+  name: string
+  value: string
+}
+
 export interface WeakChoiceInput extends WeakSimpleInput {
-  choices: string[]
+  choices: (Choice | string)[]
   min?: number
   max?: number
   direction?: 'row' | 'column'
   position?: 'start' | 'center' | 'end'
 }
 
-export interface Choice {
-  name: string
-  value: string
-}
-
 export interface ChoiceInput extends Omit<WeakChoiceInput, 'choices'> {
   name: string
-  choices: Choice[]
   required?: string
+  choices: Choice[]
 }
 
 export interface SingleChoiceInput extends WeakChoiceInput {
   name: string
   required?: string
+  choices: string[]
 }
 
 export type WeakQuestionInputProps =

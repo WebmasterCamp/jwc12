@@ -10,7 +10,6 @@ import { FacebookAuthProvider } from 'firebase/auth'
 import create from 'zustand'
 
 import { getRegistration, updateRegistration } from '@/lib/db'
-import { BranchType } from '@/modules/register/types'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
 export interface AuthStore {
@@ -88,9 +87,9 @@ export const useAuthStore = create<AuthStore>((set, get) => {
     set((state) => ({ ...state, ...data }))
   }
 
-  const updateConsent = async (consent: boolean) => {
-    await updateRegistration({ consented: consent })
-    set((state) => ({ ...state, consent }))
+  const updateConsent = async (consented: boolean) => {
+    await updateRegistration({ consented })
+    set((state) => ({ ...state, consented }))
   }
 
   return {

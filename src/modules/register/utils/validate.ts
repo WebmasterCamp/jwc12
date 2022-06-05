@@ -20,12 +20,23 @@ export const buildYupObject = (form: Question) => {
       case InputType.EMAIL: {
         let s = yup.string()
         if (input.required) s = s.required(input.required)
-        if (input.type === InputType.EMAIL) s = s.email('กรุณากรอก email ให้ถูกต้อง')
-        if (input.type === InputType.RADIO)
+        if (input.type === InputType.EMAIL) {
+          s = s.email('กรุณากรอก email ให้ถูกต้อง')
+        }
+        /**
+         * The result must be a string of the radio
+         */
+        if (input.type === InputType.RADIO) {
           s = s.test('invalid', 'กรุณาเลือกให้ถูกต้อง', (value) => {
             return !!value && input.choices.includes(value)
           })
-        if (input.validate) s = s.test(input.validate)
+        }
+        /**
+         * Custom validate configuration
+         */
+        if (input.validate) {
+          s = s.test(input.validate)
+        }
         schema[input.name] = s
         break
       }
@@ -56,7 +67,6 @@ export const buildYupObject = (form: Question) => {
               })
           : yup.object(schemaChoice)
         break
-
       default:
         break
     }
