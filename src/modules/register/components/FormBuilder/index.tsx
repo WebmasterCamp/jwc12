@@ -33,6 +33,7 @@ export const FormBuilder = () => {
   if (!form) return null
 
   const {
+    register,
     control,
     formState: { errors },
   } = form
@@ -178,24 +179,35 @@ export const FormBuilder = () => {
                   position={input.position}
                 >
                   {input.choices.map((choice) => (
-                    <Controller
-                      key={`${input.name}_${choice.name}`}
-                      control={control}
-                      name={choice.name}
-                      defaultValue=""
-                      render={({ field: { onChange, value } }) => {
-                        return (
-                          <Checkbox
-                            onChange={onChange}
-                            value={choice.value}
-                            label={choice.value}
-                            name={choice.name}
-                            checked={value as unknown as boolean}
-                            disabled={disabled || disableSpecialField}
-                          />
-                        )
-                      }}
-                    />
+                    <>
+                      <Controller
+                        key={`${input.name}_${choice.name}`}
+                        control={control}
+                        name={choice.name}
+                        defaultValue=""
+                        render={({ field: { onChange, value } }) => (
+                          <>
+                            <Checkbox
+                              onChange={onChange}
+                              value={choice.value}
+                              label={choice.value}
+                              name={choice.name}
+                              checked={value as unknown as boolean}
+                              disabled={disabled || disableSpecialField}
+                            />
+                            {console.log(choice.name)}
+                            {input.needOtherInput && choice.name.split('.').pop() === 'other' && (
+                              <Input
+                                {...register(`${choice.name}_input`)}
+                                error={errors[`${choice.name}_input`]?.message as string}
+                                placeholder="โปรดระบุ"
+                                disabled={disabled || !!value}
+                              />
+                            )}
+                          </>
+                        )}
+                      />
+                    </>
                   ))}
                 </CheckboxGroup>
               </InputContainer>

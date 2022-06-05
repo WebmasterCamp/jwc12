@@ -14,7 +14,7 @@ export const buildYupObject = (form: Question) => {
   const schema: {
     [key: string]:
       | yup.StringSchema
-      | yup.ObjectSchema<Record<string, yup.BooleanSchema>>
+      | yup.ObjectSchema<Record<string, yup.BooleanSchema | yup.StringSchema>>
       | yup.DateSchema
   } = {}
   form.inputs.forEach((input) => {
@@ -55,9 +55,17 @@ export const buildYupObject = (form: Question) => {
         break
       }
       case InputType.CHECKBOX:
-        const schemaChoice: { [key: string]: yup.BooleanSchema } = {}
+        const schemaChoice: { [key: string]: yup.BooleanSchema | yup.StringSchema } = {}
         input.choices.forEach((choice) => {
-          schemaChoice[choice.name] = yup.boolean()
+          if (choice.name.split('.')[-1] === 'other') {
+            schemaChoice[choice.name] = yup.boolean()
+            schemaChoice[`${choice.name}_input`] = yup.string().when(choice.name, {
+              is: true,
+              then: yup.string().required('กรุณากรอกข้อมูล'),
+            })
+          } else {
+            schemaChoice[choice.name] = yup.boolean()
+          }
         })
 
         schema[input.name] = input.required

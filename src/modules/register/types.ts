@@ -45,6 +45,7 @@ export interface WeakChoiceInput extends WeakSimpleInput {
   max?: number
   direction?: 'row' | 'column'
   position?: 'start' | 'center' | 'end'
+  needOtherInput?: boolean
 }
 
 export interface ChoiceInput extends Omit<WeakChoiceInput, 'choices'> {

@@ -73,11 +73,11 @@ const additionalWeakQuestions: WeakQuestion = {
         { value: 'Twitter', name: 'twitter' },
         { value: 'เพื่อน', name: 'friend' },
         { value: 'สถานศึกษา', name: 'school' },
-        { value: 'อื่นๆ', name: 'other' },
       ],
       placeholder: 'ex. งานแข่งขัน การประกวด การแสดง ฯลฯ',
       required: true,
       direction: 'column',
+      needOtherInput: true,
     },
     {
       type: InputType.TEXTAREA,

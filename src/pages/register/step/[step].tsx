@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
 import { useAuthStore } from '@/auth/store'
@@ -8,6 +10,7 @@ import { FormCard } from '@/components/FormCard'
 import { RegisterTopBar } from '@/components/RegisterTopBar'
 import { Tab, TabItem } from '@/components/Tab'
 import { FormBuilder } from '@/modules/register/components/FormBuilder'
+import { FormSummary } from '@/modules/register/components/FormSummary'
 import { RegisterProvider } from '@/modules/register/context'
 
 const stepItems = ['ข้อมูลพื้นฐาน', 'ข้อมูลเพิ่มเติม', 'คำถามจากส่วนกลาง', 'คำถามประจำสาขา', 'สรุป']
@@ -19,8 +22,8 @@ interface StepPageProps {
 const StepPage: NextPage<StepPageProps> = ({ step }) => {
   const { farthestStep, user, signOut } = useAuthStore()
 
-  return (
-    <RegisterProvider step={step}>
+  const wrapper = (children: ReactNode) => (
+    <>
       <Container maxWidth="4xl" className="mb-6 self-center m-auto">
         <RegisterTopBar displayName={user?.displayName} signOut={signOut} />
         <Tab farthestStep={farthestStep} currentStep={step}>
@@ -28,13 +31,14 @@ const StepPage: NextPage<StepPageProps> = ({ step }) => {
             <TabItem key={index} label={item} index={index + 1} />
           ))}
         </Tab>
-        <FormCard className="flex flex-1 flex-col">
-          <FormBuilder />
-        </FormCard>
+        <FormCard className="flex flex-1 flex-col">{children}</FormCard>
       </Container>
       <Footer />
-    </RegisterProvider>
+    </>
   )
+
+  if (step === 5) return wrapper(<FormSummary />)
+  return <RegisterProvider step={step}>{wrapper(<FormBuilder />)}</RegisterProvider>
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

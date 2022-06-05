@@ -44,6 +44,13 @@ export function makeQuestion(question: WeakQuestion): Question {
               value: choice,
             }
           })
+          if (input.needOtherInput) {
+            newChoices.push({
+              name: `${checkboxName}.other`,
+              label: 'อื่น ๆ',
+              value: 'other',
+            })
+          }
           return {
             ...rest,
             name: checkboxName,

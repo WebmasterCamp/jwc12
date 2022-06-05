@@ -2,11 +2,11 @@ import { Fragment, useEffect, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
+import { useAuthStore } from '@/auth/store'
 import { Button } from '@/components/Button'
 import { Loading } from '@/components/Loading'
 import { Answers, getRegistration } from '@/lib/db'
 
-import { useRegister } from '../../context'
 import { additionalQuestions } from '../../questions/additional'
 import { basicQuestions } from '../../questions/basic'
 import { coreQuestions } from '../../questions/core'
@@ -20,7 +20,7 @@ interface SummaryBuilderProps {
 
 const SummaryBuilder: React.FC<SummaryBuilderProps> = ({ question, answer }) => {
   return (
-    <>
+    <div className="text-black">
       {question?.inputs.map((input, index) => {
         switch (input.type) {
           case InputType.NONE:
@@ -44,26 +44,23 @@ const SummaryBuilder: React.FC<SummaryBuilderProps> = ({ question, answer }) => 
               </div>
             )
           case InputType.DROPDOWN:
-          case InputType.CHECKBOX:
+          case InputType.CHECKBOX: {
             return (
               <div>
                 {input.question}
-                <div>
-                  {answer[input.name].map((choosed: string) => {
-                    return <p>{choosed}</p>
-                  })}
-                </div>
+                <div>{JSON.stringify(answer[input.name])}</div>
               </div>
             )
+          }
         }
       })}
-    </>
+    </div>
   )
 }
 
 export const FormSummary = () => {
   const router = useRouter()
-  const { branch } = useRegister()
+  const { branch } = useAuthStore()
 
   const [answers, setAnswers] = useState<Answers>()
 
@@ -76,13 +73,14 @@ export const FormSummary = () => {
   }, [])
 
   const handleSubmit = () => {
+    // TODO save confirmation
     router.push('/register/complete')
   }
 
   if (!answers) return <Loading />
 
   return (
-    <div>
+    <div className="flex flex-col">
       <SummaryBuilder question={basicQuestions} answer={answers['basic']} />
       <SummaryBuilder question={additionalQuestions} answer={answers['additional']} />
       <SummaryBuilder question={coreQuestions} answer={answers['core']} />
