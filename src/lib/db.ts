@@ -9,6 +9,13 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore'
+import {
+  connectStorageEmulator,
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+} from 'firebase/storage'
 
 import { getUid } from '@/auth/store'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
@@ -16,12 +23,19 @@ import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 import { app } from './firebase'
 
 const db = getFirestore(app)
+const storage = getStorage()
+
 if (USE_FIRESTORE_EMULATOR) {
   connectFirestoreEmulator(db, 'localhost', 8080)
+  connectStorageEmulator(storage, 'localhost', 9000)
 }
 
 function getRegistrationRef(uid?: string) {
   return doc(db, 'registrations', uid ? uid : getUid())
+}
+
+function getStorageRef(filename: string) {
+  return ref(storage, filename)
 }
 
 interface Registration {
@@ -69,4 +83,17 @@ export async function updateAnswers(newAnswers: any) {
 
 function areAnswersChanged(oldAnswers: any, newAnswers: any) {
   return !equal(oldAnswers, newAnswers)
+}
+
+export async function uploadImage(name: string, file: File) {
+  const storageRef = getStorageRef(name)
+  const snapshot = await uploadBytes(storageRef, file)
+  console.log('U', snapshot)
+}
+
+export async function downloadImage(name: string) {
+  const storageRef = getStorageRef(name)
+  const response = await getDownloadURL(storageRef)
+  console.log('D', response)
+  return response
 }

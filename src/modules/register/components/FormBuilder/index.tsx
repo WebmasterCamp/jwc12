@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 import clsx from 'clsx'
 
+import { useAuthStore } from '@/auth/store'
 import { Button } from '@/components/Button'
 import { Checkbox, CheckboxGroup } from '@/components/Checkbox'
 import { Dropdown } from '@/components/Dropdown'
@@ -12,6 +13,7 @@ import { Input } from '@/components/Input'
 import { Radio, RadioGroup } from '@/components/Radio'
 import { RequireMark } from '@/components/RequireMark/indext'
 import { TextArea } from '@/components/TextArea'
+import { Upload } from '@/components/Upload'
 
 import { useRegister } from '../../context'
 import { InputType } from '../../types'
@@ -26,6 +28,7 @@ const InputContainer = (props: { children: React.ReactNode; className?: string }
 
 export const FormBuilder = () => {
   const router = useRouter()
+  const { uid } = useAuthStore()
   const { ready, form, step, question, submit, saveAnswers } = useRegister()
   if (!form) return null
 
@@ -71,10 +74,35 @@ export const FormBuilder = () => {
                     <Input
                       {...rest}
                       value={value as string}
-                      name={input.name}
                       type={input.type}
                       error={errors[input.name]?.message as string}
                       placeholder={input.placeholder}
+                      disabled={disabled}
+                    />
+                  )}
+                />
+              </InputContainer>
+            )
+          }
+          case InputType.UPLOAD: {
+            return (
+              <InputContainer key={input.name} className="sm:basis-auto">
+                <Controller
+                  control={control}
+                  name={input.name}
+                  defaultValue=""
+                  render={({ field: { value, onChange, ...rest }, formState: { errors } }) => (
+                    <Upload
+                      {...rest}
+                      uid={uid}
+                      onChange={(e) => {
+                        onChange(e)
+                        saveAnswers()
+                      }}
+                      value={value as string}
+                      label={input.question}
+                      placeholder={input.placeholder}
+                      error={errors[input.name]?.message as string}
                       disabled={disabled}
                     />
                   )}

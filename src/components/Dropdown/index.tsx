@@ -1,4 +1,5 @@
-import { Fragment, ReactNode, useCallback } from 'react'
+import { ChangeEventHandler, Fragment, ReactNode, useCallback } from 'react'
+import { ChangeHandler } from 'react-hook-form'
 
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
@@ -11,6 +12,7 @@ export interface DropdownProps extends React.SelectHTMLAttributes<HTMLSelectElem
   label: ReactNode
   options: string[]
   error?: string
+  onChange?: (...event: any[]) => void
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
@@ -24,9 +26,10 @@ export const Dropdown: React.FC<DropdownProps> = ({
   disabled,
 }) => {
   const handleChange = useCallback(
-    (option: string) => (e: any) => {
-      e.target.value = option
-      onChange?.(e)
+    (option: string) => () => {
+      onChange?.({
+        target: { value: option, name },
+      })
     },
     []
   )
@@ -39,7 +42,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           <Menu.Button
             className={clsx(
               'inline-flex justify-between w-full rounded-md border-2 border-gray-300',
-              'shadow-sm px-4 py-2 bg-white text-sm hover:bg-gray-50 focus:outline-none',
+              'shadow-sm px-4 py-2 bg-white text-sm focus:outline-none',
               !!value ? 'text-black' : 'text-gray-300',
               !!error && 'border-red-500 border-2'
             )}

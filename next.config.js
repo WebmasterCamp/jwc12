@@ -31,6 +31,10 @@ const nextConfig = (phase) => {
   return {
     reactStrictMode: true,
     env,
+    images: {
+      domains: ['firebasestorage.googleapis.com'],
+      formats: ['image/avif', 'image/webp'],
+    },
   }
 }
 

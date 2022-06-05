@@ -14,6 +14,17 @@ const basicWeakQuestions: WeakQuestion = {
       title: <Header>ข้อมูลพื้นฐาน</Header>,
     },
     {
+      type: InputType.UPLOAD,
+      name: 'profile',
+      question: (
+        <div className="text-center text-gray-400">
+          <p className="mb-4">อัพโหลดรูปประจำตัว</p>
+          <p className="text-xs italic"> ภาพขนาดไม่เกิน 2MB</p>
+        </div>
+      ),
+      required: 'กรุณาอัพโหลด รูปประจำตัว',
+    },
+    {
       type: InputType.DROPDOWN,
       name: 'title',
       question: 'คำนำหน้าชื่อ',

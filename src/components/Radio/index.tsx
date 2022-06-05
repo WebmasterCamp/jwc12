@@ -1,4 +1,5 @@
 import React, { FunctionComponent, forwardRef } from 'react'
+import { ChangeHandler } from 'react-hook-form'
 
 import clsx from 'clsx'
 
@@ -11,6 +12,7 @@ export interface RadioGroupProps extends React.InputHTMLAttributes<HTMLInputElem
   direction?: 'row' | 'column'
   position?: 'start' | 'center' | 'end'
   error?: string
+  onChange: (...event: any[]) => void
 }
 
 export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
@@ -61,16 +63,17 @@ export interface RadioProps {
   label?: string
   selected?: boolean
   className?: string
-  onChange?: (event: any) => void
+  onChange?: (...event: any[]) => void
   disabled?: boolean
 }
 
 export const Radio: FunctionComponent<RadioProps> = forwardRef<HTMLInputElement, RadioProps>(
   ({ name, value, label, selected, className, onChange, disabled = false, ...rest }, ref) => {
-    const handleClick = (e: any) => {
+    const handleClick = () => {
       if (disabled) return
-      e.target.value = value
-      onChange?.(e)
+      onChange?.({
+        target: { name, value },
+      })
     }
 
     return (

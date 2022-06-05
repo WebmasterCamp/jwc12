@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 
