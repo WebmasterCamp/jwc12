@@ -47,7 +47,7 @@ export const PlaceSection: React.FunctionComponent = () => {
           {travelingInfo.map((info) => {
             return (
               <div key={info.method}>
-                <span className="font-heading text-gold font-bold">{`${info.method}: `}</span>
+                <span className="text-gold font-semibold">{`${info.method}: `}</span>
                 {typeof info.description === 'string' ? (
                   <span>{info.description}</span>
                 ) : (
