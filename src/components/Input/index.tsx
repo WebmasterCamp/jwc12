@@ -31,7 +31,8 @@ export const Input: FunctionComponent<InputProps> = forwardRef<HTMLInputElement,
             'px-3 py-2 placeholder-gray-300 text-cool-gray relative bg-white',
             'rounded-md text-sm border-2 border-gray-300 focus:border-gold-darker w-full',
             'outline-none focus:outline-none transition-colors',
-            !!error ? 'border-red-500' : 'border-gray-300'
+            !!error ? 'border-red-500' : 'border-gray-300',
+            'disabled:bg-gray-100'
           )}
         />
         <ErrorMessage message={error} />

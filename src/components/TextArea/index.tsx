@@ -18,7 +18,6 @@ export const TextArea: FunctionComponent<TextAreaProps> = forwardRef<
   HTMLTextAreaElement,
   TextAreaProps
 >(({ variant = 'outlined', label, error, noMark, ...rest }, ref) => {
-  console.log(rest.name, rest.required, noMark)
   return (
     <div className="flex flex-col gap-2 w-full">
       {label && (

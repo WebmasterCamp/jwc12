@@ -35,18 +35,18 @@ export function makeQuestion(question: WeakQuestion): Question {
               return {
                 ...choice,
                 label: choice.label ? choice.label : choice.value,
-                name: `${checkboxName}.${choice.name}`,
+                name: `${choice.name}`,
               }
             }
             return {
-              name: `${checkboxName}.${choice}`,
+              name: `${choice}`,
               label: choice,
               value: choice,
             }
           })
           if (input.needOtherInput) {
             newChoices.push({
-              name: `${checkboxName}.other`,
+              name: 'other',
               label: 'อื่น ๆ',
               value: 'other',
             })

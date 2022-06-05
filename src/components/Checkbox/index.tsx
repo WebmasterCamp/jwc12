@@ -24,11 +24,10 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = forwardRef<
   return (
     <div
       className={clsx(
-        `flex gap-x-7 gap-y-2 w-full flex-wrap`,
+        `flex gap-x-7 gap-y-2 w-full flex-wrap flex-col`,
         position === 'start' && `items-start`,
         position === 'center' && `items-center`,
-        position === 'end' && `items-end`,
-        direction === 'row' ? 'flex-col sm:flex-row sm:items-center' : 'flex-col'
+        position === 'end' && `items-end`
       )}
       ref={ref}
     >
@@ -37,7 +36,12 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = forwardRef<
           {label} {required && <RequireMark />}
         </label>
       )}
-      <div className="flex gap-x-1 sm:gap-x-5 flex-wrap flex-col sm:flex-row justify-between">
+      <div
+        className={clsx(
+          'flex gap-x-1 sm:gap-x-5 flex-wrap justify-between w-full',
+          direction === 'row' ? 'flex-col sm:flex-row sm:items-center' : 'flex-col'
+        )}
+      >
         {children}
         <ErrorMessage message={error} />
       </div>
@@ -48,7 +52,6 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = forwardRef<
 CheckboxGroup.displayName = 'CheckboxGroup'
 
 interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string
   checked?: boolean
   label?: string
 }
@@ -56,7 +59,7 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export const Checkbox: React.FC<CheckboxProps> = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ name, label, checked, className, onChange, ...rest }, ref) => {
     return (
-      <div className="flex flex-row gap-x-2 items-center cursor-pointer p-1 select-none">
+      <div className="flex flex-row gap-x-2 items-center cursor-pointer p-1 select-none whitespace-nowrap">
         <input
           {...rest}
           ref={ref}

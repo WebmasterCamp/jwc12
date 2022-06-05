@@ -1,4 +1,4 @@
-import { InferType, TestConfig } from 'yup'
+import { InferType } from 'yup'
 
 import { Header } from '../components/Header'
 import { SPECIAL_FIELD } from '../context/constants'

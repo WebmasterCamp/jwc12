@@ -36,7 +36,6 @@ export const Dropdown: React.FC<DropdownProps> = ({
     },
     []
   )
-
   return (
     <Menu as="div" className={clsx('relative inline-block text-left w-full')}>
       <div className="flex flex-col gap-2">
@@ -76,7 +75,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         >
           <div className="py-1">
             {options.map((option) => (
-              <Menu.Item key={`${name}_${option}`}>
+              <Menu.Item key={`${name}_${option.name}`}>
                 <span
                   className={clsx(
                     value === option.value ? 'bg-gray-100 text-gray-900' : 'text-gray-700',

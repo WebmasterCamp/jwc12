@@ -103,7 +103,6 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
       if (branch === BranchType.CONTENT) return contentQuestionForm
       if (branch === BranchType.MARKETING) return marketingQuestionForm
     }
-    console.log(step, branch)
     throw new Error('Invalid step or branch')
   }, [step, branch])
 
@@ -157,8 +156,8 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
     router.push(`/register/step/${step + 1}`)
   }
 
-  const error: SubmitErrorHandler<CoreQuestionModel> = (data, error) => {
-    console.log('Error', data)
+  const error: SubmitErrorHandler<CoreQuestionModel> = (error, event) => {
+    console.log('Error', error)
     toast.error('คุณกรอกข้อมูลไม่ครบถ้วน')
   }
 

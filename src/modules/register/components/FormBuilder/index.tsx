@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react'
-import { Controller } from 'react-hook-form'
+import { Controller, FieldError } from 'react-hook-form'
 
 import { useRouter } from 'next/router'
 
+import { DevTool } from '@hookform/devtools'
 import clsx from 'clsx'
 
 import { useAuthStore } from '@/auth/store'
@@ -180,35 +181,46 @@ export const FormBuilder = () => {
                   position={input.position}
                 >
                   {input.choices.map((choice) => (
-                    <>
-                      <Controller
-                        key={`${input.name}_${choice.name}`}
-                        control={control}
-                        name={choice.name}
-                        defaultValue=""
-                        render={({ field: { onChange, value } }) => (
-                          <>
+                    <Controller
+                      key={`${input.name}_${choice.name}`}
+                      control={control}
+                      name={`${input.name}.${choice.name}`}
+                      defaultValue=""
+                      render={({ field: { value, name, ...rest } }) => (
+                        <div
+                          className={clsx(
+                            'flex flex-row flex-1 gap-x-4',
+                            input.position === 'center' && 'justify-center',
+                            input.position === 'end' && 'justify-end',
+                            input.position === 'start' && 'justify-start'
+                          )}
+                        >
+                          <div>
                             <Checkbox
-                              onChange={onChange}
-                              value={choice.value}
-                              label={choice.value}
-                              name={choice.name}
+                              {...rest}
+                              label={choice.label}
                               checked={value as unknown as boolean}
                               disabled={disabled || disableSpecialField}
                             />
-                            {console.log(choice.name)}
-                            {input.needOtherInput && choice.name.split('.').pop() === 'other' && (
+                          </div>
+                          {input.needOtherInput && choice.name.split('.').pop() === 'other' && (
+                            <div className="basis-full sm:basis-1/2">
                               <Input
-                                {...register(`${choice.name}_input`)}
-                                error={errors[`${choice.name}_input`]?.message as string}
+                                {...register(`${input.name}.${choice.name}_input`)}
                                 placeholder="โปรดระบุ"
-                                disabled={disabled || !!value}
+                                disabled={disabled || !value}
+                                required={!value}
+                                error={
+                                  (errors[`${input.name}`] as { [key: string]: FieldError })?.[
+                                    `${choice.name}_input`
+                                  ]?.message as string
+                                }
                               />
-                            )}
-                          </>
-                        )}
-                      />
-                    </>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    />
                   ))}
                 </CheckboxGroup>
               </InputContainer>
@@ -251,6 +263,7 @@ export const FormBuilder = () => {
           Next
         </Button>
       </div>
+      {/* {process.env.MODE === 'DEVELOPMENT' && <DevTool control={control} />} */}
     </form>
   )
 }

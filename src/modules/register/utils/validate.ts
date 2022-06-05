@@ -54,25 +54,28 @@ export const buildYupObject = (form: Question) => {
           : yup.date().typeError('กรุณากรอกวันที่ให้ถูกต้อง')
         break
       }
-      case InputType.CHECKBOX:
-        const schemaChoice: { [key: string]: yup.BooleanSchema | yup.StringSchema } = {}
+      case InputType.CHECKBOX: {
+        let schemaChoice: { [key: string]: yup.BooleanSchema | yup.StringSchema } = {}
         input.choices.forEach((choice) => {
-          if (choice.name.split('.')[-1] === 'other') {
-            schemaChoice[choice.name] = yup.boolean()
-            schemaChoice[`${choice.name}_input`] = yup.string().when(choice.name, {
-              is: true,
-              then: yup.string().required('กรุณากรอกข้อมูล'),
-            })
+          if (choice.name.split('.').pop() === 'other') {
+            schemaChoice = {
+              ...schemaChoice,
+              [`${choice.name}`]: yup.boolean(),
+              [`${choice.name}_input`]: yup.string().when(`${choice.name}`, {
+                is: (value: boolean) => value,
+                then: yup.string().required('กรุณากรอกข้อมูล'),
+                otherwise: yup.string(),
+              }),
+            }
           } else {
             schemaChoice[choice.name] = yup.boolean()
           }
         })
-
         schema[input.name] = input.required
           ? yup
               .object(schemaChoice)
               .required(input.required)
-              .test('required', 'คุณเลือกไม่ตรงกับที่เงื่อนไขกำหนด', (value) => {
+              .test('required', 'คุณเลือกไม่ตรงกับที่เงื่อนไขกำหนด', (value: any) => {
                 const sum = Object.keys(value).reduce((acc, key) => {
                   return acc + (value[key] ? 1 : 0)
                 }, 0)
@@ -83,6 +86,7 @@ export const buildYupObject = (form: Question) => {
               })
           : yup.object(schemaChoice)
         break
+      }
       default:
         break
     }
