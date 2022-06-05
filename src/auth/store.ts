@@ -39,7 +39,7 @@ if (USE_FIRESTORE_EMULATOR) {
 const provider =
   process.env.MODE !== 'DEVELOPMENT' ? new FacebookAuthProvider() : new GithubAuthProvider()
 
-export const useAuthStore = create<AuthStore>((set) => {
+export const useAuthStore = create<AuthStore>((set, get) => {
   const signIn = async () => {
     await signInWithPopup(auth, provider)
   }
@@ -79,6 +79,8 @@ export const useAuthStore = create<AuthStore>((set) => {
   }
 
   const updateStep = async (current: number, farthest?: number) => {
+    const storedStep = get().currentStep
+    if (storedStep === current && !farthest) return
     let data: Partial<AuthStore> = { currentStep: current }
     if (farthest) data = { ...data, farthestStep: farthest }
     await updateRegistration(data)

@@ -3,7 +3,6 @@ import { ComponentType } from 'react'
 import { useRouter } from 'next/router'
 
 import { Loading } from '@/components/Loading'
-import { Login } from '@/components/Login'
 import { Redirect } from '@/components/Redirect'
 
 import { useAuthStore } from './store'
