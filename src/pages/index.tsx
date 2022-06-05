@@ -14,6 +14,7 @@ import { MovingCard } from '@/components/MovingCard'
 import { Navbar } from '@/components/Navbar'
 import { ParticlesWidget } from '@/components/Particles'
 import { Question } from '@/components/Question'
+import { ScheduleSection } from '@/components/ScheduleSection'
 import { Section } from '@/components/Section'
 
 const Home: NextPage = () => {
@@ -58,12 +59,7 @@ const Home: NextPage = () => {
           </div>
           <div className="flex-1">Insert video here</div>
         </Section>
-        <Section className="text-center">
-          <h2 id="schedule" className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
-            กำหนดการ
-          </h2>
-          <p>TODO: Insert schedule</p>
-        </Section>
+        <ScheduleSection />
         <Section className="rounded-xl lg:border grid grid-cols-1 lg:grid-cols-2 border-gold lg:w-10/12">
           <div className="hidden lg:block">
             <Map />
