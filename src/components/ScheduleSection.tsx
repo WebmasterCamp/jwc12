@@ -60,32 +60,32 @@ const schedules = [
   {
     title: 'รับสมัคร',
     date: '8 - 24 มิถุนายน',
-    imageUrl: '/images/รับสมัคร.png',
+    imageUrl: '/images/รับสมัคร.svg',
   },
   {
-    title: 'ประกาศผลผู้มีสิทธิ์สัมภาษณ์',
+    title: 'ประกาศผล\nผู้มีสิทธิ์สัมภาษณ์',
     date: ' 26 มิถุนายน',
-    imageUrl: '/images/2-ประกาศรอบ1.png',
+    imageUrl: '/images/2-ประกาศรอบ1.svg',
   },
   {
     title: 'สัมภาษณ์ออนไลน์',
     date: '28 มิถุนายน',
-    imageUrl: '/images/3-สัมออนไลน์2.png',
+    imageUrl: '/images/3-สัมออนไลน์.svg',
   },
   {
-    title: 'ประกาศผลผู้ผ่านการคัดเลือก',
+    title: 'ประกาศผล\nผู้ผ่านการคัดเลือก',
     date: '29 มิถุนายน',
-    imageUrl: '/images/4-ประกาศรอบ2.png',
+    imageUrl: '/images/4-ประกาศรอบ2.svg',
   },
   {
     title: 'ยืนยันสิทธิ์',
     date: '29 - 30 มิถุนายน',
-    imageUrl: '/images/5-ยืนยันสิทธิ์.png',
+    imageUrl: '/images/5-ยืนยันสิทธิ์.svg',
   },
   {
     title: 'วันค่าย',
     date: '8 - 10 กรกฎาคม',
-    imageUrl: '/images/6-วันค่าย.png',
+    imageUrl: '/images/6-วันค่าย.svg',
   },
 ]
 
@@ -104,17 +104,19 @@ export const ScheduleSection: React.FunctionComponent = () => {
       </h2>
       <div
         className={clsx(
-          'flex flex-col lg:flex-row gap-8 lg:justify-evenly w-full mx-auto',
+          'flex flex-col lg:grid lg:grid-cols-6 gap-x-0 gap-y-8 lg:justify-evenly w-full mx-auto',
           styles.scheduleGrid
         )}
       >
         {schedules.map((task) => {
           return (
-            <div key={task.title} className="flex flex-col items-center p-4">
-              <picture className="rounded-full bg-primary p-0">
+            <div key={task.title} className="flex flex-col items-center">
+              <picture className="rounded-full bg-black/40 p-4 mb-4">
                 <img src={task.imageUrl} alt={task.title} />
               </picture>
-              <h3 className="font-heading font-bold text-2xl text-gold">{task.title}</h3>
+              <h3 className="font-heading whitespace-pre-line font-bold text-xl text-gold">
+                {task.title}
+              </h3>
               <p>{task.date}</p>
             </div>
           )
