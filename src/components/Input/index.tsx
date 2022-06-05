@@ -1,22 +1,28 @@
-import { FunctionComponent, forwardRef } from 'react'
+import { FunctionComponent, ReactNode, forwardRef } from 'react'
 
 import clsx from 'clsx'
 
 import { ErrorMessage } from '../ErrorMessage'
+import { RequireMark } from '../RequireMark/indext'
 
 export type InputVariants = 'outlined'
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant?: InputVariants
-  label?: string
+  label?: ReactNode
   error?: string
+  noMark?: boolean
 }
 
 export const Input: FunctionComponent<InputProps> = forwardRef<HTMLInputElement, InputProps>(
-  ({ variant = 'outlined', label, error, ...rest }, ref) => {
+  ({ variant = 'outlined', label, error, noMark, ...rest }, ref) => {
     return (
       <div className="flex flex-col gap-2 w-full">
-        {label && <label htmlFor={rest.id}>{label}</label>}
+        {label && (
+          <label htmlFor={rest.id}>
+            {label} {rest.required && !noMark && <RequireMark />}
+          </label>
+        )}
         <input
           {...rest}
           ref={ref}

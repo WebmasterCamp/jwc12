@@ -24,32 +24,23 @@ export function makeQuestion(question: WeakQuestion): Question {
         case InputType.NONE: {
           return input
         }
+
         case InputType.DROPDOWN:
-        case InputType.RADIO: {
-          const key = input.name ? `${input.name}` : `${question.stepName}_Q${inputCount}`
-          const choices: string[] = input.choices.map((choice) => {
-            if (typeof choice === 'string') return choice
-            return choice.value
-          })
-          return {
-            ...input,
-            name: key,
-            choices: choices,
-            required: getRequiredMessage(input.required, input.question),
-          }
-        }
+        case InputType.RADIO:
         case InputType.CHECKBOX: {
           const { choices, name, ...rest } = input
-          const checkboxName = name ? `${name}` : `${question.stepName}_Q${inputCount}`
+          const checkboxName = name ? `${name}` : `${question.stepName}_Q${++inputCount}`
           const newChoices: Choice[] = choices.map((choice) => {
             if (typeof choice !== 'string') {
               return {
                 ...choice,
+                label: choice.label ? choice.label : choice.value,
                 name: `${checkboxName}.${choice.name}`,
               }
             }
             return {
               name: `${checkboxName}.${choice}`,
+              label: choice,
               value: choice,
             }
           })
@@ -61,7 +52,7 @@ export function makeQuestion(question: WeakQuestion): Question {
           }
         }
         default: {
-          const key = input.name ? `${input.name}` : `${question.stepName}_Q${inputCount}`
+          const key = input.name ? `${input.name}` : `${question.stepName}_Q${++inputCount}`
           return {
             ...input,
             name: key,

@@ -38,6 +38,7 @@ import {
   programmingQuestions,
 } from '../questions/programming'
 import { BranchType, Question } from '../types'
+import { selectBranchQuestion } from '../utils/question'
 import { SPECIAL_FIELD } from './constants'
 
 interface RegisterContextData {
@@ -119,10 +120,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
     if (step === 2) return additionalQuestions
     if (step === 3) return coreQuestions
     if (step === 4) {
-      if (branch === BranchType.PROGRAMMING) return programmingQuestions
-      if (branch === BranchType.DESIGN) return designQuestions
-      if (branch === BranchType.CONTENT) return contentQuestions
-      if (branch === BranchType.MARKETING) return marketingQuestions
+      selectBranchQuestion(branch)
     }
     throw new Error('Invalid step or branch')
   }, [step, branch])

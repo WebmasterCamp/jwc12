@@ -1,24 +1,31 @@
-import { FunctionComponent, forwardRef } from 'react'
+import { FunctionComponent, ReactNode, forwardRef } from 'react'
 
 import clsx from 'clsx'
 
 import { ErrorMessage } from '../ErrorMessage'
+import { RequireMark } from '../RequireMark/indext'
 
 export type TextAreaVariants = 'outlined'
 
 export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: TextAreaVariants
-  label?: string
+  label?: ReactNode
   error?: string
+  noMark?: boolean
 }
 
 export const TextArea: FunctionComponent<TextAreaProps> = forwardRef<
   HTMLTextAreaElement,
   TextAreaProps
->(({ variant = 'outlined', label, error, ...rest }, ref) => {
+>(({ variant = 'outlined', label, error, noMark, ...rest }, ref) => {
+  console.log(rest.name, rest.required, noMark)
   return (
     <div className="flex flex-col gap-2 w-full">
-      {label && <label htmlFor={rest.id}>{label}</label>}
+      {label && (
+        <label htmlFor={rest.id} className="inline">
+          {label} {rest.required && !noMark && <RequireMark />}
+        </label>
+      )}
       <textarea
         {...rest}
         ref={ref}

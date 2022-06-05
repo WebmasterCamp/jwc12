@@ -32,6 +32,7 @@ const marketingWeakQuestions: WeakQuestion = {
       ),
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
+      noMark: true,
     },
     { type: InputType.NONE, title: <Gap /> },
     {
@@ -51,6 +52,7 @@ const marketingWeakQuestions: WeakQuestion = {
       ),
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
+      noMark: true,
     },
     { type: InputType.NONE, title: <Gap /> },
     {
@@ -65,6 +67,7 @@ const marketingWeakQuestions: WeakQuestion = {
       ),
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
+      noMark: true,
     },
     { type: InputType.NONE, title: <Gap /> },
     {
@@ -82,6 +85,7 @@ const marketingWeakQuestions: WeakQuestion = {
       ),
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
+      noMark: true,
     },
   ],
 }

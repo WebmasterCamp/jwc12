@@ -50,6 +50,7 @@ const programmingWeakQuestions: WeakQuestion = {
       ),
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
+      noMark: true,
     },
     { type: InputType.NONE, title: <Gap /> },
     {
@@ -64,6 +65,7 @@ const programmingWeakQuestions: WeakQuestion = {
       ),
       required: 'กรุณาตอบคำถามนี้',
       placeholder: 'ตอบอะไรดีนะ...',
+      noMark: true,
     },
   ],
 }

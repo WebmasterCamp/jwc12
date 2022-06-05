@@ -2,7 +2,7 @@ import { InferType } from 'yup'
 
 import { Header } from '../components/Header'
 import { InputType, WeakQuestion } from '../types'
-import { buildYupObject } from '../utils/validate'
+import { buildYupObject, phoneTestConfig } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
 
 const basicWeakQuestions: WeakQuestion = {
@@ -90,13 +90,9 @@ const basicWeakQuestions: WeakQuestion = {
       type: InputType.TEXT,
       name: 'telephone',
       question: 'เบอร์โทรศัพท์',
-      placeholder: 'xxxxxxxxxx',
+      placeholder: '088-888-8888',
       required: true,
-      validate: {
-        name: 'invalid',
-        message: 'เบอร์โทรศัพท์ไม่ถูกต้อง',
-        test: (value: string) => /^[0-9]{10}$/.test(value),
-      },
+      validate: phoneTestConfig,
     },
     {
       type: InputType.EMAIL,

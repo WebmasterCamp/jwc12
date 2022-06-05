@@ -36,6 +36,7 @@ export interface SimpleInput extends WeakSimpleInput {
 export interface Choice {
   name: string
   value: string
+  label?: string
 }
 
 export interface WeakChoiceInput extends WeakSimpleInput {
@@ -50,12 +51,6 @@ export interface ChoiceInput extends Omit<WeakChoiceInput, 'choices'> {
   name: string
   required?: string
   choices: Choice[]
-}
-
-export interface SingleChoiceInput extends WeakChoiceInput {
-  name: string
-  required?: string
-  choices: string[]
 }
 
 export type WeakQuestionInputProps =
@@ -92,10 +87,10 @@ export type QuestionInputProps =
     } & SimpleInput)
   | ({
       type: InputType.RADIO
-    } & SingleChoiceInput)
+    } & ChoiceInput)
   | ({
       type: InputType.DROPDOWN
-    } & SingleChoiceInput)
+    } & ChoiceInput)
   | ({
       type: InputType.CHECKBOX
     } & ChoiceInput)

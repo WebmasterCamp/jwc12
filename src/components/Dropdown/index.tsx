@@ -4,13 +4,15 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import clsx from 'clsx'
 
+import { Choice } from '@/modules/register/types'
+
 import { ErrorMessage } from '../ErrorMessage'
 import { RequireMark } from '../RequireMark/indext'
 
 export interface DropdownProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   name: string
   label: ReactNode
-  options: string[]
+  options: Choice[]
   error?: string
   onChange?: (...event: any[]) => void
 }
@@ -37,8 +39,10 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <Menu as="div" className={clsx('relative inline-block text-left w-full')}>
-      <div>
-        {label} {required && <RequireMark />}
+      <div className="flex flex-col gap-2">
+        <label>
+          {label} {required && <RequireMark />}
+        </label>
         <div className="flex flex-col gap-2 w-full">
           <Menu.Button
             className={clsx(
@@ -75,12 +79,12 @@ export const Dropdown: React.FC<DropdownProps> = ({
               <Menu.Item key={`${name}_${option}`}>
                 <span
                   className={clsx(
-                    value === option ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    value === option.value ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-2 text-sm cursor-pointer hover:bg-gray-100'
                   )}
-                  onClick={handleChange(option)}
+                  onClick={handleChange(option.value)}
                 >
-                  {option}
+                  {option.label}
                 </span>
               </Menu.Item>
             ))}

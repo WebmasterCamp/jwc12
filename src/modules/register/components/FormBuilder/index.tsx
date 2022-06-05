@@ -11,7 +11,6 @@ import { Checkbox, CheckboxGroup } from '@/components/Checkbox'
 import { Dropdown } from '@/components/Dropdown'
 import { Input } from '@/components/Input'
 import { Radio, RadioGroup } from '@/components/Radio'
-import { RequireMark } from '@/components/RequireMark/indext'
 import { TextArea } from '@/components/TextArea'
 import { Upload } from '@/components/Upload'
 
@@ -63,12 +62,6 @@ export const FormBuilder = () => {
           case InputType.DATE: {
             return (
               <InputContainer key={input.name}>
-                {typeof input.question === 'string' ? (
-                  <p className="inline">{input.question}</p>
-                ) : (
-                  input.question
-                )}{' '}
-                {!!input.required && <RequireMark />}
                 <Controller
                   control={control}
                   name={input.name}
@@ -78,9 +71,11 @@ export const FormBuilder = () => {
                       {...rest}
                       value={value as string}
                       type={input.type}
+                      label={input.question}
                       error={errors[input.name]?.message as string}
                       placeholder={input.placeholder}
                       disabled={disabled || disableSpecialField}
+                      noMark={input.noMark}
                     />
                   )}
                 />
@@ -136,9 +131,9 @@ export const FormBuilder = () => {
                     >
                       {input.choices.map((choice) => (
                         <Radio
-                          key={`${input.name}_${choice}`}
-                          value={choice}
-                          label={choice}
+                          key={`${input.name}_${choice.name}`}
+                          value={choice.value}
+                          label={choice.label}
                           disabled={disabled || disableSpecialField}
                         />
                       ))}
@@ -209,7 +204,6 @@ export const FormBuilder = () => {
           case InputType.TEXTAREA: {
             return (
               <InputContainer key={input.name} className="sm:basis-auto">
-                {input.question}
                 <Controller
                   control={control}
                   name={input.name}
@@ -220,10 +214,12 @@ export const FormBuilder = () => {
                       name={input.name}
                       value={value as string}
                       rows={4}
+                      label={input.question}
                       error={errors[input.name]?.message as string}
-                      className="mt-4"
                       placeholder={input.placeholder}
                       disabled={disabled || disableSpecialField}
+                      required={!!input.required}
+                      noMark={!!input.noMark}
                     />
                   )}
                 />

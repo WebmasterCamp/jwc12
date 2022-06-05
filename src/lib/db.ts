@@ -41,7 +41,7 @@ function getStorageRef(filename: string) {
   return ref(storage, filename)
 }
 
-type Answers = {
+export type Answers = {
   [key in StepName]: any
 }
 

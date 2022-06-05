@@ -28,6 +28,8 @@ export const coreWeakQuestions: WeakQuestion = {
         </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
+      placeholder: 'ตอบอะไรดีนะ...',
+      noMark: true,
     },
     { type: InputType.NONE, title: <Gap /> },
     {
@@ -45,6 +47,8 @@ export const coreWeakQuestions: WeakQuestion = {
         </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
+      placeholder: 'ตอบอะไรดีนะ...',
+      noMark: true,
     },
     { type: InputType.NONE, title: <Gap /> },
     {
@@ -62,6 +66,8 @@ export const coreWeakQuestions: WeakQuestion = {
         </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
+      placeholder: 'ตอบอะไรดีนะ...',
+      noMark: true,
     },
     { type: InputType.NONE, title: <Gap /> },
     {
@@ -75,6 +81,8 @@ export const coreWeakQuestions: WeakQuestion = {
         </QuestionWithNumber>
       ),
       required: 'กรุณาตอบคำถามนี้',
+      placeholder: 'ตอบอะไรดีนะ...',
+      noMark: true,
     },
   ],
 }

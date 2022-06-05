@@ -1,9 +1,9 @@
-import { InferType } from 'yup'
+import { InferType, TestConfig } from 'yup'
 
 import { Header } from '../components/Header'
 import { SPECIAL_FIELD } from '../context/constants'
 import { InputType, WeakQuestion } from '../types'
-import { buildYupObject } from '../utils/validate'
+import { buildYupObject, phoneTestConfig } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
 
 const additionalWeakQuestions: WeakQuestion = {
@@ -108,8 +108,9 @@ const additionalWeakQuestions: WeakQuestion = {
       type: InputType.TEXT,
       name: 'parentPhone',
       question: 'เบอร์โทรติดต่อ',
-      placeholder: 'xxxxxxxxxx',
+      placeholder: '088-888-8888',
       required: true,
+      validate: phoneTestConfig,
     },
     {
       type: InputType.TEXT,
@@ -140,8 +141,9 @@ const additionalWeakQuestions: WeakQuestion = {
       type: InputType.TEXT,
       name: 'emergencyPhone',
       question: 'เบอร์โทรติดต่อ',
-      placeholder: 'xxxxxxxxxx',
+      placeholder: '088-888-8888',
       required: true,
+      validate: phoneTestConfig,
     },
     {
       type: InputType.TEXT,
@@ -161,10 +163,10 @@ const additionalWeakQuestions: WeakQuestion = {
         <img src="https://i.pinimg.com/originals/e2/06/64/e206645f3d2b5438ac9423bcc6934a4b.jpg" />
       ),
       choices: [
-        { value: 'สาขา Content', name: 'content' },
-        { value: 'สาขา Design', name: 'design' },
-        { value: 'สาขา Marketing', name: 'marketing' },
-        { value: 'สาขา Programming', name: 'programming' },
+        { value: 'content', name: 'content', label: 'สาขา Content' },
+        { value: 'design', name: 'design', label: 'สาขา Design' },
+        { value: 'marketing', name: 'marketing', label: 'สาขา Marketing' },
+        { value: 'programming', name: 'programming', label: 'สาขา Programming' },
       ],
       required: true,
       noMark: true,

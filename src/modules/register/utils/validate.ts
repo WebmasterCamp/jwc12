@@ -2,6 +2,14 @@ import * as yup from 'yup'
 
 import { InputType, Question } from '../types'
 
+export const phoneTestConfig: yup.TestConfig<string> = {
+  name: 'invalid phone number',
+  message: 'กรุณากรอกเบอร์มือถือให้ถูกต้อง',
+  test: (value: string) => {
+    return /^((((\+66|66|0)\d{2})-?\d{3}-?\d{4})|(-))$/.test(value)
+  },
+}
+
 export const buildYupObject = (form: Question) => {
   const schema: {
     [key: string]:
@@ -28,7 +36,7 @@ export const buildYupObject = (form: Question) => {
          */
         if (input.type === InputType.RADIO) {
           s = s.test('invalid', 'กรุณาเลือกให้ถูกต้อง', (value) => {
-            return !!value && input.choices.includes(value)
+            return !!value && input.choices.some((choice) => choice.value === value)
           })
         }
         /**
