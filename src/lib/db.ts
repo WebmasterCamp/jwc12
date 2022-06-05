@@ -47,12 +47,12 @@ export type Answers = {
 
 interface Registration {
   answers: Answers
-  createdAt: Timestamp
-  updatedAt: Timestamp
   currentStep: number
   farthestStep: number
   consented: boolean
-  confirmedBranch?: BranchType | null
+  confirmedBranch: BranchType | null
+  createdAt: Timestamp
+  updatedAt: Timestamp
 }
 
 export async function hasRegistration(uid?: string) {
@@ -73,9 +73,9 @@ export async function getRegistration(uid?: string): Promise<Registration> {
       currentStep: 1,
       farthestStep: 1,
       consented: false,
+      confirmedBranch: null,
       createdAt: serverTimestamp() as Timestamp,
       updatedAt: serverTimestamp() as Timestamp,
-      confirmedBranch: null,
     }
     await setDoc(getRegistrationRef(uid), data)
     return await getRegistration(uid)
