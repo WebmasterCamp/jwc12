@@ -16,6 +16,7 @@ import { TextArea } from '@/components/TextArea'
 import { Upload } from '@/components/Upload'
 
 import { useRegister } from '../../context'
+import { SPECIAL_FIELD } from '../../context/constants'
 import { InputType } from '../../types'
 
 const InputContainer = (props: { children: React.ReactNode; className?: string }) => {
@@ -29,7 +30,7 @@ const InputContainer = (props: { children: React.ReactNode; className?: string }
 export const FormBuilder = () => {
   const router = useRouter()
   const { uid } = useAuthStore()
-  const { ready, form, step, question, submit, saveAnswers } = useRegister()
+  const { ready, form, step, question, branch, submit, saveAnswers } = useRegister()
   if (!form) return null
 
   const {
@@ -51,6 +52,8 @@ export const FormBuilder = () => {
       className="text-black flex flex-wrap gap-y-2"
     >
       {question?.inputs.map((input, index) => {
+        const disableSpecialField =
+          input.type !== InputType.NONE ? input.name in SPECIAL_FIELD && !!branch : false
         switch (input.type) {
           case InputType.NONE: {
             return <Fragment key={`${question.stepName}_${index}`}>{input.title}</Fragment>
@@ -77,7 +80,7 @@ export const FormBuilder = () => {
                       type={input.type}
                       error={errors[input.name]?.message as string}
                       placeholder={input.placeholder}
-                      disabled={disabled}
+                      disabled={disabled || disableSpecialField}
                     />
                   )}
                 />
@@ -104,7 +107,7 @@ export const FormBuilder = () => {
                       placeholder={input.placeholder}
                       error={errors[input.name]?.message as string}
                       required={!!input.required}
-                      disabled={disabled}
+                      disabled={disabled || disableSpecialField}
                     />
                   )}
                 />
@@ -136,7 +139,7 @@ export const FormBuilder = () => {
                           key={`${input.name}_${choice}`}
                           value={choice}
                           label={choice}
-                          disabled={disabled}
+                          disabled={disabled || disableSpecialField}
                         />
                       ))}
                     </RadioGroup>
@@ -161,8 +164,8 @@ export const FormBuilder = () => {
                       onChange={onChange}
                       value={value as string}
                       error={errors[input.name]?.message as string}
-                      disabled={disabled}
                       required={!!input.required}
+                      disabled={disabled || disableSpecialField}
                     />
                   )}
                 />
@@ -193,7 +196,7 @@ export const FormBuilder = () => {
                             label={choice.value}
                             name={choice.name}
                             checked={value as unknown as boolean}
-                            disabled={disabled}
+                            disabled={disabled || disableSpecialField}
                           />
                         )
                       }}
@@ -220,7 +223,7 @@ export const FormBuilder = () => {
                       error={errors[input.name]?.message as string}
                       className="mt-4"
                       placeholder={input.placeholder}
-                      disabled={disabled}
+                      disabled={disabled || disableSpecialField}
                     />
                   )}
                 />
