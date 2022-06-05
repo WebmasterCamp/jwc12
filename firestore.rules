@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {    
+    function isAdmin() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true;
+    }
+
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+
+    function verifyCreate() {
+      let data = request.resource.data;
+
+      let validFields = verifyFields(['answers', 'currentStep', 'farthestStep', 'consented', 'confirmedBranch', 'createdAt', 'updatedAt']);
+      let validTypes = verifyFieldTypes();
+      let validTimestamps = data.createdAt == request.time && data.updatedAt == request.time;
+
+      return validFields && validTypes && validTimestamps;
+    }
+
+    function verifyFieldTypes() {
+      let data = request.resource.data;
+      let validBranch = data.confirmedBranch == null ||
+        data.confirmedBranch == 'content' ||
+        data.confirmedBranch == 'design' ||
+        data.confirmedBranch == 'marketing' ||
+        data.confirmedBranch == 'programming';
+      
+      return data.answers is map &&
+        data.currentStep is int && 
+        data.farthestStep is int &&
+        data.consented is bool &&
+        validBranch &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    function verifyUpdate() {
+      let oldData = resource.data;
+      let newData = request.resource.data;
+      let diff = newData.diff(oldData);
+      let affectedKeys = diff.affectedKeys();
+
+      let validTypes = verifyFieldTypes();
+      let validBranchUpdate = !('confirmedBranch' in affectedKeys) || oldData.confirmedBranch == null;
+      let validTimestamps = !('createdAt' in affectedKeys) && newData.updatedAt == request.time;
+
+      return validTypes && validBranchUpdate && validTimestamps;
+    }
+
+    match /registrations/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && verifyCreate();
+      allow update: if isOwner(userId) && verifyUpdate();
+    }
+
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function verifyFields(fields) {
+      return request.resource.data.keys().hasAll(fields) &&
+        request.resource.data.keys().hasOnly(fields);
+    }
+  }
+}
