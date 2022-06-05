@@ -20,30 +20,34 @@ if (USE_FIRESTORE_EMULATOR) {
   connectFirestoreEmulator(db, 'localhost', 8080)
 }
 
-function getRegistrationRef() {
-  return doc(db, 'registrations', getUid())
+function getRegistrationRef(uid?: string) {
+  return doc(db, 'registrations', uid ? uid : getUid())
 }
 
 interface Registration {
   answers: any
   createdAt: Timestamp
   updatedAt: Timestamp
+  currentStep: number
+  farthestStep: number
 }
 
-export async function hasRegistration() {
-  const docSnap = await getDoc(getRegistrationRef())
+export async function hasRegistration(uid?: string) {
+  const docSnap = await getDoc(getRegistrationRef(uid))
   return docSnap.exists()
 }
 
-export async function getRegistration(): Promise<Registration> {
-  const docSnap = await getDoc(getRegistrationRef())
+export async function getRegistration(uid?: string): Promise<Registration> {
+  const docSnap = await getDoc(getRegistrationRef(uid))
   if (!docSnap.exists()) {
-    await setDoc(getRegistrationRef(), {
+    await setDoc(getRegistrationRef(uid), {
       answers: {},
+      currentStep: 1,
+      farthestStep: 1,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })
-    return await getRegistration()
+    return await getRegistration(uid)
   }
   return docSnap.data() as Registration
 }

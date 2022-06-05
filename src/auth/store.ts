@@ -9,14 +9,18 @@ import {
 import { FacebookAuthProvider } from 'firebase/auth'
 import create from 'zustand'
 
+import { getRegistration, updateRegistration } from '@/lib/db'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
 export interface AuthStore {
   pending: boolean
   uid: string | null
   user: AuthUser | null
+  currentStep: number
+  farthestStep: number
   signIn: () => Promise<void>
   signOut: () => Promise<void>
+  updateStep: (current: number, furthest?: number) => Promise<void>
 }
 
 export interface AuthUser {
@@ -42,7 +46,7 @@ export const useAuthStore = create<AuthStore>((set) => {
   }
 
   if (typeof window !== 'undefined') {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       const authUser = user
         ? {
             uid: user.uid,
@@ -50,21 +54,34 @@ export const useAuthStore = create<AuthStore>((set) => {
             photoURL: user.photoURL,
           }
         : null
+      const { farthestStep, currentStep } = await getRegistration(user?.uid)
       set((state) => ({
         ...state,
         pending: false,
         uid: user?.uid ?? null,
         user: authUser,
+        currentStep,
+        farthestStep,
       }))
     })
+  }
+
+  const updateStep = async (current: number, farthest?: number) => {
+    let data: Partial<AuthStore> = { currentStep: current }
+    if (farthest) data = { ...data, farthestStep: farthest }
+    await updateRegistration(data)
+    set((state) => ({ ...state, ...data }))
   }
 
   return {
     pending: true,
     uid: null,
     user: null,
+    currentStep: 0,
+    farthestStep: 0,
     signIn,
     signOut,
+    updateStep,
   }
 })
 

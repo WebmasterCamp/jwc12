@@ -19,7 +19,6 @@ export const buildYupObject = (form: Question) => {
       case InputType.UPLOAD:
       case InputType.EMAIL: {
         let s = yup.string()
-        console.log(input.name, input.required)
         if (input.required) s = s.required(input.required)
         if (input.type === InputType.EMAIL) s = s.email('กรุณากรอก email ให้ถูกต้อง')
         if (input.type === InputType.UPLOAD) s = s.url('กรุณากรอก URL ให้ถูกต้อง')

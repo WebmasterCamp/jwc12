@@ -10,8 +10,11 @@ import {
 import { SubmitErrorHandler, SubmitHandler, UseFormReturn, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
+import { useRouter } from 'next/router'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 
+import { useAuthStore } from '@/auth/store'
 import { getRegistration, updateAnswers } from '@/lib/db'
 
 import {
@@ -55,13 +58,11 @@ export const RegisterContext = createContext<RegisterContextData>({} as Register
 export const useRegister = () => useContext(RegisterContext)
 
 export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch, children }) => {
+  const { updateStep } = useAuthStore()
   /**
    * First Step form
    */
   const basicForm = useForm<BasicQuestionModel>({
-    defaultValues: {
-      // TODO @paphonb
-    },
     resolver: yupResolver(BasicQuestionSchema),
   })
 
@@ -69,9 +70,6 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
    * Second Step form
    */
   const addionalForm = useForm<AdditionalQuestionModel>({
-    defaultValues: {
-      // TODO @paphonb
-    },
     resolver: yupResolver(AdditionalQuestionSchema),
   })
 
@@ -79,9 +77,6 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
    * Third Step form
    */
   const coreQuestionForm = useForm<CoreQuestionModel>({
-    defaultValues: {
-      // TODO @paphonb
-    },
     resolver: yupResolver(CoreQuestionSchema),
   })
 
@@ -89,27 +84,15 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
    * 4 Branches Questions
    */
   const programmingQuestionForm = useForm<ProgrammingQuestionModel>({
-    defaultValues: {
-      // TODO @paphonb
-    },
     resolver: yupResolver(ProgrammingQuestionSchema),
   })
   const designQuestionForm = useForm<DesignQuestionModel>({
-    defaultValues: {
-      // TODO @paphonb
-    },
     resolver: yupResolver(DesignQuestionSchema),
   })
   const contentQuestionForm = useForm<ContentQuestionModel>({
-    defaultValues: {
-      // TODO @paphonb
-    },
     resolver: yupResolver(ContentQuestionSchema),
   })
   const marketingQuestionForm = useForm<MarketingQuestionModel>({
-    defaultValues: {
-      // TODO @paphonb
-    },
     resolver: yupResolver(MarketingQuestionSchema),
   })
 
@@ -156,6 +139,11 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
     restoreForm()
   }, [form])
 
+  useEffect(() => {
+    // update current step
+    updateStep(step)
+  }, [step])
+
   const saveAnswers = useCallback(() => {
     if (!ready) return
     const values = form.getValues()
@@ -164,6 +152,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, branch
 
   const success: SubmitHandler<CoreQuestionModel> = (data) => {
     console.log('Submit Success', data)
+    updateStep(step + 1, step + 1)
   }
 
   const error: SubmitErrorHandler<CoreQuestionModel> = (data, error) => {
