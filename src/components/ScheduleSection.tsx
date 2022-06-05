@@ -2,6 +2,7 @@ import { CSSProperties, useEffect, useRef, useState } from 'react'
 
 import clsx from 'clsx'
 
+import styles from './ScheduleSection.module.css'
 import { Section } from './Section'
 
 // Code from https://thewebdev.info/2021/09/12/how-to-draw-a-line-between-two-divs-with-javascript/
@@ -95,7 +96,12 @@ export const ScheduleSection: React.FunctionComponent = () => {
       <h2 id="schedule" className="text-3xl font-heading lg:text-4xl mb-16 font-semibold">
         กำหนดการ
       </h2>
-      <div className="flex flex-col lg:flex-row gap-8 lg:justify-evenly w-full mx-auto">
+      <div
+        className={clsx(
+          'flex flex-col lg:flex-row gap-8 lg:justify-evenly w-full mx-auto',
+          styles.scheduleGrid
+        )}
+      >
         {schedules.map((task) => {
           return (
             <div key={task.title} className="p-4">
