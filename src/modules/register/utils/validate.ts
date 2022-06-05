@@ -21,7 +21,6 @@ export const buildYupObject = (form: Question) => {
         let s = yup.string()
         if (input.required) s = s.required(input.required)
         if (input.type === InputType.EMAIL) s = s.email('กรุณากรอก email ให้ถูกต้อง')
-        if (input.type === InputType.UPLOAD) s = s.url('กรุณากรอก URL ให้ถูกต้อง')
         if (input.type === InputType.RADIO)
           s = s.test('invalid', 'กรุณาเลือกให้ถูกต้อง', (value) => {
             return !!value && input.choices.includes(value)

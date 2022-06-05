@@ -154,7 +154,7 @@ const basicWeakQuestions: WeakQuestion = {
       validate: {
         name: 'invalid',
         message: 'รหัสไปรษณีย์ไม่ถูกต้อง',
-        test: (value: string) => /^[0-9]{5}$/.test(value),
+        test: (value: string) => /^\d+$/.test(value),
       },
     },
     // Education Section ------------------------------------------------------------

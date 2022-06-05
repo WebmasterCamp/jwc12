@@ -159,7 +159,7 @@ const additionalWeakQuestions: WeakQuestion = {
     },
     {
       type: InputType.CHECKBOX,
-      name: SPECIAL_FIELD.BRANCH,
+      name: SPECIAL_FIELD.BRANCH_CONIRM,
       question: null,
       choices: ['ยืนยันการเลือกสาขา'],
       required: true,

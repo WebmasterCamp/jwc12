@@ -10,6 +10,8 @@ import {
 import { SubmitErrorHandler, SubmitHandler, UseFormReturn, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
+import { useRouter } from 'next/router'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAuthStore } from '@/auth/store'
@@ -57,6 +59,7 @@ export const RegisterContext = createContext<RegisterContextData>({} as Register
 export const useRegister = () => useContext(RegisterContext)
 
 export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, children }) => {
+  const router = useRouter()
   const { updateStep } = useAuthStore()
   const [branch, setBranch] = useState<BranchType | undefined>()
 
@@ -158,6 +161,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
     if (SPECIAL_FIELD.BRANCH in data && !!data[SPECIAL_FIELD.BRANCH]) {
       confirmBranch(data[SPECIAL_FIELD.BRANCH] as BranchType)
     }
+    router.push(`/register/step/${step + 1}`)
   }
 
   const error: SubmitErrorHandler<CoreQuestionModel> = (data, error) => {
