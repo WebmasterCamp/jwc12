@@ -10,6 +10,7 @@ import { Button } from '@/components/Button'
 import { Checkbox, CheckboxGroup } from '@/components/Checkbox'
 import { Dropdown } from '@/components/Dropdown'
 import { Input } from '@/components/Input'
+import { InputContainer } from '@/components/InputContainer'
 import { Radio, RadioGroup } from '@/components/Radio'
 import { TextArea } from '@/components/TextArea'
 import { Upload } from '@/components/Upload'
@@ -17,14 +18,6 @@ import { Upload } from '@/components/Upload'
 import { useRegister } from '../../context'
 import { SPECIAL_FIELD } from '../../context/constants'
 import { InputType } from '../../types'
-
-const InputContainer = (props: { children: React.ReactNode; className?: string }) => {
-  return (
-    <div className={clsx(`p-2 basis-auto w-full sm:basis-1/2`, props.className)}>
-      {props.children}
-    </div>
-  )
-}
 
 const specialFields = Object.values(SPECIAL_FIELD) as string[]
 

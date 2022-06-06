@@ -50,14 +50,22 @@ const StepPage: NextPage<StepPageProps> = withRegistrationData<InnerPageProps>(
               <TabItem key={index} label={item} index={index + 1} />
             ))}
           </Tab>
-          <FormCard className="flex flex-1 flex-col">{children}</FormCard>
+          {children}
         </Container>
         <Footer />
       </>
     )
 
     if (step === 5) return wrapper(<FormSummary />)
-    return <RegisterProvider step={step}>{wrapper(<FormBuilder />)}</RegisterProvider>
+    return (
+      <RegisterProvider step={step}>
+        {wrapper(
+          <FormCard className="flex flex-1 flex-col">
+            <FormBuilder />
+          </FormCard>
+        )}
+      </RegisterProvider>
+    )
   }
 )
 

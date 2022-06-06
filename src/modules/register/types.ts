@@ -19,6 +19,12 @@ export enum InputType {
   NONE = 'none',
 }
 
+export interface WeakBaseInput {
+  hideInSummary?: boolean
+}
+
+export interface BaseInput extends WeakBaseInput {}
+
 export interface WeakSimpleInput {
   question: React.ReactNode
   name?: string
@@ -54,51 +60,55 @@ export interface ChoiceInput extends Omit<WeakChoiceInput, 'choices'> {
   choices: Choice[]
 }
 
-export type WeakQuestionInputProps =
-  | ({
-      type:
-        | InputType.TEXTAREA
-        | InputType.TEXT
-        | InputType.UPLOAD
-        | InputType.EMAIL
-        | InputType.DATE
-    } & WeakSimpleInput)
-  | ({
-      type: InputType.RADIO
-    } & WeakChoiceInput)
-  | ({
-      type: InputType.DROPDOWN
-    } & WeakChoiceInput)
-  | ({
-      type: InputType.CHECKBOX
-    } & WeakChoiceInput)
-  | {
-      type: InputType.NONE
-      title: React.ReactNode
-    }
+export type WeakQuestionInputProps = WeakBaseInput &
+  (
+    | ({
+        type:
+          | InputType.TEXTAREA
+          | InputType.TEXT
+          | InputType.UPLOAD
+          | InputType.EMAIL
+          | InputType.DATE
+      } & WeakSimpleInput)
+    | ({
+        type: InputType.RADIO
+      } & WeakChoiceInput)
+    | ({
+        type: InputType.DROPDOWN
+      } & WeakChoiceInput)
+    | ({
+        type: InputType.CHECKBOX
+      } & WeakChoiceInput)
+    | {
+        type: InputType.NONE
+        title: React.ReactNode
+      }
+  )
 
-export type QuestionInputProps =
-  | ({
-      type:
-        | InputType.TEXTAREA
-        | InputType.TEXT
-        | InputType.UPLOAD
-        | InputType.EMAIL
-        | InputType.DATE
-    } & SimpleInput)
-  | ({
-      type: InputType.RADIO
-    } & ChoiceInput)
-  | ({
-      type: InputType.DROPDOWN
-    } & ChoiceInput)
-  | ({
-      type: InputType.CHECKBOX
-    } & ChoiceInput)
-  | {
-      type: InputType.NONE
-      title: React.ReactNode
-    }
+export type QuestionInputProps = BaseInput &
+  (
+    | ({
+        type:
+          | InputType.TEXTAREA
+          | InputType.TEXT
+          | InputType.UPLOAD
+          | InputType.EMAIL
+          | InputType.DATE
+      } & SimpleInput)
+    | ({
+        type: InputType.RADIO
+      } & ChoiceInput)
+    | ({
+        type: InputType.DROPDOWN
+      } & ChoiceInput)
+    | ({
+        type: InputType.CHECKBOX
+      } & ChoiceInput)
+    | {
+        type: InputType.NONE
+        title: React.ReactNode
+      }
+  )
 
 export type WeakQuestion = {
   stepName: string

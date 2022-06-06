@@ -179,6 +179,7 @@ const additionalWeakQuestions: WeakQuestion = {
       required: true,
       direction: 'column',
       position: 'center',
+      hideInSummary: true,
     },
     {
       type: InputType.NONE,
@@ -187,6 +188,7 @@ const additionalWeakQuestions: WeakQuestion = {
           **หากยืนยันการเลือกสาขาแล้ว จะไม่สามารถเปลี่ยนสาขาได้ภายหลัง
         </p>
       ),
+      hideInSummary: true,
     },
   ],
 }
