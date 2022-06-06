@@ -1,13 +1,10 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment } from 'react'
 
 import { useRouter } from 'next/router'
 
-import useSWR from 'swr'
-
-import { useAuthStore } from '@/auth/store'
 import { Button } from '@/components/Button'
 import { Loading } from '@/components/Loading'
-import { Answers, getRegistration } from '@/db'
+import { useRegistrationData } from '@/db'
 
 import { additionalQuestions } from '../../questions/additional'
 import { basicQuestions } from '../../questions/basic'
@@ -62,9 +59,7 @@ const SummaryBuilder: React.FC<SummaryBuilderProps> = ({ question, answer }) => 
 
 export const FormSummary = () => {
   const router = useRouter()
-  const { uid, branch } = useAuthStore()
-
-  const { data: registration } = useSWR(uid, getRegistration)
+  const { data: registration } = useRegistrationData()
   const answers = registration?.answers
 
   const handleSubmit = () => {
@@ -79,7 +74,10 @@ export const FormSummary = () => {
       <SummaryBuilder question={basicQuestions} answer={answers['basic']} />
       <SummaryBuilder question={additionalQuestions} answer={answers['additional']} />
       <SummaryBuilder question={coreQuestions} answer={answers['core']} />
-      <SummaryBuilder question={selectBranchQuestion(branch)} answer={answers['branch']} />
+      <SummaryBuilder
+        question={selectBranchQuestion(registration.confirmedBranch)}
+        answer={answers['branch']}
+      />
       <Button onClick={handleSubmit}>Submit</Button>
     </div>
   )
