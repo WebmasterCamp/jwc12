@@ -10,6 +10,18 @@ import styles from './BranchesSection.module.css'
 import { Section } from './Section'
 
 type Branch = 'pg' | 'mk' | 'ds' | 'ct'
+type BranchAbbr = {
+  [key in Branch]: string
+}
+
+const nameMap: BranchAbbr = {
+  pg: 'Programming',
+  ct: 'Content',
+  mk: 'Marketing',
+  ds: 'Design',
+}
+
+const imageUrl = (name: Branch) => `/images/Colored_${nameMap[name]}.png`
 
 // TODO: Add questions
 const branchesDescription: Array<{ branch: Branch; title: string; description: string }> = [
@@ -54,17 +66,17 @@ export const BranchesSection: React.FunctionComponent = () => {
         )}
       >
         {/* TODO: Use actual cards */}
-        <div onClick={() => setBranch('ct')} className="bg-ct p-8 cursor-pointer aspect-card">
-          The Content Creator: นักกวี
+        <div onClick={() => setBranch('ct')} className="bg-ct cursor-pointer aspect-card">
+          <img alt={nameMap['ct']} src={imageUrl('ct')} />
         </div>
-        <div onClick={() => setBranch('ds')} className="bg-ds p-8 cursor-pointer aspect-card">
-          The Designer: จิตรกร
+        <div onClick={() => setBranch('ds')} className="bg-ds cursor-pointer aspect-card">
+          <img alt={nameMap['ds']} src={imageUrl('ds')} />
         </div>
-        <div onClick={() => setBranch('mk')} className="bg-mk p-8 cursor-pointer aspect-card">
-          The Marketer: นักพยากรณ์
+        <div onClick={() => setBranch('mk')} className="bg-mk cursor-pointer aspect-card">
+          <img alt={nameMap['mk']} src={imageUrl('mk')} />
         </div>
-        <div onClick={() => setBranch('pg')} className="bg-pg p-8 cursor-pointer aspect-card">
-          The Programmer: จอมเวท
+        <div onClick={() => setBranch('pg')} className="bg-pg cursor-pointer aspect-card">
+          <img alt={nameMap['pg']} src={imageUrl('pg')} />
         </div>
         {branchesDescription.map((detail) => (
           <BranchDialog
