@@ -30,7 +30,7 @@ export const UserBar: React.FC<UserBarProps> = ({ displayName, photoURL, signOut
           )}
         >
           {photoURL ? (
-            <Image src={photoURL} width="24" height="24" />
+            <Image src={photoURL} width="24" height="24" alt="" />
           ) : (
             <div className="w-[24px] h-[24px] rounded-full bg-primary leading-none flex items-center justify-center">
               {firstLetter}

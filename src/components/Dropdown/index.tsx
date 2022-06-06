@@ -34,7 +34,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         target: { value: option, name: name },
       })
     },
-    []
+    [name, onChange]
   )
   return (
     <Menu as="div" className={clsx('relative inline-block text-left w-full')}>
