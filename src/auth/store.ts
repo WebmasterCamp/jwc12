@@ -1,3 +1,6 @@
+import toast from 'react-hot-toast'
+
+import { FirebaseError } from 'firebase/app'
 import {
   GithubAuthProvider,
   connectAuthEmulator,
@@ -38,7 +41,16 @@ const provider =
 
 export const useAuthStore = create<AuthStore>((set) => {
   const signIn = async () => {
-    await signInWithPopup(auth, provider)
+    try {
+      await signInWithPopup(auth, provider)
+    } catch (e) {
+      if (e instanceof FirebaseError) {
+        if (e.code === 'auth/popup-closed-by-user') return
+        toast.error(`ไม่สามารถเข้าสู่ระบบได้ (${e.code})`)
+      } else {
+        toast.error('ไม่สามารถเข้าสู่ระบบได้')
+      }
+    }
   }
 
   const signOut = async () => {
