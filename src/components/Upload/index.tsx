@@ -77,7 +77,7 @@ export function Upload({
   const content = !imageUrl ? (
     label
   ) : (
-    <img className="w-full h-full rounded-[4px] object-cover" src={imageUrl} alt="" />
+    <img className="w-48 h-48 rounded-[4px] object-cover" src={imageUrl} alt="" />
   )
 
   return (
