@@ -5,11 +5,16 @@ import { withAuth } from '@/auth/withAuth'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { ImagePreview } from '@/components/ImagePreview'
+import { Redirect } from '@/components/Redirect'
 import { withRegistrationData } from '@/db'
 
 const CompletePage: NextPage = withRegistrationData(({ registration }) => {
   const { signOut } = useAuthStore()
-  const { answers } = registration!!
+  const { answers, submitted } = registration!!
+
+  if (!submitted) {
+    return <Redirect to={`/register`} replace />
+  }
 
   return (
     <Container maxWidth="4xl" className="self-center m-auto flex flex-col justify-center">
