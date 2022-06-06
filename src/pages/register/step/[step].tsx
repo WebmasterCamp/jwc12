@@ -29,11 +29,16 @@ type InnerPageProps = StepPageProps & {
 const StepPage: NextPage<StepPageProps> = withRegistrationData<InnerPageProps>(
   ({ step, registration }) => {
     const { user, signOut } = useAuthStore()
-    const { consented = false, furthestStep = 1 } = registration || {}
+    const { consented = false, furthestStep = 1, submitted = false } = registration || {}
 
     // has not consent to registration rules
     if (!consented) {
       return <Redirect to={`/register`} replace />
+    }
+
+    // has submitted the registration
+    if (submitted) {
+      return <Redirect to={`/register/complete`} replace />
     }
 
     // has gone further than the furthest step

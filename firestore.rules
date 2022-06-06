@@ -12,7 +12,7 @@ service cloud.firestore {
     function verifyCreate() {
       let data = request.resource.data;
 
-      let validFields = verifyFields(['answers', 'currentStep', 'furthestStep', 'consented', 'confirmedBranch', 'createdAt', 'updatedAt']);
+      let validFields = verifyFields(['answers', 'currentStep', 'furthestStep', 'consented', 'confirmedBranch', 'submitted', 'createdAt', 'updatedAt']);
       let validTypes = verifyFieldTypes();
       let validTimestamps = data.createdAt == request.time && data.updatedAt == request.time;
 
@@ -32,6 +32,7 @@ service cloud.firestore {
         data.furthestStep is int &&
         data.consented is bool &&
         validBranch &&
+        data.submitted is bool &&
         data.createdAt is timestamp &&
         data.updatedAt is timestamp;
     }
@@ -45,8 +46,9 @@ service cloud.firestore {
       let validTypes = verifyFieldTypes();
       let validBranchUpdate = !('confirmedBranch' in affectedKeys) || oldData.confirmedBranch == null;
       let validTimestamps = !('createdAt' in affectedKeys) && newData.updatedAt == request.time;
+      let hasNotSubmitted = oldData.submitted == false;
 
-      return validTypes && validBranchUpdate && validTimestamps;
+      return validTypes && validBranchUpdate && validTimestamps && hasNotSubmitted;
     }
 
     match /registrations/{userId} {

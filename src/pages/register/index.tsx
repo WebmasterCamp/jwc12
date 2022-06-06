@@ -24,7 +24,7 @@ type ConsentModel = InferType<typeof ConsentSchema>
 
 const RegisterPage: NextPage = withRegistrationData(({ registration }) => {
   const { user, signOut } = useAuthStore()
-  const { consented = false, currentStep = 1 } = registration || {}
+  const { consented = false, currentStep = 1, submitted = false } = registration || {}
 
   const { control, handleSubmit } = useForm<ConsentModel>({
     resolver: yupResolver(ConsentSchema),
@@ -40,6 +40,10 @@ const RegisterPage: NextPage = withRegistrationData(({ registration }) => {
 
   const onError: SubmitErrorHandler<ConsentModel> = () => {
     toast.error('กรุณายอมรับข้อตกลงก่อนสมัคร')
+  }
+
+  if (submitted) {
+    return <Redirect to={`/register/complete`} replace />
   }
 
   if (consented) {

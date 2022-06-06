@@ -63,6 +63,7 @@ export async function getRegistration(uid?: string): Promise<Registration> {
       furthestStep: 1,
       consented: false,
       confirmedBranch: null,
+      submitted: false,
       createdAt: serverTimestamp() as Timestamp,
       updatedAt: serverTimestamp() as Timestamp,
     }

@@ -13,6 +13,7 @@ export interface Registration {
   furthestStep: number
   consented: boolean
   confirmedBranch: BranchType | null
+  submitted: boolean
   createdAt: Timestamp
   updatedAt: Timestamp
 }

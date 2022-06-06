@@ -1,13 +1,11 @@
 import { Fragment, ReactNode } from 'react'
 
-import { useRouter } from 'next/router'
-
 import { Button } from '@/components/Button'
 import { FormCard } from '@/components/FormCard'
 import { ImagePreview } from '@/components/ImagePreview'
 import { InputContainer } from '@/components/InputContainer'
 import { Loading } from '@/components/Loading'
-import { useRegistrationData } from '@/db'
+import { updateRegistration, useRegistrationData } from '@/db'
 
 import { SPECIAL_FIELD } from '../../context/constants'
 import { additionalQuestions } from '../../questions/additional'
@@ -122,14 +120,14 @@ function AnswerPreview({
 }
 
 export const FormSummary = () => {
-  const router = useRouter()
   const { data: registration } = useRegistrationData()
   const answers = registration!!.answers
   const branch = registration!!.confirmedBranch
 
-  const handleSubmit = () => {
-    // TODO save confirmation
-    router.push('/register/complete')
+  const handleSubmit = async () => {
+    await updateRegistration({
+      submitted: true,
+    })
   }
 
   if (!answers) return <Loading />
@@ -141,7 +139,7 @@ export const FormSummary = () => {
       <SummaryBuilder question={coreQuestions} answers={answers['core']} />
       <SummaryBuilder question={selectBranchQuestion(branch)} answers={answers['branch']} />
       <Button className="mt-4" onClick={handleSubmit}>
-        Submit
+        ส่งใบสมัคร
       </Button>
     </FormCard>
   )
