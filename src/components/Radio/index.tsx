@@ -108,7 +108,7 @@ export const Radio: FunctionComponent<RadioProps> = forwardRef<HTMLInputElement,
             className
           )}
         />
-        {label && <label onClick={handleClick}>{label}</label>}
+        {label && <span>{label}</span>}
       </div>
     )
   }
