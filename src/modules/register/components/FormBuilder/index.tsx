@@ -201,7 +201,7 @@ export const FormBuilder = () => {
                           {input.needOtherInput && choice.name.split('.').pop() === 'other' && (
                             <div className="basis-full sm:basis-1/2">
                               <Input
-                                {...register(`${input.name}.${choice.name}_input`)}
+                                {...register(`${input.name}.${choice.name}_input`, { value: '' })}
                                 placeholder="โปรดระบุ"
                                 disabled={disabled || !value}
                                 required={!value}
