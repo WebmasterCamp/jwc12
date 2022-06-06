@@ -147,7 +147,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
   const { getValues } = form
   const saveAnswers = useCallback(() => {
     const values = getValues()
-    updateAnswers(stepName, values)
+    updateAnswers(answersRef.current, stepName, values)
   }, [getValues, stepName])
 
   const success: SubmitHandler<CoreQuestionModel> = async (data) => {

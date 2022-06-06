@@ -24,7 +24,7 @@ import { app } from '@/lib/firebase'
 import type { StepName } from '@/modules/register/questions'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
-import { Registration } from './types'
+import { Answers, Registration } from './types'
 
 export * from './context'
 
@@ -79,8 +79,8 @@ export async function updateRegistration(data: Partial<Registration>) {
   })
 }
 
-export async function updateAnswers(stepName: StepName, newAnswers: any) {
-  const answers = (await getRegistration()).answers[stepName]
+export async function updateAnswers(allAnswers: Answers, stepName: StepName, newAnswers: any) {
+  const answers = allAnswers[stepName]
   let shouldUpdate = false
   const updateObject = {} as any
   Object.keys(newAnswers).forEach((key) => {
