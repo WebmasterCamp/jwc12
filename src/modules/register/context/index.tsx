@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react'
 import { SubmitErrorHandler, SubmitHandler, UseFormReturn, useForm } from 'react-hook-form'
@@ -57,7 +58,11 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
   if (!registration) {
     throw new Error('No registration data')
   }
-  const { confirmedBranch: branch } = registration
+  const { answers, confirmedBranch: branch } = registration
+  const answersRef = useRef(answers)
+  useEffect(() => {
+    answersRef.current = answers
+  }, [answers])
 
   /**
    * First Step form
@@ -119,13 +124,10 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
     throw new Error('Invalid step or branch')
   }, [step, branch])
 
-  const [ready, setReady] = useState(false)
-
   const stepName = stepNames[step - 1]
   useEffect(() => {
     async function restoreForm() {
-      setReady(false)
-      const { answers } = await getRegistration()
+      const answers = answersRef.current
       const keys = Object.keys(form.getValues())
       const stepAnswers = answers[stepName]
       keys.forEach((key) => {
@@ -133,7 +135,6 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
           form.setValue(key, stepAnswers[key])
         }
       })
-      setReady(true)
     }
     restoreForm()
   }, [form, stepName])
@@ -145,10 +146,9 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
 
   const { getValues } = form
   const saveAnswers = useCallback(() => {
-    if (!ready) return
     const values = getValues()
     updateAnswers(stepName, values)
-  }, [ready, getValues, stepName])
+  }, [getValues, stepName])
 
   const success: SubmitHandler<CoreQuestionModel> = async (data) => {
     console.log('Submit Success', data)
@@ -169,7 +169,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
   return (
     <RegisterContext.Provider
       value={{
-        ready,
+        ready: true,
         step,
         form,
         question,
