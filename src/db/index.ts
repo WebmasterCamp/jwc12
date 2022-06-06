@@ -12,13 +12,7 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore'
-import {
-  connectStorageEmulator,
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytes,
-} from 'firebase/storage'
+import { connectStorageEmulator, getBlob, getStorage, ref, uploadBytes } from 'firebase/storage'
 
 import { getUid } from '@/auth/store'
 import '@/lib/firebase'
@@ -110,6 +104,5 @@ export async function uploadImage(name: string, file: File) {
 export async function downloadImage(name: string) {
   const fileName = name.split('?')[0]
   const storageRef = getStorageRef(fileName)
-  const response = await getDownloadURL(storageRef)
-  return response
+  return await getBlob(storageRef)
 }

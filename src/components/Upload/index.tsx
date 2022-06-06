@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef, useCallback, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import toast from 'react-hot-toast'
 
@@ -8,8 +8,9 @@ import useSWR from 'swr'
 import { downloadImage, uploadImage } from '@/db'
 import { createBlurhash } from '@/utils/createBlurhash'
 import { extractBlurhash } from '@/utils/extractBlurhash'
+import { useBlobUrl } from '@/utils/useBlobUrl'
 
-import { Blurhash } from '../Blurhash'
+import { BlurhashImage } from '../BlurhashImage'
 import { ErrorMessage } from '../ErrorMessage'
 import { LoadingAnimation } from '../Loading'
 
@@ -36,9 +37,10 @@ export function Upload({
   ...props
 }: UploadProps) {
   const [uploading, setUploading] = useState(false)
-  const { data: imageUrl, isValidating } = useSWR(value, downloadImage, {
+  const { data: image, isValidating } = useSWR(value, downloadImage, {
     revalidateOnFocus: false,
   })
+  const imageUrl = useBlobUrl(image)
   const [blurhash, setBlurhash] = useState<string | null>(null)
   useEffect(() => setBlurhash(extractBlurhash(value)), [value])
 
@@ -82,17 +84,6 @@ export function Upload({
     onDrop,
   })
 
-  const pendingContent = blurhash ? (
-    <Blurhash className="w-48 h-48 rounded-[4px]" blurhash={blurhash} />
-  ) : (
-    <LoadingAnimation className="w-[148px] h-[148px]" />
-  )
-  const content = !imageUrl ? (
-    label
-  ) : (
-    <img className="w-48 h-48 rounded-[4px] object-cover" src={imageUrl} alt="" />
-  )
-
   return (
     <div className={clsx('relative w-[196px] h-[196px] flex flex-col gap-2', className)}>
       <label
@@ -104,7 +95,13 @@ export function Upload({
         )}
         {...getRootProps()}
       >
-        {pending ? pendingContent : content}
+        {pending && !blurhash && <LoadingAnimation className="w-[148px] h-[148px]" />}
+        <BlurhashImage
+          className="w-48 h-48 rounded-[4px] overflow-hidden"
+          src={imageUrl}
+          blurhash={blurhash}
+          alt=""
+        />
       </label>
       <input {...props} id={name} name={name} {...getInputProps()} />
       <ErrorMessage message={error} />
