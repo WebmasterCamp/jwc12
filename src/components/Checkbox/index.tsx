@@ -59,7 +59,12 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export const Checkbox: React.FC<CheckboxProps> = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ name, label, checked, className, onChange, ...rest }, ref) => {
     return (
-      <div className="flex flex-row gap-x-2 items-center cursor-pointer p-1 select-none whitespace-nowrap">
+      <div
+        className={clsx(
+          'flex flex-row gap-x-2 items-center cursor-pointer p-1 select-none whitespace-nowrap',
+          rest.disabled && `cursor-default`
+        )}
+      >
         <input
           {...rest}
           ref={ref}
@@ -76,11 +81,15 @@ export const Checkbox: React.FC<CheckboxProps> = forwardRef<HTMLInputElement, Ch
             'before:top-1/2 before:left-1/2',
             'before:transform before:-translate-x-1/2 before:-translate-y-1/2',
             `transition-colors ease-out duration-100`,
-            className
+            className,
+            rest.disabled && `cursor-default`
           )}
         />
         {label && (
-          <label className="cursor-pointer" htmlFor={name}>
+          <label
+            className={clsx('cursor-pointer', rest.disabled && `cursor-default`)}
+            htmlFor={name}
+          >
             {label}
           </label>
         )}

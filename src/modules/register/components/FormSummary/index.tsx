@@ -82,16 +82,20 @@ const SummaryBuilder: React.FC<SummaryBuilderProps> = ({ question, answers }) =>
                 key={input.name}
                 question={input.question}
                 answer={
-                  <ul>
-                    {input.choices.map((choice) => {
-                      if (answer[choice.name] !== true) return null
-                      let display = `- ${choice.label ?? choice.value}`
-                      if (choice.name === 'other') {
-                        display += `: ${answer['other_input']}`
-                      }
-                      return <li key={`${input.name}_${choice.name}`}>{display}</li>
-                    })}
-                  </ul>
+                  Object.values(answers[input.name]).some((value) => value) ? (
+                    <ul>
+                      {input.choices.map((choice) => {
+                        if (answer[choice.name] !== true) return null
+                        let display = `- ${choice.label ?? choice.value}`
+                        if (choice.name === 'other') {
+                          display += `: ${answer['other_input']}`
+                        }
+                        return <li key={`${input.name}_${choice.name}`}>{display}</li>
+                      })}
+                    </ul>
+                  ) : (
+                    '-'
+                  )
                 }
               />
             )
