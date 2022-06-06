@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import clsx from 'clsx'
 
@@ -10,7 +10,7 @@ const DURATION = 3450 // 3.450 sec
 export const Loading = () => {
   const [show, setShow] = useState(false)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setShow(true)
   }, [])
 
