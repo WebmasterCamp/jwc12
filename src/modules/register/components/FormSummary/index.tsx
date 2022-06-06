@@ -94,7 +94,9 @@ const SummaryBuilder: React.FC<SummaryBuilderProps> = ({ question, answers }) =>
             )
           }
           case InputType.UPLOAD: {
-            return <ImagePreview key={input.name} value={answers[input.name]} />
+            return (
+              <ImagePreview key={input.name} className="w-full p-2" value={answers[input.name]} />
+            )
           }
         }
       })}

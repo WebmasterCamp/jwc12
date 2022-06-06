@@ -5,14 +5,15 @@ import { downloadImage } from '@/db'
 
 export interface ImagePreviewProps {
   value: string | undefined
+  className?: string
 }
 
-export function ImagePreview({ value }: ImagePreviewProps) {
+export function ImagePreview({ value, className }: ImagePreviewProps) {
   const { data: imageUrl, isValidating } = useSWR(value, downloadImage, {
     revalidateOnFocus: false,
   })
   return (
-    <div className="w-full p-2">
+    <div className={className}>
       {isValidating ? (
         <div className="w-48 h-48 bg-gray-100 rounded-md flex items-center justify-center">
           <LoadingAnimation className="w-[148px] h-[148px]" />
