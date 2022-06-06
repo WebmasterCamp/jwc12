@@ -151,14 +151,21 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
   }, [getValues, stepName])
 
   const success: SubmitHandler<CoreQuestionModel> = async (data) => {
-    console.log('Submit Success', data)
-    await updateStep(step + 1, step + 1)
-    if (SPECIAL_FIELD.BRANCH in data && !!data[SPECIAL_FIELD.BRANCH]) {
-      await updateRegistration({
-        confirmedBranch: data[SPECIAL_FIELD.BRANCH] as BranchType,
-      })
+    async function submitStep() {
+      console.log('Submit Success', data)
+      await updateStep(step + 1, step + 1)
+      if (SPECIAL_FIELD.BRANCH in data && !!data[SPECIAL_FIELD.BRANCH]) {
+        await updateRegistration({
+          confirmedBranch: data[SPECIAL_FIELD.BRANCH] as BranchType,
+        })
+      }
+      router.push(`/register/step/${step + 1}`)
     }
-    router.push(`/register/step/${step + 1}`)
+    await toast.promise(submitStep(), {
+      loading: 'กำลังบันทึกข้อมูล',
+      success: 'บันทึกข้อมูลสำเร็จ',
+      error: 'บันทึกข้อมูลไม่สำเร็จ',
+    })
   }
 
   const error: SubmitErrorHandler<CoreQuestionModel> = (error, event) => {
