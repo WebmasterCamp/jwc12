@@ -7,6 +7,7 @@ import { withAuth } from '@/auth/withAuth'
 import { Container } from '@/components/Container'
 import { Footer } from '@/components/Footer'
 import { FormCard } from '@/components/FormCard'
+import { Redirect } from '@/components/Redirect'
 import { RegisterTopBar } from '@/components/RegisterTopBar'
 import { Tab, TabItem } from '@/components/Tab'
 import { FormBuilder } from '@/modules/register/components/FormBuilder'
@@ -20,7 +21,17 @@ interface StepPageProps {
 }
 
 const StepPage: NextPage<StepPageProps> = ({ step }) => {
-  const { farthestStep, user, signOut } = useAuthStore()
+  const { consented, farthestStep, user, signOut } = useAuthStore()
+
+  // has not consent to registration rules
+  if (!consented) {
+    return <Redirect to={`/register`} replace />
+  }
+
+  // has gone further than the farthest step
+  if (step > farthestStep) {
+    return <Redirect to={`/register/step/${farthestStep}`} replace />
+  }
 
   const wrapper = (children: ReactNode) => (
     <>
