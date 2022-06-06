@@ -128,6 +128,7 @@ export const FormSummary = () => {
 
   const handleSubmit = async () => {
     await updateRegistration({
+      answers,
       submitted: true,
     })
   }
