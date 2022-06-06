@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 
 import clsx from 'clsx'
 
@@ -8,6 +8,14 @@ import styles from './styles.module.css'
 const DURATION = 3450 // 3.450 sec
 
 export const Loading = () => {
+  const [show, setShow] = useState(false)
+
+  useLayoutEffect(() => {
+    setShow(true)
+  }, [])
+
+  if (!show) return null
+
   return (
     <Container maxWidth="sm" className="min-height-screen flex items-center justify-center">
       <LoadingAnimation className="w-60 h-60" />
