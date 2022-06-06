@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import { useAuthStore } from '@/auth/store'
 import { Container } from '@/components/Container'
 
@@ -10,7 +8,7 @@ export function Login() {
     <Container maxWidth="4xl" className="self-center m-auto flex flex-col justify-center">
       <div className="bg-white rounded-md w-full text-center p-4 py-[86px] md:py-[116px]">
         <div className="inline-block w-[212px] h-[104px] md:w-[320px] md:h-[158px]">
-          <Image src="/images/login-logo.png" width={320} height={158} alt="" />
+          <img src="/images/login-logo.png" width={320} height={158} alt="" />
         </div>
         <p className="mt-2 font-heading text-black text-lg md:text-2xl">
           ระบบรับสมัครค่าย Junior Webmaster Camp ครั้งที่ 12

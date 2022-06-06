@@ -1,7 +1,5 @@
 import React, { Fragment, useMemo } from 'react'
 
-import Image from 'next/image'
-
 import { Menu, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 
@@ -30,7 +28,7 @@ export const UserBar: React.FC<UserBarProps> = ({ displayName, photoURL, signOut
           )}
         >
           {photoURL ? (
-            <Image src={photoURL} width="24" height="24" alt="" />
+            <img src={photoURL} width="24" height="24" alt="" />
           ) : (
             <div className="w-[24px] h-[24px] rounded-full bg-primary leading-none flex items-center justify-center">
               {firstLetter}
