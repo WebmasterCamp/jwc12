@@ -151,7 +151,6 @@ export const FormSummary = () => {
         <Button className="w-40" onClick={() => router.push(`/register/step/4`)} variant="outlined">
           ย้อนกลับ
         </Button>
-
         <Button className="w-40" onClick={handleSubmit}>
           ส่งใบสมัคร
         </Button>
