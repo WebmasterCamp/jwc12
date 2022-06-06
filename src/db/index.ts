@@ -104,7 +104,3 @@ export async function downloadImage(name: string) {
   const response = await getDownloadURL(storageRef)
   return response
 }
-
-function areAnswersChanged(oldAnswers: any, newAnswers: any) {
-  return !equal(oldAnswers, newAnswers)
-}
