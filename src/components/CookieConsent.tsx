@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 
 import Link from 'next/link'
 
@@ -10,11 +10,16 @@ import { Button } from './Button'
 import { CookieConsentSettingDialog } from './CookieConsentSettingDialog'
 
 export const CookieConsent: FunctionComponent = () => {
-  const { open, setOpenSettings, setOpen, openSettings, setConsentCookie } = useConsentStore()
+  const { open, setOpenSettings, initialize, setOpen, openSettings, setConsentCookie } =
+    useConsentStore()
+
+  useEffect(() => {
+    initialize()
+  }, [initialize])
 
   const handleSubmit = () => {
     setConsentCookie({
-      mt_pixel: 'granted',
+      mt_pixel: 'grant',
       ad_storage: 'granted',
       analytics_storage: 'granted',
     })

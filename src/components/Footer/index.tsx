@@ -4,11 +4,19 @@ import Link from 'next/link'
 
 import clsx from 'clsx'
 
+import { useConsentStore } from '@/stores/consents'
+
 interface Props {
   className?: string
 }
 
 export const Footer: FC<Props> = ({ className }) => {
+  const { setOpenSettings } = useConsentStore()
+
+  const openCookieBanner = () => {
+    setOpenSettings(true)
+  }
+
   return (
     <footer
       className={clsx('text-md mx-5 mb-5 text-center leading-8 text-white lg:text-lg', className)}
@@ -23,7 +31,11 @@ export const Footer: FC<Props> = ({ className }) => {
         |{' '}
         <Link href="/policy/cookies">
           <a className="underline">Cookie Policy</a>
-        </Link>
+        </Link>{' '}
+        |{' '}
+        <button className="underline" onClick={openCookieBanner}>
+          Privacy Settings
+        </button>
       </div>
     </footer>
   )

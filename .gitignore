@@ -35,3 +35,9 @@ yarn-error.log*
 *.tsbuildinfo
 
 .firebase
+
+# Firebase emulator
+emulator-dump
+firebase-debug.log
+firestore-debug.log
+ui-debug.log

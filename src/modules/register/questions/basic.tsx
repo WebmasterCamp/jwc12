@@ -1,0 +1,195 @@
+import { InferType } from 'yup'
+
+import { Header } from '../components/Header'
+import { InputType, WeakQuestion } from '../types'
+import { buildYupObject, phoneTestConfig } from '../utils/validate'
+import { makeQuestion } from '../utils/weak'
+
+const basicWeakQuestions: WeakQuestion = {
+  stepName: 'basic',
+  inputs: [
+    // Information Section ------------------------------------------------------------
+    {
+      type: InputType.NONE,
+      title: <Header>ข้อมูลพื้นฐาน</Header>,
+    },
+    {
+      type: InputType.UPLOAD,
+      name: 'profile',
+      question: (
+        <div className="text-center text-gray-400">
+          <p className="mb-4">อัพโหลดรูปประจำตัว</p>
+          <p className="text-xs italic"> ภาพขนาดไม่เกิน 2MB</p>
+        </div>
+      ),
+      required: 'กรุณาอัพโหลด รูปประจำตัว',
+    },
+    {
+      type: InputType.DROPDOWN,
+      name: 'title',
+      question: 'คำนำหน้าชื่อ',
+      placeholder: 'คำนำหน้าชื่อ',
+      choices: ['เด็กชาย', 'เด็กหญิง', 'นาย', 'นางสาว'],
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'firstName',
+      question: 'ชื่อจริง',
+      placeholder: 'ชื่อจริง',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'lastName',
+      question: 'นามสกุล',
+      placeholder: 'นามสกุล',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'firstNameEn',
+      question: 'ชื่อจริง (ภาษาอังกฤษ)',
+      placeholder: 'ชื่อจริง (ภาษาอังกฤษ)',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'lastNameEn',
+      question: 'นามสกุล (ภาษาอังกฤษ)',
+      placeholder: 'นามสกุล (ภาษาอังกฤษ)',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'nickname',
+      question: 'ชื่อเล่น',
+      placeholder: 'ชื่อเล่น',
+      required: true,
+    },
+    {
+      type: InputType.DATE,
+      name: 'birthDate',
+      question: 'วัน/เดือน/ปีเกิด',
+      placeholder: 'dd/mm/yyyy',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'citizenId',
+      question: 'เลขบัตรประชาชน',
+      placeholder: 'xxxxxxxxxxxxx',
+      required: true,
+      validate: {
+        name: 'invalid',
+        message: 'เลขบัตรประชาชนไม่ถูกต้อง',
+        test: (value: string) => /^[0-9]{13}$/.test(value),
+      },
+    },
+    {
+      type: InputType.TEXT,
+      name: 'telephone',
+      question: 'เบอร์โทรศัพท์',
+      placeholder: '088-888-8888',
+      required: true,
+      validate: phoneTestConfig,
+    },
+    {
+      type: InputType.EMAIL,
+      name: 'email',
+      question: 'อีเมล',
+      placeholder: 'example@gmail.com',
+      required: true,
+    },
+    // Address Section ------------------------------------------------------------
+    {
+      type: InputType.NONE,
+      title: <Header>ที่อยู่ปัจจุบัน</Header>,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'address',
+      question: 'ที่อยู่',
+      placeholder: 'ที่อยู่',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'road',
+      question: 'ถนน',
+      placeholder: 'ถนน',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'subdistrict',
+      question: 'แขวง/ตำบล',
+      placeholder: 'แขวง/ตำบล',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'district',
+      question: 'เขต/อำเภอ',
+      placeholder: 'เขต/อำเภอ',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'province',
+      question: 'จังหวัด',
+      placeholder: 'จังหวัด',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'postalCode',
+      question: 'รหัสไปรษณีย์',
+      placeholder: 'รหัสไปรษณีย์',
+      required: true,
+      validate: {
+        name: 'invalid',
+        message: 'รหัสไปรษณีย์ไม่ถูกต้อง',
+        test: (value: string) => /^\d+$/.test(value),
+      },
+    },
+    // Education Section ------------------------------------------------------------
+    {
+      type: InputType.NONE,
+      title: <Header>ข้อมูลการศึกษา</Header>,
+    },
+    {
+      type: InputType.RADIO,
+      name: 'educationLevel',
+      question: 'กำลังศึกษาอยู่ในระดับชั้น',
+      placeholder: 'กำลังศึกษาอยู่ในระดับชั้น',
+      choices: [
+        'มัธยมศึกษาปีที่ 4',
+        'มัธยมศึกษาปีที่ 5',
+        'มัธยมศึกษาปีที่ 6',
+        'กำลังขึ้นปริญญาตรีปีที่ 1',
+      ],
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'educationSchool',
+      question: 'โรงเรียน',
+      placeholder: 'โรงเรียน',
+      required: true,
+    },
+    {
+      type: InputType.TEXT,
+      name: 'educationProvince',
+      question: 'จังหวัด',
+      placeholder: 'จังหวัด',
+      required: true,
+    },
+  ],
+}
+
+export const basicQuestions = makeQuestion(basicWeakQuestions)
+
+export const BasicQuestionSchema = buildYupObject(basicQuestions)
+
+export type BasicQuestionModel = InferType<typeof BasicQuestionSchema>
