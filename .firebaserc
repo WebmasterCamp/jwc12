@@ -6,10 +6,10 @@
     "jwc12-3c4e0": {
       "hosting": {
         "production": [
-          "jwc12-register-10d6e"
+          "jwc12-3c4e0"
         ],
         "staging": [
-          "staging-jwc12-register-10d6e"
+          "staging-jwc12-3c4e0"
         ]
       }
     }
