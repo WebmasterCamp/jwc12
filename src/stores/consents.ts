@@ -39,7 +39,7 @@ export const useConsentStore = create<ConsentStoreProps>((set) => {
     open: false,
     openSettings: false,
     consents: {
-      mt_pixel: consents?.mt_pixel || 'denied',
+      mt_pixel: consents?.mt_pixel || 'revoke',
       ad_storage: consents?.ad_storage || 'denied',
       analytics_storage: consents?.analytics_storage || 'denied',
     },
