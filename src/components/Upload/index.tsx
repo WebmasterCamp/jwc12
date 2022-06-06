@@ -74,10 +74,14 @@ export function Upload({
     onDrop,
   })
 
-  const content = !imageUrl ? label : <img className="h-48 object-contain" src={imageUrl} alt="" />
+  const content = !imageUrl ? (
+    label
+  ) : (
+    <img className="w-full h-full rounded-[4px] object-cover" src={imageUrl} alt="" />
+  )
 
   return (
-    <div className={clsx('relative h-48 flex flex-col gap-2', className)}>
+    <div className={clsx('relative w-48 h-48 flex flex-col gap-2', className)}>
       <label
         className={clsx(
           'relative border-gray-300 flex flex-1 justify-center items-center cursor-pointer rounded-md',
