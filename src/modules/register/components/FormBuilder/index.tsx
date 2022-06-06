@@ -198,6 +198,7 @@ export const FormBuilder = () => {
                           <div>
                             <Checkbox
                               {...rest}
+                              name={choice.name}
                               label={choice.label}
                               checked={value as unknown as boolean}
                               disabled={disabled || disableSpecialField}
