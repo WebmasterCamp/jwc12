@@ -3,7 +3,6 @@ import { Controller, FieldError } from 'react-hook-form'
 
 import { useRouter } from 'next/router'
 
-import { DevTool } from '@hookform/devtools'
 import clsx from 'clsx'
 
 import { useAuthStore } from '@/auth/store'
@@ -26,6 +25,8 @@ const InputContainer = (props: { children: React.ReactNode; className?: string }
     </div>
   )
 }
+
+const specialFields = Object.values(SPECIAL_FIELD) as string[]
 
 export const FormBuilder = () => {
   const router = useRouter()
@@ -53,8 +54,8 @@ export const FormBuilder = () => {
       className="text-black flex flex-wrap gap-y-2"
     >
       {question?.inputs.map((input, index) => {
-        const disableSpecialField =
-          input.type !== InputType.NONE ? input.name in SPECIAL_FIELD && !!branch : false
+        const isSpecialField = input.type !== InputType.NONE && specialFields.includes(input.name)
+        const disableSpecialField = isSpecialField && branch !== null
         switch (input.type) {
           case InputType.NONE: {
             return <Fragment key={`${question.stepName}_${index}`}>{input.title}</Fragment>
