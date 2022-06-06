@@ -29,7 +29,12 @@ type InnerPageProps = StepPageProps & {
 const StepPage: NextPage<StepPageProps> = withRegistrationData<InnerPageProps>(
   ({ step, registration }) => {
     const { user, signOut } = useAuthStore()
-    const { consented = false, furthestStep = 1, submitted = false } = registration || {}
+    const {
+      consented = false,
+      furthestStep = 1,
+      submitted = false,
+      confirmedBranch = '',
+    } = registration || {}
 
     // has not consent to registration rules
     if (!consented) {
@@ -62,8 +67,10 @@ const StepPage: NextPage<StepPageProps> = withRegistrationData<InnerPageProps>(
     )
 
     if (step === 5) return wrapper(<FormSummary />)
+
+    const formKey = step >= 4 ? `${step}-${confirmedBranch}` : `${step}`
     return (
-      <RegisterProvider step={step}>
+      <RegisterProvider key={formKey} step={step}>
         {wrapper(
           <FormCard className="flex flex-1 flex-col">
             <FormBuilder />
