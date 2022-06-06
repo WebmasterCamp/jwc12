@@ -179,7 +179,7 @@ export const FormBuilder = () => {
                       key={`${input.name}_${choice.name}`}
                       control={control}
                       name={`${input.name}.${choice.name}`}
-                      defaultValue=""
+                      defaultValue={false}
                       render={({ field: { value, name, ...rest } }) => (
                         <div
                           className={clsx(
