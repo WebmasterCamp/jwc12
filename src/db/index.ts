@@ -108,7 +108,8 @@ export async function uploadImage(name: string, file: File) {
 }
 
 export async function downloadImage(name: string) {
-  const storageRef = getStorageRef(name)
+  const fileName = name.split('?')[0]
+  const storageRef = getStorageRef(fileName)
   const response = await getDownloadURL(storageRef)
   return response
 }

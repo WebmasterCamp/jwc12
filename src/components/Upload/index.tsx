@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef, useCallback, useState } from 'react'
+import { ReactNode, forwardRef, useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import toast from 'react-hot-toast'
 
@@ -6,7 +6,10 @@ import clsx from 'clsx'
 import useSWR from 'swr'
 
 import { downloadImage, uploadImage } from '@/db'
+import { createBlurhash } from '@/utils/createBlurhash'
+import { extractBlurhash } from '@/utils/extractBlurhash'
 
+import { Blurhash } from '../Blurhash'
 import { ErrorMessage } from '../ErrorMessage'
 import { LoadingAnimation } from '../Loading'
 
@@ -33,10 +36,12 @@ export function Upload({
   ...props
 }: UploadProps) {
   const [uploading, setUploading] = useState(false)
-  const [uploadCount, setUploadCount] = useState(0)
-  const { data: imageUrl, isValidating } = useSWR([value, uploadCount], downloadImage, {
+  const { data: imageUrl, isValidating } = useSWR(value, downloadImage, {
     revalidateOnFocus: false,
   })
+  const [blurhash, setBlurhash] = useState<string | null>(null)
+  useEffect(() => setBlurhash(extractBlurhash(value)), [value])
+
   const pending = uploading || isValidating
 
   const onDrop = useCallback(
@@ -47,14 +52,17 @@ export function Upload({
       if (file.size > MAX_IMAGE_SIZE) return toast.error('รูปภาพมีขนาดเกิน 2MB')
       const extension = file.name.split('.').pop() ?? '.jpg'
       const fileName = `/users/${uid}/${name}.${extension}`
+      const newHash = await createBlurhash(file)
+      const fileNameWithHash = `${fileName}?${new URLSearchParams({
+        blurhash: newHash,
+      }).toString()}`
+      setBlurhash(newHash)
       setUploading(true)
       try {
         await uploadImage(fileName, file)
         onChange?.({
-          target: { value: fileName, name },
+          target: { value: fileNameWithHash, name },
         })
-        // hack: force revalidate
-        setTimeout(() => setUploadCount((count) => count + 1), 0)
       } catch (err) {
         throw new Error('upload faield')
       } finally {
@@ -74,6 +82,11 @@ export function Upload({
     onDrop,
   })
 
+  const pendingContent = blurhash ? (
+    <Blurhash className="w-48 h-48 rounded-[4px]" blurhash={blurhash} />
+  ) : (
+    <LoadingAnimation className="w-[148px] h-[148px]" />
+  )
   const content = !imageUrl ? (
     label
   ) : (
@@ -81,7 +94,7 @@ export function Upload({
   )
 
   return (
-    <div className={clsx('relative w-48 h-48 flex flex-col gap-2', className)}>
+    <div className={clsx('relative w-[196px] h-[196px] flex flex-col gap-2', className)}>
       <label
         className={clsx(
           'relative border-gray-300 flex flex-1 justify-center items-center cursor-pointer rounded-md',
@@ -91,7 +104,7 @@ export function Upload({
         )}
         {...getRootProps()}
       >
-        {pending ? <LoadingAnimation className="w-[148px] h-[148px]" /> : content}
+        {pending ? pendingContent : content}
       </label>
       <input {...props} id={name} name={name} {...getInputProps()} />
       <ErrorMessage message={error} />
