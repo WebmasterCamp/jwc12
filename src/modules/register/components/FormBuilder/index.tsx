@@ -80,36 +80,30 @@ export const FormBuilder = () => {
           }
           case InputType.UPLOAD: {
             return (
-              <>
-                <InputContainer key={input.name} className="sm:basis-1/2">
-                  <Controller
-                    control={control}
-                    name={input.name}
-                    defaultValue=""
-                    render={({
-                      field: { name, value, onChange, onBlur },
-                      formState: { errors },
-                    }) => (
-                      <Upload
-                        uid={uid}
-                        name={name}
-                        onChange={(e) => {
-                          onChange(e)
-                          saveAnswers()
-                        }}
-                        onBlur={onBlur}
-                        value={value as string}
-                        label={input.question}
-                        placeholder={input.placeholder}
-                        error={errors[input.name]?.message as string}
-                        required={!!input.required}
-                        disabled={disabled || disableSpecialField}
-                      />
-                    )}
-                  />
-                </InputContainer>
-                <div className="sm:basis-1/2" />
-              </>
+              <InputContainer key={input.name} className="sm:basis-auto">
+                <Controller
+                  control={control}
+                  name={input.name}
+                  defaultValue=""
+                  render={({ field: { name, value, onChange, onBlur }, formState: { errors } }) => (
+                    <Upload
+                      uid={uid}
+                      name={name}
+                      onChange={(e) => {
+                        onChange(e)
+                        saveAnswers()
+                      }}
+                      onBlur={onBlur}
+                      value={value as string}
+                      label={input.question}
+                      placeholder={input.placeholder}
+                      error={errors[input.name]?.message as string}
+                      required={!!input.required}
+                      disabled={disabled || disableSpecialField}
+                    />
+                  )}
+                />
+              </InputContainer>
             )
           }
           case InputType.RADIO: {
