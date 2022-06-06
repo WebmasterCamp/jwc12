@@ -20,6 +20,7 @@ import { useRouter } from 'next/router'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { updateAnswers, updateRegistration, useRegistrationData } from '@/db'
+import { saveToast } from '@/utils/saveToast'
 
 import { stepNames } from '../questions'
 import { AdditionalQuestionSchema, additionalQuestions } from '../questions/additional'
@@ -140,11 +141,7 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
       }
       router.push(`/register/step/${step + 1}`)
     }
-    await toast.promise(submitStep(), {
-      loading: 'กำลังบันทึกข้อมูล',
-      success: 'บันทึกข้อมูลสำเร็จ',
-      error: 'บันทึกข้อมูลไม่สำเร็จ',
-    })
+    await saveToast(submitStep())
   }
 
   const error: SubmitErrorHandler<CoreQuestionModel> = (error, event) => {

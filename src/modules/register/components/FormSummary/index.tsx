@@ -6,6 +6,7 @@ import { ImagePreview } from '@/components/ImagePreview'
 import { InputContainer } from '@/components/InputContainer'
 import { Loading } from '@/components/Loading'
 import { updateRegistration, useRegistrationData } from '@/db'
+import { saveToast } from '@/utils/saveToast'
 
 import { SPECIAL_FIELD } from '../../context/constants'
 import { additionalQuestions } from '../../questions/additional'
@@ -127,10 +128,12 @@ export const FormSummary = () => {
   const branch = registration!!.confirmedBranch
 
   const handleSubmit = async () => {
-    await updateRegistration({
-      answers,
-      submitted: true,
-    })
+    await saveToast(
+      updateRegistration({
+        answers,
+        submitted: true,
+      })
+    )
   }
 
   if (!answers) return <Loading />
