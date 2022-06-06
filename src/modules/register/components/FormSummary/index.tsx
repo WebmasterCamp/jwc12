@@ -1,5 +1,7 @@
 import { Fragment, ReactNode } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { Button } from '@/components/Button'
 import { FormCard } from '@/components/FormCard'
 import { ImagePreview } from '@/components/ImagePreview'
@@ -123,6 +125,7 @@ function AnswerPreview({
 }
 
 export const FormSummary = () => {
+  const router = useRouter()
   const { data: registration } = useRegistrationData()
   const answers = registration!!.answers
   const branch = registration!!.confirmedBranch
@@ -144,9 +147,15 @@ export const FormSummary = () => {
       <SummaryBuilder question={additionalQuestions} answers={answers['additional']} />
       <SummaryBuilder question={coreQuestions} answers={answers['core']} />
       <SummaryBuilder question={selectBranchQuestion(branch)} answers={answers['branch']} />
-      <Button className="mt-4" onClick={handleSubmit}>
-        ส่งใบสมัคร
-      </Button>
+      <div className="flex flex-row space-x-4 justify-center mt-8 w-full p-2 ">
+        <Button className="w-40" onClick={() => router.push(`/register/step/4`)} variant="outlined">
+          ย้อนกลับ
+        </Button>
+
+        <Button className="w-40" onClick={handleSubmit}>
+          ส่งใบสมัคร
+        </Button>
+      </div>
     </FormCard>
   )
 }

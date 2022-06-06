@@ -250,12 +250,14 @@ export const FormBuilder = () => {
             return null
         }
       })}
-      <div className="flex flex-row space-x-4 mt-8 w-full p-2">
-        <Button onClick={onClickPrev} className="w-full" variant="outlined">
-          Prev
-        </Button>
-        <Button type="submit" className="w-full">
-          Next
+      <div className="flex flex-row space-x-4 justify-center mt-8 w-full p-2 ">
+        {step > 1 && (
+          <Button className="w-40" onClick={onClickPrev} variant="outlined">
+            ย้อนกลับ
+          </Button>
+        )}
+        <Button className="w-40" type="submit">
+          ต่อไป
         </Button>
       </div>
       {/* {process.env.MODE === 'DEVELOPMENT' && <DevTool control={control} />} */}
