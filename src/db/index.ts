@@ -19,11 +19,10 @@ import {
 } from 'firebase/storage'
 
 import { getUid } from '@/auth/store'
+import { app } from '@/lib/firebase'
 import type { StepName } from '@/modules/register/questions'
 import { BranchType } from '@/modules/register/types'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
-
-import { app } from './firebase'
 
 const db = getFirestore(app)
 const storage = getStorage()

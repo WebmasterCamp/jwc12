@@ -9,7 +9,7 @@ import {
 import { FacebookAuthProvider } from 'firebase/auth'
 import create from 'zustand'
 
-import { getRegistration, updateRegistration } from '@/lib/db'
+import { getRegistration, updateRegistration } from '@/db'
 import { BranchType } from '@/modules/register/types'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 

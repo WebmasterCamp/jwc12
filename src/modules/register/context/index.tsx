@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAuthStore } from '@/auth/store'
-import { getRegistration, updateAnswers } from '@/lib/db'
+import { getRegistration, updateAnswers } from '@/db'
 
 import { stepNames } from '../questions'
 import {

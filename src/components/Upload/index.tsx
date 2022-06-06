@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import clsx from 'clsx'
 import useSWR from 'swr'
 
-import { downloadImage, uploadImage } from '@/lib/db'
+import { downloadImage, uploadImage } from '@/db'
 
 import { ErrorMessage } from '../ErrorMessage'
 import { LoadingAnimation } from '../Loading'

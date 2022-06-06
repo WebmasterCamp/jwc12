@@ -7,7 +7,7 @@ import useSWR from 'swr'
 import { useAuthStore } from '@/auth/store'
 import { Button } from '@/components/Button'
 import { Loading } from '@/components/Loading'
-import { Answers, getRegistration } from '@/lib/db'
+import { Answers, getRegistration } from '@/db'
 
 import { additionalQuestions } from '../../questions/additional'
 import { basicQuestions } from '../../questions/basic'
