@@ -260,7 +260,6 @@ export const FormBuilder = () => {
           ต่อไป
         </Button>
       </div>
-      {/* {process.env.MODE === 'DEVELOPMENT' && <DevTool control={control} />} */}
     </form>
   )
 }
