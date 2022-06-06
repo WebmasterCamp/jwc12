@@ -71,7 +71,7 @@ export const buildYupObject = (form: Question) => {
             schemaChoice[choice.name] = yup.boolean()
           }
         })
-        schema[input.name] = input.required
+        let s = input.required
           ? yup
               .object(schemaChoice)
               .required(input.required)
@@ -85,6 +85,13 @@ export const buildYupObject = (form: Question) => {
                 return true
               })
           : yup.object(schemaChoice)
+        /**
+         * Custom validate configuration
+         */
+        if (input.validate) {
+          s = s.test(input.validate)
+        }
+        schema[input.name] = s
         break
       }
       default:

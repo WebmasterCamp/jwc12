@@ -43,8 +43,8 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = forwardRef<
         )}
       >
         {children}
-        <ErrorMessage message={error} />
       </div>
+      <ErrorMessage message={error} />
     </div>
   )
 })

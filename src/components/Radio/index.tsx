@@ -58,8 +58,8 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
               selected: value === radioValue,
             })
           })}
-          <ErrorMessage message={error} />
         </div>
+        <ErrorMessage message={error} />
       </div>
     )
   }

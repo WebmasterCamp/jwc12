@@ -15,12 +15,6 @@ export const CookieConsent: FunctionComponent = () => {
 
   useEffect(() => {
     initialize()
-    setConsentCookie({
-      mt_pixel: 'grant',
-      ad_storage: 'granted',
-      analytics_storage: 'granted',
-    })
-    setOpen(true)
   }, [initialize])
 
   const handleSubmit = () => {

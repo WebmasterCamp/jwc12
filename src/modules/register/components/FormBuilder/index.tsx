@@ -71,6 +71,7 @@ export const FormBuilder = () => {
                       error={errors[input.name]?.message as string}
                       placeholder={input.placeholder}
                       disabled={disabled || disableSpecialField}
+                      required={!!input.required}
                       noMark={input.noMark}
                     />
                   )}
@@ -180,7 +181,7 @@ export const FormBuilder = () => {
                       control={control}
                       name={`${input.name}.${choice.name}`}
                       defaultValue={false}
-                      render={({ field: { value, name, ...rest } }) => (
+                      render={({ field: { value, ...rest } }) => (
                         <div
                           className={clsx(
                             'flex flex-row flex-1 gap-x-4',
@@ -192,7 +193,6 @@ export const FormBuilder = () => {
                           <div>
                             <Checkbox
                               {...rest}
-                              name={choice.name}
                               label={choice.label}
                               checked={value as unknown as boolean}
                               disabled={disabled || disableSpecialField}
