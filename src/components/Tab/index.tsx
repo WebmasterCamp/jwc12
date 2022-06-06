@@ -42,19 +42,19 @@ export const TabItem: FunctionComponent<TabItem> = ({ label, index, active, disa
 }
 
 export interface TabProps {
-  farthestStep: number
+  furthestStep: number
   currentStep: number
   children: React.ReactNode
 }
 
-export const Tab: FunctionComponent<TabProps> = ({ children, farthestStep, currentStep }) => {
+export const Tab: FunctionComponent<TabProps> = ({ children, furthestStep, currentStep }) => {
   return (
     <div className="flex flex-row w-full divide-x-0 sm:divide-x divide-solid divide-gray-300 mb-6 rounded-md overflow-x-hidden">
       {React.Children.map(children, (child, index) => {
         const step = index + 1
         return React.cloneElement(child as React.ReactElement, {
           active: currentStep === step,
-          disabled: step > farthestStep,
+          disabled: step > furthestStep,
         })
       })}
     </div>

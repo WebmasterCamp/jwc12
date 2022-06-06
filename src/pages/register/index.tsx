@@ -14,6 +14,7 @@ import { Container } from '@/components/Container'
 import { FormCard } from '@/components/FormCard'
 import { Redirect } from '@/components/Redirect'
 import { RegisterTopBar } from '@/components/RegisterTopBar'
+import { updateRegistration, withRegistrationData } from '@/db'
 
 const ConsentSchema = object({
   consented: boolean().test('required', 'ยอมรับเดี๋ยวนี้', (value) => !!value),
@@ -21,8 +22,9 @@ const ConsentSchema = object({
 
 type ConsentModel = InferType<typeof ConsentSchema>
 
-const RegisterPage: NextPage = () => {
-  const { currentStep, consented, user, signOut, updateConsent } = useAuthStore()
+const RegisterPage: NextPage = withRegistrationData(({ registration }) => {
+  const { user, signOut } = useAuthStore()
+  const { consented = false, currentStep = 1 } = registration || {}
 
   const { control, handleSubmit } = useForm<ConsentModel>({
     resolver: yupResolver(ConsentSchema),
@@ -30,7 +32,10 @@ const RegisterPage: NextPage = () => {
   })
 
   const onSubmit: SubmitHandler<ConsentModel> = async (data) => {
-    updateConsent(data.consented ?? false)
+    if (!data.consented) return
+    await updateRegistration({
+      consented: true,
+    })
   }
 
   const onError: SubmitErrorHandler<ConsentModel> = () => {
@@ -120,6 +125,6 @@ const RegisterPage: NextPage = () => {
       </FormCard>
     </Container>
   )
-}
+})
 
 export default withAuth(RegisterPage)

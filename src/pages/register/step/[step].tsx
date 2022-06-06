@@ -10,6 +10,8 @@ import { FormCard } from '@/components/FormCard'
 import { Redirect } from '@/components/Redirect'
 import { RegisterTopBar } from '@/components/RegisterTopBar'
 import { Tab, TabItem } from '@/components/Tab'
+import { useRegistrationData, withRegistrationData } from '@/db'
+import { Registration } from '@/db/types'
 import { FormBuilder } from '@/modules/register/components/FormBuilder'
 import { FormSummary } from '@/modules/register/components/FormSummary'
 import { RegisterProvider } from '@/modules/register/context'
@@ -20,37 +22,44 @@ interface StepPageProps {
   step: number
 }
 
-const StepPage: NextPage<StepPageProps> = ({ step }) => {
-  const { consented, farthestStep, user, signOut } = useAuthStore()
-
-  // has not consent to registration rules
-  if (!consented) {
-    return <Redirect to={`/register`} replace />
-  }
-
-  // has gone further than the farthest step
-  if (step > farthestStep) {
-    return <Redirect to={`/register/step/${farthestStep}`} replace />
-  }
-
-  const wrapper = (children: ReactNode) => (
-    <>
-      <Container maxWidth="4xl" className="mb-6 self-center m-auto">
-        <RegisterTopBar displayName={user?.displayName} signOut={signOut} />
-        <Tab farthestStep={farthestStep} currentStep={step}>
-          {stepItems.map((item, index) => (
-            <TabItem key={index} label={item} index={index + 1} />
-          ))}
-        </Tab>
-        <FormCard className="flex flex-1 flex-col">{children}</FormCard>
-      </Container>
-      <Footer />
-    </>
-  )
-
-  if (step === 5) return wrapper(<FormSummary />)
-  return <RegisterProvider step={step}>{wrapper(<FormBuilder />)}</RegisterProvider>
+type InnerPageProps = StepPageProps & {
+  registration: Registration | undefined
 }
+
+const StepPage: NextPage<StepPageProps> = withRegistrationData<InnerPageProps>(
+  ({ step, registration }) => {
+    const { user, signOut } = useAuthStore()
+    const { consented = false, furthestStep = 1 } = registration || {}
+
+    // has not consent to registration rules
+    if (!consented) {
+      return <Redirect to={`/register`} replace />
+    }
+
+    // has gone further than the furthest step
+    if (step > furthestStep) {
+      return <Redirect to={`/register/step/${furthestStep}`} replace />
+    }
+
+    const wrapper = (children: ReactNode) => (
+      <>
+        <Container maxWidth="4xl" className="mb-6 self-center m-auto">
+          <RegisterTopBar displayName={user?.displayName} signOut={signOut} />
+          <Tab furthestStep={furthestStep} currentStep={step}>
+            {stepItems.map((item, index) => (
+              <TabItem key={index} label={item} index={index + 1} />
+            ))}
+          </Tab>
+          <FormCard className="flex flex-1 flex-col">{children}</FormCard>
+        </Container>
+        <Footer />
+      </>
+    )
+
+    if (step === 5) return wrapper(<FormSummary />)
+    return <RegisterProvider step={step}>{wrapper(<FormBuilder />)}</RegisterProvider>
+  }
+)
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: { params: { step: string } }[] = []

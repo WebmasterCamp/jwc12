@@ -14,8 +14,7 @@ import { useRouter } from 'next/router'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { useAuthStore } from '@/auth/store'
-import { getRegistration, updateAnswers } from '@/db'
+import { getRegistration, updateAnswers, updateRegistration, useRegistrationData } from '@/db'
 
 import { stepNames } from '../questions'
 import {
@@ -54,7 +53,11 @@ export const useRegister = () => useContext(RegisterContext)
 
 export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, children }) => {
   const router = useRouter()
-  const { branch, updateStep, confirmBranch } = useAuthStore()
+  const { data: registration, updateStep } = useRegistrationData()
+  if (!registration) {
+    throw new Error('No registration data')
+  }
+  const { confirmedBranch: branch } = registration
 
   /**
    * First Step form
@@ -147,11 +150,13 @@ export const RegisterProvider: React.FC<RegisterProviderProps> = ({ step, childr
     updateAnswers(stepName, values)
   }, [ready, getValues, stepName])
 
-  const success: SubmitHandler<CoreQuestionModel> = (data) => {
+  const success: SubmitHandler<CoreQuestionModel> = async (data) => {
     console.log('Submit Success', data)
-    updateStep(step + 1, step + 1)
+    await updateStep(step + 1, step + 1)
     if (SPECIAL_FIELD.BRANCH in data && !!data[SPECIAL_FIELD.BRANCH]) {
-      confirmBranch(data[SPECIAL_FIELD.BRANCH] as BranchType)
+      await updateRegistration({
+        confirmedBranch: data[SPECIAL_FIELD.BRANCH] as BranchType,
+      })
     }
     router.push(`/register/step/${step + 1}`)
   }

@@ -19,10 +19,14 @@ import {
 } from 'firebase/storage'
 
 import { getUid } from '@/auth/store'
+import '@/lib/firebase'
 import { app } from '@/lib/firebase'
 import type { StepName } from '@/modules/register/questions'
-import { BranchType } from '@/modules/register/types'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
+
+import { Registration } from './types'
+
+export * from './context'
 
 const db = getFirestore(app)
 const storage = getStorage()
@@ -32,26 +36,12 @@ if (USE_FIRESTORE_EMULATOR) {
   connectStorageEmulator(storage, 'localhost', 9000)
 }
 
-function getRegistrationRef(uid?: string) {
+export function getRegistrationRef(uid?: string) {
   return doc(db, 'registrations', uid ? uid : getUid()) as DocumentReference<Registration>
 }
 
 function getStorageRef(filename: string) {
   return ref(storage, filename)
-}
-
-export type Answers = {
-  [key in StepName]: any
-}
-
-interface Registration {
-  answers: Answers
-  currentStep: number
-  farthestStep: number
-  consented: boolean
-  confirmedBranch: BranchType | null
-  createdAt: Timestamp
-  updatedAt: Timestamp
 }
 
 export async function hasRegistration(uid?: string) {
@@ -70,7 +60,7 @@ export async function getRegistration(uid?: string): Promise<Registration> {
         branch: {},
       },
       currentStep: 1,
-      farthestStep: 1,
+      furthestStep: 1,
       consented: false,
       confirmedBranch: null,
       createdAt: serverTimestamp() as Timestamp,

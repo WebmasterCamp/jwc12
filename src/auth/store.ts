@@ -10,6 +10,7 @@ import { FacebookAuthProvider } from 'firebase/auth'
 import create from 'zustand'
 
 import { getRegistration, updateRegistration } from '@/db'
+import '@/lib/firebase'
 import { BranchType } from '@/modules/register/types'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
@@ -17,15 +18,8 @@ export interface AuthStore {
   pending: boolean
   uid: string | null
   user: AuthUser | null
-  currentStep: number
-  farthestStep: number
-  consented: boolean
-  branch: BranchType | null
   signIn: () => Promise<void>
   signOut: () => Promise<void>
-  updateStep: (current: number, furthest?: number) => Promise<void>
-  updateConsent: (consent: boolean) => Promise<void>
-  confirmBranch: (branch: BranchType) => Promise<void>
 }
 
 export interface AuthUser {
@@ -42,7 +36,7 @@ if (USE_FIRESTORE_EMULATOR) {
 const provider =
   process.env.MODE !== 'DEVELOPMENT' ? new FacebookAuthProvider() : new GithubAuthProvider()
 
-export const useAuthStore = create<AuthStore>((set, get) => {
+export const useAuthStore = create<AuthStore>((set) => {
   const signIn = async () => {
     await signInWithPopup(auth, provider)
   }
@@ -60,42 +54,19 @@ export const useAuthStore = create<AuthStore>((set, get) => {
             photoURL: user.photoURL,
           }
         : null
-      let data: Partial<AuthStore> = {
+      const data: Partial<AuthStore> = {
         pending: false,
         uid: user?.uid ?? null,
         user: authUser,
       }
       if (user) {
-        const { farthestStep, currentStep, consented, confirmedBranch } = await getRegistration(
-          user.uid
-        )
-        data = {
-          ...data,
-          currentStep,
-          farthestStep,
-          consented,
-          branch: confirmedBranch,
-        }
+        await getRegistration(user.uid)
       }
       set((state) => ({
         ...state,
         ...data,
       }))
     })
-  }
-
-  const updateStep = async (current: number, farthest?: number) => {
-    const storedStep = get().currentStep
-    if (storedStep === current && !farthest) return
-    let data: Partial<AuthStore> = { currentStep: current }
-    if (farthest) data = { ...data, farthestStep: farthest }
-    await updateRegistration(data)
-    set((state) => ({ ...state, ...data }))
-  }
-
-  const updateConsent = async (consented: boolean) => {
-    await updateRegistration({ consented })
-    set((state) => ({ ...state, consented }))
   }
 
   const confirmBranch = async (branch: BranchType) => {
@@ -107,15 +78,8 @@ export const useAuthStore = create<AuthStore>((set, get) => {
     pending: true,
     uid: null,
     user: null,
-    currentStep: 0,
-    farthestStep: 0,
-    consented: false,
-    branch: null,
     signIn,
     signOut,
-    updateStep,
-    updateConsent,
-    confirmBranch,
   }
 })
 
