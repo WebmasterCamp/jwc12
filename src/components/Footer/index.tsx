@@ -34,7 +34,7 @@ export const Footer: FC<Props> = ({ className }) => {
         </Link>{' '}
         |{' '}
         <button className="underline" onClick={openCookieBanner}>
-          Cookie Setting
+          Privacy Settings
         </button>
       </div>
     </footer>
