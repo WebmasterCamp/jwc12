@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast'
+
 import equal from 'fast-deep-equal'
 import {
   DocumentReference,
@@ -74,10 +76,15 @@ export async function getRegistration(uid?: string): Promise<Registration> {
 }
 
 export async function updateRegistration(data: Partial<Registration>) {
-  return await updateDoc(getRegistrationRef(), {
-    ...data,
-    updatedAt: serverTimestamp(),
-  })
+  try {
+    return await updateDoc(getRegistrationRef(), {
+      ...data,
+      updatedAt: serverTimestamp(),
+    })
+  } catch (e) {
+    toast.error('ไม่สามารถบันทึกข้อมูลได้ โปรดรีเฟรชแล้วลองอีกครั้ง')
+    throw e
+  }
 }
 
 export async function updateAnswers(allAnswers: Answers, stepName: StepName, newAnswers: any) {
