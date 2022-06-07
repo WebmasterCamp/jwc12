@@ -30,7 +30,7 @@ export function MovingCards() {
           <CardTemplate ref={card4} color="#1DC5B2" />
         </div>
       </div>
-      <div ref={ref} className="absolute top-0 left-0 h-screen w-10" />
+      <div ref={ref} className="absolute top-0 left-0 h-screen" />
     </>
   )
 }
