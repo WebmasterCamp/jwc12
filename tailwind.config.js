@@ -13,18 +13,17 @@ const config = {
           DEFAULT: '#940FA3',
           accent: '#660A70',
         },
-        gold: '#E4D0A2',
-        brown: {
-          dark: '#413313',
-          light: '#6b541f',
+        gold: {
+          DEFAULT: '#E4D0A2',
+          dark: '#CEB273',
+          darker: '#AF8633',
         },
-        ct: '#1dc5b2',
-        pg: '#dc4223',
-        mk: '#7423dc',
-        ds: '#a1dd40',
-      },
-      aspectRatio: {
-        card: '0.6111',
+        brown: {
+          DEFAULT: '#6B541F',
+          dark: '#413313',
+        },
+        black: '#0A101E',
+        'cool-gray': '#2A3551',
       },
     },
   },

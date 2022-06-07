@@ -2,7 +2,7 @@ import { Fragment, FunctionComponent } from 'react'
 
 import { Dialog, Transition } from '@headlessui/react'
 
-import { ConsentKeys } from '@/lib/gtm'
+import { ConsentKeys, GoogleConsent, MetaConsent } from '@/lib/gtm'
 import { useConsentStore } from '@/stores/consents'
 
 import { CookieConsentSection } from './CookieSection'
@@ -12,6 +12,21 @@ interface Props {
   closeModal: () => void
 }
 
+interface ConsentMap<T> {
+  true: T
+  false: T
+}
+
+const googleConsentMap: ConsentMap<GoogleConsent> = {
+  true: 'granted',
+  false: 'denied',
+}
+
+const metaConsentMap: ConsentMap<MetaConsent> = {
+  true: 'grant',
+  false: 'revoke',
+}
+
 export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, closeModal }) => {
   const { consents, setConsentCookie, setOpenSettings } = useConsentStore()
 
@@ -19,9 +34,11 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, c
     setOpenSettings(false)
   }
 
-  const handleChangeConsent = (name: ConsentKeys) => (checked: boolean) => {
-    setConsentCookie({ ...consents, [name]: checked ? 'granted' : 'denied' })
-  }
+  const handleChangeConsent =
+    <T,>(name: ConsentKeys, mapping: ConsentMap<T>) =>
+    (checked: boolean) => {
+      setConsentCookie({ ...consents, [name]: mapping[`${checked}`] })
+    }
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -67,20 +84,20 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, c
                   </div>
                   <CookieConsentSection
                     checked={consents.ad_storage === 'granted' ?? false}
-                    onChange={handleChangeConsent('ad_storage')}
+                    onChange={handleChangeConsent('ad_storage', googleConsentMap)}
                     title="คุกกี้โฆษณาและการตลาด"
                     content="คุกกี้ประเภทนี้จัดเก็บตัวเลือกการเข้าถึงเว็บไซต์ของผู้ใช้ และใช้เป็นพื้นฐานในการปรับแต่งหน้าของเว็บไซต์เพื่อนำเสนอโฆษณาที่เกี่ยวข้องกับคุณมากที่สุด เช่น โดยการเลือกแสดงโฆษณาสำหรับสินค้าที่คุณสนใจ การป้องกันหรือจำกัดจำนวนครั้งที่โฆษณาปรากฏบนหน้าเว็บไซต์เพื่อประเมินประสิทธิภาพของโฆษณาได้ดียิ่งขึ้น"
                   />
                   <CookieConsentSection
                     checked={consents.analytics_storage === 'granted' ?? false}
-                    onChange={handleChangeConsent('analytics_storage')}
+                    onChange={handleChangeConsent('analytics_storage', googleConsentMap)}
                     title="คุกกี้เพื่อการวิเคราะห์"
                     content="คุกกี้ประเภทนี้จะทำการเก็บข้อมูลการใช้งานเว็บไซต์ของคุณ เพื่อเป็นประโยชน์ในการวัดผล ปรับปรุงและพัฒนาประสบการณ์ที่ดีในการใช้งานเว็บไซต์ ถ้าหากท่านไม่ยินยอมให้เราใช้คุกกี้นี้เราจะไม่สามารถวัดผล ปรังปรุงและพัฒนาเว็บไซต์ได้"
                   />
 
                   <CookieConsentSection
-                    checked={consents.mt_pixel === 'granted' ?? false}
-                    onChange={handleChangeConsent('mt_pixel')}
+                    checked={consents.mt_pixel === 'grant' ?? false}
+                    onChange={handleChangeConsent('mt_pixel', metaConsentMap)}
                     title="คุกกี้เพื่อปรับเนื้อหาให้เข้ากับกลุ่มเป้าหมาย"
                     content="คุกกี้ประเภทนี้จะเก็บข้อมูลต่าง ๆ รวมทั้งข้อมูลวส่วนบุคคลเกี่ยวกับตัวคุณเพื่อเราสามารถนำมาวิเคราะห์ และนำเสนอเนื้อหา ให้ตรงกับความเหมาะสมกับความสนใจของคุณ ถ้าหากคุณไม่ยินยอมเราจะไม่สามารถนำเสนอเนื้อหาและโฆษณาได้ไม่ตรงกับความสนใจของคุณ"
                   />
