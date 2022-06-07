@@ -4,4 +4,5 @@ export enum TrackId {
   NEXT_BUTTON = 'next-button',
   PREV_BUTTON = 'prev-button',
   FORM = 'form',
+  INPUT = 'input',
 }

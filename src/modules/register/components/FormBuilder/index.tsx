@@ -75,7 +75,7 @@ export const FormBuilder = () => {
                       disabled={disabled || disableSpecialField}
                       required={!!input.required}
                       noMark={input.noMark}
-                      data-track-id={rest.name}
+                      data-track-id={TrackId.INPUT}
                     />
                   )}
                 />
@@ -104,7 +104,7 @@ export const FormBuilder = () => {
                       error={errors[input.name]?.message as string}
                       required={!!input.required}
                       disabled={disabled || disableSpecialField}
-                      data-track-id={name}
+                      data-track-id={TrackId.INPUT}
                     />
                   )}
                 />
@@ -131,7 +131,7 @@ export const FormBuilder = () => {
                       required={!!input.required}
                       noMark={!!input.noMark}
                       direction={input.direction}
-                      data-track-id={name}
+                      data-track-id={TrackId.INPUT}
                     >
                       {input.choices.map((choice) => (
                         <Radio
@@ -139,7 +139,7 @@ export const FormBuilder = () => {
                           value={choice.value}
                           label={choice.label}
                           disabled={disabled || disableSpecialField}
-                          data-track-id={`${input.name}_${choice.name}`}
+                          data-track-id={TrackId.INPUT}
                         />
                       ))}
                     </RadioGroup>
@@ -166,7 +166,7 @@ export const FormBuilder = () => {
                       error={errors[input.name]?.message as string}
                       required={!!input.required}
                       disabled={disabled || disableSpecialField}
-                      data-track-id={name}
+                      data-track-id={TrackId.INPUT}
                     />
                   )}
                 />
@@ -204,14 +204,14 @@ export const FormBuilder = () => {
                               label={choice.label}
                               checked={value as unknown as boolean}
                               disabled={disabled || disableSpecialField}
-                              data-track-id={rest.name}
+                              data-track-id={TrackId.INPUT}
                             />
                           </div>
                           {input.needOtherInput && choice.name.split('.').pop() === 'other' && (
                             <div className="basis-full sm:basis-1/2">
                               <Input
                                 {...register(`${input.name}.${choice.name}_input`, { value: '' })}
-                                data-track-id={`${input.name}.${choice.name}_input`}
+                                data-track-id={TrackId.INPUT}
                                 placeholder="โปรดระบุ"
                                 disabled={disabled || !value}
                                 required={!value}
@@ -249,7 +249,7 @@ export const FormBuilder = () => {
                       disabled={disabled || disableSpecialField}
                       required={!!input.required}
                       noMark={!!input.noMark}
-                      data-track-id={rest.name}
+                      data-track-id={TrackId.INPUT}
                     />
                   )}
                 />
