@@ -6,6 +6,8 @@ import BarsIcon from '@iconify/icons-fa6-solid/bars'
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 
+import { useScrollY } from '@/utils/useScroll'
+
 import { Button } from './Button'
 
 interface Props {
@@ -15,8 +17,16 @@ interface Props {
 export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
   const [shown, setShown] = useState(false)
   const toggleNavbar = () => setShown((shown) => !shown)
+  const scrollY = useScrollY()
   return (
-    <div className="sticky top-0 z-50 bg-primary">
+    <div className="sticky top-0 z-50">
+      <div
+        className="fixed top-0 w-full h-[72px] z-[-1]"
+        style={{
+          background: 'linear-gradient(180deg, #000000 -38.89%, rgba(0, 0, 0, 0) 100%)',
+          opacity: Math.min(1, scrollY / 72),
+        }}
+      />
       <nav className={clsx('flex px-4 py-2 justify-between items-center', className)}>
         <Link href={'/'}>
           <a>
