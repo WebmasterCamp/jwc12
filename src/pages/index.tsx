@@ -29,7 +29,7 @@ const Home: NextPage = () => {
         <ParticlesWidget />
         <div className="w-full lg:w-1/2 mx-auto">
           <h1 className="text-4xl lg:text-5xl text-center mt-16 space-y-4 font-heading">
-            Make Your site,
+            Make Your Site,
             <br /> Write Your <span className="text-ct">Future</span>
           </h1>
           {/* TODO: Insert sponsor logo here */}
