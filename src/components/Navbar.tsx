@@ -28,7 +28,7 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
           </a>
         </Link>
         <div className="lg:hidden">
-          <Button onClick={toggleNavbar} variant="outlined" className="lg:hidden">
+          <Button onClick={toggleNavbar} variant="outlined" color="primary" className="lg:hidden">
             <Icon icon={BarsIcon} className="inline-block" /> เมนู
           </Button>
         </div>
