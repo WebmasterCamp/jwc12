@@ -28,6 +28,7 @@ export const TabItem: FunctionComponent<TabItem> = ({ label, index, active, disa
         disabled && 'cursor-default hover:bg-white',
         !disabled && !active && 'cursor-pointer hover:bg-gray-200'
       )}
+      id={`${TrackId.TAB_BUTTON}-${index}`}
       data-track-id={`${TrackId.TAB_BUTTON}-${index}`}
       onClick={handleClick}
     >
