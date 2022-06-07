@@ -23,14 +23,6 @@ const travelingInfo = [
       'สายมีนบุรี–ลาดกระบัง',
     ],
   },
-  {
-    method: 'รถโดยสาร',
-    description: 'สาย 143 (รถร่วมบริการ), สาย 1013 (รถร่วมบริการ)',
-  },
-  {
-    method: 'รถสองแถว',
-    description: 'ศูนย์การค้าแฮปปี้แลนด์–ตลาดหัวตะเข้',
-  },
 ]
 
 export const PlaceSection: React.FunctionComponent = () => {
