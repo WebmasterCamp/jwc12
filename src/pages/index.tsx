@@ -49,7 +49,7 @@ const Home: NextPage = () => {
         <Section className="flex flex-col-reverse lg:flex-row">
           <div className="flex-1">
             <h2 id="about" className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
-              รู้จักกับค่ายแห่งโชคชะตา
+              JWC คืออะไร
             </h2>
             <p className="">
               <span className="text-gold font-bold">
