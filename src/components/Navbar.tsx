@@ -50,7 +50,9 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
             ติดต่อเรา
           </a>
           <Link href="/register" passHref>
-            <LinkButton color="gold">สมัครค่าย JWC</LinkButton>
+            <LinkButton className="register-button" color="gold">
+              สมัครค่าย JWC
+            </LinkButton>
           </Link>
         </div>
       </nav>
@@ -74,7 +76,9 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
         </a>
         <div className="p-4">
           <Link href="/register" passHref>
-            <LinkButton color="gold">สมัครค่าย JWC</LinkButton>
+            <LinkButton className="register-button" color="gold">
+              สมัครค่าย JWC
+            </LinkButton>
           </Link>
         </div>
       </div>

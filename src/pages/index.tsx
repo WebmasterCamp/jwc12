@@ -36,7 +36,9 @@ const Home: NextPage = () => {
           <div className=" space-x-4 p-8 text-center mx-auto">TODO: Insert logo</div>
           <div className="flex flex-col gap-4 lg:gap-8 lg:flex-row lg:justify-center">
             <Link href="/register" passHref>
-              <LinkButton color="gold">สมัครค่าย</LinkButton>
+              <LinkButton className="register-button" color="gold">
+                สมัครค่าย
+              </LinkButton>
             </Link>
             <LinkButton href="#about" color="gold" variant="outlined">
               รู้จักกับค่าย

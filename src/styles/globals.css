@@ -83,3 +83,7 @@
     @apply underline;
   }
 }
+
+.register-button {
+  box-shadow: 0px 0px 10px rgba(228, 208, 162, 0.4);
+}
