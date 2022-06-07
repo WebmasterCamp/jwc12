@@ -5,6 +5,8 @@ import CrossIcon from '@iconify/icons-akar-icons/cross'
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 
+import { RegistrationStats } from '@/db/types'
+
 import { BranchDialog } from './BranchDialog'
 import styles from './BranchesSection.module.css'
 import { Section } from './Section'
@@ -20,6 +22,8 @@ const nameMap: BranchAbbr = {
   mk: 'Marketing',
   ds: 'Design',
 }
+
+const getStatname = (branch: Branch) => nameMap[branch].toLowerCase() as keyof RegistrationStats
 
 const imageUrl = (name: Branch) => `/images/Card_${nameMap[name]}.png`
 
@@ -51,7 +55,11 @@ const branchesDescription: Array<{ branch: Branch; title: string; description: s
   },
 ]
 
-export const BranchesSection: React.FunctionComponent = () => {
+interface Props {
+  statData: undefined | RegistrationStats
+}
+
+export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) => {
   const [branch, setBranch] = useState<Branch | null>(null)
   const onClose = () => setBranch(null)
   return (
@@ -96,6 +104,7 @@ export const BranchesSection: React.FunctionComponent = () => {
             title={detail.title}
             open={branch === detail.branch}
             description={detail.description}
+            count={statData ? statData[getStatname(detail.branch)] : 0}
             onClose={onClose}
           />
         ))}

@@ -67,7 +67,7 @@ const Home: NextPage = () => {
         </Section>
         <ScheduleSection />
         <PlaceSection />
-        <BranchesSection />
+        <BranchesSection statData={stats.data} />
         <FaqSection />
         <Section className="text-center">
           <h2 className="text-3xl lg:text-4l font-semibold font-heading mb-4">ภาพกิจกรรม</h2>
