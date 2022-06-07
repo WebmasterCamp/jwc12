@@ -25,7 +25,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Navbar className="text-white" />
-      <div className="flex min-h-screen overflow-x-hidden w-full flex-col px-5 text-white">
+      <div className="flex index-bg min-h-screen overflow-x-hidden w-full flex-col px-5 text-white">
         <ParticlesWidget />
         <div className="w-full lg:w-1/2 mx-auto">
           <h1 className="text-4xl lg:text-5xl text-center mt-16 space-y-4 font-heading">

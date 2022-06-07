@@ -82,3 +82,7 @@
     @apply underline;
   }
 }
+
+.index-bg {
+  background: linear-gradient(180deg, #8e269f 0%, #131d38 75%);
+}
