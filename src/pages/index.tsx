@@ -17,8 +17,11 @@ import { PlaceSection } from '@/components/PlaceSection'
 import { Question } from '@/components/Question'
 import { ScheduleSection } from '@/components/ScheduleSection'
 import { Section } from '@/components/Section'
+import { useRegistrationStats } from '@/db/hooks'
 
 const Home: NextPage = () => {
+  const stats = useRegistrationStats()
+  console.log(stats)
   return (
     <>
       <Navbar className="text-white" />
