@@ -22,7 +22,6 @@ import { useRegistrationStats } from '@/db/hooks'
 
 const Home: NextPage = () => {
   const stats = useRegistrationStats()
-  console.log(stats)
   return (
     <>
       <Navbar className="text-white" />
