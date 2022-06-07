@@ -21,7 +21,7 @@ const nameMap: BranchAbbr = {
   ds: 'Design',
 }
 
-const imageUrl = (name: Branch) => `/images/Colored_${nameMap[name]}.png`
+const imageUrl = (name: Branch) => `/images/Card_${nameMap[name]}.png`
 
 // TODO: Add questions
 const branchesDescription: Array<{ branch: Branch; title: string; description: string }> = [
