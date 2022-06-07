@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
 
 import FacebookIcon from '@iconify/icons-fa6-brands/facebook'
 import InstagramIcon from '@iconify/icons-fa6-brands/instagram'
@@ -35,10 +36,14 @@ const Home: NextPage = () => {
           {/* TODO: Insert sponsor logo here */}
           <div className=" space-x-4 p-8 text-center mx-auto">TODO: Insert logo</div>
           <div className="flex flex-col gap-4 lg:gap-8 lg:flex-row lg:justify-center">
-            <Button color="gold">สมัครค่าย</Button>
-            <Button color="gold" variant="outlined">
-              รู้จักกับค่าย
-            </Button>
+            <Link href="/register">
+              <Button color="gold">สมัครค่าย</Button>
+            </Link>
+            <a href="#about">
+              <Button color="gold" variant="outlined">
+                รู้จักกับค่าย
+              </Button>
+            </a>
           </div>
           <MovingCards />
         </div>
