@@ -159,14 +159,14 @@ const basicWeakQuestions: WeakQuestion = {
       title: <Header>ข้อมูลการศึกษา</Header>,
     },
     {
-      type: InputType.RADIO,
+      type: InputType.DROPDOWN,
       name: 'educationLevel',
       question: 'กำลังศึกษาอยู่ในระดับชั้น',
       placeholder: 'กำลังศึกษาอยู่ในระดับชั้น',
       choices: [
-        'มัธยมศึกษาปีที่ 4',
-        'มัธยมศึกษาปีที่ 5',
-        'มัธยมศึกษาปีที่ 6',
+        'มัธยมศึกษาปีที่ 4 หรือเทียบเท่า',
+        'มัธยมศึกษาปีที่ 5 หรือเทียบเท่า',
+        'มัธยมศึกษาปีที่ 6 หรือเทียบเท่า',
         'กำลังขึ้นปริญญาตรีปีที่ 1',
       ],
       required: true,

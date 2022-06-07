@@ -93,13 +93,17 @@ export function Upload({
         )}
         {...getRootProps()}
       >
+        {!imageUrl ? (
+          label
+        ) : (
+          <BlurhashImage
+            className="w-48 h-48 rounded-[4px] overflow-hidden"
+            src={imageUrl}
+            blurhash={blurhash}
+            alt=""
+          />
+        )}
         {pending && !blurhash && <LoadingAnimation className="w-[148px] h-[148px]" />}
-        <BlurhashImage
-          className="w-48 h-48 rounded-[4px] overflow-hidden"
-          src={imageUrl}
-          blurhash={blurhash}
-          alt=""
-        />
       </label>
       <input {...props} id={name} name={name} {...getInputProps()} />
       <ErrorMessage message={error} />

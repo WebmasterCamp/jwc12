@@ -39,7 +39,8 @@ if (USE_FIRESTORE_EMULATOR) {
 }
 
 export function getRegistrationRef(uid?: string) {
-  return doc(db, 'registrations', uid ? uid : getUid()) as DocumentReference<Registration>
+  const target = process.env.MODE === 'PRODUCTION' ? 'registrations' : 'registrations_staging'
+  return doc(db, target, uid ? uid : getUid()) as DocumentReference<Registration>
 }
 
 function getStorageRef(filename: string) {

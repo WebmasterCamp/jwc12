@@ -32,7 +32,11 @@ const SummaryBuilder: React.FC<SummaryBuilderProps> = ({ question, answers }) =>
         if (input.hideInSummary) return null
         if (input.type === InputType.RADIO && input.name === SPECIAL_FIELD.BRANCH) {
           const choice = input.choices.find((choice) => choice.value === branch)
-          return <div className="p-2 -mt-4">{choice?.label ?? choice?.value}</div>
+          return (
+            <div key={input.name} className="p-2 -mt-4">
+              {choice?.label ?? choice?.value}
+            </div>
+          )
         }
         switch (input.type) {
           case InputType.NONE: {
@@ -94,7 +98,7 @@ const SummaryBuilder: React.FC<SummaryBuilderProps> = ({ question, answers }) =>
                       })}
                     </ul>
                   ) : (
-                    '-'
+                    <Fragment key={input.name}>'-'</Fragment>
                   )
                 }
               />
