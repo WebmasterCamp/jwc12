@@ -37,7 +37,9 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
           <a href="#schedule">กำหนดการ</a>
           <a href="#faq">คำถามที่พบบ่อย</a>
           <a href="#contact">ติดต่อเรา</a>
-          <Button variant="gold">สมัครค่าย JWC</Button>
+          <Link href="/register">
+            <Button variant="gold">สมัครค่าย JWC</Button>
+          </Link>
         </div>
       </nav>
       <div
