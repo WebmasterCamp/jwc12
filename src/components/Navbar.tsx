@@ -38,7 +38,7 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
           <a href="#faq">คำถามที่พบบ่อย</a>
           <a href="#contact">ติดต่อเรา</a>
           <Link href="/register">
-            <Button variant="gold">สมัครค่าย JWC</Button>
+            <Button color="gold">สมัครค่าย JWC</Button>
           </Link>
         </div>
       </nav>
@@ -61,7 +61,7 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
           ติดต่อเรา
         </a>
         <div className="p-4">
-          <Button variant="gold">สมัครค่าย JWC</Button>
+          <Button color="gold">สมัครค่าย JWC</Button>
         </div>
       </div>
     </div>

@@ -32,8 +32,10 @@ const Home: NextPage = () => {
           {/* TODO: Insert sponsor logo here */}
           <div className=" space-x-4 p-8 text-center mx-auto">TODO: Insert logo</div>
           <div className="flex flex-col gap-4 lg:gap-8 lg:flex-row lg:justify-center">
-            <Button variant="gold">สมัครค่าย</Button>
-            <Button variant="outlined-gold">รู้จักกับค่าย</Button>
+            <Button color="gold">สมัครค่าย</Button>
+            <Button color="gold" variant="outlined">
+              รู้จักกับค่าย
+            </Button>
           </div>
           <div className="w-1/2 mx-auto min-h-[30vh] relative mt-[20vh] border">
             <MovingCard angle={-30} variant="ct" />
