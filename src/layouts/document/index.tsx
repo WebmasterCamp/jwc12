@@ -1,7 +1,8 @@
 import { FunctionComponent, ReactNode } from 'react'
 
-import { ParticlesWidget } from '../../components/Particles'
-import { Footer } from './components/Footer'
+import { Footer } from '@/components/Footer'
+import { ParticlesWidget } from '@/components/Particles'
+
 import { Header } from './components/Header'
 
 interface Props {

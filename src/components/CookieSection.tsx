@@ -17,7 +17,7 @@ export const CookieConsentSection: FunctionComponent<CookieConsentSectionProps> 
   content,
 }) => {
   return (
-    <div className="border p-4">
+    <div className="border border-t-0 p-4">
       <div className="flex justify-between font-medium">
         <div>{title}</div>
         <Switch

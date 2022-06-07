@@ -1,11 +1,12 @@
 import TagManager, { TagManagerArgs } from 'react-gtm-module'
 
-type Consent = 'granted' | 'denied'
+export type GoogleConsent = 'granted' | 'denied'
+export type MetaConsent = 'grant' | 'revoke'
 
 export interface ConsentParams {
-  mt_pixel?: Consent
-  ad_storage?: Consent
-  analytics_storage?: Consent
+  mt_pixel?: MetaConsent
+  ad_storage?: GoogleConsent
+  analytics_storage?: GoogleConsent
 }
 
 export type ConsentKeys = keyof ConsentParams
