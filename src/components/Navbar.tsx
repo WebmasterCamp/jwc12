@@ -36,7 +36,9 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
           <a href="#about">JWC คืออะไร</a>
           <a href="#schedule">กำหนดการ</a>
           <a href="#faq">คำถามที่พบบ่อย</a>
-          <a href="#contact">ติดต่อเรา</a>
+          <a href="https://www.facebook.com/jwcth" target="_blank" rel="noreferrer">
+            ติดต่อเรา
+          </a>
           <Link href="/register">
             <Button color="gold">สมัครค่าย JWC</Button>
           </Link>
