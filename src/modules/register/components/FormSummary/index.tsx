@@ -128,7 +128,7 @@ function AnswerPreview({
   return (
     <InputContainer className={className}>
       <div className="text-gray-500">{question}</div>
-      <div>{answer}</div>
+      <div>{!!answer ? answer : '-'}</div>
     </InputContainer>
   )
 }

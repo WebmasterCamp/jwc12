@@ -1,6 +1,7 @@
 import { InferType } from 'yup'
 
 import { Header } from '../components/Header'
+import { provinces } from '../constants/province'
 import { InputType, WeakQuestion } from '../types'
 import { buildYupObject, phoneTestConfig } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
@@ -44,6 +45,10 @@ const basicWeakQuestions: WeakQuestion = {
       placeholder: 'คำนำหน้าชื่อ',
       choices: ['เด็กชาย', 'เด็กหญิง', 'นาย', 'นางสาว'],
       required: true,
+    },
+    {
+      type: InputType.NONE,
+      title: <div className="basis-1/2" />,
     },
     {
       type: InputType.TEXT,
@@ -148,10 +153,11 @@ const basicWeakQuestions: WeakQuestion = {
       required: true,
     },
     {
-      type: InputType.TEXT,
+      type: InputType.DROPDOWN,
       name: 'province',
       question: 'จังหวัด',
       placeholder: 'จังหวัด',
+      choices: provinces,
       required: true,
     },
     {
@@ -192,10 +198,11 @@ const basicWeakQuestions: WeakQuestion = {
       required: true,
     },
     {
-      type: InputType.TEXT,
+      type: InputType.DROPDOWN,
       name: 'educationProvince',
       question: 'จังหวัด',
       placeholder: 'จังหวัด',
+      choices: provinces,
       required: true,
     },
   ],

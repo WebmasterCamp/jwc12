@@ -83,7 +83,7 @@ export function Upload({
   })
 
   return (
-    <div className={clsx('relative w-[196px] h-[196px] flex flex-col gap-2', className)}>
+    <div className={clsx('relative h-[196px] flex flex-col gap-2', className)}>
       <label
         className={clsx(
           'relative border-gray-300 flex flex-1 justify-center items-center cursor-pointer rounded-md',
