@@ -14,6 +14,7 @@ import { InputContainer } from '@/components/InputContainer'
 import { Radio, RadioGroup } from '@/components/Radio'
 import { TextArea } from '@/components/TextArea'
 import { Upload } from '@/components/Upload'
+import { TrackId } from '@/track/enums'
 
 import { useRegister } from '../../context'
 import { SPECIAL_FIELD } from '../../context/constants'
@@ -45,6 +46,7 @@ export const FormBuilder = () => {
       onSubmit={submit}
       onBlur={saveAnswers}
       className="text-black flex flex-wrap gap-y-2"
+      data-track-id={TrackId.FORM}
     >
       {question?.inputs.map((input, index) => {
         const isSpecialField = input.type !== InputType.NONE && specialFields.includes(input.name)
@@ -73,6 +75,7 @@ export const FormBuilder = () => {
                       disabled={disabled || disableSpecialField}
                       required={!!input.required}
                       noMark={input.noMark}
+                      data-track-id={rest.name}
                     />
                   )}
                 />
@@ -101,6 +104,7 @@ export const FormBuilder = () => {
                       error={errors[input.name]?.message as string}
                       required={!!input.required}
                       disabled={disabled || disableSpecialField}
+                      data-track-id={name}
                     />
                   )}
                 />
@@ -114,8 +118,9 @@ export const FormBuilder = () => {
                   control={control}
                   name={input.name}
                   defaultValue=""
-                  render={({ field: { onChange, value }, formState: { errors } }) => (
+                  render={({ field: { onChange, value, name }, formState: { errors } }) => (
                     <RadioGroup
+                      name={name}
                       value={value as string}
                       onChange={(e) => {
                         onChange(e)
@@ -126,6 +131,7 @@ export const FormBuilder = () => {
                       required={!!input.required}
                       noMark={!!input.noMark}
                       direction={input.direction}
+                      data-track-id={name}
                     >
                       {input.choices.map((choice) => (
                         <Radio
@@ -133,6 +139,7 @@ export const FormBuilder = () => {
                           value={choice.value}
                           label={choice.label}
                           disabled={disabled || disableSpecialField}
+                          data-track-id={`${input.name}_${choice.name}`}
                         />
                       ))}
                     </RadioGroup>
@@ -148,9 +155,9 @@ export const FormBuilder = () => {
                   control={control}
                   name={input.name}
                   defaultValue=""
-                  render={({ field: { onChange, value }, formState: { errors } }) => (
+                  render={({ field: { onChange, value, name }, formState: { errors } }) => (
                     <Dropdown
-                      name={input.name}
+                      name={name}
                       label={input.question}
                       placeholder={input.placeholder}
                       options={input.choices}
@@ -159,6 +166,7 @@ export const FormBuilder = () => {
                       error={errors[input.name]?.message as string}
                       required={!!input.required}
                       disabled={disabled || disableSpecialField}
+                      data-track-id={name}
                     />
                   )}
                 />
@@ -196,12 +204,14 @@ export const FormBuilder = () => {
                               label={choice.label}
                               checked={value as unknown as boolean}
                               disabled={disabled || disableSpecialField}
+                              data-track-id={rest.name}
                             />
                           </div>
                           {input.needOtherInput && choice.name.split('.').pop() === 'other' && (
                             <div className="basis-full sm:basis-1/2">
                               <Input
                                 {...register(`${input.name}.${choice.name}_input`, { value: '' })}
+                                data-track-id={`${input.name}.${choice.name}_input`}
                                 placeholder="โปรดระบุ"
                                 disabled={disabled || !value}
                                 required={!value}
@@ -231,7 +241,6 @@ export const FormBuilder = () => {
                   render={({ field: { value, ...rest }, formState: { errors } }) => (
                     <TextArea
                       {...rest}
-                      name={input.name}
                       value={value as string}
                       rows={4}
                       label={input.question}
@@ -240,6 +249,7 @@ export const FormBuilder = () => {
                       disabled={disabled || disableSpecialField}
                       required={!!input.required}
                       noMark={!!input.noMark}
+                      data-track-id={rest.name}
                     />
                   )}
                 />
@@ -252,11 +262,16 @@ export const FormBuilder = () => {
       })}
       <div className="flex flex-row space-x-4 justify-center mt-8 w-full p-2 ">
         {step > 1 && (
-          <Button className="w-40" onClick={onClickPrev} variant="outlined">
+          <Button
+            className="w-40"
+            onClick={onClickPrev}
+            variant="outlined"
+            data-track-id={TrackId.PREV_BUTTON}
+          >
             ย้อนกลับ
           </Button>
         )}
-        <Button className="w-40" type="submit">
+        <Button className="w-40" type="submit" data-track-id={TrackId.NEXT_BUTTON}>
           ต่อไป
         </Button>
       </div>

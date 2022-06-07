@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 
 import clsx from 'clsx'
 
+import { TrackId } from '@/track/enums'
+
 export interface TabItem {
   label: string
   index: number
@@ -26,6 +28,7 @@ export const TabItem: FunctionComponent<TabItem> = ({ label, index, active, disa
         disabled && 'cursor-default hover:bg-white',
         !disabled && !active && 'cursor-pointer hover:bg-gray-200'
       )}
+      data-track-id={`${TrackId.TAB_BUTTON}-${index}`}
       onClick={handleClick}
     >
       <span
