@@ -28,7 +28,7 @@ export const Button: FunctionComponent<ButtonProps> = forwardRef<HTMLButtonEleme
             `bg-primary text-white hover:bg-primary-accent`,
           variant === 'outlined' &&
             color === 'gold' &&
-            `border-2 border-gold bg-white text-gold-darker hover:bg-gray-50 hover:border-gold-dark`,
+            `border border-1 border-gold text-gold hover:bg-gold/10 hover:border-gold-dark hover:text-gold-dark`,
           variant === 'primary' && color === 'gold' && `bg-gold text-brown-dark hover:bg-gold-dark`
         )}
       >
