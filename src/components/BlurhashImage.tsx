@@ -1,4 +1,7 @@
-import { ImgHTMLAttributes } from 'react'
+/* eslint-disable jsx-a11y/alt-text */
+import { ImgHTMLAttributes, useState } from 'react'
+
+import clsx from 'clsx'
 
 import { Blurhash } from './Blurhash'
 
@@ -13,9 +16,19 @@ export function BlurhashImage({ blurhash, className, src, ...rest }: BlurhashIma
         {blurhash && (
           <Blurhash className="absolute top-0 left-0 w-full h-full" blurhash={blurhash} />
         )}
-        {/* eslint-disable-next-line jsx-a11y/alt-text */}
-        {src && <img className="absolute inset-0 w-full h-full object-cover" src={src} {...rest} />}
+        <Image key={src} src={src} {...rest} />
       </div>
     </div>
+  )
+}
+
+function Image(props: ImgHTMLAttributes<HTMLImageElement>) {
+  const [show, setShow] = useState(false)
+  return (
+    <img
+      className={clsx('absolute inset-0 w-full h-full object-cover', !show && 'opacity-0')}
+      onLoad={() => setShow(true)}
+      {...props}
+    />
   )
 }
