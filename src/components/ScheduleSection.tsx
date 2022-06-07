@@ -38,14 +38,13 @@ const schedules = [
   },
 ]
 
+const firstSchedules = schedules.slice(0, 3)
+const secondSchedules = schedules.slice(3)
+
 export const ScheduleSection: React.FunctionComponent = () => {
-  //   const schedulesRef = useRef<(HTMLDivElement | null)[]>([null, null])
-  //   const [schedulesState, setSchedulesState] = useState<(HTMLDivElement | null)[]>([null, null])
-  // TODO: Draw connecting lines
-  //   useEffect(() => {
-  //     setSchedulesState((_) => schedulesRef.current)
-  //     console.log('update')
-  //   }, [schedulesRef])
+  const [viewMore, setViewMore] = useState(false)
+  const text = viewMore ? 'ดูน้อยลง' : 'ดูเพิ่มเติม'
+  const toggleViewMore = () => setViewMore((vm) => !vm)
   return (
     <Section className="text-center">
       <h2 id="schedule" className="text-3xl font-heading lg:text-4xl mb-16 font-semibold">
@@ -53,11 +52,11 @@ export const ScheduleSection: React.FunctionComponent = () => {
       </h2>
       <div
         className={clsx(
-          'flex flex-col lg:grid lg:grid-cols-6 gap-x-0 gap-y-8 lg:justify-evenly w-full mx-auto',
+          'flex flex-col lg:grid lg:grid-cols-6 gap-x-0 lg:gap-x-4 xl:gap-x-0 gap-y-8 lg:justify-evenly w-full mx-auto',
           styles.scheduleGrid
         )}
       >
-        {schedules.map((task) => {
+        {firstSchedules.map((task) => {
           return (
             <div key={task.title} className="flex flex-col items-center">
               <picture className="rounded-full bg-black/40 p-4 mb-4">
@@ -70,6 +69,25 @@ export const ScheduleSection: React.FunctionComponent = () => {
             </div>
           )
         })}
+        {secondSchedules.map((task) => {
+          return (
+            <div
+              key={task.title}
+              className={clsx('flex lg:flex flex-col items-center', !viewMore && 'hidden')}
+            >
+              <picture className="rounded-full bg-black/40 p-4 mb-4">
+                <img src={task.imageUrl} alt={task.title} />
+              </picture>
+              <h3 className="font-heading whitespace-pre-line font-bold text-xl text-gold">
+                {task.title}
+              </h3>
+              <p>{task.date}</p>
+            </div>
+          )
+        })}
+        <a onClick={toggleViewMore} className="lg:hidden font-bold text-gold font-heading text-xl">
+          {text}
+        </a>
       </div>
     </Section>
   )
