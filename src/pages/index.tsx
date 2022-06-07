@@ -10,7 +10,7 @@ import { Button } from '@/components/Button'
 import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
 import { GoogleMap } from '@/components/Map'
-import { MovingCard } from '@/components/MovingCard'
+import { MovingCards } from '@/components/MovingCards'
 import { Navbar } from '@/components/Navbar'
 import { ParticlesWidget } from '@/components/Particles'
 import { PlaceSection } from '@/components/PlaceSection'
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Navbar className="text-white" />
-      <div className="relative flex min-h-screen overflow-x-hidden w-full flex-col px-5 text-white">
+      <div className="flex min-h-screen overflow-x-hidden w-full flex-col px-5 text-white">
         <ParticlesWidget />
         <div className="w-full lg:w-1/2 mx-auto">
           <h1 className="text-4xl lg:text-5xl text-center mt-16 space-y-4 font-heading">
@@ -40,12 +40,7 @@ const Home: NextPage = () => {
               รู้จักกับค่าย
             </Button>
           </div>
-          <div className="w-1/2 mx-auto min-h-[30vh] relative mt-[20vh] border">
-            <MovingCard angle={-30} variant="ct" />
-            <MovingCard angle={-10} variant="ds" />
-            <MovingCard angle={10} variant="mk" />
-            <MovingCard angle={30} variant="pg" />
-          </div>
+          <MovingCards />
         </div>
         <Section className="flex flex-col-reverse lg:flex-row">
           <div className="flex-1">
