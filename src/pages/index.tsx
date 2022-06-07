@@ -7,7 +7,7 @@ import TwitterIcon from '@iconify/icons-fa6-brands/twitter'
 import { Icon } from '@iconify/react'
 
 import { BranchesSection } from '@/components/BranchesSection'
-import { Button } from '@/components/Button'
+import { Button, LinkButton } from '@/components/Button'
 import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
 import { GoogleMap } from '@/components/Map'
@@ -35,14 +35,12 @@ const Home: NextPage = () => {
           {/* TODO: Insert sponsor logo here */}
           <div className=" space-x-4 p-8 text-center mx-auto">TODO: Insert logo</div>
           <div className="flex flex-col gap-4 lg:gap-8 lg:flex-row lg:justify-center">
-            <Link href="/register">
-              <Button color="gold">สมัครค่าย</Button>
+            <Link href="/register" passHref>
+              <LinkButton color="gold">สมัครค่าย</LinkButton>
             </Link>
-            <a href="#about">
-              <Button color="gold" variant="outlined">
-                รู้จักกับค่าย
-              </Button>
-            </a>
+            <LinkButton href="#about" color="gold" variant="outlined">
+              รู้จักกับค่าย
+            </LinkButton>
           </div>
           <MovingCards />
         </div>

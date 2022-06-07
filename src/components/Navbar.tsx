@@ -8,7 +8,7 @@ import clsx from 'clsx'
 
 import { useScrollY } from '@/utils/useScroll'
 
-import { Button } from './Button'
+import { Button, LinkButton } from './Button'
 
 interface Props {
   className?: string
@@ -49,8 +49,8 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
           <a href="https://www.facebook.com/jwcth" target="_blank" rel="noreferrer">
             ติดต่อเรา
           </a>
-          <Link href="/register">
-            <Button color="gold">สมัครค่าย JWC</Button>
+          <Link href="/register" passHref>
+            <LinkButton color="gold">สมัครค่าย JWC</LinkButton>
           </Link>
         </div>
       </nav>
@@ -73,7 +73,9 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
           ติดต่อเรา
         </a>
         <div className="p-4">
-          <Button color="gold">สมัครค่าย JWC</Button>
+          <Link href="/register" passHref>
+            <LinkButton color="gold">สมัครค่าย JWC</LinkButton>
+          </Link>
         </div>
       </div>
     </div>
