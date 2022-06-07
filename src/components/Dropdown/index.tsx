@@ -46,7 +46,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           <Menu.Button
             className={clsx(
               'inline-flex justify-between w-full rounded-md border-2 border-gray-300',
-              'shadow-sm px-4 py-2 bg-white text-sm focus:outline-none',
+              'shadow-sm px-4 py-2.5 bg-white text-sm focus:outline-none',
               !!value ? 'text-black' : 'text-gray-300',
               !!error && 'border-red-500 border-2'
             )}
