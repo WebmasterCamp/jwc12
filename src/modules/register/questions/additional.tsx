@@ -154,7 +154,9 @@ const additionalWeakQuestions: WeakQuestion = {
       type: InputType.RADIO,
       name: SPECIAL_FIELD.BRANCH,
       question: (
-        <img src="https://i.pinimg.com/originals/e2/06/64/e206645f3d2b5438ac9423bcc6934a4b.jpg" />
+        <div className="w-full flex justify-center">
+          <img src="/images/registrationFormPicture.png" className="w-full" />
+        </div>
       ),
       choices: [
         { value: 'content', name: 'content', label: 'สาขา Content' },

@@ -5,6 +5,19 @@ import { InputType, WeakQuestion } from '../types'
 import { buildYupObject, phoneTestConfig } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
 
+function checkCitizenId(id: string) {
+  let sum = 0
+  for (let i = 0; i < 12; i++) {
+    sum += parseInt(id.charAt(i)) * (13 - i)
+  }
+  const mod = sum % 11
+  const check = (11 - mod) % 10
+  if (check == parseInt(id.charAt(12))) {
+    return true
+  }
+  return false
+}
+
 const basicWeakQuestions: WeakQuestion = {
   stepName: 'basic',
   inputs: [
@@ -83,7 +96,7 @@ const basicWeakQuestions: WeakQuestion = {
       validate: {
         name: 'invalid',
         message: 'เลขบัตรประชาชนไม่ถูกต้อง',
-        test: (value: string) => /^[0-9]{13}$/.test(value),
+        test: checkCitizenId,
       },
     },
     {
@@ -150,7 +163,7 @@ const basicWeakQuestions: WeakQuestion = {
       validate: {
         name: 'invalid',
         message: 'รหัสไปรษณีย์ไม่ถูกต้อง',
-        test: (value: string) => /^\d+$/.test(value),
+        test: (value: string) => /^[0-9]{5}$/.test(value),
       },
     },
     // Education Section ------------------------------------------------------------
