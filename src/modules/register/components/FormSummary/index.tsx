@@ -8,6 +8,7 @@ import { ImagePreview } from '@/components/ImagePreview'
 import { InputContainer } from '@/components/InputContainer'
 import { Loading } from '@/components/Loading'
 import { updateRegistration, useRegistrationData } from '@/db'
+import { TrackId } from '@/track/enums'
 import { saveToast } from '@/utils/saveToast'
 
 import { SPECIAL_FIELD } from '../../context/constants'
@@ -156,10 +157,15 @@ export const FormSummary = () => {
       <SummaryBuilder question={coreQuestions} answers={answers['core']} />
       <SummaryBuilder question={selectBranchQuestion(branch)} answers={answers['branch']} />
       <div className="flex flex-row space-x-4 justify-center mt-8 w-full p-2 ">
-        <Button className="w-40" onClick={() => router.push(`/register/step/4`)} variant="outlined">
+        <Button
+          className="w-40"
+          onClick={() => router.push(`/register/step/4`)}
+          variant="outlined"
+          data-track-id={TrackId.PREV_BUTTON}
+        >
           ย้อนกลับ
         </Button>
-        <Button className="w-40" onClick={handleSubmit}>
+        <Button className="w-40" onClick={handleSubmit} data-track-id={TrackId.COMPLETE_BUTTON}>
           ส่งใบสมัคร
         </Button>
       </div>
