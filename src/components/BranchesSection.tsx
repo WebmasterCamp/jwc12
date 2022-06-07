@@ -66,16 +66,28 @@ export const BranchesSection: React.FunctionComponent = () => {
         )}
       >
         {/* TODO: Use actual cards */}
-        <div onClick={() => setBranch('ct')} className="cursor-pointer aspect-card">
+        <div
+          onClick={() => setBranch('ct')}
+          className={clsx('cursor-pointer aspect-card', branch != null && 'pointer-events-none')}
+        >
           <img alt={nameMap['ct']} src={imageUrl('ct')} />
         </div>
-        <div onClick={() => setBranch('ds')} className="cursor-pointer aspect-card">
+        <div
+          onClick={() => setBranch('ds')}
+          className={clsx('cursor-pointer aspect-card', branch != null && 'pointer-events-none')}
+        >
           <img alt={nameMap['ds']} src={imageUrl('ds')} />
         </div>
-        <div onClick={() => setBranch('mk')} className="cursor-pointer aspect-card">
+        <div
+          onClick={() => setBranch('mk')}
+          className={clsx('cursor-pointer aspect-card', branch != null && 'pointer-events-none')}
+        >
           <img alt={nameMap['mk']} src={imageUrl('mk')} />
         </div>
-        <div onClick={() => setBranch('pg')} className="cursor-pointer aspect-card">
+        <div
+          onClick={() => setBranch('pg')}
+          className={clsx('cursor-pointer aspect-card', branch != null && 'pointer-events-none')}
+        >
           <img alt={nameMap['pg']} src={imageUrl('pg')} />
         </div>
         {branchesDescription.map((detail) => (
