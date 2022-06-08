@@ -16,37 +16,32 @@ const additionalWeakQuestions: WeakQuestion = {
     {
       type: InputType.TEXT,
       name: 'healthCongenitalDisease',
-      question: 'โรคประจำตัว (ถ้าไม่มีใส่ -)',
+      question: 'โรคประจำตัว',
       placeholder: 'ex. ภูมิแพ้',
-      required: true,
     },
     {
       type: InputType.TEXT,
       name: 'healthDrug',
-      question: 'ยาประจำตัว (ถ้าไม่มีใส่ -)',
+      question: 'ยาประจำตัว',
       placeholder: 'ยาประจำตัว',
-      required: true,
     },
     {
       type: InputType.TEXT,
       name: 'healthAllergicDrug',
-      question: 'ยาที่แพ้ (ถ้าไม่มีใส่ -)',
+      question: 'ยาที่แพ้',
       placeholder: 'ยาที่แพ้',
-      required: true,
     },
     {
       type: InputType.TEXT,
       name: 'healthAllergicThing',
-      question: 'สิ่งที่แพ้ (ถ้าไม่มีใส่ -)',
+      question: 'สิ่งที่แพ้',
       placeholder: 'ex. ขนสัตว์, กุ้ง',
-      required: true,
     },
     {
       type: InputType.TEXT,
       name: 'healthDietaryRestriction',
-      question: 'ข้อจำกัดด้านอาหาร (ถ้าไม่มีใส่ -)',
+      question: 'ข้อจำกัดด้านอาหาร',
       placeholder: 'ex. มังสวิรัติ, อาหารคาว, อาหารเผ็ด, ฮาลาล',
-      required: true,
     },
     {
       type: InputType.DROPDOWN,
@@ -84,7 +79,6 @@ const additionalWeakQuestions: WeakQuestion = {
       name: 'remark',
       question: 'มีอะไรอยากบอกไหม (ข้อมูลอื่นๆ ที่จำเป็น)',
       placeholder: 'มีอะไรอยากบอกไหม (ข้อมูลอื่นๆ ที่จำเป็น)',
-      required: true,
     },
     {
       type: InputType.NONE,
@@ -160,7 +154,12 @@ const additionalWeakQuestions: WeakQuestion = {
       type: InputType.RADIO,
       name: SPECIAL_FIELD.BRANCH,
       question: (
-        <img src="https://i.pinimg.com/originals/e2/06/64/e206645f3d2b5438ac9423bcc6934a4b.jpg" />
+        <div className="w-full flex justify-center">
+          <picture>
+            <source srcSet="/images/registrationFormPicture-2x.png 2x" />
+            <img src="/images/registrationFormPicture.png" className="w-full" alt="" />
+          </picture>
+        </div>
       ),
       choices: [
         { value: 'content', name: 'content', label: 'สาขา Content' },

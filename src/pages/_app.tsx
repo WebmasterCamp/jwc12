@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { Toaster } from 'react-hot-toast'
+import { ParallaxProvider } from 'react-scroll-parallax'
 
 import { DefaultSeo } from 'next-seo'
 import type { AppProps } from 'next/app'
@@ -25,7 +27,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RegistrationDataProvider>
       <DefaultSeo {...DefaultSeoConfig} />
-      <Component {...pageProps} />
+      <ParallaxProvider>
+        <Component {...pageProps} />
+      </ParallaxProvider>
       <CookieConsent />
       <Toaster />
     </RegistrationDataProvider>

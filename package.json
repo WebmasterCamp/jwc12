@@ -10,9 +10,11 @@
     "format": "yarn prettier --write ."
   },
   "dependencies": {
+    "@iconify/icons-akar-icons": "^1.2.6",
     "@heroicons/react": "^1.0.6",
     "@hookform/resolvers": "^2.9.0",
     "@iconify/icons-fa6-brands": "^1.2.3",
+    "@iconify/icons-fa6-solid": "^1.2.4",
     "@iconify/react": "^3.2.1",
     "axios": "^0.27.2",
     "blurhash": "^1.1.5",
@@ -22,6 +24,7 @@
     "firebase": "^9.8.2",
     "flowbite": "^1.4.7",
     "next": "12.1.6",
+    "next-mdx-remote": "^4.0.3",
     "next-seo": "^5.4.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
@@ -30,6 +33,7 @@
     "react-hook-form": "^7.31.3",
     "react-hot-toast": "^2.2.0",
     "react-query": "^3.39.1",
+    "react-scroll-parallax": "^3.2.0",
     "react-tsparticles": "^2.0.6",
     "swr": "^1.3.0",
     "tsparticles": "^2.0.6",

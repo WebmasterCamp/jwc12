@@ -1,9 +1,23 @@
 import { InferType } from 'yup'
 
 import { Header } from '../components/Header'
+import { provinces } from '../constants/province'
 import { InputType, WeakQuestion } from '../types'
 import { buildYupObject, phoneTestConfig } from '../utils/validate'
 import { makeQuestion } from '../utils/weak'
+
+function checkCitizenId(id: string) {
+  let sum = 0
+  for (let i = 0; i < 12; i++) {
+    sum += parseInt(id.charAt(i)) * (13 - i)
+  }
+  const mod = sum % 11
+  const check = (11 - mod) % 10
+  if (check == parseInt(id.charAt(12))) {
+    return true
+  }
+  return false
+}
 
 const basicWeakQuestions: WeakQuestion = {
   stepName: 'basic',
@@ -31,6 +45,10 @@ const basicWeakQuestions: WeakQuestion = {
       placeholder: 'คำนำหน้าชื่อ',
       choices: ['เด็กชาย', 'เด็กหญิง', 'นาย', 'นางสาว'],
       required: true,
+    },
+    {
+      type: InputType.NONE,
+      title: <div className="basis-1/2" />,
     },
     {
       type: InputType.TEXT,
@@ -83,7 +101,7 @@ const basicWeakQuestions: WeakQuestion = {
       validate: {
         name: 'invalid',
         message: 'เลขบัตรประชาชนไม่ถูกต้อง',
-        test: (value: string) => /^[0-9]{13}$/.test(value),
+        test: checkCitizenId,
       },
     },
     {
@@ -135,10 +153,11 @@ const basicWeakQuestions: WeakQuestion = {
       required: true,
     },
     {
-      type: InputType.TEXT,
+      type: InputType.DROPDOWN,
       name: 'province',
       question: 'จังหวัด',
       placeholder: 'จังหวัด',
+      choices: provinces,
       required: true,
     },
     {
@@ -150,7 +169,7 @@ const basicWeakQuestions: WeakQuestion = {
       validate: {
         name: 'invalid',
         message: 'รหัสไปรษณีย์ไม่ถูกต้อง',
-        test: (value: string) => /^\d+$/.test(value),
+        test: (value: string) => /^[0-9]{5}$/.test(value),
       },
     },
     // Education Section ------------------------------------------------------------
@@ -159,14 +178,14 @@ const basicWeakQuestions: WeakQuestion = {
       title: <Header>ข้อมูลการศึกษา</Header>,
     },
     {
-      type: InputType.RADIO,
+      type: InputType.DROPDOWN,
       name: 'educationLevel',
       question: 'กำลังศึกษาอยู่ในระดับชั้น',
       placeholder: 'กำลังศึกษาอยู่ในระดับชั้น',
       choices: [
-        'มัธยมศึกษาปีที่ 4',
-        'มัธยมศึกษาปีที่ 5',
-        'มัธยมศึกษาปีที่ 6',
+        'มัธยมศึกษาปีที่ 4 หรือเทียบเท่า',
+        'มัธยมศึกษาปีที่ 5 หรือเทียบเท่า',
+        'มัธยมศึกษาปีที่ 6 หรือเทียบเท่า',
         'กำลังขึ้นปริญญาตรีปีที่ 1',
       ],
       required: true,
@@ -179,10 +198,11 @@ const basicWeakQuestions: WeakQuestion = {
       required: true,
     },
     {
-      type: InputType.TEXT,
+      type: InputType.DROPDOWN,
       name: 'educationProvince',
       question: 'จังหวัด',
       placeholder: 'จังหวัด',
+      choices: provinces,
       required: true,
     },
   ],
