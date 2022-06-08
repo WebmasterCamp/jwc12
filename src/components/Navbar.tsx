@@ -28,7 +28,13 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
           opacity: Math.min(1, scrollY / 72),
         }}
       />
-      <nav className={clsx('flex px-4 py-2 justify-between items-center', className)}>
+      <nav
+        className={clsx(
+          'flex px-4 py-2 justify-between items-center',
+          shown && 'bg-primary',
+          className
+        )}
+      >
         <Link href={'/'}>
           <a>
             <Logo className="h-14" />
@@ -55,7 +61,7 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
       </nav>
       <div
         className={clsx(
-          'lg:hidden flex-col text-right text-white bg-primary',
+          'fixed w-full lg:hidden flex-col text-right text-white bg-primary',
           shown ? 'flex' : 'hidden'
         )}
       >

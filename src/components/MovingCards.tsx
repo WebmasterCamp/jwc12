@@ -8,6 +8,7 @@ import { Logo } from './Logo'
 const MIN_ANGLE_DISTANCE = 5.9
 
 export function MovingCards() {
+  const parent = useRef<HTMLDivElement>(null)
   const card1 = useRef<HTMLDivElement>(null)
   const card2 = useRef<HTMLDivElement>(null)
   const card3 = useRef<HTMLDivElement>(null)
@@ -15,6 +16,7 @@ export function MovingCards() {
   const [loaded, setLoaded] = useState(false)
   useEffect(() => setLoaded(true), [])
   const { ref } = useParallax<HTMLDivElement>({
+    onEnter: () => (parent.current!!.style.display = 'block'),
     onProgressChange: (p) => {
       const angleDistance = getAngleDistance()
       const progress = p * 2 - 1
@@ -30,7 +32,7 @@ export function MovingCards() {
   return (
     <>
       <div className="mx-auto min-h-[30vh] relative my-[10vh]" style={{ width: 173 }}>
-        <div className={clsx(loaded ? 'fixed' : 'absolute', 'w-[174px]')}>
+        <div ref={parent} className={clsx(loaded ? 'fixed hidden' : 'absolute', 'w-[174px]')}>
           <CardTemplate ref={card1} className="rotate-[8.85deg]" color="#DC4223" />
           <CardTemplate ref={card2} className="rotate-[2.95deg]" color="#7423DC" />
           <CardTemplate ref={card3} className="rotate-[-2.95deg]" color="#A1DD40" />

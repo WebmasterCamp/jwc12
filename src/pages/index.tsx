@@ -75,7 +75,7 @@ const Home: NextPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {Array(9)
               .fill(0)
-              .map((_, i) => `/images/0${i + 1}.jpeg`)
+              .map((_, i) => `/images/0${i + 1}.jpg`)
               .map((x) => (
                 <img key={x} src={x} alt="Activities at JWC11" />
               ))}
