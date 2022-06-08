@@ -85,41 +85,30 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
   const [branch, setBranch] = useState<Branch | null>(null)
   const onClose = () => setBranch(null)
   return (
-    <Section className="text-center">
+    <Section className="text-center -mx-5 w-[calc(100%+40px)] sm:px-4 py-4" noPadding>
       <h2 className="text-3xl font-heading lg:text-4xl mb-16 font-semibold">
         เลือกสาขาที่ต้องการสมัคร
       </h2>
       <div
         className={clsx(
-          'flex flex-row gap-8 font-heading font-bold text-3xl text-white',
+          'flex flex-row overflow-x-scroll gap-8 font-heading font-bold text-3xl text-white',
+          'px-[calc(100vw_/_2_-_114.5px)] sm:px-9 snap-x',
           styles.branchesGrid
         )}
       >
-        {/* TODO: Use actual cards */}
-        <div
-          onClick={() => setBranch('ct')}
-          className={clsx('cursor-pointer aspect-card', branch != null && 'pointer-events-none')}
-        >
-          <img alt={nameMap['ct']} src={imageUrl('ct')} />
-        </div>
-        <div
-          onClick={() => setBranch('ds')}
-          className={clsx('cursor-pointer aspect-card', branch != null && 'pointer-events-none')}
-        >
-          <img alt={nameMap['ds']} src={imageUrl('ds')} />
-        </div>
-        <div
-          onClick={() => setBranch('mk')}
-          className={clsx('cursor-pointer aspect-card', branch != null && 'pointer-events-none')}
-        >
-          <img alt={nameMap['mk']} src={imageUrl('mk')} />
-        </div>
-        <div
-          onClick={() => setBranch('pg')}
-          className={clsx('cursor-pointer aspect-card', branch != null && 'pointer-events-none')}
-        >
-          <img alt={nameMap['pg']} src={imageUrl('pg')} />
-        </div>
+        {(['ct', 'ds', 'mk', 'pg'] as const).map((b) => (
+          <div
+            key={b}
+            onClick={() => setBranch(b)}
+            className={clsx(
+              'min-w-[229px] min-h-[375px] sm:min-w-0 sm:min-h-0',
+              'cursor-pointer aspect-card snap-center',
+              branch != null && 'pointer-events-none'
+            )}
+          >
+            <img alt={nameMap[b]} src={imageUrl(b)} />
+          </div>
+        ))}
         {branchesDescription.map((detail) => (
           <BranchDialog
             key={detail.branch}

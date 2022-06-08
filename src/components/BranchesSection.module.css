@@ -1,8 +1,5 @@
 @media screen(sm) {
-  .branchesGrid div {
-    transform: translateY(20px);
-  }
-  .branchesGrid div:nth-child(even) {
-    transform: translateY(-20px);
+  .branchesGrid div:nth-child(odd) {
+    margin-top: 40px;
   }
 }

@@ -97,7 +97,7 @@ export function Upload({
           label
         ) : (
           <BlurhashImage
-            className="w-48 h-48 rounded-[4px] overflow-hidden"
+            className="w-48 h-48 overflow-hidden"
             src={imageUrl}
             blurhash={blurhash}
             alt=""
