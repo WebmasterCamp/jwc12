@@ -37,10 +37,9 @@ export function Upload({
   ...props
 }: UploadProps) {
   const [uploading, setUploading] = useState(false)
-  const { data: image, isValidating } = useSWR(value, downloadImage, {
+  const { data: imageUrl, isValidating } = useSWR(value, downloadImage, {
     revalidateOnFocus: false,
   })
-  const imageUrl = useBlobUrl(image)
   const [blurhash, setBlurhash] = useState<string | null>(null)
   useEffect(() => setBlurhash(extractBlurhash(value)), [value])
 
@@ -84,7 +83,7 @@ export function Upload({
   })
 
   return (
-    <div className={clsx('relative w-[196px] h-[196px] flex flex-col gap-2', className)}>
+    <div className={clsx('relative h-[196px] flex flex-col gap-2', className)}>
       <label
         className={clsx(
           'relative border-gray-300 flex flex-1 justify-center items-center cursor-pointer rounded-md',
@@ -94,13 +93,17 @@ export function Upload({
         )}
         {...getRootProps()}
       >
+        {!imageUrl ? (
+          label
+        ) : (
+          <BlurhashImage
+            className="w-48 h-48 rounded-[4px] overflow-hidden"
+            src={imageUrl}
+            blurhash={blurhash}
+            alt=""
+          />
+        )}
         {pending && !blurhash && <LoadingAnimation className="w-[148px] h-[148px]" />}
-        <BlurhashImage
-          className="w-48 h-48 rounded-[4px] overflow-hidden"
-          src={imageUrl}
-          blurhash={blurhash}
-          alt=""
-        />
       </label>
       <input {...props} id={name} name={name} {...getInputProps()} />
       <ErrorMessage message={error} />

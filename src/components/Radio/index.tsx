@@ -46,7 +46,7 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = forwardRef<
         ref={ref}
       >
         {label && (
-          <label className="whitespace-nowrap">
+          <label className="whitespace-nowrap w-full">
             {label} {required && !noMark && <RequireMark />}
           </label>
         )}

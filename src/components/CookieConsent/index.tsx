@@ -6,7 +6,7 @@ import { Transition } from '@headlessui/react'
 
 import { useConsentStore } from '@/stores/consents'
 
-import { Button } from './Button'
+import { Button } from '../Button'
 import { CookieConsentSettingDialog } from './CookieConsentSettingDialog'
 
 export const CookieConsent: FunctionComponent = () => {

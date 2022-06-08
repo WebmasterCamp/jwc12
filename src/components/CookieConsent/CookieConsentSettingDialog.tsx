@@ -5,6 +5,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { ConsentKeys, GoogleConsent, MetaConsent } from '@/lib/gtm'
 import { useConsentStore } from '@/stores/consents'
 
+import { Button } from '../Button'
 import { CookieConsentSection } from './CookieSection'
 
 interface Props {
@@ -76,7 +77,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, c
                   <div className="border p-4">
                     <div className="flex justify-between font-medium">
                       <div>คุกกี้ที่จำเป็น</div>
-                      <div className="text-primary">เปิดใช้งานตลอด</div>
+                      <div className="text-gold-dark">เปิดใช้งานตลอด</div>
                     </div>
                     <div className="mt-3 text-sm">
                       คุกกี้มีความจำเป็นสำหรับการทำงานของเว็บไซต์
@@ -88,7 +89,7 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, c
                     checked={consents.ad_storage === 'granted' ?? false}
                     onChange={handleChangeConsent('ad_storage', googleConsentMap)}
                     title="คุกกี้โฆษณาและการตลาด"
-                    content="คุกกี้ประเภทนี้จัดเก็บตัวเลือกการเข้าถึงเว็บไซต์ของผู้ใช้ และใช้เป็นพื้นฐานในการปรับแต่งหน้าของเว็บไซต์เพื่อนำเสนอโฆษณาที่เกี่ยวข้องกับคุณมากที่สุด เช่น โดยการเลือกแสดงโฆษณาสำหรับสินค้าที่คุณสนใจ การป้องกันหรือจำกัดจำนวนครั้งที่โฆษณาปรากฏบนหน้าเว็บไซต์เพื่อประเมินประสิทธิภาพของโฆษณาได้ดียิ่งขึ้น"
+                    content="คุกกี้ประเภทนี้จะทำการจัดเก็บตัวเลือกการเข้าถึงเว็บไซต์ของผู้ใช้ เพื่อใช้เป็นพื้นฐานในการปรับแต่งหน้าของเว็บไซต์เพื่อนำเสนอโฆษณาที่เหมาะสมกับคุณมากที่สุด การป้องกันหรือจำกัดจำนวนครั้งที่โฆษณาจะปรากฏบนหน้าเว็บไซต์เพื่อให้สามารถประเมินประสิทธิภาพของโฆษณาได้ดียิ่งขึ้น"
                   />
                   <CookieConsentSection
                     checked={consents.analytics_storage === 'granted' ?? false}
@@ -96,22 +97,11 @@ export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, c
                     title="คุกกี้เพื่อการวิเคราะห์"
                     content="คุกกี้ประเภทนี้จะทำการเก็บข้อมูลการใช้งานเว็บไซต์ของคุณ เพื่อเป็นประโยชน์ในการวัดผล ปรับปรุงและพัฒนาประสบการณ์ที่ดีในการใช้งานเว็บไซต์ ถ้าหากท่านไม่ยินยอมให้เราใช้คุกกี้นี้เราจะไม่สามารถวัดผล ปรังปรุงและพัฒนาเว็บไซต์ได้"
                   />
-
-                  <CookieConsentSection
-                    checked={consents.mt_pixel === 'grant' ?? false}
-                    onChange={handleChangeConsent('mt_pixel', metaConsentMap)}
-                    title="คุกกี้เพื่อปรับเนื้อหาให้เข้ากับกลุ่มเป้าหมาย"
-                    content="คุกกี้ประเภทนี้จะเก็บข้อมูลต่าง ๆ รวมทั้งข้อมูลวส่วนบุคคลเกี่ยวกับตัวคุณเพื่อเราสามารถนำมาวิเคราะห์ และนำเสนอเนื้อหา ให้ตรงกับความเหมาะสมกับความสนใจของคุณ ถ้าหากคุณไม่ยินยอมเราจะไม่สามารถนำเสนอเนื้อหาและโฆษณาได้ไม่ตรงกับความสนใจของคุณ"
-                  />
                 </div>
                 <div className="mt-4 flex justify-end gap-5">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                    onClick={handleSubmitConsent}
-                  >
+                  <Button type="button" onClick={handleSubmitConsent}>
                     บันทึกการตั้งค่า
-                  </button>
+                  </Button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

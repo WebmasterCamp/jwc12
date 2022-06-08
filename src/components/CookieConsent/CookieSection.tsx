@@ -25,7 +25,7 @@ export const CookieConsentSection: FunctionComponent<CookieConsentSectionProps> 
           onChange={onChange}
           className={clsx(
             'relative inline-flex h-[24px] w-[50px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75',
-            checked ? 'bg-primary' : 'bg-gray-300'
+            checked ? 'bg-gold-dark' : 'bg-gray-300'
           )}
         >
           <span

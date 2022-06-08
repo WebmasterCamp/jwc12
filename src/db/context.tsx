@@ -1,7 +1,5 @@
 import { ComponentType, ReactNode, createContext, useCallback, useContext } from 'react'
 
-import equal from 'fast-deep-equal'
-
 import { Loading } from '@/components/Loading'
 
 import { updateRegistration } from '.'

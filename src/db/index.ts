@@ -12,7 +12,13 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore'
-import { connectStorageEmulator, getBlob, getStorage, ref, uploadBytes } from 'firebase/storage'
+import {
+  connectStorageEmulator,
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+} from 'firebase/storage'
 
 import { getUid } from '@/auth/store'
 import '@/lib/firebase'
@@ -39,7 +45,8 @@ if (USE_FIRESTORE_EMULATOR) {
 }
 
 export function getRegistrationRef(uid?: string) {
-  return doc(db, 'registrations', uid ? uid : getUid()) as DocumentReference<Registration>
+  const target = process.env.MODE === 'PRODUCTION' ? 'registrations' : 'registrations_staging'
+  return doc(db, target, uid ? uid : getUid()) as DocumentReference<Registration>
 }
 
 function getStorageRef(filename: string) {
@@ -110,5 +117,5 @@ export async function uploadImage(name: string, file: File) {
 export async function downloadImage(name: string) {
   const fileName = name.split('?')[0]
   const storageRef = getStorageRef(fileName)
-  return await getBlob(storageRef)
+  return await getDownloadURL(storageRef)
 }
