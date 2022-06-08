@@ -6,4 +6,5 @@ export enum TrackId {
   PREV_BUTTON = 'prev-button',
   FORM = 'form',
   INPUT = 'input',
+  BRANCH_CARD = 'branch-card',
 }
