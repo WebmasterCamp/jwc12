@@ -9,6 +9,10 @@ service cloud.firestore {
       allow read, write: if isAdmin();
     }
 
+    match /stats/registrations {
+      allow read;
+    }
+
     function verifyCreate() {
       let data = request.resource.data;
 
@@ -47,11 +51,18 @@ service cloud.firestore {
       let validBranchUpdate = !('confirmedBranch' in affectedKeys) || oldData.confirmedBranch == null;
       let validTimestamps = !('createdAt' in affectedKeys) && newData.updatedAt == request.time;
       let hasNotSubmitted = oldData.submitted == false;
+      let submitWithBranch = !newData.submitted || newData.confirmedBranch != null;
 
-      return validTypes && validBranchUpdate && validTimestamps && hasNotSubmitted;
+      return validTypes && validBranchUpdate && validTimestamps && hasNotSubmitted && submitWithBranch;
     }
 
     match /registrations/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && verifyCreate();
+      allow update: if isOwner(userId) && verifyUpdate();
+    }
+    
+    match /registrations_staging/{userId} {
       allow read: if isOwner(userId);
       allow create: if isOwner(userId) && verifyCreate();
       allow update: if isOwner(userId) && verifyUpdate();

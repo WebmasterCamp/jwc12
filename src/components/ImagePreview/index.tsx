@@ -15,10 +15,9 @@ export interface ImagePreviewProps {
 }
 
 export function ImagePreview({ value, className }: ImagePreviewProps) {
-  const { data: image, isValidating } = useSWR(value, downloadImage, {
+  const { data: imageUrl, isValidating } = useSWR(value, downloadImage, {
     revalidateOnFocus: false,
   })
-  const imageUrl = useBlobUrl(image)
   const blurhash = useMemo(() => extractBlurhash(value), [value])
   return (
     <div className={className}>

@@ -8,6 +8,7 @@ import { ImagePreview } from '@/components/ImagePreview'
 import { InputContainer } from '@/components/InputContainer'
 import { Loading } from '@/components/Loading'
 import { updateRegistration, useRegistrationData } from '@/db'
+import { TrackId } from '@/track/enums'
 import { saveToast } from '@/utils/saveToast'
 
 import { SPECIAL_FIELD } from '../../context/constants'
@@ -32,7 +33,11 @@ const SummaryBuilder: React.FC<SummaryBuilderProps> = ({ question, answers }) =>
         if (input.hideInSummary) return null
         if (input.type === InputType.RADIO && input.name === SPECIAL_FIELD.BRANCH) {
           const choice = input.choices.find((choice) => choice.value === branch)
-          return <div className="p-2 -mt-4">{choice?.label ?? choice?.value}</div>
+          return (
+            <div key={input.name} className="p-2 -mt-4">
+              {choice?.label ?? choice?.value}
+            </div>
+          )
         }
         switch (input.type) {
           case InputType.NONE: {
@@ -94,7 +99,7 @@ const SummaryBuilder: React.FC<SummaryBuilderProps> = ({ question, answers }) =>
                       })}
                     </ul>
                   ) : (
-                    '-'
+                    <Fragment key={input.name}>'-'</Fragment>
                   )
                 }
               />
@@ -123,7 +128,7 @@ function AnswerPreview({
   return (
     <InputContainer className={className}>
       <div className="text-gray-500">{question}</div>
-      <div>{answer}</div>
+      <div>{!!answer ? answer : '-'}</div>
     </InputContainer>
   )
 }
@@ -152,10 +157,15 @@ export const FormSummary = () => {
       <SummaryBuilder question={coreQuestions} answers={answers['core']} />
       <SummaryBuilder question={selectBranchQuestion(branch)} answers={answers['branch']} />
       <div className="flex flex-row space-x-4 justify-center mt-8 w-full p-2 ">
-        <Button className="w-40" onClick={() => router.push(`/register/step/4`)} variant="outlined">
+        <Button
+          className="w-40"
+          onClick={() => router.push(`/register/step/4`)}
+          variant="outlined"
+          data-track-id={TrackId.PREV_BUTTON}
+        >
           ย้อนกลับ
         </Button>
-        <Button className="w-40" onClick={handleSubmit}>
+        <Button className="w-40" onClick={handleSubmit} data-track-id={TrackId.COMPLETE_BUTTON}>
           ส่งใบสมัคร
         </Button>
       </div>

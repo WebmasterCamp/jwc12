@@ -35,7 +35,8 @@ function renderButton<T, P>(
         variant === 'outlined' &&
           color === 'gold' &&
           `border border-1 border-gold text-gold hover:bg-gold/10 hover:border-gold-dark hover:text-gold-dark`,
-        variant === 'primary' && color === 'gold' && `bg-gold text-brown-dark hover:bg-gold-dark`
+        variant === 'primary' && color === 'gold' && `bg-gold text-brown-dark hover:bg-gold-dark`,
+        'disabled:bg-gray-200 disabled:hover:bg-gray-200'
       )}
     />
   )
@@ -55,4 +56,4 @@ export const LinkButton = forwardRef<
 >(({ variant = 'primary', color = 'gold', className, ...rest }, ref) => {
   return renderButton('a', ref, variant, color, className, rest)
 })
-LinkButton.displayName = 'Button'
+LinkButton.displayName = 'LinkButton'

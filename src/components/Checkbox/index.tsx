@@ -61,7 +61,7 @@ export const Checkbox: React.FC<CheckboxProps> = forwardRef<HTMLInputElement, Ch
     return (
       <div
         className={clsx(
-          'flex flex-row gap-x-2 items-center cursor-pointer p-1 select-none whitespace-nowrap',
+          'flex flex-row gap-x-2 items-center cursor-pointer p-1 select-none',
           rest.disabled && `cursor-default`
         )}
       >
@@ -74,12 +74,13 @@ export const Checkbox: React.FC<CheckboxProps> = forwardRef<HTMLInputElement, Ch
           checked={checked}
           onChange={onChange}
           className={clsx(
-            `accent-white w-4 h-4 relative cursor-pointer checked:bg-gold-darker checked:border-gold-darker`,
+            `accent-white w-4 h-4 shrink-0 relative cursor-pointer checked:bg-gold-darker checked:border-gold-darker`,
             `appearance-none bg-white rounded-sm border-2 border-gray-300`,
-            `before:content-['✓'] before:absolute before:bg-transparent before:text-white before:font-bold before:text-xs`,
+            `before:content-['✓'] before:absolute before:bg-transparent before:text-transparent before:text-white before:font-bold before:text-xs`,
             `before:w-2 before:h-2 before:flex before:items-center before:justify-center`,
             'before:top-1/2 before:left-1/2',
             'before:transform before:-translate-x-1/2 before:-translate-y-1/2',
+            'before:checked:text-white',
             `transition-colors ease-out duration-100`,
             className,
             rest.disabled && `cursor-default`
