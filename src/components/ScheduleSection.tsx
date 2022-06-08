@@ -85,7 +85,7 @@ export const ScheduleSection: React.FunctionComponent = () => {
             </div>
           )
         })}
-        <a onClick={toggleViewMore} className="lg:hidden font-bold text-gold font-heading text-xl">
+        <a onClick={toggleViewMore} className="lg:hidden text-gold cursor-pointer underline">
           {text}
         </a>
       </div>
