@@ -10,6 +10,7 @@ import { BranchesSection } from '@/components/BranchesSection'
 import { Button, LinkButton } from '@/components/Button'
 import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
+import { Logo } from '@/components/Logo'
 import { GoogleMap } from '@/components/Map'
 import { MovingCards } from '@/components/MovingCards'
 import { Navbar } from '@/components/Navbar'
@@ -71,11 +72,7 @@ const Home: NextPage = () => {
             </p>
           </div>
           <div className="flex-1">
-            <picture>
-              <source srcSet="/images/jwc12-logo.avif" type="image/avif" />
-              <source srcSet="/images/jwc12-logo.webp" type="image/webp" />
-              <img src="/images/jwc12-logo.png" alt="Junior Webmaster Camp 12" />
-            </picture>
+            <Logo />
           </div>
         </Section>
         <ScheduleSection />

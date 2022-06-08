@@ -3,6 +3,8 @@ import { useParallax } from 'react-scroll-parallax'
 
 import clsx from 'clsx'
 
+import { Logo } from './Logo'
+
 const MIN_ANGLE_DISTANCE = 5.9
 
 export function MovingCards() {
@@ -85,7 +87,7 @@ const CardTemplate = forwardRef<HTMLDivElement, CardProps>(
             strokeWidth="2.62283"
           />
           <foreignObject x="42" y="117" width="90" height="49.3">
-            <img src="/images/jwc12-logo.png" className="h-11" alt="" />
+            <Logo className="h-11" alt="" />
           </foreignObject>
           <defs>
             <linearGradient

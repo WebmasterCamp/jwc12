@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 
 import { FollowUsBar } from '@/components/FollowUsBar'
 import { Footer } from '@/components/Footer'
+import { Logo } from '@/components/Logo'
 import { ParticlesWidget } from '@/components/Particles'
 
 const Home: NextPage = () => {
@@ -14,15 +15,7 @@ const Home: NextPage = () => {
 
       <div className="my-10 mx-auto flex min-h-max w-full max-w-screen-md grow flex-col items-center justify-center">
         <div className="relative mx-auto mb-8 w-full max-w-xl xl:max-w-screen-2xl">
-          <picture>
-            <source srcSet="/images/jwc12-logo.avif" type="image/avif" />
-            <source srcSet="/images/jwc12-logo.webp" type="image/webp" />
-            <img
-              src="/images/jwc12-logo.png"
-              alt="Junior Webmaster Camp 12"
-              className="mx-auto w-full"
-            />
-          </picture>
+          <Logo className="mx-auto w-full" />
         </div>
         <div className="mx-auto w-full text-center text-3xl font-medium leading-7">
           เราจะกลับมาอีกใน
