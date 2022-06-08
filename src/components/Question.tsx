@@ -19,7 +19,7 @@ export const Question: React.FunctionComponent<Props> = ({ title = '', children 
         onClick={toggle}
       >
         <h3 className="text-2xl">{title}</h3>
-        <Icon className="text-2xl" icon={shown ? Cross : Plus}></Icon>
+        <Icon className="text-2xl min-w-[24px]" icon={shown ? Cross : Plus}></Icon>
       </div>
       {shown && <div className="p-4">{children}</div>}
     </div>
