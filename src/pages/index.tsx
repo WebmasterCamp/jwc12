@@ -69,8 +69,15 @@ const Home: NextPage = () => {
         <BranchesSection statData={stats.data} />
         <FaqSection />
         <Section className="text-center">
-          <h2 className="text-3xl lg:text-4l font-semibold font-heading mb-4">ภาพกิจกรรม</h2>
-          <p>TODO: ใส่ภาพกิจกรรม</p>
+          <h2 className="text-3xl lg:text-4l font-semibold font-heading mb-16">ภาพกิจกรรม</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            {Array(9)
+              .fill(0)
+              .map((_, i) => `/images/0${i + 1}.jpeg`)
+              .map((x) => (
+                <img key={x} src={x} alt="Activities at JWC11" />
+              ))}
+          </div>
         </Section>
         <Section className="text-center">
           <h2 className="text-3xl lg:text-4l font-semibold font-heading mb-4">
@@ -103,9 +110,11 @@ const Home: NextPage = () => {
             </a>
           </div>
         </Section>
+        {/* 
+        TODO: Add this back after sponser send logo
         <Section className="text-center">
           <h2 className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">ผู้สนับสนุน</h2>
-        </Section>
+        </Section> */}
         <Footer />
       </div>
     </>
