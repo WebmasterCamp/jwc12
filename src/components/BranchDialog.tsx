@@ -1,9 +1,11 @@
+import Link from 'next/link'
+
 import { Dialog } from '@headlessui/react'
 import CrossIcon from '@iconify/icons-akar-icons/cross'
 import { Icon } from '@iconify/react'
 import { count } from 'console'
 
-import { Button } from './Button'
+import { Button, LinkButton } from './Button'
 
 interface Props {
   open: boolean
@@ -39,7 +41,9 @@ export const BranchDialog: React.FunctionComponent<Props> = ({
                 <span className="font-bold text-lg lg:text-3xl text-brown-dark font-heading">
                   สมัครแล้ว {count} คน
                 </span>
-                <Button color="gold">สมัครสาขานี้</Button>
+                <Link href="/register" passHref>
+                  <LinkButton color="gold">สมัครสาขานี้</LinkButton>
+                </Link>
               </div>
             </div>
           </Dialog.Panel>
