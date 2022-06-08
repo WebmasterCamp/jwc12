@@ -33,16 +33,10 @@ const programmingWeakQuestions: WeakQuestion = {
             ในส่วนของที่เป็นรูปภาพและแผนที่สามารถใส่รูปภาพใดก็ได้มาแทนที่
           </p>
           <div className="flex flex-wrap gap-x-10">
-            <ExternalLink
-              href="https://drive.google.com/file/d/1DRD-MegyLieFAIvDkgw60WmYozYr65CV/view?usp=sharing"
-              target="_blank"
-            >
+            <ExternalLink href="/images/computer-design.png" target="_blank">
               แบบ Desktop
             </ExternalLink>
-            <ExternalLink
-              href="https://drive.google.com/file/d/1DRD-MegyLieFAIvDkgw60WmYozYr65CV/view?usp=sharing"
-              target="_blank"
-            >
+            <ExternalLink href="/images/phone-design.png" target="_blank">
               แบบ Mobile
             </ExternalLink>
           </div>
