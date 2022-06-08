@@ -69,7 +69,7 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
       </h2>
       <div
         className={clsx(
-          'grid grid-cols-1 lg:grid-cols-4 gap-8 font-heading font-bold text-3xl text-white',
+          'flex flex-row gap-8 font-heading font-bold text-3xl text-white',
           styles.branchesGrid
         )}
       >
