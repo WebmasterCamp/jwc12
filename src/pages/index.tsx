@@ -54,7 +54,7 @@ const Home: NextPage = () => {
           </div>
           <MovingCards />
         </div>
-        <Section className="flex flex-col-reverse lg:flex-row">
+        <Section className="flex flex-col-reverse gap-8 lg:flex-row lg:items-center">
           <div className="flex-1">
             <h2 id="about" className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
               JWC คืออะไร
@@ -70,7 +70,13 @@ const Home: NextPage = () => {
               กับค่าย JWC12: Make Your Site, Write Your Future
             </p>
           </div>
-          <div className="flex-1">Insert video here</div>
+          <div className="flex-1">
+            <picture>
+              <source srcSet="/images/jwc12-logo.avif" type="image/avif" />
+              <source srcSet="/images/jwc12-logo.webp" type="image/webp" />
+              <img src="/images/jwc12-logo.png" alt="Junior Webmaster Camp 12" />
+            </picture>
+          </div>
         </Section>
         <ScheduleSection />
         <PlaceSection />
