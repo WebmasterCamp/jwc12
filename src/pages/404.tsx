@@ -1,18 +1,23 @@
 import Link from 'next/link'
 
 import { Container } from '@/components/Container'
-import { Loading } from '@/components/Loading'
+import { Navbar } from '@/components/Navbar'
+import { ParticlesWidget } from '@/components/Particles'
 
 const NotFoundPage = () => {
   return (
-    <Container maxWidth="sm" className="min-height-screen flex items-center justify-center">
-      <div className="flex flex-col items-center justify-center flex-1">
-        <p className="text-3xl">ไม่มีหน้านี้อยู่</p>
-        <Link href="/">
-          <div className="">กลับสู้หน้าหลัก</div>
-        </Link>
-      </div>
-    </Container>
+    <>
+      <Navbar />
+      <Container maxWidth="sm" className="min-height-screen flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center flex-1 gap-y-5">
+          <p className="text-3xl">ไม่มีหน้านี้อยู่</p>
+          <Link href="/">
+            <div className="cursor-pointer underline text-gold-dark">กลับสู้หน้าหลัก</div>
+          </Link>
+        </div>
+        <ParticlesWidget />
+      </Container>
+    </>
   )
 }
 
