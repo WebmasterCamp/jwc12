@@ -20,7 +20,10 @@ export const useConsentStore = create<ConsentStoreProps>((set) => {
   }
 
   const setConsentCookie = (payload: ConsentParams): void => {
-    setCookies('consents', JSON.stringify(payload))
+    const expires = new Date()
+    expires.setFullYear(expires.getFullYear() + 1)
+    console.log(expires)
+    setCookies('consents', JSON.stringify(payload), { expires })
     GTM.consentUpdate()
     set((state) => ({ ...state, consents: payload }))
   }

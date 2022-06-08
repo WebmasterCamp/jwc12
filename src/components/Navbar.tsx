@@ -40,12 +40,12 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
             <Logo className="h-14" />
           </a>
         </Link>
-        <div className="lg:hidden">
-          <Button onClick={toggleNavbar} variant="outlined" color="primary" className="lg:hidden">
+        <div className="md:hidden">
+          <Button onClick={toggleNavbar} variant="outlined" color="primary" className="md:hidden">
             <Icon icon={BarsIcon} className="inline-block" /> เมนู
           </Button>
         </div>
-        <div className="hidden lg:flex flex-row gap-4 items-center">
+        <div className="hidden md:flex flex-row gap-4 items-center">
           <a href="#about">JWC คืออะไร</a>
           <a href="#schedule">กำหนดการ</a>
           <a href="#faq">คำถามที่พบบ่อย</a>
@@ -61,7 +61,7 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
       </nav>
       <div
         className={clsx(
-          'fixed w-full lg:hidden flex-col text-right text-white bg-primary',
+          'fixed w-full md:hidden flex-col text-right text-white bg-primary',
           shown ? 'flex' : 'hidden'
         )}
       >

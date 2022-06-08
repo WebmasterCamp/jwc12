@@ -72,7 +72,7 @@ const Home: NextPage = () => {
         <FaqSection />
         <Section className="text-center">
           <h2 className="text-3xl lg:text-4l font-semibold font-heading mb-16">ภาพกิจกรรม</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {Array(9)
               .fill(0)
               .map((_, i) => `/images/0${i + 1}.jpg`)
