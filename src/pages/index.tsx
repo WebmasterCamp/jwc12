@@ -87,14 +87,14 @@ const Home: NextPage = () => {
             <a
               href="https://www.facebook.com/jwcth"
               target="_blank"
-              className="hover:text-gold"
+              className="hover:text-gold transition-colors ease-in"
               rel="noreferrer"
             >
               <Icon icon={FacebookIcon} className="mr-3 inline text-3xl sm:text-5xl" inline />
             </a>
             <a
               href="https://twitter.com/jwcth"
-              className="hover:text-gold"
+              className="hover:text-gold transition-colors ease-in"
               target="_blank"
               rel="noreferrer"
             >
@@ -103,7 +103,7 @@ const Home: NextPage = () => {
             <a
               href="https://www.instagram.com/jwcth/"
               target="_blank"
-              className="hover:text-gold"
+              className="hover:text-gold transition-colors ease-in"
               rel="noreferrer"
             >
               <Icon icon={InstagramIcon} className="mr-3 inline text-3xl sm:text-5xl" inline />
