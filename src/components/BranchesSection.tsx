@@ -88,6 +88,8 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
             className={clsx(
               'min-w-[229px] min-h-[375px] sm:min-w-0 sm:min-h-0',
               'cursor-pointer aspect-card snap-center',
+              'hover:-translate-y-3 hover:scale-105',
+              'transition-transform ease-out duration-500',
               branch != null && 'pointer-events-none'
             )}
           >
