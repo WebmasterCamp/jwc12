@@ -10,16 +10,22 @@ const schedules = [
     title: 'รับสมัคร',
     date: '8 - 24 มิถุนายน',
     imageUrl: '/images/รับสมัคร.svg',
+    beginDate: new Date(Date.UTC(2022, 5, 8, -7, 0, 0)),
+    endDate: new Date(Date.UTC(2022, 5, 24, 23 - 7, 59, 59)),
   },
   {
     title: 'ประกาศผล\nผู้มีสิทธิ์สัมภาษณ์',
-    date: ' 26 มิถุนายน',
+    date: '26 มิถุนายน',
     imageUrl: '/images/2-ประกาศรอบ1.svg',
+    beginDate: new Date(Date.UTC(2022, 5, 26, -7, 0, 0)),
+    endDate: new Date(Date.UTC(2022, 5, 26, 23 - 7, 59, 59)),
   },
   {
     title: 'สัมภาษณ์ออนไลน์',
     date: '28 มิถุนายน',
     imageUrl: '/images/3-สัมออนไลน์.svg',
+    beginDate: new Date(Date.UTC(2022, 5, 28, -7, 0, 0)),
+    endDate: new Date(Date.UTC(2022, 5, 28, 23 - 7, 59, 59)),
   },
   {
     title: 'ประกาศผล\nผู้ผ่านการคัดเลือก',
@@ -30,16 +36,17 @@ const schedules = [
     title: 'ยืนยันสิทธิ์',
     date: '29 - 30 มิถุนายน',
     imageUrl: '/images/5-ยืนยันสิทธิ์.svg',
+    beginDate: new Date(Date.UTC(2022, 5, 29, -7, 0, 0)),
+    endDate: new Date(Date.UTC(2022, 5, 30, 23 - 7, 59, 59)),
   },
   {
     title: 'วันค่าย',
     date: '8 - 10 กรกฎาคม',
     imageUrl: '/images/6-วันค่าย.svg',
+    beginDate: new Date(Date.UTC(2022, 6, 8, -7, 0, 0)),
+    endDate: new Date(Date.UTC(2022, 5, 10, 23 - 7, 59, 59)),
   },
 ]
-
-const firstSchedules = schedules.slice(0, 3)
-const secondSchedules = schedules.slice(3)
 
 export const ScheduleSection: React.FunctionComponent = () => {
   const [viewMore, setViewMore] = useState(false)
@@ -56,26 +63,21 @@ export const ScheduleSection: React.FunctionComponent = () => {
           styles.scheduleGrid
         )}
       >
-        {firstSchedules.map((task) => {
-          return (
-            <div key={task.title} className="flex flex-col items-center">
-              <picture className="rounded-full bg-black/40 p-4 mb-4">
-                <img src={task.imageUrl} alt={task.title} />
-              </picture>
-              <h3 className="font-heading whitespace-pre-line font-bold text-xl text-gold">
-                {task.title}
-              </h3>
-              <p>{task.date}</p>
-            </div>
-          )
-        })}
-        {secondSchedules.map((task) => {
+        {schedules.map((task, i) => {
+          const active =
+            task.beginDate &&
+            task.endDate &&
+            task.beginDate < new Date() &&
+            task.endDate > new Date()
           return (
             <div
               key={task.title}
-              className={clsx('flex lg:flex flex-col items-center', !viewMore && 'hidden')}
+              className={clsx(
+                'flex lg:flex flex-col items-center',
+                i >= 3 && !viewMore && 'hidden'
+              )}
             >
-              <picture className="rounded-full bg-black/40 p-4 mb-4">
+              <picture className={clsx('mb-4 p-4', active && 'rounded-full bg-black/40')}>
                 <img src={task.imageUrl} alt={task.title} />
               </picture>
               <h3 className="font-heading whitespace-pre-line font-bold text-xl text-gold">
