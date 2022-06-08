@@ -30,14 +30,14 @@ export const PlaceSection: React.FunctionComponent = () => {
     <Section className="lg:p-16">
       <div
         className={clsx(
-          'grid grid-cols-1 lg:flex lg:border lg:p-8 lg:pt-32 rounded-xl bg-cover bg-no-repeat border-gold w-full',
+          'grid grid-cols-1 lg:flex lg:border lg:p-8 lg:pr-0 xl:pt-32 rounded-xl xl:border-none bg-cover bg-no-repeat border-gold w-full max-w-[984px] mx-auto',
           styles.placeSection
         )}
       >
         <div className="hidden w-[400px] lg:block lg:-translate-x-32">
           <GoogleMap />
         </div>
-        <div className="lg:-translate-x-32 px-4">
+        <div className="lg:-ml-32 px-4">
           <h2 className="text-3xl font-heading mb-4 font-semibold">สถานที่</h2>
           <h3 className="text-gold font-heading font-semibold">
             คณะเทคโนโลยีสารสนเทศ <br></br> สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
