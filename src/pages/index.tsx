@@ -35,6 +35,15 @@ const Home: NextPage = () => {
           {/* TODO: Insert sponsor logo here */}
           {/* <div className=" space-x-4 p-8 text-center mx-auto">TODO: Insert logo</div> */}
           <div className="flex flex-col gap-4 lg:gap-8 lg:flex-row lg:justify-center">
+          <div className=" space-x-4 p-8 text-center mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
+            <img
+              className="h-12"
+              src="/images/sponsor-01_TWA.svg"
+              alt="Thai Webmaster Association"
+            />
+            <img className="h-12" src="/images/sponsor-02_it-kmitl.svg" alt="IT KMITL" />
+          </div>
+          <div className="flex flex-col gap-4 sm:gap-8 sm:flex-row sm:justify-center">
             <Link href="/register" passHref>
               <LinkButton className="register-button" color="gold">
                 สมัครค่าย
