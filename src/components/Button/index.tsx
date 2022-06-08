@@ -56,4 +56,4 @@ export const LinkButton = forwardRef<
 >(({ variant = 'primary', color = 'gold', className, ...rest }, ref) => {
   return renderButton('a', ref, variant, color, className, rest)
 })
-LinkButton.displayName = 'Button'
+LinkButton.displayName = 'LinkButton'
