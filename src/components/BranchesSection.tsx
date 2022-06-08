@@ -8,6 +8,7 @@ import { designQuestions } from '@/modules/register/questions/design'
 import { marketingQuestions } from '@/modules/register/questions/marketing'
 import { programmingQuestions } from '@/modules/register/questions/programming'
 import { InputType, Question, SimpleInput } from '@/modules/register/types'
+import { TrackId } from '@/track/enums'
 
 import { BranchDialog } from './BranchDialog'
 import styles from './BranchesSection.module.css'
@@ -75,8 +76,8 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
       </h2>
       <div
         className={clsx(
-          'flex flex-row overflow-x-scroll sm:overflow-x-visible gap-8 font-heading font-bold text-3xl text-white',
-          '-mt-6 pt-6 sm:px-9 snap-x',
+          'flex flex-row overflow-x-scroll sm:overflow-x-visible p-8 gap-8 font-heading font-bold text-3xl text-white',
+          'sm:px-9 snap-x',
           styles.branchesGrid
         )}
       >
@@ -84,6 +85,7 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
         {(['ct', 'ds', 'mk', 'pg'] as const).map((b) => (
           <div
             key={b}
+            id={b}
             onClick={() => setBranch(b)}
             className={clsx(
               'min-w-[229px] min-h-[375px] sm:min-w-0 sm:min-h-0',
@@ -92,6 +94,7 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
               'transition-transform ease-out duration-500',
               branch != null && 'pointer-events-none'
             )}
+            data-track-id={TrackId.BRANCH_CARD}
           >
             <img alt={nameMap[b]} src={imageUrl(b)} />
           </div>
