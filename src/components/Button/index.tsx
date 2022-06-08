@@ -20,7 +20,7 @@ function renderButton<T, P>(
 ) {
   return (
     <Component
-      type="button"
+      {...(Component === 'button' ? { type: 'button' } : {})}
       {...props}
       ref={ref}
       className={clsx(
