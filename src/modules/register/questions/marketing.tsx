@@ -43,10 +43,22 @@ const marketingWeakQuestions: WeakQuestion = {
             แม่หมอต้องการให้น้อง ๆ สังเกตภาพด้านบนนี้ เมื่อเห็นภาพนี้แล้วเห็นโอกาสอะไร
             ถ้าคิดธุรกิจมาได้อยากทำธุรกิจอะไร พร้อมให้เหตุผล
           </p>
-          <div>
-            <ExternalLink href="https://www.scg.com/sdsymposium/2020/wp-content/uploads/2020/10/IMG_9567.jpg / ที่มาของภาพ: https://www.scg.com/sdsymposium/2020/pillar/%E0%B8%95%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%A2%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B9%80%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%8D/">
-              รูปอยู่ตรงนี้
-            </ExternalLink>
+          <div className="flex flex-col gap-y-3">
+            <img
+              src="https://cdn.pixabay.com/photo/2017/09/08/18/20/garbage-2729608_1280.jpg"
+              alt="โจทย์ marketing"
+              className="rounded-md overflow-hidden"
+            />
+            <p className="italic text-xs text-gray-500 text-center">
+              ภาพโดย{' '}
+              <ExternalLink href="https://pixabay.com/th/users/ritae-19628/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2729608">
+                RitaE
+              </ExternalLink>{' '}
+              จาก{' '}
+              <ExternalLink href="https://pixabay.com/th/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2729608">
+                Pixabay
+              </ExternalLink>
+            </p>
           </div>
         </QuestionWithNumber>
       ),

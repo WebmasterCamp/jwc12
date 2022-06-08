@@ -7,16 +7,14 @@ import TwitterIcon from '@iconify/icons-fa6-brands/twitter'
 import { Icon } from '@iconify/react'
 
 import { BranchesSection } from '@/components/BranchesSection'
-import { Button, LinkButton } from '@/components/Button'
+import { LinkButton } from '@/components/Button'
 import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
 import { Logo } from '@/components/Logo'
-import { GoogleMap } from '@/components/Map'
 import { MovingCards } from '@/components/MovingCards'
 import { Navbar } from '@/components/Navbar'
 import { ParticlesWidget } from '@/components/Particles'
 import { PlaceSection } from '@/components/PlaceSection'
-import { Question } from '@/components/Question'
 import { ScheduleSection } from '@/components/ScheduleSection'
 import { Section } from '@/components/Section'
 import { useRegistrationStats } from '@/db/hooks'
@@ -89,14 +87,14 @@ const Home: NextPage = () => {
             <a
               href="https://www.facebook.com/jwcth"
               target="_blank"
-              className="hover:text-gold"
+              className="hover:text-gold transition-colors ease-in"
               rel="noreferrer"
             >
               <Icon icon={FacebookIcon} className="mr-3 inline text-3xl sm:text-5xl" inline />
             </a>
             <a
               href="https://twitter.com/jwcth"
-              className="hover:text-gold"
+              className="hover:text-gold transition-colors ease-in"
               target="_blank"
               rel="noreferrer"
             >
@@ -105,7 +103,7 @@ const Home: NextPage = () => {
             <a
               href="https://www.instagram.com/jwcth/"
               target="_blank"
-              className="hover:text-gold"
+              className="hover:text-gold transition-colors ease-in"
               rel="noreferrer"
             >
               <Icon icon={InstagramIcon} className="mr-3 inline text-3xl sm:text-5xl" inline />
