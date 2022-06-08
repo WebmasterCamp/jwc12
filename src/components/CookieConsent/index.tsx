@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from 'react'
+import { FunctionComponent, useEffect, useRef } from 'react'
 
 import Link from 'next/link'
 
@@ -13,8 +13,13 @@ export const CookieConsent: FunctionComponent = () => {
   const { open, setOpenSettings, initialize, setOpen, openSettings, setConsentCookie } =
     useConsentStore()
 
+  const openRef = useRef<boolean>(false)
+
   useEffect(() => {
-    initialize()
+    if (!openRef.current) {
+      initialize()
+    }
+    openRef.current = true
   }, [initialize])
 
   const handleSubmit = () => {

@@ -45,10 +45,10 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
             <Icon icon={BarsIcon} className="inline-block" /> เมนู
           </Button>
         </div>
-        <div className="hidden md:flex flex-row gap-4 items-center">
-          <a href="#about">JWC คืออะไร</a>
-          <a href="#schedule">กำหนดการ</a>
-          <a href="#faq">คำถามที่พบบ่อย</a>
+        <div className="hidden md:flex flex-row gap-4 items-center text-white">
+          <Link href="/#about">JWC คืออะไร</Link>
+          <Link href="/#schedule">กำหนดการ</Link>
+          <Link href="/#faq">คำถามที่พบบ่อย</Link>
           <a href="https://www.facebook.com/jwcth" target="_blank" rel="noreferrer">
             ติดต่อเรา
           </a>

@@ -13,16 +13,27 @@ export interface ConsentStoreProps {
   setConsentCookie: (payload: ConsentParams) => void
 }
 
-export const useConsentStore = create<ConsentStoreProps>((set) => {
+const getExpiredDate = () => {
+  const now = new Date()
+  now.setFullYear(now.getFullYear() + 1)
+  return now
+}
+
+export const useConsentStore = create<ConsentStoreProps>((set, get) => {
   const initialize = () => {
     const initiallyOpen = typeof window !== 'undefined' ? !getCookie('consents') : false
+    if (initiallyOpen) {
+      get().setConsentCookie({
+        mt_pixel: 'grant',
+        ad_storage: 'granted',
+        analytics_storage: 'granted',
+      })
+    }
     set((state) => ({ ...state, open: initiallyOpen }))
   }
 
   const setConsentCookie = (payload: ConsentParams): void => {
-    const expires = new Date()
-    expires.setFullYear(expires.getFullYear() + 1)
-    console.log(expires)
+    const expires = getExpiredDate()
     setCookies('consents', JSON.stringify(payload), { expires })
     GTM.consentUpdate()
     set((state) => ({ ...state, consents: payload }))
