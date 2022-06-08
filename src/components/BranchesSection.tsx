@@ -76,10 +76,11 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
       <div
         className={clsx(
           'flex flex-row overflow-x-scroll sm:overflow-x-visible gap-8 font-heading font-bold text-3xl text-white',
-          'px-[calc(100vw_/_2_-_114.5px)] sm:px-9 snap-x',
+          'sm:px-9 snap-x',
           styles.branchesGrid
         )}
       >
+        <div className="sm:hidden" style={{ minWidth: 'calc(100vw / 2 - 146.5px)' }} />
         {(['ct', 'ds', 'mk', 'pg'] as const).map((b) => (
           <div
             key={b}
@@ -93,6 +94,7 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
             <img alt={nameMap[b]} src={imageUrl(b)} />
           </div>
         ))}
+        <div className="sm:hidden" style={{ minWidth: 'calc(100vw / 2 - 146.5px)' }} />
         {branchesDescription.map((detail) => (
           <BranchDialog
             key={detail.branch}
