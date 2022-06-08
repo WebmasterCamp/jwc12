@@ -9,6 +9,7 @@ import clsx from 'clsx'
 import { useScrollY } from '@/utils/useScroll'
 
 import { Button, LinkButton } from './Button'
+import { Logo } from './Logo'
 
 interface Props {
   className?: string
@@ -30,11 +31,7 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
       <nav className={clsx('flex px-4 py-2 justify-between items-center', className)}>
         <Link href={'/'}>
           <a>
-            <picture>
-              <source srcSet="/images/jwc12-logo.avif" type="image/avif" />
-              <source srcSet="/images/jwc12-logo.webp" type="image/webp" />
-              <img src="/images/jwc12-logo.png" alt="Junior Webmaster Camp 12" className="h-14" />
-            </picture>
+            <Logo className="h-14" />
           </a>
         </Link>
         <div className="lg:hidden">

@@ -10,6 +10,7 @@ import { BranchesSection } from '@/components/BranchesSection'
 import { Button, LinkButton } from '@/components/Button'
 import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
+import { Logo } from '@/components/Logo'
 import { GoogleMap } from '@/components/Map'
 import { MovingCards } from '@/components/MovingCards'
 import { Navbar } from '@/components/Navbar'
@@ -32,16 +33,7 @@ const Home: NextPage = () => {
             Make Your Site,
             <br /> Write Your <span className="text-ct">Future</span>
           </h1>
-          {/* TODO: Insert sponsor logo here */}
-          {/* <div className=" space-x-4 p-8 text-center mx-auto">TODO: Insert logo</div> */}
-          <div className=" space-x-4 p-8 text-center mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
-            <img
-              className="h-12"
-              src="/images/sponsor-01_TWA.svg"
-              alt="Thai Webmaster Association"
-            />
-            <img className="h-12" src="/images/sponsor-02_it-kmitl.svg" alt="IT KMITL" />
-          </div>
+          <SponsorLogos />
           <div className="flex flex-col gap-4 sm:gap-8 sm:flex-row sm:justify-center">
             <Link href="/register" passHref>
               <LinkButton className="register-button" color="gold">
@@ -71,11 +63,7 @@ const Home: NextPage = () => {
             </p>
           </div>
           <div className="flex-1">
-            <picture>
-              <source srcSet="/images/jwc12-logo.avif" type="image/avif" />
-              <source srcSet="/images/jwc12-logo.webp" type="image/webp" />
-              <img src="/images/jwc12-logo.png" alt="Junior Webmaster Camp 12" />
-            </picture>
+            <Logo />
           </div>
         </Section>
         <ScheduleSection />
@@ -127,18 +115,20 @@ const Home: NextPage = () => {
 
         <Section className="text-center">
           <h2 className="text-3xl font-heading lg:text-4xl mb-16 font-semibold">ผู้สนับสนุน</h2>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {/* TODO: Dynamically add sponser */}
-            {Array(2)
-              .fill(0)
-              .map((_, i) => (
-                <img src={`/images/sponsor-0${i + 1}.svg`} alt="Sponsor" key={i} />
-              ))}
-          </div>
+          <SponsorLogos />
         </Section>
         <Footer />
       </div>
     </>
+  )
+}
+
+function SponsorLogos() {
+  return (
+    <div className=" space-x-4 p-8 text-center mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
+      <img className="h-12" src="/images/sponsor-01.svg" alt="Thai Webmaster Association" />
+      <img className="h-12" src="/images/sponsor-02.svg" alt="IT KMITL" />
+    </div>
   )
 }
 
