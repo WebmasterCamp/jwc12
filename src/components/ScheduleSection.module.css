@@ -1,0 +1,8 @@
+/* @media screen(lg) {
+    .scheduleGrid > *:nth-child(odd) {
+        transform: tranlateY(-50px);
+    }
+    .scheduleGrid > *:nth-child(even) {
+        transform: translateY(50px);
+    }
+} */

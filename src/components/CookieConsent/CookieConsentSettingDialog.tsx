@@ -29,9 +29,11 @@ const metaConsentMap: ConsentMap<MetaConsent> = {
 }
 
 export const CookieConsentSettingDialog: FunctionComponent<Props> = ({ isOpen, closeModal }) => {
-  const { consents, setConsentCookie, setOpenSettings } = useConsentStore()
+  const { consents, setConsentCookie, setOpen, setOpenSettings } = useConsentStore()
 
   const handleSubmitConsent = () => {
+    setConsentCookie(consents)
+    setOpen(false)
     setOpenSettings(false)
   }
 

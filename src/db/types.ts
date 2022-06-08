@@ -17,3 +17,11 @@ export interface Registration {
   createdAt: Timestamp
   updatedAt: Timestamp
 }
+
+export interface RegistrationStats {
+  all: number
+  programming: number
+  design: number
+  marketing: number
+  content: number
+}

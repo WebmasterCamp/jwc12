@@ -155,7 +155,10 @@ const additionalWeakQuestions: WeakQuestion = {
       name: SPECIAL_FIELD.BRANCH,
       question: (
         <div className="w-full flex justify-center">
-          <img src="/images/registrationFormPicture.png" className="w-full" />
+          <picture>
+            <source srcSet="/images/registrationFormPicture-2x.png 2x" />
+            <img src="/images/registrationFormPicture.png" className="w-full" alt="" />
+          </picture>
         </div>
       ),
       choices: [

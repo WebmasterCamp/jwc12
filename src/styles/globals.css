@@ -22,8 +22,9 @@
 
 @layer base {
   body {
-    background-image: url('/images/line.png'),
-      conic-gradient(from 180deg at 50% 50%, #8e269f 0deg, #131d38 88.12deg, #8e269f 360deg);
+    /* background-image: url('/images/line.png'),
+      conic-gradient(from 180deg at 50% 50%, #8e269f 0deg, #131d38 88.12deg, #8e269f 360deg); */
+    background: linear-gradient(180deg, #8e269f 0%, #131d38 75%);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover, cover;
@@ -81,4 +82,8 @@
   a {
     @apply underline;
   }
+}
+
+.register-button {
+  box-shadow: 0px 0px 10px rgba(228, 208, 162, 0.4);
 }

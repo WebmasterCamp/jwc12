@@ -26,12 +26,18 @@ import { app } from '@/lib/firebase'
 import type { StepName } from '@/modules/register/questions'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
-import { Answers, Registration } from './types'
+import { Answers, Registration, RegistrationStats } from './types'
 
 export * from './context'
 
 const db = getFirestore(app)
 const storage = getStorage()
+
+export const registrationStatsRef = doc(
+  db,
+  'stats',
+  'registrations'
+) as DocumentReference<RegistrationStats>
 
 if (USE_FIRESTORE_EMULATOR) {
   connectFirestoreEmulator(db, 'localhost', 8080)
