@@ -9,9 +9,9 @@ const nextConfig = (phase) => {
     BASE_URL: (() => {
       if (isDev) return 'http://localhost:3000'
       if (isProd) {
-        return 'https://register.12.jwc.in.th'
+        return 'https://12.jwc.in.th'
       }
-      if (isStaging) return 'http://register.12-staging.jwc.in.th'
+      if (isStaging) return 'http://12-staging.jwc.in.th'
       return 'BASE_URL:not (isDev,isProd && !isStaging,isProd && isStaging)'
     })(),
     MODE: (() => {
