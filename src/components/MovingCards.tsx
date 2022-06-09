@@ -1,5 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from 'react'
-import { useParallax } from 'react-scroll-parallax'
+import { forwardRef, useEffect, useRef } from 'react'
 
 import clsx from 'clsx'
 
@@ -13,13 +12,10 @@ export function MovingCards() {
   const card2 = useRef<HTMLDivElement>(null)
   const card3 = useRef<HTMLDivElement>(null)
   const card4 = useRef<HTMLDivElement>(null)
-  const [loaded, setLoaded] = useState(false)
-  useEffect(() => setLoaded(true), [])
-  const { ref } = useParallax<HTMLDivElement>({
-    onEnter: () => (parent.current!!.style.display = 'block'),
-    onProgressChange: (p) => {
+  useEffect(() => {
+    function updateTransforms() {
+      const progress = window.scrollY / window.innerHeight
       const angleDistance = getAngleDistance()
-      const progress = p * 2 - 1
       const refs = [card1.current!!, card2.current!!, card3.current!!, card4.current!!]
       refs.forEach((ref, i) => {
         const baseAngle = -(i - 1.5) * angleDistance
@@ -27,20 +23,25 @@ export function MovingCards() {
         const angle = baseAngle * (1 + additionalMultiplier)
         ref.style.transform = `rotate(${angle}deg) translateY(-${progress * 1200}px)`
       })
-    },
-  })
+    }
+    updateTransforms()
+    parent.current!!.style.position = 'fixed'
+    window.addEventListener('scroll', updateTransforms)
+    window.addEventListener('resize', updateTransforms)
+    return () => {
+      window.removeEventListener('scroll', updateTransforms)
+      window.removeEventListener('resize', updateTransforms)
+    }
+  }, [])
   return (
-    <>
-      <div className="mx-auto min-h-[30vh] relative my-[10vh]" style={{ width: 173 }}>
-        <div ref={parent} className={clsx(loaded ? 'fixed hidden' : 'absolute', 'w-[174px]')}>
-          <CardTemplate ref={card1} className="rotate-[8.85deg]" color="#DC4223" />
-          <CardTemplate ref={card2} className="rotate-[2.95deg]" color="#7423DC" />
-          <CardTemplate ref={card3} className="rotate-[-2.95deg]" color="#A1DD40" />
-          <CardTemplate ref={card4} className="rotate-[-8.85deg]" color="#1DC5B2" />
-        </div>
+    <div className="mx-auto min-h-[30vh] relative my-[10vh]" style={{ width: 173 }}>
+      <div ref={parent} className="absolute w-[174px]">
+        <CardTemplate ref={card1} className="rotate-[8.85deg]" color="#DC4223" />
+        <CardTemplate ref={card2} className="rotate-[2.95deg]" color="#7423DC" />
+        <CardTemplate ref={card3} className="rotate-[-2.95deg]" color="#A1DD40" />
+        <CardTemplate ref={card4} className="rotate-[-8.85deg]" color="#1DC5B2" />
       </div>
-      <div ref={ref} className="absolute top-0 left-0 h-screen" />
-    </>
+    </div>
   )
 }
 
