@@ -8,7 +8,7 @@ const NotFoundPage = () => {
   return (
     <>
       <Navbar />
-      <Container maxWidth="sm" className="min-height-screen flex items-center justify-center">
+      <Container belowNavbar maxWidth="sm" className="flex items-center justify-center">
         <div className="flex flex-col items-center justify-center flex-1 gap-y-5">
           <p className="text-3xl">ไม่มีหน้านี้อยู่</p>
           <Link href="/">

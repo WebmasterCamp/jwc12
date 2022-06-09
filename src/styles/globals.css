@@ -33,8 +33,13 @@
 
 @layer utilities {
   .min-h-screen {
-    /* min-height: '100vh'; */
-    min-height: '100dvh';
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .min-h-screen-navbar {
+    min-height: calc(100vh - 72px);
+    min-height: calc(100dvh - 72px);
   }
 }
 

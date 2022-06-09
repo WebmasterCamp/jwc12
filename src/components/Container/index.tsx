@@ -22,18 +22,21 @@ export interface ContainerProps {
   className?: string
   children: React.ReactNode
   maxWidth?: MaxWidth
+  belowNavbar?: boolean
 }
 
 export const Container: FunctionComponent<ContainerProps> = ({
   children,
   maxWidth = 'full',
   className,
+  belowNavbar = false,
 }) => {
   return (
     <div
       className={clsx(
         className,
-        'relative min-h-screen w-full flex flex-col text-white p-5 m-auto',
+        belowNavbar ? 'min-h-screen-navbar' : 'min-h-screen',
+        'relative w-full flex flex-col text-white p-5 m-auto',
         maxWidth && maxWidthMapping[maxWidth]
       )}
     >
