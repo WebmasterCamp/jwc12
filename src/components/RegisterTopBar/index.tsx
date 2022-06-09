@@ -3,12 +3,7 @@ import Link from 'next/link'
 import { Logo } from '../Logo'
 import { UserBar } from '../UserBar'
 
-interface RegisterTopBarProps {
-  displayName?: string
-  signOut: () => void
-}
-
-export const RegisterTopBar: React.FC<RegisterTopBarProps> = ({ displayName, signOut }) => {
+export const RegisterTopBar = () => {
   return (
     <div className="w-full flex items-center justify-between mb-4">
       <header>
@@ -19,7 +14,7 @@ export const RegisterTopBar: React.FC<RegisterTopBarProps> = ({ displayName, sig
         </Link>
       </header>
 
-      <UserBar displayName={displayName} signOut={signOut} />
+      <UserBar />
     </div>
   )
 }

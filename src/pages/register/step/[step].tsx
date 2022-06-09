@@ -2,7 +2,6 @@ import { ReactNode } from 'react'
 
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
-import { useAuthStore } from '@/auth/store'
 import { withAuth } from '@/auth/withAuth'
 import { Container } from '@/components/Container'
 import { Footer } from '@/components/Footer'
@@ -28,7 +27,6 @@ type InnerPageProps = StepPageProps & {
 
 const StepPage: NextPage<StepPageProps> = withRegistrationData<InnerPageProps>(
   ({ step, registration }) => {
-    const { user, signOut } = useAuthStore()
     const {
       consented = false,
       furthestStep = 1,
@@ -54,7 +52,7 @@ const StepPage: NextPage<StepPageProps> = withRegistrationData<InnerPageProps>(
     const wrapper = (children: ReactNode) => (
       <>
         <Container maxWidth="4xl" className="mb-6 self-center m-auto">
-          <RegisterTopBar displayName={user?.displayName} signOut={signOut} />
+          <RegisterTopBar />
           <Tab furthestStep={furthestStep} currentStep={step}>
             {stepItems.map((item, index) => (
               <TabItem key={index} label={item} index={index + 1} />

@@ -3,13 +3,12 @@ import React, { Fragment, useMemo } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 
-interface UserBarProps {
-  signOut: () => void
-  displayName?: string
-  photoURL?: string
-}
+import { useAuthStore } from '@/auth/store'
 
-export const UserBar: React.FC<UserBarProps> = ({ displayName, photoURL, signOut }) => {
+export const UserBar = () => {
+  const { user, signOut } = useAuthStore()
+  const { displayName, photoURL } = user || {}
+
   const shortName = useMemo(() => {
     return displayName ? displayName.split(' ')[0] : 'user'
   }, [displayName])
@@ -28,9 +27,9 @@ export const UserBar: React.FC<UserBarProps> = ({ displayName, photoURL, signOut
           )}
         >
           {photoURL ? (
-            <img src={photoURL} width="24" height="24" alt="" />
+            <img className="w-6 h-6 rounded-full" src={photoURL} alt="" />
           ) : (
-            <div className="w-[24px] h-[24px] rounded-full bg-primary leading-none flex items-center justify-center">
+            <div className="w-6 h-6 rounded-full bg-primary leading-none flex items-center justify-center">
               {firstLetter}
             </div>
           )}

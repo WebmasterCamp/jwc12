@@ -10,7 +10,6 @@ import { readFileSync } from 'fs'
 import { resolve } from 'path'
 import { InferType, boolean, object } from 'yup'
 
-import { useAuthStore } from '@/auth/store'
 import { withAuth } from '@/auth/withAuth'
 import { Button } from '@/components/Button'
 import { Checkbox } from '@/components/Checkbox'
@@ -35,7 +34,6 @@ interface RegisterPageProps {
 
 const RegisterPage: NextPage<RegisterPageProps> = withRegistrationData<RegisterPageProps>(
   ({ registration, source }) => {
-    const { user, signOut } = useAuthStore()
     const { consented = false, currentStep = 1, submitted = false } = registration || {}
 
     const { control, handleSubmit } = useForm<ConsentModel>({
@@ -66,7 +64,7 @@ const RegisterPage: NextPage<RegisterPageProps> = withRegistrationData<RegisterP
 
     return (
       <Container maxWidth="4xl" className="flex flex-col self-center m-auto max-h-screen">
-        <RegisterTopBar displayName={user?.displayName} signOut={signOut} />
+        <RegisterTopBar />
         <FormCard className="flex flex-col text-black gap-y-4 grow-1 min-h-0 bg-white">
           <h2 className="text-xl text-center font-bold">
             กรุณายอมรับข้อกำหนดและเงื่อนไข การเข้าร่วมโครงการเพื่อดำเนินการสมัคร
