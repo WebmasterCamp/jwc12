@@ -8,7 +8,6 @@ import useSWR from 'swr'
 import { downloadImage, uploadImage } from '@/db'
 import { createBlurhash } from '@/utils/createBlurhash'
 import { extractBlurhash } from '@/utils/extractBlurhash'
-import { useBlobUrl } from '@/utils/useBlobUrl'
 
 import { BlurhashImage } from '../BlurhashImage'
 import { ErrorMessage } from '../ErrorMessage'
@@ -93,7 +92,7 @@ export function Upload({
         )}
         {...getRootProps()}
       >
-        {!imageUrl ? (
+        {!value ? (
           label
         ) : (
           <BlurhashImage
