@@ -61,7 +61,7 @@ const additionalWeakQuestions: WeakQuestion = {
     {
       type: InputType.CHECKBOX,
       name: 'knowFrom',
-      question: 'รู้จักค่าย YWC จากไหน',
+      question: 'รู้จักค่าย JWC จากไหน',
       choices: [
         { value: 'Facebook', name: 'facebook' },
         { value: 'Instagram', name: 'instagram' },
