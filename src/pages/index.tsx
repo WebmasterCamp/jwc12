@@ -41,12 +41,12 @@ const Home: NextPage = () => {
           </h1>
           <SponsorLogos />
           <div className="flex flex-col gap-4 sm:gap-8 sm:flex-row sm:justify-center">
-            <Link href="/register" passHref>
+            <Link href="/#branch" passHref>
               <LinkButton className="register-button" color="gold">
                 สมัครค่าย
               </LinkButton>
             </Link>
-            <LinkButton href="#about" color="gold" variant="outlined">
+            <LinkButton href="/#about" color="gold" variant="outlined">
               รู้จักกับค่าย
             </LinkButton>
           </div>
