@@ -56,7 +56,6 @@ const additionalWeakQuestions: WeakQuestion = {
       name: 'activity',
       question: 'กิจกรรมที่เข้าร่วมหรือผลงานที่เคยทำ',
       placeholder: 'ex. งานแข่งขัน การประกวด การแสดง ฯลฯ',
-      required: true,
     },
     {
       type: InputType.CHECKBOX,
