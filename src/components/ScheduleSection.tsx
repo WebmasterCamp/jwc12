@@ -40,7 +40,7 @@ const schedules = [
     endDate: new Date(Date.UTC(2022, 5, 30, 23 - 7, 59, 59)),
   },
   {
-    title: 'วันค่าย',
+    title: 'วันจัดกิจกรรม',
     date: '8 - 10 กรกฎาคม',
     imageUrl: '/images/6-วันค่าย.svg',
     beginDate: new Date(Date.UTC(2022, 6, 8, -7, 0, 0)),
@@ -80,10 +80,10 @@ export const ScheduleSection: React.FunctionComponent = () => {
               <picture className={clsx('mb-4 p-4', active && 'rounded-full bg-black/40')}>
                 <img src={task.imageUrl} alt={task.title} />
               </picture>
+              <p>{task.date}</p>
               <h3 className="font-heading whitespace-pre-line font-bold text-xl text-gold">
                 {task.title}
               </h3>
-              <p>{task.date}</p>
             </div>
           )
         })}

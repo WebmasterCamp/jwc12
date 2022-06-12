@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import type { NextPage } from 'next'
 import Link from 'next/link'
 
@@ -17,28 +19,37 @@ import { ParticlesWidget } from '@/components/Particles'
 import { PlaceSection } from '@/components/PlaceSection'
 import { ScheduleSection } from '@/components/ScheduleSection'
 import { Section } from '@/components/Section'
+import { Star } from '@/components/Star'
 import { useRegistrationStats } from '@/db/hooks'
 
 const Home: NextPage = () => {
   const stats = useRegistrationStats()
+
   return (
     <>
       <Navbar className="text-white" />
       <div className="flex min-h-screen overflow-x-hidden w-full flex-col px-5 text-white">
         <ParticlesWidget />
-        <div className="w-full lg:w-1/2 mx-auto">
-          <h1 className="text-4xl lg:text-5xl text-center mt-16 space-y-4 font-heading">
+        <div className="w-full lg:w-1/2 mx-auto pt-16">
+          <div className="flex gap-x-4 items-center justify-center">
+            <Star />
+            <p className="text-gold-dark whitespace-nowrap text-center">
+              ค่ายสร้างเว็บที่เด็กม.ปลาย พลาดไม่ได้ !!
+            </p>
+            <Star />
+          </div>
+          <h1 className="text-4xl lg:text-5xl text-center space-y-4 font-heading">
             Make Your Site,
             <br /> Write Your <span className="text-ct">Future</span>
           </h1>
           <SponsorLogos />
           <div className="flex flex-col gap-4 sm:gap-8 sm:flex-row sm:justify-center">
-            <Link href="/register" passHref>
+            <Link href="/#branch" passHref>
               <LinkButton className="register-button" color="gold">
                 สมัครค่าย
               </LinkButton>
             </Link>
-            <LinkButton href="#about" color="gold" variant="outlined">
+            <LinkButton href="/#about" color="gold" variant="outlined">
               รู้จักกับค่าย
             </LinkButton>
           </div>

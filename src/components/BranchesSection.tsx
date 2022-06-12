@@ -71,12 +71,12 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
   const onClose = () => setBranch(null)
   return (
     <Section className="text-center -mx-5 w-[calc(100%+40px)] sm:px-4 py-4" noPadding>
-      <h2 className="text-3xl font-heading lg:text-4xl mb-16 font-semibold">
+      <h2 className="text-3xl font-heading lg:text-4xl mb-16 font-semibold" id="branch">
         เลือกสาขาที่ต้องการสมัคร
       </h2>
       <div
         className={clsx(
-          'flex flex-row overflow-x-scroll sm:overflow-x-visible -mt-8 pt-8 gap-8 font-heading font-bold text-3xl text-white',
+          'flex flex-row overflow-x-scroll sm:overflow-x-visible -mt-8 pt-8 gap-8 font-heading font-bold text-3xl text-white justify-center',
           'sm:px-9 snap-x',
           styles.branchesGrid
         )}
