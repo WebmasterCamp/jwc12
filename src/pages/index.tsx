@@ -19,6 +19,7 @@ import { PlaceSection } from '@/components/PlaceSection'
 import { Question } from '@/components/Question'
 import { ScheduleSection } from '@/components/ScheduleSection'
 import { Section } from '@/components/Section'
+import { Star } from '@/components/Star'
 import { useRegistrationStats } from '@/db/hooks'
 
 const Home: NextPage = () => {
@@ -28,8 +29,13 @@ const Home: NextPage = () => {
       <Navbar className="text-white" />
       <div className="flex min-h-screen overflow-x-hidden w-full flex-col px-5 text-white">
         <ParticlesWidget />
-        <div className="w-full lg:w-1/2 mx-auto">
-          <h1 className="text-4xl lg:text-5xl text-center mt-16 space-y-4 font-heading">
+        <div className="w-full lg:w-1/2 mx-auto pt-16">
+          <div className="flex gap-x-4 items-center justify-center">
+            <Star />
+            <p className="text-gold-dark">ค่ายสร้างเว็บที่เด็กม.ปลาย พลาดไม่ได้ !!</p>
+            <Star />
+          </div>
+          <h1 className="text-4xl lg:text-5xl text-center space-y-4 font-heading">
             Make Your Site,
             <br /> Write Your <span className="text-ct">Future</span>
           </h1>
