@@ -80,10 +80,10 @@ export const ScheduleSection: React.FunctionComponent = () => {
               <picture className={clsx('mb-4 p-4', active && 'rounded-full bg-black/40')}>
                 <img src={task.imageUrl} alt={task.title} />
               </picture>
+              <p>{task.date}</p>
               <h3 className="font-heading whitespace-pre-line font-bold text-xl text-gold">
                 {task.title}
               </h3>
-              <p>{task.date}</p>
             </div>
           )
         })}
