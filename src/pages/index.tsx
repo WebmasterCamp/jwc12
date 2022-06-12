@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import type { NextPage } from 'next'
 import Link from 'next/link'
 
@@ -11,12 +13,10 @@ import { Button, LinkButton } from '@/components/Button'
 import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
 import { Logo } from '@/components/Logo'
-import { GoogleMap } from '@/components/Map'
 import { MovingCards } from '@/components/MovingCards'
 import { Navbar } from '@/components/Navbar'
 import { ParticlesWidget } from '@/components/Particles'
 import { PlaceSection } from '@/components/PlaceSection'
-import { Question } from '@/components/Question'
 import { ScheduleSection } from '@/components/ScheduleSection'
 import { Section } from '@/components/Section'
 import { Star } from '@/components/Star'
@@ -24,6 +24,7 @@ import { useRegistrationStats } from '@/db/hooks'
 
 const Home: NextPage = () => {
   const stats = useRegistrationStats()
+
   return (
     <>
       <Navbar className="text-white" />
