@@ -2,7 +2,13 @@ import Particles from 'react-tsparticles'
 
 import { loadFull } from 'tsparticles'
 
+import { useIsSafari } from '@/utils/isSafari'
+
 export const ParticlesWidget = () => {
+  const isSafari = useIsSafari()
+
+  if (isSafari) return null
+
   const particlesInit = async (main: any) => {
     // console.log(main)
     await loadFull(main)

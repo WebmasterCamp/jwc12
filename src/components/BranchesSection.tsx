@@ -76,7 +76,7 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
       </h2>
       <div
         className={clsx(
-          'flex flex-row overflow-x-scroll sm:overflow-x-visible -mt-8 pt-8 gap-8 font-heading font-bold text-3xl text-white',
+          'flex flex-row overflow-x-scroll sm:overflow-x-visible -mt-8 pt-8 gap-8 font-heading font-bold text-3xl text-white justify-center',
           'sm:px-9 snap-x',
           styles.branchesGrid
         )}
