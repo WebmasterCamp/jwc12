@@ -136,7 +136,6 @@ const basicWeakQuestions: WeakQuestion = {
       name: 'road',
       question: 'ถนน',
       placeholder: 'ถนน',
-      required: true,
     },
     {
       type: InputType.TEXT,
