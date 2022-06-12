@@ -40,7 +40,7 @@ const schedules = [
     endDate: new Date(Date.UTC(2022, 5, 30, 23 - 7, 59, 59)),
   },
   {
-    title: 'วันค่าย',
+    title: 'วันจัดกิจกรรม',
     date: '8 - 10 กรกฎาคม',
     imageUrl: '/images/6-วันค่าย.svg',
     beginDate: new Date(Date.UTC(2022, 6, 8, -7, 0, 0)),

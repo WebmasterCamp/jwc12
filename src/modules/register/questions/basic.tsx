@@ -88,7 +88,7 @@ const basicWeakQuestions: WeakQuestion = {
     {
       type: InputType.DATE,
       name: 'birthDate',
-      question: 'วัน/เดือน/ปีเกิด',
+      question: 'วันเกิด',
       placeholder: 'dd/mm/yyyy',
       required: true,
     },
@@ -136,7 +136,6 @@ const basicWeakQuestions: WeakQuestion = {
       name: 'road',
       question: 'ถนน',
       placeholder: 'ถนน',
-      required: true,
     },
     {
       type: InputType.TEXT,

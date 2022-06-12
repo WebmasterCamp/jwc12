@@ -52,8 +52,8 @@ export const BranchDialog: React.FunctionComponent<Props> = ({
           leaveTo="opacity-0 scale-95"
         >
           <div className="fixed inset-0 flex items-center justify-center p-8 z-[200]">
-            <Dialog.Panel className="flex flex-col justify-between w-full lg:w-1/2">
-              <div className="bg-white space-y-8 p-8 mx-auto rounded-2xl max-h-[calc(100vh_-_72px)] overflow-y-scroll">
+            <Dialog.Panel className="flex flex-col justify-between w-full lg:w-1/2 relative rounded-2xl overflow-hidden">
+              <div className="bg-white space-y-8 p-8 mx-auto max-h-[calc(100vh_-_72px)] overflow-y-scroll">
                 <div className="flex justify-between items-center mb-8">
                   <Dialog.Title className="font-bold text-lg lg:text-3xl text-brown-dark font-heading">
                     {title}
@@ -61,16 +61,16 @@ export const BranchDialog: React.FunctionComponent<Props> = ({
                   <Icon icon={CrossIcon} onClick={onClose} className="text-3xl cursor-pointer" />
                 </div>
                 <Dialog.Description className="mb-4">{description}</Dialog.Description>
-                {/* TODO: Insert questions here */}
                 {questions}
-                <div className="flex flex-col lg:flex-row gap-8 justify-between">
-                  <span className="font-bold text-lg lg:text-3xl text-brown-dark font-heading">
-                    สมัครแล้ว {count} คน
-                  </span>
-                  <Link href="/register" passHref>
-                    <LinkButton color="gold">สมัครสาขานี้</LinkButton>
-                  </Link>
-                </div>
+                <div className="h-[150px] lg:h-[100px]" />
+              </div>
+              <div className="flex flex-col lg:flex-row gap-8 justify-between absolute p-8 bottom-0 bg-white border-t-2 w-full">
+                <span className="font-bold text-2xl lg:text-3xl text-center text-brown-dark font-heading">
+                  สมัครแล้ว {count} คน
+                </span>
+                <Link href="/register" passHref>
+                  <LinkButton color="gold">สมัครสาขานี้</LinkButton>
+                </Link>
               </div>
             </Dialog.Panel>
           </div>

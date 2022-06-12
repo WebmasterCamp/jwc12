@@ -71,7 +71,7 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
   const onClose = () => setBranch(null)
   return (
     <Section className="text-center -mx-5 w-[calc(100%+40px)] sm:px-4 py-4" noPadding>
-      <h2 className="text-3xl font-heading lg:text-4xl mb-16 font-semibold">
+      <h2 className="text-3xl font-heading lg:text-4xl mb-16 font-semibold" id="branch">
         เลือกสาขาที่ต้องการสมัคร
       </h2>
       <div
