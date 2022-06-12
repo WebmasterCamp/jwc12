@@ -48,8 +48,57 @@ const additionalWeakQuestions: WeakQuestion = {
       name: 'shirtSize',
       question: 'ไซส์เสื้อ',
       placeholder: 'ไซส์เสื้อ',
-      choices: ['S', 'M', 'L', 'XL', 'XXL'],
+      choices: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
       required: true,
+    },
+    {
+      type: InputType.NONE,
+      title: (
+        <div className="p-2 w-full text-center">
+          <table className="w-full border-2 border-gray-300">
+            <tr className="text-center border-2 border-gray-300">
+              <th colSpan={3} className="p-3 border-2 border-gray-300">
+                ตารางขนาดเสื้อ
+              </th>
+            </tr>
+            <tr className="text-center border-2 border-gray-300">
+              <th className="p-3 border-2 border-gray-300">ไซส์</th>
+              <th className="p-3 border-2 border-gray-300">รอบอก</th>
+              <th className="p-3 border-2 border-gray-300">ยาว</th>
+            </tr>
+            <tr className="text-center border-2 border-gray-300">
+              <td className="p-2 border-2 border-gray-300">S</td>
+              <td className="p-2 border-2 border-gray-300">33&quot;</td>
+              <td className="p-2 border-2 border-gray-300">25&quot;</td>
+            </tr>
+            <tr className="text-center border-2 border-gray-300">
+              <td className="p-2 border-2 border-gray-300">M</td>
+              <td className="p-2 border-2 border-gray-300">36&quot;</td>
+              <td className="p-2 border-2 border-gray-300">27&quot;</td>
+            </tr>
+            <tr className="text-center border-2 border-gray-300">
+              <td className="p-2 border-2 border-gray-300">L</td>
+              <td className="p-2 border-2 border-gray-300">40&quot;</td>
+              <td className="p-2 border-2 border-gray-300">28&quot;</td>
+            </tr>
+            <tr className="text-center border-2 border-gray-300">
+              <td className="p-2 border-2 border-gray-300">XL</td>
+              <td className="p-2 border-2 border-gray-300">44&quot;</td>
+              <td className="p-2 border-2 border-gray-300">30&quot;</td>
+            </tr>
+            <tr className="text-center border-2 border-gray-300">
+              <td className="p-2 border-2 border-gray-300">2XL</td>
+              <td className="p-2 border-2 border-gray-300">48&quot;</td>
+              <td className="p-2 border-2 border-gray-300">31&quot;</td>
+            </tr>
+            <tr className="text-center border-2 border-gray-300">
+              <td className="p-2 border-2 border-gray-300">3XL</td>
+              <td className="p-2 border-2 border-gray-300">52&quot;</td>
+              <td className="p-2 border-2 border-gray-300">32&quot;</td>
+            </tr>
+          </table>
+        </div>
+      ),
     },
     {
       type: InputType.TEXTAREA,
@@ -57,6 +106,7 @@ const additionalWeakQuestions: WeakQuestion = {
       question: 'กิจกรรมที่เข้าร่วมหรือผลงานที่เคยทำ',
       placeholder: 'ex. งานแข่งขัน การประกวด การแสดง ฯลฯ',
     },
+
     {
       type: InputType.CHECKBOX,
       name: 'knowFrom',
