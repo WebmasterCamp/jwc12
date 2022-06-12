@@ -33,7 +33,9 @@ const Home: NextPage = () => {
         <div className="w-full lg:w-1/2 mx-auto pt-16">
           <div className="flex gap-x-4 items-center justify-center">
             <Star />
-            <p className="text-gold-dark">ค่ายสร้างเว็บที่เด็กม.ปลาย พลาดไม่ได้ !!</p>
+            <p className="text-gold-dark whitespace-nowrap">
+              ค่ายสร้างเว็บที่เด็กม.ปลาย พลาดไม่ได้ !!
+            </p>
             <Star />
           </div>
           <h1 className="text-4xl lg:text-5xl text-center space-y-4 font-heading">
