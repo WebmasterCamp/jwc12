@@ -35,6 +35,16 @@ async function incrementStepStats(newStep: Step, previousStep: Step, delta: numb
   })
 }
 
+export const onCreate = functions.firestore
+  .document('registrations/{userId}')
+  .onCreate(async (snap) => {
+    const newValue = snap.data() as PartialRegistration
+    await stepStatsDoc.update({
+      [newValue.furthestStep.toString()]: admin.firestore.FieldValue.increment(1),
+      all: admin.firestore.FieldValue.increment(1),
+    })
+  })
+
 export const onChangeStep = functions.firestore
   .document('registrations/{userId}')
   .onUpdate(async (change) => {
@@ -77,26 +87,59 @@ export const onSubmit = functions.firestore
   })
 
 export const refreshCounts = functions.https.onRequest(async (_, res) => {
-  const registrations = await db
+  const branchConfirmedRegistrations = await db
     .collection('registrations')
     .select('confirmedBranch')
-    .where('submitted', '==', true)
     .where('confirmedBranch', '!=', null)
     .get()
-  const counts = {
+
+  const allRegistrations = await db.collection('registrations').select('furthestStep').get()
+
+  const submittedCounts = {
     all: 0,
     programming: 0,
     design: 0,
     marketing: 0,
     content: 0,
   }
-  registrations.forEach((doc) => {
+  const branchConfirmedCounts = {
+    all: 0,
+    programming: 0,
+    design: 0,
+    marketing: 0,
+    content: 0,
+  }
+  const furthestStepCounts = {
+    all: 0,
+    '1': 0,
+    '2': 0,
+    '3': 0,
+    '4': 0,
+    '5': 0,
+  }
+
+  branchConfirmedRegistrations.forEach((doc) => {
     const branch = (doc.data() as PartialRegistration).confirmedBranch
+    const submitted = (doc.data() as PartialRegistration).submitted
     if (branch != null) {
-      counts[branch]++
+      if (submitted) submittedCounts[branch]++
+      branchConfirmedCounts[branch]++
     }
-    counts.all++
+    if (submitted) submittedCounts.all++
+    branchConfirmedCounts.all++
   })
-  await registrationStatsDoc.set(counts)
-  res.status(200).send(JSON.stringify(counts))
+
+  allRegistrations.forEach((doc) => {
+    const furthestStep = (doc.data() as PartialRegistration).furthestStep
+    furthestStepCounts[furthestStep]++
+    furthestStepCounts.all++
+  })
+
+  await registrationStatsDoc.set(submittedCounts)
+  await branchStatsDoc.set(branchConfirmedCounts)
+  await stepStatsDoc.set(furthestStepCounts)
+
+  res
+    .status(200)
+    .send(JSON.stringify({ submittedCounts, branchConfirmedCounts, furthestStepCounts }))
 })
