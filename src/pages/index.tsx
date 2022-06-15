@@ -55,13 +55,13 @@ const Home: NextPage = () => {
           </div>
           <MovingCards />
         </div>
-        <Section className="flex flex-col-reverse gap-8 lg:flex-row lg:items-center">
+        <Section className="flex flex-col-reverse gap-10 md:flex-row md:items-center">
           <div className="flex-1">
             <h2 id="about" className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
               JWC คืออะไร
             </h2>
             <p className="">
-              <span className="text-gold font-bold">
+              <span className="text-gold font-bold inline-block mb-2">
                 JWC คือ ค่ายสร้างเว็บของเด็กม.ปลายผู้มีความฝัน อยากฟันฝ่าโชคชะตาและกำหนดอนาคต
               </span>
               <br />
@@ -71,9 +71,9 @@ const Home: NextPage = () => {
               กับค่าย JWC12: Make Your Site, Write Your Future
             </p>
           </div>
-          <div className="flex-1">
-            <Logo />
-          </div>
+          <video autoPlay muted loop className="flex-[1-0-0%]">
+            <source src="/images/shuffle-cards.mp4" type="video/mp4" />
+          </video>
         </Section>
         <ScheduleSection />
         <PlaceSection />
