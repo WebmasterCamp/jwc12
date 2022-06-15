@@ -45,34 +45,26 @@ export const onCreate = functions.firestore
     })
   })
 
-export const onChangeStep = functions.firestore
+export const onChange = functions.firestore
   .document('registrations/{userId}')
   .onUpdate(async (change) => {
     const newValue = change.after.data() as PartialRegistration
     const previousValue = change.before.data() as PartialRegistration
+
+    // CASE : Change furthest step
     if (newValue.furthestStep > previousValue.furthestStep) {
       await incrementStepStats(newValue.furthestStep, previousValue.furthestStep, 1)
     }
-  })
 
-export const onConfirmBranch = functions.firestore
-  .document('registrations/{userId}')
-  .onUpdate(async (change) => {
-    const newValue = change.after.data() as PartialRegistration
-    const previousValue = change.before.data() as PartialRegistration
+    // CASE : Confirm branch
     if (
       newValue.confirmedBranch !== previousValue.confirmedBranch &&
       newValue.confirmedBranch !== null
     ) {
       await incrementBranchStats(branchStatsDoc, newValue.confirmedBranch, 1)
     }
-  })
 
-export const onSubmit = functions.firestore
-  .document('registrations/{userId}')
-  .onUpdate(async (change) => {
-    const newValue = change.after.data() as PartialRegistration
-    const previousValue = change.before.data() as PartialRegistration
+    // CASE : Submit
     if (
       newValue.confirmedBranch !== previousValue.confirmedBranch ||
       newValue.submitted !== previousValue.submitted
@@ -89,7 +81,7 @@ export const onSubmit = functions.firestore
 export const refreshCounts = functions.https.onRequest(async (_, res) => {
   const branchConfirmedRegistrations = await db
     .collection('registrations')
-    .select('confirmedBranch')
+    .select('confirmedBranch', 'submitted')
     .where('confirmedBranch', '!=', null)
     .get()
 
