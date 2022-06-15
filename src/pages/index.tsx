@@ -72,7 +72,8 @@ const Home: NextPage = () => {
             </p>
           </div>
           <video autoPlay muted loop className="flex-[1-0-0%]">
-            <source src="/images/shuffle-cards.mp4" type="video/mp4" />
+            <source src="/images/shuffle-cards.mp4" type="video/mp4; codecs='hvc1'" />
+            <source src="/images/shuffle-cards.webm" type="video/webm" />
           </video>
         </Section>
         <ScheduleSection />
