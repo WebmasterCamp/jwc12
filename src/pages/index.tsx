@@ -71,7 +71,7 @@ const Home: NextPage = () => {
               กับค่าย JWC12: Make Your Site, Write Your Future
             </p>
           </div>
-          <video autoPlay muted loop className="flex-[1-0-0%]">
+          <video autoPlay muted loop playsInline className="flex-[1-0-0%]">
             <source src="/images/shuffle-cards.mov" type="video/mp4; codecs='hvc1'" />
             <source src="/images/shuffle-cards.webm" type="video/webm" />
           </video>
