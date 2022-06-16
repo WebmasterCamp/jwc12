@@ -10,9 +10,9 @@
     "format": "yarn prettier --write ."
   },
   "dependencies": {
-    "@iconify/icons-akar-icons": "^1.2.6",
     "@heroicons/react": "^1.0.6",
     "@hookform/resolvers": "^2.9.0",
+    "@iconify/icons-akar-icons": "^1.2.6",
     "@iconify/icons-fa6-brands": "^1.2.3",
     "@iconify/icons-fa6-solid": "^1.2.4",
     "@iconify/react": "^3.2.1",
@@ -27,6 +27,8 @@
     "next-mdx-remote": "^4.0.3",
     "next-seo": "^5.4.0",
     "react": "18.1.0",
+    "react-admin": "^4.1.3",
+    "react-admin-firebase": "^4.0.2",
     "react-dom": "18.1.0",
     "react-dropzone": "^14.2.1",
     "react-gtm-module": "^2.0.11",
