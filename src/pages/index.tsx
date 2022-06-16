@@ -61,7 +61,7 @@ const Home: NextPage = () => {
           </div>
           <MovingCards />
         </div>
-        <Section className="flex flex-col-reverse gap-10 md:flex-row md:items-center">
+        <Section className="flex flex-col-reverse gap-10 md:flex-row md:items-center lg:max-w-[1088px]">
           <div className="flex-1">
             <h2 id="about" className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
               JWC คืออะไร
