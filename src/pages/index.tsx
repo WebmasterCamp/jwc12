@@ -29,6 +29,9 @@ function supportsHEVCAlpha() {
   const hasMediaCapabilities = !!(
     navigator.mediaCapabilities && navigator.mediaCapabilities.decodingInfo
   )
+  if (navigator.userAgent.match('CriOS'))
+    // Chrome on iOS
+    return hasMediaCapabilities
   const isSafari =
     ua.indexOf('safari') != -1 && !(ua.indexOf('chrome') != -1) && ua.indexOf('version/') != -1
   return isSafari && hasMediaCapabilities
