@@ -10,6 +10,8 @@ import {
   Resource,
   SimpleForm,
   TextField,
+  useGetIdentity,
+  useGetOne,
 } from 'react-admin'
 
 import { contentQuestions } from '@/modules/register/questions/content'
@@ -20,6 +22,16 @@ import { programmingQuestions } from '@/modules/register/questions/programming'
 import { InputType, Question, SimpleInput } from '@/modules/register/types'
 
 import { authProvider, dataProvider } from './adminConfig'
+
+const branchToQuestion = {
+  marketing: marketingQuestions,
+  programming: programmingQuestions,
+  content: contentQuestions,
+  design: designQuestions,
+  core: coreQuestions,
+} as {
+  [key: string]: Question
+}
 
 function renderBranchQuestions(question: Question, branch: string) {
   return question.inputs
@@ -49,26 +61,50 @@ function renderCoreQuestions() {
     })
 }
 
-export const RegistrationList = () => (
-  <List filter={{ submitted: true }}>
-    <Datagrid>
-      <TextField source="id" />
-      <TextField source="confirmedBranch" />
-      <TextField source="submitted" />
-      <EditButton />
-    </Datagrid>
-  </List>
-)
+type Branchable = {
+  branch: string
+}
 
-export const RegistrationEdit = () => (
-  <Edit>
-    <SimpleForm>
-      <TextField source="id" />
-      <TextField source="confirmedBranch" />
-      {renderCoreQuestions()}
-    </SimpleForm>
-  </Edit>
-)
+export const RegistrationList = () => {
+  const { isLoading: isIdentityLoading, identity } = useGetIdentity()
+  const { isLoading: isUserLoading, data: user } = useGetOne('users', {
+    id: identity?.id,
+  })
+  if (isIdentityLoading || isUserLoading) {
+    return <p>Loading...</p>
+  }
+  return (
+    <List filter={{ submitted: true }}>
+      <Datagrid>
+        <TextField source="id" />
+        <TextField source="confirmedBranch" />
+        <TextField source="submitted" />
+        <EditButton />
+      </Datagrid>
+    </List>
+  )
+}
+
+export const RegistrationEdit = () => {
+  const { isLoading: isIdentityLoading, identity } = useGetIdentity()
+  const { isLoading: isUserLoading, data: user } = useGetOne('users', {
+    id: identity?.id,
+  })
+  if (isIdentityLoading || isUserLoading) {
+    return <p>Loading...</p>
+  }
+  return (
+    <Edit>
+      <SimpleForm>
+        <TextField source="id" />
+        <TextField source="confirmedBranch" />
+        {user.branch === 'core' && typeof user.branch === 'string'
+          ? renderCoreQuestions()
+          : renderBranchQuestions(branchToQuestion[`${user?.branch}`], user.branch)}
+      </SimpleForm>
+    </Edit>
+  )
+}
 
 const AdminBackOffice = () => (
   <Admin dataProvider={dataProvider} authProvider={authProvider}>
