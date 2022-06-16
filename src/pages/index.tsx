@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import type { NextPage } from 'next'
 import Link from 'next/link'
@@ -22,8 +22,27 @@ import { Section } from '@/components/Section'
 import { Star } from '@/components/Star'
 import { useRegistrationStats } from '@/db/hooks'
 
+//TODO : Move somewhere else
+function supportsHEVCAlpha() {
+  const navigator = window.navigator
+  const ua = navigator.userAgent.toLowerCase()
+  const hasMediaCapabilities = !!(
+    navigator.mediaCapabilities && navigator.mediaCapabilities.decodingInfo
+  )
+  const isSafari =
+    ua.indexOf('safari') != -1 && !(ua.indexOf('chrome') != -1) && ua.indexOf('version/') != -1
+  return isSafari && hasMediaCapabilities
+}
+
 const Home: NextPage = () => {
   const stats = useRegistrationStats()
+  const supportsHEVC = useRef<boolean>()
+
+  useEffect(() => {
+    supportsHEVC.current = supportsHEVCAlpha()
+  }, [])
+
+  console.log(supportsHEVC)
 
   return (
     <>
@@ -71,9 +90,18 @@ const Home: NextPage = () => {
               กับค่าย JWC12: Make Your Site, Write Your Future
             </p>
           </div>
-          <video autoPlay muted loop playsInline className="flex-[1-0-0%]">
-            <source src="/images/shuffle-cards-hevc.mov" type="video/mp4; codecs='hvc1'" />
-            <source src="/images/shuffle-cards.webm" type="video/webm" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="flex-[1-0-0%]"
+            src={
+              supportsHEVC.current ? '/images/shuffle-cards-hevc.mov' : `/images/shuffle-cards.webm`
+            }
+          >
+            {/* <source src="/images/shuffle-cards-hevc.mov" type="video/mp4; codecs='hvc1'" />
+            <source src="/images/shuffle-cards.webm" type="video/webm" /> */}
           </video>
         </Section>
         <ScheduleSection />
