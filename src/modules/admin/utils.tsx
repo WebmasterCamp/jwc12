@@ -1,8 +1,6 @@
 import { Fragment } from 'react'
 import { NumberInput, RaRecord, TextField, TextInput } from 'react-admin'
 
-import { Input } from '@/components/Input'
-
 import { coreQuestions } from '../register/questions/core'
 import { BranchType, InputType, Question, SimpleInput } from '../register/types'
 import { UserAdmin } from './types'
@@ -145,29 +143,4 @@ export function renderQuestion(question: Question, branch: string, checker: User
       />
     </>
   )
-}
-
-export function renderBranchQuestions(question: Question, branch: string, checker: any) {
-  if (!checker) return null
-
-  if (typeof checker.name != 'string') {
-    return <p className="text-red-500 font-bold text-5xl">Please set your name first!!!</p>
-  }
-  return question.inputs
-    .filter((it) => it.type === InputType.TEXTAREA)
-    .map((it, index) => {
-      const input = it as SimpleInput
-      return (
-        <Fragment key={input.name}>
-          <h2>{input.question}</h2>
-          <TextField source={`answers.branch.${branch}_Q${index + 1}`} />
-          <NumberInput
-            min={0}
-            max={10}
-            step={1}
-            source={`score.branch_Q${index + 1}.${checker.name}`}
-          />
-        </Fragment>
-      )
-    })
 }
