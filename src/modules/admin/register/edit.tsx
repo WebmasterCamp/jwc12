@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import {
   ArrayField,
+  BooleanField,
   Datagrid,
   Edit,
   NumberField,
@@ -48,9 +49,14 @@ export const RegistrationEdit = () => {
       <SimpleForm>
         <TextField source="id" />
         <TextField source="confirmedBranch" />
+        <h2>มี 0 ไหม </h2>
+        <BooleanField source="hasZero" />
+        <h2>คะแนนรวม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง)</h2>
+        <NumberField source="totalScore" />
         {questions}
         <NumberField source="score.total" />
-        <h3>Comments</h3>
+        {/* TODO: Add collapsible */}
+        <h3>Comments (โปรดใช้วิจารณญาณในการอ่าน เพราะว่า comment เป็น subjective)</h3>
         <ArrayField source="comments">
           <Datagrid>
             <TextField source="author" />

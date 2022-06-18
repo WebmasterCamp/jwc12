@@ -5,7 +5,55 @@ import { coreQuestions } from '../register/questions/core'
 import { InputType, Question, SimpleInput } from '../register/types'
 import { UserAdmin } from './types'
 
-export const registrationTransform = ({ currentComment, ...record }: RaRecord) => {
+export const registrationTransform = ({ currentComment, checker, ...record }: RaRecord) => {
+  const score = record.score
+  // True when someone put the score.
+  let isThereScore = false
+  // There is any zero in score. Zero is a number not null.
+  let hasZero = false
+  // Total score for calculation
+  let totalScore = 0
+  // True when person filled the form add the score
+  let checked = false
+
+  // Summation of score
+  // Loop over question score
+  for (let questionScore of Object.values(score)) {
+    // Loop over score by each person
+    // Please don't care about TypeScript.
+    for (let [personCheck, personScore] of Object.entries(questionScore as any)) {
+      if (typeof personScore === 'number') {
+        // Score belong to the person that enter the form.
+        if (personCheck === checker) {
+          // There is at least one field checked.
+          checked = true
+        }
+        totalScore += personScore
+        // If someone put score, that mean they are checked.
+        isThereScore = true
+        if (personScore === 0) hasZero = true
+      }
+    }
+  }
+  // If someone puts score, put calculated total score.
+  if (isThereScore) {
+    record.totalScore = totalScore
+  } else {
+    // Otherwise, set it to null
+    record.totalScore = null
+  }
+  // If there is a zero, red flag them.
+  if (isThereScore && hasZero) {
+    record.hasZero = true
+  } else {
+    record.hasZero = false
+  }
+
+  // Utitlity: so no need to check again unless something happens.
+  // If there is no such field already, replaces it with an empty object so the property can be set.
+  record.checkedBy = record.checkedBy || {}
+
+  record.checkedBy[checker] = checked
   return {
     ...record,
     comments: (function () {
