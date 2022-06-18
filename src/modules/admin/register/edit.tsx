@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import {
   ArrayField,
   BooleanField,
@@ -18,6 +18,26 @@ import { BranchType } from '@/modules/register/types'
 import { branchToQuestion } from '../constants'
 import { UserAdmin } from '../types'
 import { registrationTransform, renderBranchQuestions, renderQuestion } from '../utils'
+
+const CommentsSection = () => {
+  const [shown, setShown] = useState(false)
+  const open = () => setShown((_) => true)
+  const close = () => setShown((_) => false)
+  if (!shown) {
+    return <button onClick={open}>Show the comment</button>
+  }
+  return (
+    <>
+      <ArrayField source="comments">
+        <Datagrid>
+          <TextField source="author" />
+          <TextField source="body" />
+        </Datagrid>
+      </ArrayField>
+      <button onClick={close}>{"I don't want to see the comments. :("}</button>
+    </>
+  )
+}
 
 export const RegistrationEdit = () => {
   const { isLoading: isIdentityLoading, identity } = useGetIdentity()
@@ -41,7 +61,6 @@ export const RegistrationEdit = () => {
     <Edit transform={registrationTransform}>
       <SimpleForm>
         <TextField source="id" />
-        <TextField source="confirmedBranch" />
         <h2>มี 0 ไหม </h2>
         <BooleanField source="hasZero" />
         <h2>คะแนนรวม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง)</h2>
@@ -55,14 +74,8 @@ export const RegistrationEdit = () => {
         />
         {questions}
         <NumberField source="score.total" />
-        {/* TODO: Add collapsible */}
         <h3>Comments (โปรดใช้วิจารณญาณในการอ่าน เพราะว่า comment เป็น subjective)</h3>
-        <ArrayField source="comments">
-          <Datagrid>
-            <TextField source="author" />
-            <TextField source="body" />
-          </Datagrid>
-        </ArrayField>
+        <CommentsSection></CommentsSection>
         <TextInput
           defaultValue={user?.name}
           source="currentComment.author"
