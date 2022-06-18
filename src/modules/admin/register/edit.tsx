@@ -6,9 +6,11 @@ import {
   Edit,
   FunctionField,
   NumberField,
+  SaveButton,
   SimpleForm,
   TextField,
   TextInput,
+  Toolbar,
   useGetIdentity,
   useGetOne,
 } from 'react-admin'
@@ -39,6 +41,12 @@ const CommentsSection = () => {
   )
 }
 
+const UserEditToolbar = (props: any) => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+)
+
 export const RegistrationEdit = () => {
   const { isLoading: isIdentityLoading, identity } = useGetIdentity()
   const { isLoading: isUserLoading, data: user } = useGetOne<UserAdmin>('users', {
@@ -59,7 +67,7 @@ export const RegistrationEdit = () => {
 
   return (
     <Edit transform={registrationTransform}>
-      <SimpleForm>
+      <SimpleForm toolbar={<UserEditToolbar />}>
         <TextField source="id" />
         <h2 className="text-3xl font-bold">
           มี 0 ไหม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง){' '}
