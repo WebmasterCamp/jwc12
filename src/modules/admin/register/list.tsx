@@ -30,8 +30,8 @@ export const RegistrationList = () => {
   }
 
   return (
-    <List filter={filter}>
-      <Datagrid>
+    <List filter={filter} bulkActionButtons={false}>
+      <Datagrid bulkActionButtons={false}>
         <FunctionField
           label="รหัสอ้างอิง"
           render={(record: any) => {
