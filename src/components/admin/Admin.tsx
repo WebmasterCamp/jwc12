@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import {
   Admin,
   ArrayField,
@@ -93,11 +93,19 @@ export const RegistrationList = () => {
   const { isLoading: isUserLoading, data: user } = useGetOne('users', {
     id: identity?.id,
   })
+  // don't stare at me.
+  const [filter, setFilter] = useState<any>({ submitted: true })
+  useEffect(() => {
+    // Valid branch (not core)
+    if (user && ['programming', 'design', 'marketing', 'content'].includes(user.branch)) {
+      setFilter((f: any) => ({ ...f, confirmedBranch: user.branch }))
+    }
+  }, [user, isUserLoading])
   if (isIdentityLoading || isUserLoading) {
     return <p>Loading...</p>
   }
   return (
-    <List filter={{ submitted: true }}>
+    <List filter={filter}>
       <Datagrid>
         <TextField source="id" />
         <TextField source="confirmedBranch" />
