@@ -6,11 +6,23 @@ service cloud.firestore {
     }
 
     match /{document=**} {
-      allow read, write: if isAdmin();
+      allow read: if isAdmin();
     }
 
     match /stats/registrations {
       allow read;
+    }
+    
+    match /check/{userId} {
+       allow read: if isAdmin();
+       allow update: if isAdmin();
+       allow create: if isAdmin();
+    }
+    
+    match /check_staging/{userId} {
+       allow read: if isAdmin();
+       allow update: if isAdmin();
+       allow create: if isAdmin();
     }
 
     function verifyCreate() {
@@ -63,9 +75,16 @@ service cloud.firestore {
     }
     
     match /registrations_staging/{userId} {
-      allow read: if isOwner(userId);
-      allow create: if isOwner(userId) && verifyCreate();
-      allow update: if isOwner(userId) && verifyUpdate();
+      // Allow admin because it is so difficult.
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if ((isOwner(userId)) && verifyCreate()) || isAdmin();
+      allow update: if ((isOwner(userId)) && verifyUpdate()) || isAdmin();
+    }
+    
+    match /score_staging/{userId} {
+       allow read: if isAdmin();
+       allow update: if isAdmin();
+       allow create: if isAdmin();
     }
 
     function isOwner(userId) {
