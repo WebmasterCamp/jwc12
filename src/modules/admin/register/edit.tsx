@@ -61,9 +61,13 @@ export const RegistrationEdit = () => {
     <Edit transform={registrationTransform}>
       <SimpleForm>
         <TextField source="id" />
-        <h2>มี 0 ไหม </h2>
+        <h2 className="text-3xl font-bold">
+          มี 0 ไหม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง){' '}
+        </h2>
         <BooleanField source="hasZero" />
-        <h2>คะแนนรวม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง)</h2>
+        <h2 className="text-3xl font-bold">
+          คะแนนรวม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง)
+        </h2>
         <NumberField source="totalScore" />
         <FunctionField
           label="confirmedBranch"
@@ -74,14 +78,18 @@ export const RegistrationEdit = () => {
         />
         {questions}
         <NumberField source="score.total" />
-        <h3>Comments (โปรดใช้วิจารณญาณในการอ่าน เพราะว่า comment เป็น subjective)</h3>
+        <h2 className="text-xl font-bold">
+          Comments (โปรดใช้วิจารณญาณในการอ่าน เพราะว่า comment เป็น subjective)
+        </h2>
         <CommentsSection></CommentsSection>
         <TextInput
           defaultValue={user?.name}
+          label="ชื่อคนเขียนเม้นท์ (แก้ไม่ได้)"
+          className="pointer-events-none cursor-not-allowed"
           source="currentComment.author"
           validate={(val) => (val == user?.name ? undefined : "Can't change your name")}
         />
-        <TextInput source="currentComment.body" />
+        <TextInput label="เนื้อหา" source="currentComment.body" />
       </SimpleForm>
     </Edit>
   )
