@@ -113,7 +113,7 @@ export function renderQuestion(question: Question, branch: string, checker: User
     .map((x) => x as SimpleInput)[checker.which - 1]
   const rootSource = branch === 'core' ? 'core' : 'branch'
   const questionSource = `${branch === 'core' ? 'core' : branch}_Q${checker.which}`
-  const destination = `score.${rootSource}_Q${checker.which}.${checker.name}`
+  const destination = `score.${rootSource}_Q${checker.which}`
   return (
     <>
       <h2>{theQuestion.question}</h2>
