@@ -1,8 +1,7 @@
 import { Fragment } from 'react'
 import { NumberInput, RaRecord, TextField } from 'react-admin'
 
-import { coreQuestions } from '../register/questions/core'
-import { InputType, Question, SimpleInput } from '../register/types'
+import { BranchType, InputType, Question, SimpleInput } from '../register/types'
 import { UserAdmin } from './types'
 
 export const registrationTransform = ({ currentComment, checker, ...record }: RaRecord) => {
@@ -72,53 +71,30 @@ export const registrationTransform = ({ currentComment, checker, ...record }: Ra
   }
 }
 
-export function renderCoreQuestions(checker?: UserAdmin) {
-  if (!checker) return null
+export function renderQuestions(
+  user: UserAdmin | undefined,
+  question?: Question,
+  branch?: BranchType | 'core'
+) {
+  if (!user) return null
 
-  if (typeof checker.name != 'string') {
-    return <p className="text-red-500 font-bold text-5xl">Please set your name first.</p>
-  }
+  const filteredQuestions = question?.inputs.filter((it) => it.type === InputType.TEXTAREA)
 
-  return coreQuestions.inputs
-    .filter((it) => it.type === InputType.TEXTAREA)
-    .map((it, index) => {
-      const input = it as SimpleInput
-      return (
-        <Fragment key={input.name}>
-          <h2>{input.question}</h2>
-          <TextField source={`answers.core.core_Q${index + 1}`} />
-          <NumberInput
-            min={0}
-            max={10}
-            step={1}
-            source={`score.core_Q${index + 1}.${checker.name}`}
-          />
-        </Fragment>
-      )
-    })
-}
+  const section = branch === 'core' ? 'core' : 'branch'
 
-export function renderBranchQuestions(question: Question, branch: string, checker: any) {
-  if (!checker) return null
-
-  if (typeof checker.name != 'string') {
-    return <p className="text-red-500 font-bold text-5xl">Please set your name first!!!</p>
-  }
-  return question.inputs
-    .filter((it) => it.type === InputType.TEXTAREA)
-    .map((it, index) => {
-      const input = it as SimpleInput
-      return (
-        <Fragment key={input.name}>
-          <h2>{input.question}</h2>
-          <TextField source={`answers.branch.${branch}_Q${index + 1}`} />
-          <NumberInput
-            min={0}
-            max={10}
-            step={1}
-            source={`score.branch_Q${index + 1}.${checker.name}`}
-          />
-        </Fragment>
-      )
-    })
+  return filteredQuestions?.map((it, index) => {
+    const input = it as SimpleInput
+    return (
+      <Fragment key={input.name}>
+        <h2>{input.question}</h2>
+        <TextField source={`answers.${section}.${branch}_Q${index + 1}`} />
+        <NumberInput
+          min={0}
+          max={10}
+          step={1}
+          source={`score.${branch}_Q${index + 1}.${user?.name}`}
+        />
+      </Fragment>
+    )
+  })
 }
