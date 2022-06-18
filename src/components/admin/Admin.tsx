@@ -2,6 +2,7 @@ import { Fragment, useEffect } from 'react'
 import {
   Admin,
   ArrayField,
+  BooleanField,
   Datagrid,
   DateField,
   Edit,
@@ -100,20 +101,72 @@ export const RegistrationList = () => {
       <Datagrid>
         <TextField source="id" />
         <TextField source="confirmedBranch" />
-        <TextField source="submitted" />
+        <BooleanField source={`checkedBy.${user.name}`} />
+        <NumberField source="totalScore" />
+        <BooleanField source="hasZero" />
         <EditButton />
       </Datagrid>
     </List>
   )
 }
 
-const registrationTransform = ({ currentComment, ...record }: RaRecord) => {
+const registrationTransform = ({ currentComment, checker, branch, ...record }: RaRecord) => {
+  const score = record.score
+  // True when someone put the score.
+  let isThereScore = false
+  // There is any zero in score. Zero is a number not null.
+  let hasZero = false
+  // Total score for calculation
+  let totalScore = 0
+  // True when person filled the form add the score
+  let checked = false
+
+  // Summation of score
+  // Loop over question score
+  for (let questionScore of Object.values(score)) {
+    // Loop over score by each person
+    // Please don't care about TypeScript.
+    for (let [personCheck, personScore] of Object.entries(questionScore as any)) {
+      if (typeof personScore === 'number') {
+        // Score belong to the person that enter the form.
+        if (personCheck === checker) {
+          // There is at least one field checked.
+          checked = true
+        }
+        totalScore += personScore
+        // If someone put score, that mean they are checked.
+        isThereScore = true
+        if (personScore === 0) hasZero = true
+      }
+    }
+  }
+  // If someone puts score, put calculated total score.
+  if (isThereScore) {
+    record.totalScore = totalScore
+  } else {
+    // Otherwise, set it to null
+    record.totalScore = null
+  }
+  // If there is a zero, red flag them.
+  if (isThereScore && hasZero) {
+    record.hasZero = true
+  } else {
+    record.hasZero = false
+  }
+
+  // Utitlity: so no need to check again unless something happens.
+  // If there is no such field already, replaces it with an empty object so the property can be set.
+  record.checkedBy = record.checkedBy || {}
+
+  record.checkedBy[checker] = checked
+
   return {
     ...record,
     comments: (function () {
       // Actually array
       if (typeof currentComment.body !== 'string' || currentComment.body.length == 0)
-        return record.comments
+        // If undefined, return empty array
+        return record.comments || []
       if (typeof record.comments === 'object') {
         return [...record.comments, currentComment]
       }
@@ -141,8 +194,18 @@ export const RegistrationEdit = () => {
   return (
     <Edit transform={registrationTransform}>
       <SimpleForm>
+        <h2>สาขา จะขึ้น Core หากเป็นคนตรวจคำถามกลาง​ (แก้ input ไม่ได้)</h2>
+        <TextInput
+          source="branch"
+          defaultValue={user.branch}
+          validate={(val) => (val == user.branch ? undefined : "Can't change branch")}
+        ></TextInput>
         <TextField source="id" />
         <TextField source="confirmedBranch" />
+        <h2>มี 0 ไหม </h2>
+        <BooleanField source="hasZero" />
+        <h2>คะแนนรวม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง)</h2>
+        <NumberField source="totalScore" />
         {user.branch === 'core' && typeof user.branch === 'string'
           ? renderCoreQuestions(user)
           : renderBranchQuestions(branchToQuestion[`${user?.branch}`], user.branch, user)}
@@ -160,6 +223,12 @@ export const RegistrationEdit = () => {
           validate={(val) => (val == user.name ? undefined : "Can't change your name")}
         />
         <TextInput source="currentComment.body" />
+        <h2>ชื่อคนตรวจ (แก้ไม่ได้)</h2>
+        <TextInput
+          source="checker"
+          defaultValue={user.name}
+          validate={(val) => (val == user.name ? undefined : "Can't change your name")}
+        />
       </SimpleForm>
     </Edit>
   )
