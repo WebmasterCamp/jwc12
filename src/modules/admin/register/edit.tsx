@@ -19,7 +19,7 @@ import { BranchType } from '@/modules/register/types'
 
 import { branchToQuestion } from '../constants'
 import { UserAdmin } from '../types'
-import { registrationTransform, renderBranchQuestions, renderQuestion } from '../utils'
+import { registrationTransform, renderQuestion } from '../utils'
 
 const CommentsSection = () => {
   const [shown, setShown] = useState(false)
