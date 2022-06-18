@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { NumberInput, RaRecord, TextField } from 'react-admin'
+import { NumberInput, RaRecord, TextField, TextInput } from 'react-admin'
 
 import { Input } from '@/components/Input'
 
@@ -7,7 +7,7 @@ import { coreQuestions } from '../register/questions/core'
 import { BranchType, InputType, Question, SimpleInput } from '../register/types'
 import { UserAdmin } from './types'
 
-export const registrationTransform = ({ currentComment, ...record }: RaRecord) => {
+export const registrationTransform = ({ currentComment, which, branch, ...record }: RaRecord) => {
   // There is no need for text field
   const checker = currentComment.author
   const score = record.score
@@ -22,22 +22,34 @@ export const registrationTransform = ({ currentComment, ...record }: RaRecord) =
 
   // Summation of score
   // Loop over question score
-  for (let questionScore of Object.values(score)) {
-    // Loop over score by each person
-    // Please don't care about TypeScript.
-    for (let [personCheck, personScore] of Object.entries(questionScore as any)) {
-      if (typeof personScore === 'number') {
-        // Score belong to the person that enter the form.
-        if (personCheck === checker) {
-          // There is at least one field checked.
-          checked = true
-        }
-        totalScore += personScore
-        // If someone put score, that mean they are checked.
-        isThereScore = true
-        if (personScore === 0) hasZero = true
+  for (let [questionKey, questionScore] of Object.entries(score)) {
+    // Check only if there is at least one record
+    if (typeof questionScore === 'number') {
+      // There is a number!!
+      isThereScore = true
+      totalScore += questionScore
+      const [questionType, qRaw] = questionKey.split('_')
+      // It is a single digit number. At least, we don't have more than 9 questions.
+      const qNumber = Number.parseInt(qRaw[1])
+      // This question belongs to the person who edited the form.
+      if (questionType === branch && qNumber == which) {
+        checked = true
       }
+      if (questionScore === 0) hasZero = true
     }
+    // for (let [personCheck, personScore] of Object.entries(questionScore as any)) {
+    //   if (typeof personScore === 'number') {
+    //     // Score belong to the person that enter the form.
+    //     if (personCheck === checker) {
+    //       // There is at least one field checked.
+    //       checked = true
+    //     }
+    //     totalScore += personScore
+    //     // If someone put score, that mean they are checked.
+    //     isThereScore = true
+    //     if (personScore === 0) hasZero = true
+    //   }
+    // }
   }
   // If someone puts score, put calculated total score.
   if (isThereScore) {
@@ -119,6 +131,18 @@ export function renderQuestion(question: Question, branch: string, checker: User
       <h2>{theQuestion.question}</h2>
       <TextField source={`answers.${rootSource}.${questionSource}`} />
       <NumberInput min={0} max={10} step={1} source={destination} />
+      <NumberInput
+        source="which"
+        className="hidden"
+        defaultValue={checker.which}
+        validate={(va) => (va === checker.which ? undefined : "Don't change it.")}
+      />
+      <TextInput
+        source="branch"
+        className="hidden"
+        defaultValue={branch}
+        validate={(va: any) => (va === branch ? undefined : "I said don't change it")}
+      />
     </>
   )
 }
