@@ -133,13 +133,13 @@ export function renderQuestion(question: Question, branch: string, checker: User
       <NumberInput min={0} max={10} step={1} source={destination} />
       <NumberInput
         source="which"
-        className="hidden"
+        className="!hidden"
         defaultValue={checker.which}
         validate={(va) => (va === checker.which ? undefined : "Don't change it.")}
       />
       <TextInput
         source="branch"
-        className="hidden"
+        className="!hidden"
         defaultValue={branch}
         validate={(va: any) => (va === branch ? undefined : "I said don't change it")}
       />
