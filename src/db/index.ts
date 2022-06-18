@@ -26,7 +26,7 @@ import { app } from '@/lib/firebase'
 import type { StepName } from '@/modules/register/questions'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
-import { Answers, Registration, RegistrationStats } from './types'
+import { Answers, Check, Registration, RegistrationStats } from './types'
 
 export * from './context'
 

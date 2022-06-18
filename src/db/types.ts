@@ -25,3 +25,19 @@ export interface RegistrationStats {
   marketing: number
   content: number
 }
+
+type QuestionNumber = '1' | '2' | '3' | '4' | '5' | '6'
+
+type QuestionName = `${BranchType | 'core'}_Q${QuestionNumber}`
+
+interface Comment {
+  author: string
+  comment: string
+}
+
+export interface Check {
+  scores: Record<QuestionName, number>
+  comments: Comment[]
+  totalScore: number
+  hasZero: boolean
+}
