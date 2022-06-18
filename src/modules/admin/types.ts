@@ -6,5 +6,7 @@ export interface UserAdmin {
   id: Identifier
   name: string
   admin: string
-  branch: BranchType | 'core'
+  branch: BranchType | 'core',
+  // ตรวจข้อไหน
+  which: number
 }

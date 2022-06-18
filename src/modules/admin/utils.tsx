@@ -1,6 +1,8 @@
 import { Fragment } from 'react'
 import { NumberInput, RaRecord, TextField } from 'react-admin'
 
+import { Input } from '@/components/Input'
+
 import { coreQuestions } from '../register/questions/core'
 import { InputType, Question, SimpleInput } from '../register/types'
 import { UserAdmin } from './types'
@@ -96,6 +98,30 @@ export function renderCoreQuestions(checker?: UserAdmin) {
         </Fragment>
       )
     })
+}
+
+export function renderQuestion(question: Question, branch: string, checker: UserAdmin | undefined) {
+  if (!checker) return null
+  if (typeof checker.name != 'string') {
+    return <p className="text-red-500 font-bold text-5xl">Please set your name first!!!</p>
+  }
+  if (typeof checker.which != 'number') {
+    return <p className="text-red-500 font-bold text-5xl">Please set which one to check first!!!</p>
+  }
+  // -1 for the index (`which` is 1-based.)
+  const theQuestion = question.inputs
+    .filter((it) => it.type === InputType.TEXTAREA)
+    .map((x) => x as SimpleInput)[checker.which - 1]
+  const rootSource = branch === 'core' ? 'core' : 'branch'
+  const questionSource = `${branch === 'core' ? 'core' : branch}_Q${checker.which}`
+  const destination = `score.${rootSource}_Q${checker.which}.${checker.name}`
+  return (
+    <>
+      <h2>{theQuestion.question}</h2>
+      <TextField source={`answers.${rootSource}.${questionSource}`} />
+      <NumberInput min={0} max={10} step={1} source={destination} />
+    </>
+  )
 }
 
 export function renderBranchQuestions(question: Question, branch: string, checker: any) {

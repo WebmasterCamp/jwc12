@@ -16,7 +16,12 @@ import { BranchType } from '@/modules/register/types'
 
 import { branchToQuestion } from '../constants'
 import { UserAdmin } from '../types'
-import { registrationTransform, renderBranchQuestions, renderCoreQuestions } from '../utils'
+import {
+  registrationTransform,
+  renderBranchQuestions,
+  renderCoreQuestions,
+  renderQuestion,
+} from '../utils'
 
 export const RegistrationEdit = () => {
   const { isLoading: isIdentityLoading, identity } = useGetIdentity()
@@ -25,6 +30,11 @@ export const RegistrationEdit = () => {
   })
 
   const questions = useMemo(() => {
+    return renderQuestion(
+      branchToQuestion[`${user?.branch}` as BranchType],
+      user?.branch || '',
+      user
+    )
     if (user?.branch === 'core') {
       return renderCoreQuestions(user)
     }
