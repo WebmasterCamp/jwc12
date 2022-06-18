@@ -1,0 +1,69 @@
+import { useEffect, useMemo } from 'react'
+import {
+  ArrayField,
+  Datagrid,
+  Edit,
+  NumberField,
+  SimpleForm,
+  TextField,
+  TextInput,
+  useGetIdentity,
+  useGetOne,
+} from 'react-admin'
+
+import { BranchType } from '@/modules/register/types'
+
+import { branchToQuestion } from '../constants'
+import { UserAdmin } from '../types'
+import { registrationTransform, renderBranchQuestions, renderCoreQuestions } from '../utils'
+
+export const RegistrationEdit = () => {
+  const { isLoading: isIdentityLoading, identity } = useGetIdentity()
+  const { isLoading: isUserLoading, data: user } = useGetOne<UserAdmin>('users', {
+    id: identity?.id ?? '',
+  })
+
+  const questions = useMemo(() => {
+    if (user?.branch === 'core') {
+      return renderCoreQuestions(user)
+    }
+    return renderBranchQuestions(
+      branchToQuestion[`${user?.branch}` as BranchType],
+      user?.branch ?? '',
+      user
+    )
+  }, [user])
+
+  useEffect(() => {
+    console.table(user)
+    console.table(identity)
+  }, [user, identity])
+
+  if (isIdentityLoading || isUserLoading) {
+    return <p>Loading...</p>
+  }
+
+  return (
+    <Edit transform={registrationTransform}>
+      <SimpleForm>
+        <TextField source="id" />
+        <TextField source="confirmedBranch" />
+        {questions}
+        <NumberField source="score.total" />
+        <h3>Comments</h3>
+        <ArrayField source="comments">
+          <Datagrid>
+            <TextField source="author" />
+            <TextField source="body" />
+          </Datagrid>
+        </ArrayField>
+        <TextInput
+          defaultValue={user?.name}
+          source="currentComment.author"
+          validate={(val) => (val == user?.name ? undefined : "Can't change your name")}
+        />
+        <TextInput source="currentComment.body" />
+      </SimpleForm>
+    </Edit>
+  )
+}
