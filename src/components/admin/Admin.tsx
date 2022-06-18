@@ -110,8 +110,15 @@ export const RegistrationList = () => {
 const registrationTransform = ({ currentComment, ...record }: RaRecord) => {
   return {
     ...record,
-    comments:
-      typeof record.comments === 'object' ? [...record.comments, currentComment] : [currentComment],
+    comments: (function () {
+      // Actually array
+      if (typeof currentComment.body !== 'string' || currentComment.body.length == 0)
+        return record.comments
+      if (typeof record.comments === 'object') {
+        return [...record.comments, currentComment]
+      }
+      return [currentComment]
+    })(),
     // score: {
     //   ...record.score,
     //   total: Object.values(score)
