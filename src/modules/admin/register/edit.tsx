@@ -26,7 +26,11 @@ const CommentsSection = () => {
   const open = () => setShown((_) => true)
   const close = () => setShown((_) => false)
   if (!shown) {
-    return <button onClick={open}>Show the comment</button>
+    return (
+      <button className="underline hover:text-green-500 font-bold cursor-pointer" onClick={open}>
+        Show the comment
+      </button>
+    )
   }
   return (
     <>
@@ -36,7 +40,9 @@ const CommentsSection = () => {
           <TextField source="body" />
         </Datagrid>
       </ArrayField>
-      <button onClick={close}>{"I don't want to see the comments. :("}</button>
+      <button className="underline hover:text-red-500 font-bold cursor-pointer" onClick={close}>
+        {"I don't want to see the comments. :("}
+      </button>
     </>
   )
 }
