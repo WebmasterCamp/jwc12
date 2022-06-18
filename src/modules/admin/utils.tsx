@@ -7,7 +7,9 @@ import { coreQuestions } from '../register/questions/core'
 import { BranchType, InputType, Question, SimpleInput } from '../register/types'
 import { UserAdmin } from './types'
 
-export const registrationTransform = ({ currentComment, checker, ...record }: RaRecord) => {
+export const registrationTransform = ({ currentComment, ...record }: RaRecord) => {
+  // There is no need for text field
+  const checker = currentComment.author
   const score = record.score
   // True when someone put the score.
   let isThereScore = false
