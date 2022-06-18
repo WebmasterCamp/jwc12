@@ -1,11 +1,12 @@
 import yup from 'yup'
 
-export enum BranchType {
-  PROGRAMMING = 'programming',
-  DESIGN = 'design',
-  MARKETING = 'marketing',
-  CONTENT = 'content',
-}
+export const BranchType = {
+  PROGRAMMING: 'programming',
+  DESIGN: 'design',
+  MARKETING: 'marketing',
+  CONTENT: 'content',
+} as const
+export type BranchType = typeof BranchType[keyof typeof BranchType]
 
 export enum InputType {
   TEXT = 'text',
