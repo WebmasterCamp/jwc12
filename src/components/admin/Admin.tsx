@@ -2,13 +2,11 @@ import { Fragment, useEffect } from 'react'
 import {
   Admin,
   ArrayField,
-  BooleanField,
   Datagrid,
   DateField,
   Edit,
   EditButton,
   List,
-  ListGuesser,
   NumberField,
   NumberInput,
   RaRecord,
@@ -16,7 +14,6 @@ import {
   SimpleForm,
   TextField,
   TextInput,
-  UserIdentity,
   useGetIdentity,
   useGetOne,
 } from 'react-admin'
