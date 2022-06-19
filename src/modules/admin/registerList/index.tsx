@@ -11,14 +11,10 @@ export const RegistrationList = () => {
 
   console.log(user?.branch)
 
+  const filter = user?.branch === 'core' ? undefined : { confirmedBranch: user?.branch }
+
   return (
-    <List
-      actions={<RegisterActionButtons />}
-      aside={<FilterSidebar />}
-      filter={{
-        confirmedBranch: user?.branch,
-      }}
-    >
+    <List actions={<RegisterActionButtons />} aside={<FilterSidebar />} filter={filter}>
       <Datagrid>
         <FunctionField
           label="รหัสอ้างอิง"
@@ -27,7 +23,12 @@ export const RegistrationList = () => {
           }}
         />
         <TextField label="สาขา" source="confirmedBranch" />
-        <TextField label="คะแนนรวม (ทุกคนที่ตรวจ)" source="totalScore" />
+        <FunctionField
+          label="คะแนนรวม (ทุกคนที่ตรวจ)"
+          render={(record: any) => {
+            return record?.totalScore ?? 0
+          }}
+        />
         <BooleanField label="มี 0 ไหม" source="hasZero" />
         <FunctionField
           label="ตรวจแล้ว"
