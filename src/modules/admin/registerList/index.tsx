@@ -5,7 +5,7 @@ import { RegisterActionButtons } from './actions'
 import { FilterSidebar } from './filter'
 
 export const RegistrationList = () => {
-  const { user, isLoading } = useUser()
+  const { user, isLoading, identity } = useUser()
 
   if (isLoading) return null
 
@@ -32,7 +32,7 @@ export const RegistrationList = () => {
         <FunctionField
           label="ตรวจแล้ว"
           render={(record: any) => {
-            return `${record?.checkedBy?.[user?.id ?? ''] ? 'Y' : 'N'}`
+            return `${record?.checkedBy?.[identity?.id ?? ''] ? 'Y' : 'N'}`
           }}
         />
         <EditButton label="" />

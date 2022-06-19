@@ -18,6 +18,7 @@ import {
 import { BranchType } from '@/modules/register/types'
 
 import { branchToQuestion } from '../constants'
+import { useUser } from '../hook/user'
 import { UserAdmin } from '../types'
 import { registrationTransform, renderQuestion } from '../utils'
 
@@ -61,10 +62,7 @@ const UserEditToolbar = (props: any) => (
 )
 
 export const RegistrationEdit = () => {
-  const { isLoading: isIdentityLoading, identity } = useGetIdentity()
-  const { isLoading: isUserLoading, data: user } = useGetOne<UserAdmin>('users', {
-    id: identity?.id ?? '',
-  })
+  const { user, isLoading, identity } = useUser()
 
   const questions = useMemo(() => {
     return renderQuestion(
@@ -74,7 +72,7 @@ export const RegistrationEdit = () => {
     )
   }, [user])
 
-  if (isIdentityLoading || isUserLoading) {
+  if (isLoading) {
     return <p>Loading...</p>
   }
 
@@ -107,12 +105,12 @@ export const RegistrationEdit = () => {
             <span>{user?.name}</span>
           </div>
           <TextInput
-            defaultValue={user?.id}
+            defaultValue={identity?.id}
             disabled
             label="checker id "
             className="pointer-events-none cursor-not-allowed"
             source="currentComment.author"
-            validate={(val) => (val == user?.id ? undefined : "Can't change your name")}
+            validate={(val) => (val == identity?.id ? undefined : "Can't change your name")}
           />
           <div className="flex flex-col gap-x-4 w-full">
             <h3 className="font-bold inline text-lg">ความคิดเห็นของคุณ</h3>

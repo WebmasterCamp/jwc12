@@ -9,6 +9,7 @@ export const useUser = () => {
   })
 
   return {
+    identity,
     isLoading: isIdentityLoading || isUserLoading,
     user,
   }

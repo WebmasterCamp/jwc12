@@ -5,9 +5,9 @@ import { Box, Card, CardContent } from '@mui/material'
 import { useUser } from '../hook/user'
 
 const IsCheckedFilter = () => {
-  const { user, isLoading } = useUser()
+  const { user, isLoading, identity } = useUser()
 
-  const uid = user?.id ?? ''
+  const uid = identity?.id
 
   if (isLoading) return null
 
