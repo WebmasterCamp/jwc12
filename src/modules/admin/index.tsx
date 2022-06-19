@@ -1,8 +1,8 @@
 import { Admin, Resource } from 'react-admin'
 
 import { authProvider, dataProvider } from './config'
-import { RegistrationEdit } from './register/edit'
-import { RegistrationList } from './register/list'
+import { RegistrationEdit } from './registerEdit'
+import { RegistrationList } from './registerList'
 
 export const checkResource = process.env.MODE !== 'DEVELOPMENT' ? 'check' : 'check_staging'
 

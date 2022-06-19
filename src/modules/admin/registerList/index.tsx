@@ -11,6 +11,8 @@ import {
 } from 'react-admin'
 
 import { UserAdmin } from '../types'
+import { RegisterActionButtons } from './actions'
+import { FilterSidebar } from './filter'
 
 export const RegistrationList = () => {
   const { isLoading: isIdentityLoading, identity } = useGetIdentity()
@@ -30,8 +32,8 @@ export const RegistrationList = () => {
   }
 
   return (
-    <List filter={filter} bulkActionButtons={false}>
-      <Datagrid bulkActionButtons={false}>
+    <List filter={filter} actions={<RegisterActionButtons />} aside={<FilterSidebar />}>
+      <Datagrid>
         <FunctionField
           label="รหัสอ้างอิง"
           render={(record: any) => {
