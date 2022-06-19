@@ -5,7 +5,7 @@ import { Box, Card, CardContent } from '@mui/material'
 import { useUser } from '../hook/user'
 
 const IsCheckedFilter = () => {
-  const { user, isLoading, identity } = useUser()
+  const { isLoading, identity } = useUser()
 
   const uid = identity?.id
 
@@ -30,6 +30,10 @@ const IsCheckedFilter = () => {
 }
 
 export const FilterSidebar = () => {
+  const { user, isLoading } = useUser()
+
+  if (isLoading) return null
+
   return (
     <Box
       sx={{
@@ -45,6 +49,9 @@ export const FilterSidebar = () => {
     >
       <Card>
         <CardContent>
+          <p className="text-lg font-bold mb-2">
+            คุณ {user?.name} ตรวจ {user?.branch}
+          </p>
           <FilterLiveSearch source="id" />
           <IsCheckedFilter />
         </CardContent>
