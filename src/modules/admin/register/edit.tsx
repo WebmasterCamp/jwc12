@@ -74,18 +74,20 @@ export const RegistrationEdit = () => {
   return (
     <Edit transform={registrationTransform}>
       <SimpleForm toolbar={<UserEditToolbar />}>
-        <TextField source="id" />
-        <h2 className="text-3xl font-bold">
+        <h2 className="text-3xl font-bold mb-4">รหัสอ้างอิง</h2>
+        <FunctionField render={(record: any) => record?.id.slice(0, 9)} />
+        <h2 className="text-3xl font-bold mb-4">
           มี 0 ไหม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง){' '}
         </h2>
         <BooleanField source="hasZero" />
-        <h2 className="text-3xl font-bold">
+        <h2 className="text-3xl font-bold mb-4">
           คะแนนรวม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง)
         </h2>
         <NumberField source="totalScore" />
         <FunctionField
           label="confirmedBranch"
           source="confirmedBranch"
+          className="text-3xl font-bold mb-4"
           render={(record: any) => {
             return `Confirm Branch: ${record?.confirmedBranch}`
           }}
