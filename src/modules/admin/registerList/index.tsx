@@ -9,8 +9,16 @@ export const RegistrationList = () => {
 
   if (isLoading) return null
 
+  console.log(user?.branch)
+
   return (
-    <List actions={<RegisterActionButtons />} aside={<FilterSidebar />}>
+    <List
+      actions={<RegisterActionButtons />}
+      aside={<FilterSidebar />}
+      filter={{
+        confirmedBranch: user?.branch,
+      }}
+    >
       <Datagrid>
         <FunctionField
           label="รหัสอ้างอิง"

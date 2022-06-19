@@ -108,6 +108,7 @@ export const RegistrationEdit = () => {
           </div>
           <TextInput
             defaultValue={user?.id}
+            disabled
             label="checker id "
             className="pointer-events-none cursor-not-allowed"
             source="currentComment.author"

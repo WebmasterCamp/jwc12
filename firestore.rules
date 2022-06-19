@@ -4,6 +4,10 @@ service cloud.firestore {
     function isAdmin() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true;
     }
+    
+    function isSuperAdmin() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.superAdmin == true;
+    }
 
     match /{document=**} {
       allow read: if isAdmin();
@@ -11,6 +15,12 @@ service cloud.firestore {
 
     match /stats/registrations {
       allow read;
+    }
+    
+    match /users/{userId} {
+      allow read: if isSuperAdmin();
+      allow update: if isSuperAdmin();
+      allow create: if isSuperAdmin();
     }
     
     match /check/{userId} {

@@ -14,15 +14,15 @@ const IsCheckedFilter = () => {
   return (
     <FilterList label="สถานะการตรวจ" icon={null}>
       <FilterListItem
-        label="ยังไม่ตรวจ"
-        value={{
-          [`checkedBy.${uid}`]: false,
-        }}
-      />
-      <FilterListItem
         label="ตรวจแล้ว"
         value={{
           [`checkedBy.${uid}`]: true,
+        }}
+      />
+      <FilterListItem
+        label="ยังไม่ตรวจ"
+        value={{
+          [`checkedBy.${uid}`]: false,
         }}
       />
     </FilterList>

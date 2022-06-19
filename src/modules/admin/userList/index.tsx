@@ -1,5 +1,13 @@
 import { useState } from 'react'
-import { Datagrid, FunctionField, List, TextField, TopToolbar, useRefresh } from 'react-admin'
+import {
+  Datagrid,
+  EditButton,
+  FunctionField,
+  List,
+  TextField,
+  TopToolbar,
+  useRefresh,
+} from 'react-admin'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import {
@@ -92,6 +100,8 @@ export const UserList = () => {
 
   if (isLoading) return null
 
+  if (!user?.superAdmin) return <h2>Permission Denied</h2>
+
   return (
     <List actions={<CreateUserActions />}>
       <Datagrid>
@@ -104,6 +114,7 @@ export const UserList = () => {
         <TextField label="ชื่อ" source="name" />
         <TextField label="สาขา" source="branch" />
         <TextField label="ข้อ" source="which" />
+        <EditButton label="" />
       </Datagrid>
     </List>
   )
