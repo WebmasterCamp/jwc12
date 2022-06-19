@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import React, { ReactNode, useMemo, useState } from 'react'
 import {
   ArrayField,
   BooleanField,
@@ -21,6 +21,13 @@ import { branchToQuestion } from '../constants'
 import { UserAdmin } from '../types'
 import { registrationTransform, renderQuestion } from '../utils'
 
+const withContent = (title: string, content: ReactNode) => (
+  <div className="flex flex-row items-center gap-x-4">
+    <h3 className="font-bold inline text-lg">{title}</h3>
+    <div>{content}</div>
+  </div>
+)
+
 const CommentsSection = () => {
   const [shown, setShown] = useState(false)
   const open = () => setShown((_) => true)
@@ -28,7 +35,7 @@ const CommentsSection = () => {
   if (!shown) {
     return (
       <button className="underline hover:text-green-500 font-bold cursor-pointer" onClick={open}>
-        Show the comment
+        Show the comment (โปรดใช้วิจารณญาณในการอ่าน)
       </button>
     )
   }
@@ -74,38 +81,44 @@ export const RegistrationEdit = () => {
   return (
     <Edit transform={registrationTransform}>
       <SimpleForm toolbar={<UserEditToolbar />}>
-        <h2 className="text-3xl font-bold mb-4">รหัสอ้างอิง</h2>
-        <FunctionField render={(record: any) => record?.id.slice(0, 9)} />
-        <h2 className="text-3xl font-bold mb-4">
-          มี 0 ไหม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง){' '}
-        </h2>
-        <BooleanField source="hasZero" />
-        <h2 className="text-3xl font-bold mb-4">
-          คะแนนรวม (ถ้าไม่มีช่องนี้ แสดงว่ายังไม่มีใครตรวจน้อง)
-        </h2>
-        <NumberField source="totalScore" />
-        <FunctionField
-          label="confirmedBranch"
-          source="confirmedBranch"
-          className="text-3xl font-bold mb-4"
-          render={(record: any) => {
-            return `Confirm Branch: ${record?.confirmedBranch}`
-          }}
-        />
-        {questions}
+        <div className="flex flex-col gap-y-4 w-full border-2 p-4 rounded-md">
+          <FunctionField
+            render={(record: any) => withContent('รหัสอ้างอิง', record?.id.slice(0, 9))}
+          />
+          <FunctionField
+            label="confirmedBranch"
+            source="confirmedBranch"
+            render={(record: any) => withContent('ฝ่าย', record?.confirmedBranch)}
+          />
+          <FunctionField
+            render={(record: any) =>
+              withContent('คะแนนรวม', record?.totalScore ?? 'ยังไม่มีใครตรวจ')
+            }
+          />
+          <FunctionField
+            render={(record: any) => withContent('ที 0 ไหม', record?.hasZero ? 'ใช่' : 'ไม่ใช่')}
+          />
+          {questions}
+        </div>
         <NumberField source="score.total" />
-        <h2 className="text-xl font-bold">
-          Comments (โปรดใช้วิจารณญาณในการอ่าน เพราะว่า comment เป็น subjective)
-        </h2>
-        <CommentsSection></CommentsSection>
-        <TextInput
-          defaultValue={user?.name}
-          label="ชื่อคนเขียนเม้นท์ (แก้ไม่ได้)"
-          className="pointer-events-none cursor-not-allowed"
-          source="currentComment.author"
-          validate={(val) => (val == user?.name ? undefined : "Can't change your name")}
-        />
-        <TextInput label="เนื้อหา" source="currentComment.body" />
+        <div className="flex flex-col gap-y-2 my-5 w-full border-2 p-4 rounded-md">
+          <div className="flex flex-row items-center gap-x-4 w-full">
+            <h3 className="font-bold inline text-lg">ชื่อผู้ตรวจ</h3>
+            <span>{user?.name}</span>
+          </div>
+          <TextInput
+            defaultValue={user?.id}
+            label="checker id "
+            className="pointer-events-none cursor-not-allowed"
+            source="currentComment.author"
+            validate={(val) => (val == user?.id ? undefined : "Can't change your name")}
+          />
+          <div className="flex flex-col gap-x-4 w-full">
+            <h3 className="font-bold inline text-lg">ความคิดเห็นของคุณ</h3>
+            <TextInput label="comment" source="currentComment.body" />
+          </div>
+          <CommentsSection />
+        </div>
       </SimpleForm>
     </Edit>
   )

@@ -9,22 +9,20 @@ const IsCheckedFilter = () => {
 
   const uid = user?.id ?? ''
 
+  if (isLoading) return null
+
   return (
     <FilterList label="สถานะการตรวจ" icon={null}>
       <FilterListItem
         label="ยังไม่ตรวจ"
         value={{
-          checkedBy: {
-            [uid]: null,
-          },
+          [`checkedBy.${uid}`]: false,
         }}
       />
       <FilterListItem
         label="ตรวจแล้ว"
         value={{
-          checkedBy: {
-            [uid]: true,
-          },
+          [`checkedBy.${uid}`]: true,
         }}
       />
     </FilterList>

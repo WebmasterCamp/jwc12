@@ -21,8 +21,13 @@ export const RegistrationList = () => {
         <TextField label="สาขา" source="confirmedBranch" />
         <TextField label="คะแนนรวม (ทุกคนที่ตรวจ)" source="totalScore" />
         <BooleanField label="มี 0 ไหม" source="hasZero" />
-        <BooleanField label="ตรวจแล้ว" source={`checkedBy.${user?.name}`} />
-        <EditButton />
+        <FunctionField
+          label="ตรวจแล้ว"
+          render={(record: any) => {
+            return `${record?.checkedBy?.[user?.id ?? ''] ? 'Y' : 'N'}`
+          }}
+        />
+        <EditButton label="" />
       </Datagrid>
     </List>
   )
