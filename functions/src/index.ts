@@ -177,17 +177,15 @@ async function setupCheckDoc(
   registraions: admin.firestore.QuerySnapshot<admin.firestore.DocumentData>,
   isStaging: boolean
 ) {
-  const ids = await Promise.all(
-    registraions.docs
-      .map(async (doc) => {
-        const data = doc.data()
-        if (!data.submitted) return null
-        await createOrUpdateCheckDocs(doc.data(), doc.id, isStaging)
-        return doc.id
-      })
-      .filter((id) => id !== null)
-  )
-  return ids
+  const ids = (await Promise.all(
+    registraions.docs.map(async (doc) => {
+      const data = doc.data()
+      if (!data.submitted) return null
+      await createOrUpdateCheckDocs(doc.data(), doc.id, isStaging)
+      return doc.id
+    })
+  )) as string[]
+  return ids.filter((id) => id != null)
 }
 
 export const initializeCheckStagingDocs = functions.https.onRequest(async (_, res) => {
