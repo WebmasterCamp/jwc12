@@ -150,9 +150,9 @@ const Home: NextPage = () => {
 }
 
 const withLink = (url: string, children: ReactNode) => (
-  <Link passHref href={url} target="_blank">
+  <a href={url} target="_blank" rel="noreferrer">
     {children}
-  </Link>
+  </a>
 )
 
 function SponsorLogosOnHero() {
