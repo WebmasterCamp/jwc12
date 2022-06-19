@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import type { NextPage } from 'next'
 import Link from 'next/link'
@@ -21,9 +21,15 @@ import { ScheduleSection } from '@/components/ScheduleSection'
 import { Section } from '@/components/Section'
 import { Star } from '@/components/Star'
 import { useRegistrationStats } from '@/db/hooks'
+import { supportsHEVCAlpha } from '@/utils/checkHVECAlphaSupport'
 
 const Home: NextPage = () => {
   const stats = useRegistrationStats()
+  const supportsHEVC = useRef<boolean>()
+
+  useEffect(() => {
+    supportsHEVC.current = supportsHEVCAlpha()
+  }, [])
 
   return (
     <>
@@ -55,13 +61,13 @@ const Home: NextPage = () => {
           </div>
           <MovingCards />
         </div>
-        <Section className="flex flex-col-reverse gap-8 lg:flex-row lg:items-center">
+        <Section className="flex flex-col-reverse gap-10 md:flex-row md:items-center lg:max-w-[1088px]">
           <div className="flex-1">
             <h2 id="about" className="text-3xl font-heading lg:text-4xl mb-4 font-semibold">
               JWC คืออะไร
             </h2>
             <p className="">
-              <span className="text-gold font-bold">
+              <span className="text-gold font-bold inline-block mb-2">
                 JWC คือ ค่ายสร้างเว็บของเด็กม.ปลายผู้มีความฝัน อยากฟันฝ่าโชคชะตาและกำหนดอนาคต
               </span>
               <br />
@@ -71,9 +77,16 @@ const Home: NextPage = () => {
               กับค่าย JWC12: Make Your Site, Write Your Future
             </p>
           </div>
-          <div className="flex-1">
-            <Logo />
-          </div>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="flex-[1-0-0%]"
+            src={
+              supportsHEVC.current ? '/images/shuffle-cards-hevc.mov' : `/images/shuffle-cards.webm`
+            }
+          ></video>
         </Section>
         <ScheduleSection />
         <PlaceSection />
