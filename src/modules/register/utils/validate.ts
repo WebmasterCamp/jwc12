@@ -6,7 +6,7 @@ export const phoneTestConfig: yup.TestConfig<string> = {
   name: 'invalid phone number',
   message: 'กรุณากรอกเบอร์มือถือให้ถูกต้อง',
   test: (value: string) => {
-    return /^((((\+66|66|0)\d{2})-?\d{3}-?\d{4})|(-))$/.test(value)
+    return /^((((\+66|66|0)\d{2})-?\d{3}-?\d{4}))$/.test(value)
   },
 }
 

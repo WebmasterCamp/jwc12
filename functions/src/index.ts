@@ -17,6 +17,17 @@ const registrationStatsDoc = db.doc('stats/registrations')
 const branchStatsDoc = db.doc('stats/branchConfirmed')
 const stepStatsDoc = db.doc('stats/furthestStep')
 
+async function createOrUpdateCheckDocs(data: any, userId: string, isStaging = true) {
+  const collectionName = isStaging ? 'check_staging' : 'check'
+  const checkDoc = db.doc(`${collectionName}/${userId}`)
+  const checkDocExists = await checkDoc.get()
+  if (checkDocExists.exists) {
+    await checkDoc.update(data)
+  } else {
+    await checkDoc.create(data)
+  }
+}
+
 async function incrementBranchStats(
   doc: admin.firestore.DocumentReference<admin.firestore.DocumentData>,
   branch: Branch,
@@ -47,7 +58,8 @@ export const onCreate = functions.firestore
 
 export const onChange = functions.firestore
   .document('registrations/{userId}')
-  .onUpdate(async (change) => {
+  .onUpdate(async (change, context) => {
+    const userId = context.params.userId
     const newValue = change.after.data() as PartialRegistration
     const previousValue = change.before.data() as PartialRegistration
 
@@ -69,6 +81,31 @@ export const onChange = functions.firestore
       newValue.confirmedBranch !== previousValue.confirmedBranch ||
       newValue.submitted !== previousValue.submitted
     ) {
+      await createOrUpdateCheckDocs(newValue, userId, false)
+
+      if (previousValue.submitted && previousValue.confirmedBranch !== null) {
+        await incrementBranchStats(registrationStatsDoc, previousValue.confirmedBranch, -1)
+      }
+      if (newValue.submitted && newValue.confirmedBranch !== null) {
+        await incrementBranchStats(registrationStatsDoc, newValue.confirmedBranch, 1)
+      }
+    }
+  })
+
+export const onStagingChange = functions.firestore
+  .document('registrations_staging/{userId}')
+  .onUpdate(async (change, context) => {
+    const userId = context.params.userId
+    const newValue = change.after.data() as PartialRegistration
+    const previousValue = change.before.data() as PartialRegistration
+
+    // CASE : Submit
+    if (
+      newValue.confirmedBranch !== previousValue.confirmedBranch ||
+      newValue.submitted !== previousValue.submitted
+    ) {
+      await createOrUpdateCheckDocs(newValue, userId)
+
       if (previousValue.submitted && previousValue.confirmedBranch !== null) {
         await incrementBranchStats(registrationStatsDoc, previousValue.confirmedBranch, -1)
       }
@@ -134,4 +171,31 @@ export const refreshCounts = functions.https.onRequest(async (_, res) => {
   res
     .status(200)
     .send(JSON.stringify({ submittedCounts, branchConfirmedCounts, furthestStepCounts }))
+})
+
+async function setupCheckDoc(
+  registraions: admin.firestore.QuerySnapshot<admin.firestore.DocumentData>,
+  isStaging: boolean
+) {
+  const ids = (await Promise.all(
+    registraions.docs.map(async (doc) => {
+      const data = doc.data()
+      if (!data.submitted) return null
+      await createOrUpdateCheckDocs(doc.data(), doc.id, isStaging)
+      return doc.id
+    })
+  )) as string[]
+  return ids.filter((id) => id != null)
+}
+
+export const initializeCheckStagingDocs = functions.https.onRequest(async (_, res) => {
+  const allRegistrations = await db.collection('registrations_staging').get()
+  const ids = await setupCheckDoc(allRegistrations, true)
+  res.status(200).json({ ids, total: ids.length })
+})
+
+export const initializeCheckDocs = functions.https.onRequest(async (_, res) => {
+  const allRegistrations = await db.collection('registrations').get()
+  const ids = await setupCheckDoc(allRegistrations, false)
+  res.status(200).json({ ids, total: ids.length })
 })

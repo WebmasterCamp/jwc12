@@ -4,13 +4,35 @@ service cloud.firestore {
     function isAdmin() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true;
     }
+    
+    function isSuperAdmin() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.superAdmin == true;
+    }
 
     match /{document=**} {
-      allow read, write: if isAdmin();
+      allow read: if isAdmin();
     }
 
     match /stats/registrations {
       allow read;
+    }
+    
+    match /users/{userId} {
+      allow read: if isSuperAdmin();
+      allow update: if isSuperAdmin();
+      allow create: if isSuperAdmin();
+    }
+    
+    match /check/{userId} {
+       allow read: if isAdmin();
+       allow update: if isAdmin();
+       allow create: if isAdmin();
+    }
+    
+    match /check_staging/{userId} {
+       allow read: if isAdmin();
+       allow update: if isAdmin();
+       allow create: if isAdmin();
     }
 
     function verifyCreate() {
@@ -63,9 +85,16 @@ service cloud.firestore {
     }
     
     match /registrations_staging/{userId} {
-      allow read: if isOwner(userId);
-      allow create: if isOwner(userId) && verifyCreate();
-      allow update: if isOwner(userId) && verifyUpdate();
+      // Allow admin because it is so difficult.
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if ((isOwner(userId)) && verifyCreate()) || isAdmin();
+      allow update: if ((isOwner(userId)) && verifyUpdate()) || isAdmin();
+    }
+    
+    match /score_staging/{userId} {
+       allow read: if isAdmin();
+       allow update: if isAdmin();
+       allow create: if isAdmin();
     }
 
     function isOwner(userId) {
