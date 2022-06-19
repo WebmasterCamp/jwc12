@@ -1,38 +1,16 @@
-import { useEffect, useState } from 'react'
-import {
-  BooleanField,
-  Datagrid,
-  EditButton,
-  FunctionField,
-  List,
-  TextField,
-  useGetIdentity,
-  useGetOne,
-} from 'react-admin'
+import { BooleanField, Datagrid, EditButton, FunctionField, List, TextField } from 'react-admin'
 
-import { UserAdmin } from '../types'
+import { useUser } from '../hook/user'
 import { RegisterActionButtons } from './actions'
 import { FilterSidebar } from './filter'
 
 export const RegistrationList = () => {
-  const { isLoading: isIdentityLoading, identity } = useGetIdentity()
-  const { isLoading: isUserLoading, data: user } = useGetOne<UserAdmin>('users', {
-    id: identity?.id ?? '',
-  })
+  const { user, isLoading } = useUser()
 
-  const [filter, setFilter] = useState<any>({ submitted: true })
-  useEffect(() => {
-    // Valid branch (not core)
-    if (user && ['programming', 'design', 'marketing', 'content'].includes(user.branch)) {
-      setFilter((f: any) => ({ ...f, confirmedBranch: user.branch }))
-    }
-  }, [user, isUserLoading])
-  if (isIdentityLoading || isUserLoading) {
-    return <p>Loading...</p>
-  }
+  if (isLoading) return null
 
   return (
-    <List filter={filter} actions={<RegisterActionButtons />} aside={<FilterSidebar />}>
+    <List actions={<RegisterActionButtons />} aside={<FilterSidebar />}>
       <Datagrid>
         <FunctionField
           label="รหัสอ้างอิง"

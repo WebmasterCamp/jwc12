@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { BulkExportButton } from 'react-admin'
 
 import { Box } from '@mui/material'
