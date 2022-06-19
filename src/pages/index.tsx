@@ -150,6 +150,7 @@ function SponsorLogos() {
     <div className=" space-x-4 p-8 text-center mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
       <img className="h-12" src="/images/sponsor-01.svg" alt="Thai Webmaster Association" />
       <img className="h-12" src="/images/sponsor-02.svg" alt="IT KMITL" />
+      <img className="" src="/images/sponsor-03.svg" alt="Dek-D" />
     </div>
   )
 }
