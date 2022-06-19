@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 
 import type { NextPage } from 'next'
 import Link from 'next/link'
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
             Make Your Site,
             <br /> Write Your <span className="text-ct">Future</span>
           </h1>
-          <SponsorLogos />
+          <SponsorLogosOnHero />
           <div className="flex flex-col gap-4 sm:gap-8 sm:flex-row sm:justify-center">
             <Link href="/#branch" passHref>
               <LinkButton className="register-button" color="gold">
@@ -134,23 +134,182 @@ const Home: NextPage = () => {
             </a>
           </div>
         </Section>
-
         <Section className="text-center">
           <h2 className="text-3xl font-heading lg:text-4xl mb-16 font-semibold">ผู้สนับสนุน</h2>
-          <SponsorLogos />
+          <SponsorLogosOnBottom />
         </Section>
+        {/* TODO: Media Partner images broken */}
+        {/* <Section className="text-center">
+          <h2 className="text-3xl font-heading lg:text-4xl mb-16 font-semibold">พันธมิตร</h2>
+          <MediaPartner />
+        </Section> */}
         <Footer />
       </div>
     </>
   )
 }
 
-function SponsorLogos() {
+const withLink = (url: string, children: ReactNode) => (
+  <Link passHref href={url} target="_blank">
+    {children}
+  </Link>
+)
+
+function SponsorLogosOnHero() {
   return (
-    <div className=" space-x-4 p-8 text-center mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
-      <img className="h-12" src="/images/sponsor-01.svg" alt="Thai Webmaster Association" />
-      <img className="h-12" src="/images/sponsor-02.svg" alt="IT KMITL" />
-      <img className="" src="/images/sponsor-03.svg" alt="Dek-D" />
+    <div className="space-x-4 text-center mx-auto flex flex-row items-center justify-center gap-6 flex-wrap my-20">
+      {withLink(
+        'https://www.webmaster.or.th/',
+        <img
+          className="h-14 cursor-pointer"
+          src="/images/sponsors/01_TWA.svg"
+          alt="Thai Webmaster Association"
+        />
+      )}
+      {withLink(
+        'https://www.it.kmitl.ac.th/',
+        <img className="h-14 cursor-pointer" src="/images/sponsors/02_IT.svg" alt="IT KMITL" />
+      )}
+      {withLink(
+        'https://www.cpall.co.th/',
+        <img
+          className="h-[72px] cursor-pointer"
+          src="/images/sponsors/VIP_01_CP.svg"
+          alt="CP All"
+        />
+      )}
+      {withLink(
+        'https://www.scb.co.th/',
+        <img className="h-14 cursor-pointer" src="/images/sponsors/VIP_02_SCB.svg" alt="SCB" />
+      )}
+    </div>
+  )
+}
+
+function SponsorLogosOnBottom() {
+  return (
+    <div className="space-x-4 p-8 text-center mx-auto flex flex-col items-center justify-center gap-y-16">
+      <div className="flex flex-wrap flex-1 gap-x-20 justify-center items-center">
+        {withLink(
+          'https://www.webmaster.or.th/',
+          <img
+            className="h-20 cursor-pointer"
+            src="/images/sponsors/01_TWA.svg"
+            alt="Thai Webmaster Association"
+          />
+        )}
+        {withLink(
+          'https://www.it.kmitl.ac.th/',
+          <img className="h-20 cursor-pointer" src="/images/sponsors/02_IT.svg" alt="IT KMITL" />
+        )}
+      </div>
+      <div className="flex flex-wrap flex-1 gap-x-20 justify-center items-center">
+        {withLink(
+          'https://www.cpall.co.th/',
+          <img className="h-20 cursor-pointer" src="/images/sponsors/VIP_01_CP.svg" alt="CP All" />
+        )}
+        {withLink(
+          'https://www.scb.co.th/',
+          <img className="h-20 cursor-pointer" src="/images/sponsors/VIP_02_SCB.svg" alt="SCB" />
+        )}
+      </div>
+      <div className="flex flex-wrap flex-1 gap-x-20 justify-center items-center">
+        {withLink(
+          '/',
+          <img
+            className="h-20 cursor-pointer"
+            src="/images/sponsors/Partner_01_Imagine.svg"
+            alt="Imagine"
+          />
+        )}
+        {withLink(
+          'https://www.camphub.in.th/',
+          <img
+            className="h-8 cursor-pointer"
+            src="/images/sponsors/Partner_02_camphub.svg"
+            alt="camphub"
+          />
+        )}
+      </div>
+      <div className="flex flex-wrap flex-1 gap-x-20 justify-center items-center">
+        {withLink(
+          'https://www.dek-d.com/',
+          <img
+            className="h-5 cursor-pointer"
+            src="/images/sponsors/Sponsor_01_Dekd.svg"
+            alt="camphub"
+          />
+        )}
+      </div>
+    </div>
+  )
+}
+
+function MediaPartner() {
+  return (
+    <div className="space-x-4 p-8 text-center mx-auto flex flex-col items-center justify-center gap-y-16">
+      <div className="flex flex-wrap flex-1 gap-x-20 justify-center items-center">
+        {withLink(
+          'https://www.youtube.com/c/QueenH',
+          <img
+            className="h-10 cursor-pointer"
+            src="/images/mediaPartners/1_QueenH.png"
+            alt="QueenH"
+          />
+        )}
+        {withLink(
+          'https://www.facebook.com/learnlalen',
+          <img
+            className="h-10 cursor-pointer"
+            src="/images/mediaPartners/2_learnlalen.png"
+            alt="learnlalen"
+          />
+        )}
+        {withLink(
+          'https://www.modernist.life/',
+          <img
+            className="h-10 cursor-pointer"
+            src="/images/mediaPartners/3_Modernist.png"
+            alt="Modernist"
+          />
+        )}
+        {withLink(
+          'https://www.contentshifu.com/',
+          <img
+            className="h-10 cursor-pointer"
+            src="/images/mediaPartners/4_content-shifu.png"
+            alt="content-shifu"
+          />
+        )}
+        {withLink(
+          'https://www.facebook.com/join.codebase/',
+          <img
+            className="h-10 cursor-pointer"
+            src="/images/mediaPartners/5_codebase.png"
+            alt="codebase"
+          />
+        )}
+        {withLink(
+          'https://baseplayhouse.co/',
+          <img className="h-10 cursor-pointer" src="/images/mediaPartners/6_BASE.png" alt="BASE" />
+        )}
+        {withLink(
+          'https://www.facebook.com/dataholicth',
+          <img
+            className="h-10 cursor-pointer"
+            src="/images/mediaPartners/7_dataholic.png"
+            alt="dataholicth"
+          />
+        )}
+        {withLink(
+          'https://adaddictth.com/',
+          <img
+            className="h-10 cursor-pointer"
+            src="/images/mediaPartners/8_AdAddict.png"
+            alt="AdAddict"
+          />
+        )}
+      </div>
     </div>
   )
 }
