@@ -11,7 +11,6 @@ export const registerResource =
 
 export const AdminBackOffice = () => (
   <Admin dataProvider={dataProvider} authProvider={authProvider}>
-    <Resource name={registerResource} list={RegistrationList} edit={RegistrationEdit} />
     <Resource name={checkResource} list={RegistrationList} edit={RegistrationEdit} />
   </Admin>
 )
