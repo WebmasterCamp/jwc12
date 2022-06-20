@@ -118,7 +118,7 @@ export const UserList = () => {
         <FunctionField
           label="ดูรายชื่อได้"
           render={(record: any) => {
-            return `${record?.reacContact ? 'Y' : 'N'}`
+            return `${record?.readContact ? 'Y' : 'N'}`
           }}
         />
         <EditButton label="" />
