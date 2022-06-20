@@ -75,11 +75,18 @@ export const registrationTransform = ({ currentComment, which, branch, ...record
     ...record,
     comments: (function () {
       // Actually array
-      if (typeof currentComment.body !== 'string' || currentComment.body.length == 0)
+      if (record.comments == undefined) {
+        record.comments = []
+      }
+      if (typeof currentComment.body !== 'string' || currentComment.body.length == 0) {
+        console.log('Enter no comment case')
         return record.comments
+      }
       if (typeof record.comments === 'object') {
+        console.log('oncase')
         return [...record.comments, currentComment]
       }
+      console.log('Undefined case')
       return [currentComment]
     })(),
     // score: {
