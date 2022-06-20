@@ -11,7 +11,10 @@ export const RegistrationList = () => {
 
   console.log(user?.branch)
 
-  const filter = user?.branch === 'core' ? undefined : { confirmedBranch: user?.branch }
+  const filter =
+    user?.branch === 'core'
+      ? { submitted: true }
+      : { submitted: true, confirmedBranch: user?.branch }
 
   return (
     <List actions={<RegisterActionButtons />} aside={<FilterSidebar />} filter={filter}>
