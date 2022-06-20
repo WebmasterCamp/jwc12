@@ -3,6 +3,7 @@ import { Datagrid, List, TextField, downloadCSV } from 'react-admin'
 import jsonExport from 'jsonexport'
 
 import { useUser } from '../hook/user'
+import { FilterSidebar } from './filter'
 
 const exporter = (items: any[]) => {
   const contacts = items.map((item) => ({
@@ -33,7 +34,7 @@ export const RegisterList = () => {
   if (!user?.readContact) return <h2>{"Permission denied: need 'readContact: true'"}</h2>
 
   return (
-    <List filter={{ submitted: false }} exporter={exporter}>
+    <List exporter={exporter} aside={<FilterSidebar />}>
       <Datagrid>
         <TextField label="ชื่อ" source="answers.basic.firstName" />
         <TextField label="นามสกุล" source="answers.basic.lastName" />
