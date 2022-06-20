@@ -17,7 +17,12 @@ export const RegistrationList = () => {
       : { submitted: true, confirmedBranch: user?.branch }
 
   return (
-    <List actions={<RegisterActionButtons />} aside={<FilterSidebar />} filter={filter}>
+    <List
+      actions={<RegisterActionButtons />}
+      aside={<FilterSidebar />}
+      perPage={100}
+      filter={filter}
+    >
       <Datagrid>
         <FunctionField
           label="รหัสอ้างอิง"
