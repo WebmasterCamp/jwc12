@@ -1,5 +1,5 @@
 import React from 'react'
-import { Edit, NumberInput, SimpleForm, TextInput } from 'react-admin'
+import { BooleanInput, Edit, NumberInput, SimpleForm, TextInput } from 'react-admin'
 
 import { useUser } from '../hook/user'
 
@@ -15,6 +15,7 @@ export const UserEdit = () => {
         <TextInput source="name" />
         <TextInput source="branch" />
         <NumberInput source="which" />
+        <BooleanInput source="readContact" />
       </SimpleForm>
     </Edit>
   )

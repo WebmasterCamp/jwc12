@@ -17,10 +17,10 @@ const exporter = (items: any[]) => {
   jsonExport(
     contacts,
     {
-      headers: ['firstName', 'lastName', 'nickname', 'telephone', 'email', 'confirmedBranch'], // order fields in the export
+      headers: ['firstName', 'lastName', 'nickname', 'telephone', 'email', 'confirmedBranch'],
     },
     (err, csv) => {
-      downloadCSV(csv, 'contact') // download as 'posts.csv` file
+      downloadCSV(csv, 'contact')
     }
   )
 }

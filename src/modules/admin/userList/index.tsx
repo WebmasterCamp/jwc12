@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {
+  BooleanField,
   Datagrid,
   EditButton,
   FunctionField,
@@ -114,6 +115,12 @@ export const UserList = () => {
         <TextField label="ชื่อ" source="name" />
         <TextField label="สาขา" source="branch" />
         <TextField label="ข้อ" source="which" />
+        <FunctionField
+          label="ดูรายชื่อได้"
+          render={(record: any) => {
+            return `${record?.reacContact ? 'Y' : 'N'}`
+          }}
+        />
         <EditButton label="" />
       </Datagrid>
     </List>
