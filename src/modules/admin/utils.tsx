@@ -30,7 +30,10 @@ export const registrationTransform = ({ currentComment, which, branch, ...record
       // It is a single digit number. At least, we don't have more than 9 questions.
       const qNumber = Number.parseInt(qRaw[1])
       // This question belongs to the person who edited the form.
-      if (questionType === branch && qNumber == which) {
+      const correctBrnach =
+        (branch === 'core' && questionType === 'core') ||
+        (branch !== 'core' && questionType === 'branch')
+      if (correctBrnach && qNumber == which) {
         checked = true
       }
       if (questionScore === 0) hasZero = true
