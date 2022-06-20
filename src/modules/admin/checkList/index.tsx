@@ -24,19 +24,9 @@ export const CheckList = () => {
       filter={filter}
     >
       <Datagrid>
-        <FunctionField
-          label="รหัสอ้างอิง"
-          render={(record: any) => {
-            return `${record?.id?.slice(0, 9)}`
-          }}
-        />
+        <TextField label="รหัสอ้างอิง" source="id" />
         <TextField label="สาขา" source="confirmedBranch" />
-        <FunctionField
-          label="คะแนนรวม (ทุกคนที่ตรวจ)"
-          render={(record: any) => {
-            return record?.totalScore ?? 0
-          }}
-        />
+        <TextField label="คะแนนรวม" source="totalScore" defaultValue={0} />
         <BooleanField label="มี 0 ไหม" source="hasZero" />
         <FunctionField
           label="ตรวจแล้ว"
