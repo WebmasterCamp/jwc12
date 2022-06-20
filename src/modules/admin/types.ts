@@ -10,4 +10,5 @@ export interface UserAdmin {
   branch: BranchType | 'core'
   // ตรวจข้อไหน
   which: number
+  readContact: boolean
 }
