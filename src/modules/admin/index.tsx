@@ -1,8 +1,8 @@
 import { Admin, Resource } from 'react-admin'
 
+import { CheckEdit } from './checkEdit'
+import { CheckList } from './checkList'
 import { authProvider, dataProvider } from './config'
-import { RegistrationEdit } from './registerEdit'
-import { RegistrationList } from './registerList'
 import { UserEdit } from './userEdit'
 import { UserList } from './userList'
 
@@ -14,7 +14,8 @@ export const registerResource =
 
 export const AdminBackOffice = () => (
   <Admin dataProvider={dataProvider} authProvider={authProvider}>
-    <Resource name={checkResource} list={RegistrationList} edit={RegistrationEdit} />
+    <Resource name={registerResource} list={CheckList} edit={CheckEdit} />
+    <Resource name={checkResource} list={CheckList} edit={CheckEdit} />
     <Resource name={userResource} list={UserList} edit={UserEdit} />
   </Admin>
 )

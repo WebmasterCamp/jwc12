@@ -4,7 +4,7 @@ import { useUser } from '../hook/user'
 import { RegisterActionButtons } from './actions'
 import { FilterSidebar } from './filter'
 
-export const RegistrationList = () => {
+export const CheckList = () => {
   const { user, isLoading, identity } = useUser()
 
   if (isLoading) return null

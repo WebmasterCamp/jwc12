@@ -1,7 +1,6 @@
 import React, { ReactNode, useMemo, useState } from 'react'
 import {
   ArrayField,
-  BooleanField,
   Datagrid,
   Edit,
   FunctionField,
@@ -11,15 +10,12 @@ import {
   TextField,
   TextInput,
   Toolbar,
-  useGetIdentity,
-  useGetOne,
 } from 'react-admin'
 
 import { BranchType } from '@/modules/register/types'
 
 import { branchToQuestion } from '../constants'
 import { useUser } from '../hook/user'
-import { UserAdmin } from '../types'
 import { registrationTransform, renderQuestion } from '../utils'
 
 const withContent = (title: string, content: ReactNode) => (
@@ -61,7 +57,7 @@ const UserEditToolbar = (props: any) => (
   </Toolbar>
 )
 
-export const RegistrationEdit = () => {
+export const CheckEdit = () => {
   const { user, isLoading, identity } = useUser()
 
   const questions = useMemo(() => {
