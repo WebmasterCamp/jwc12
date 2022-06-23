@@ -1,6 +1,7 @@
 import {
   BooleanField,
   Datagrid,
+  DateField,
   EditButton,
   FunctionField,
   List,
@@ -44,6 +45,7 @@ export const CheckList = () => {
         <TextField label="คะแนนรวม" source="totalScore" defaultValue={0} />
         {source.length > 0 && <NumberField source={source} label="คะแนนที่ให้ล่าสุด" />}
         <BooleanField label="มี 0 ไหม" source="hasZero" />
+        <DateField label="สมัครตอนไหน" source="createdAt" locales="th-TH" showTime />
         <FunctionField
           label="ตรวจแล้ว"
           render={(record: any) => {
