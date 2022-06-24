@@ -54,6 +54,8 @@ const RegisterPage: NextPage<RegisterPageProps> = withRegistrationData<RegisterP
       toast.error('กรุณายอมรับข้อตกลงก่อนสมัคร')
     }
 
+    return <Redirect to="/" replace />
+
     if (submitted) {
       return <Redirect to={`/register/complete`} replace />
     }

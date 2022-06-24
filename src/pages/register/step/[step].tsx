@@ -34,6 +34,8 @@ const StepPage: NextPage<StepPageProps> = withRegistrationData<InnerPageProps>(
       confirmedBranch = '',
     } = registration || {}
 
+    return <Redirect to="/" replace />
+
     // has not consent to registration rules
     if (!consented) {
       return <Redirect to={`/register`} replace />
