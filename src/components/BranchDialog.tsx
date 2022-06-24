@@ -7,7 +7,7 @@ import CrossIcon from '@iconify/icons-akar-icons/cross'
 import { Icon } from '@iconify/react'
 import { count } from 'console'
 
-import { Button, LinkButton } from './Button'
+import { Button } from './Button'
 
 interface Props {
   open: boolean
@@ -68,9 +68,9 @@ export const BranchDialog: React.FunctionComponent<Props> = ({
                 <span className="font-bold text-2xl lg:text-3xl text-center text-brown-dark font-heading">
                   สมัครแล้ว {count} คน
                 </span>
-                <Link href="/register" passHref>
-                  <LinkButton color="gold">สมัครสาขานี้</LinkButton>
-                </Link>
+                <Button color="gold" variant="outlined">
+                  ปิดรับสมัคร
+                </Button>
               </div>
             </Dialog.Panel>
           </div>
