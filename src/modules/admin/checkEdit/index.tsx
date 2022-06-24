@@ -73,7 +73,7 @@ export const CheckEdit = () => {
   }
 
   return (
-    <Edit transform={registrationTransform}>
+    <Edit mutationMode="optimistic" transform={registrationTransform}>
       <SimpleForm toolbar={<UserEditToolbar />}>
         <div className="flex flex-col gap-y-4 w-full border-2 p-4 rounded-md">
           <FunctionField
