@@ -138,7 +138,10 @@ export function renderQuestion(question: Question, branch: string, checker: User
     <>
       <h2 className="text-lg ">{theQuestion.question}</h2>
       <h3 className="text-xl font-semibold">คำตอบ</h3>
-      <TextField source={`answers.${rootSource}.${questionSource}`} />
+      <TextField
+        className="whitespace-pre-wrap"
+        source={`answers.${rootSource}.${questionSource}`}
+      />
       <NumberInput label="คะแนนที่ให้" min={0} max={10} source={destination} />
       <NumberInput
         source="which"
