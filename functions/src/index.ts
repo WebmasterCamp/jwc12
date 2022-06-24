@@ -39,13 +39,6 @@ async function incrementBranchStats(
   })
 }
 
-async function incrementStepStats(newStep: Step, previousStep: Step, delta: number) {
-  await stepStatsDoc.update({
-    [newStep.toString()]: admin.firestore.FieldValue.increment(delta),
-    [previousStep.toString()]: admin.firestore.FieldValue.increment(-delta),
-  })
-}
-
 export const onCreate = functions.firestore
   .document('registrations/{userId}')
   .onCreate(async (snap) => {
@@ -65,7 +58,29 @@ export const onChange = functions.firestore
 
     // CASE : Change furthest step
     if (newValue.furthestStep > previousValue.furthestStep) {
-      await incrementStepStats(newValue.furthestStep, previousValue.furthestStep, 1)
+      const stepStats = await stepStatsDoc.get()
+      const oldData = stepStats.data()
+
+      const getValue = (step: Step, delta: number, branch: Branch | null, oldData: any) => {
+        let stepKey: any = {
+          [step.toString()]: admin.firestore.FieldValue.increment(delta),
+        }
+        if (step >= 3 && branch) {
+          stepKey = {
+            [step.toString()]: {
+              ...oldData?.[step.toString()],
+              [branch]: (oldData?.[step.toString()][branch] ?? 0) + delta,
+            },
+          }
+        }
+        return stepKey
+      }
+
+      await stepStatsDoc.update({
+        ...oldData,
+        ...getValue(newValue.furthestStep, 1, newValue.confirmedBranch, oldData),
+        ...getValue(previousValue.furthestStep, -1, previousValue.confirmedBranch, oldData),
+      })
     }
 
     // CASE : Confirm branch
@@ -115,6 +130,14 @@ export const onStagingChange = functions.firestore
     }
   })
 
+interface BranchCount {
+  programming: number
+  design: number
+  marketing: number
+  content: number
+  all: number
+}
+
 export const refreshCounts = functions.https.onRequest(async (_, res) => {
   const branchConfirmedRegistrations = await db
     .collection('registrations')
@@ -122,29 +145,26 @@ export const refreshCounts = functions.https.onRequest(async (_, res) => {
     .where('confirmedBranch', '!=', null)
     .get()
 
-  const allRegistrations = await db.collection('registrations').select('furthestStep').get()
+  const allRegistrations = await db
+    .collection('registrations')
+    .select('confirmedBranch', 'furthestStep')
+    .get()
 
-  const submittedCounts = {
+  const submittedCounts: BranchCount = {
     all: 0,
     programming: 0,
     design: 0,
     marketing: 0,
     content: 0,
   }
-  const branchConfirmedCounts = {
-    all: 0,
-    programming: 0,
-    design: 0,
-    marketing: 0,
-    content: 0,
-  }
+  const branchConfirmedCounts: BranchCount = JSON.parse(JSON.stringify(submittedCounts))
   const furthestStepCounts = {
     all: 0,
     '1': 0,
     '2': 0,
-    '3': 0,
-    '4': 0,
-    '5': 0,
+    '3': JSON.parse(JSON.stringify(submittedCounts)) as BranchCount,
+    '4': JSON.parse(JSON.stringify(submittedCounts)) as BranchCount,
+    '5': JSON.parse(JSON.stringify(submittedCounts)) as BranchCount,
   }
 
   branchConfirmedRegistrations.forEach((doc) => {
@@ -160,8 +180,14 @@ export const refreshCounts = functions.https.onRequest(async (_, res) => {
 
   allRegistrations.forEach((doc) => {
     const furthestStep = (doc.data() as PartialRegistration).furthestStep
-    furthestStepCounts[furthestStep]++
+    const branch = (doc.data() as PartialRegistration).confirmedBranch
     furthestStepCounts.all++
+    if (furthestStep >= 3 && branch) {
+      ;(furthestStepCounts[furthestStep] as BranchCount).all++
+      ;(furthestStepCounts[furthestStep] as BranchCount)[branch]++
+    } else {
+      furthestStepCounts[furthestStep]++
+    }
   })
 
   await registrationStatsDoc.set(submittedCounts)

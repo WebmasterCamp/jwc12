@@ -25,6 +25,9 @@
     },
     "ui": {
       "enabled": true
+    },
+    "functions": {
+      "port": 8082
     }
   },
   "firestore": {
