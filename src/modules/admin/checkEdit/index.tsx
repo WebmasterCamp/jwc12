@@ -1,6 +1,8 @@
 import React, { ReactNode, useMemo, useState } from 'react'
 import {
   ArrayField,
+  BooleanField,
+  BooleanInput,
   Datagrid,
   Edit,
   FunctionField,
@@ -113,6 +115,7 @@ export const CheckEdit = () => {
             <TextInput label="comment" source="currentComment.body" />
           </div>
           <CommentsSection />
+          <BooleanInput label="เอาน้องเข้าค่ายไหม" source="include" />
         </div>
       </SimpleForm>
     </Edit>

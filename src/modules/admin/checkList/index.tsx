@@ -7,11 +7,31 @@ import {
   List,
   NumberField,
   TextField,
+  useRecordContext,
 } from 'react-admin'
+
+import clsx from 'clsx'
 
 import { useUser } from '../hook/user'
 import { RegisterActionButtons } from './actions'
 import { FilterSidebar } from './filter'
+
+const IncludeField = ({ label = 'เอาน้องคนนี้ไหม' }) => {
+  const record = useRecordContext()
+  const include = record?.include
+  return (
+    <FunctionField
+      label={label}
+      sx={{
+        color: include ? 'rgb(6 78 59);' : 'rgb(239 68 68)',
+        textDecoration: include ? 'underline' : 'line-through',
+      }}
+      render={(record: any) => {
+        return `${record?.include ? 'ใช่' : 'ไม่'}`
+      }}
+    />
+  )
+}
 
 export const CheckList = () => {
   const { user, isLoading, identity } = useUser()
@@ -52,6 +72,7 @@ export const CheckList = () => {
             return `${record?.checkedBy?.[identity?.id ?? ''] ? 'Y' : 'N'}`
           }}
         />
+        <IncludeField label="เอาน้องคนนี้ไหม" />
         <EditButton label="" />
       </Datagrid>
     </List>
