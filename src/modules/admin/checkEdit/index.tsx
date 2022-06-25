@@ -12,20 +12,15 @@ import {
   TextField,
   TextInput,
   Toolbar,
+  useRecordContext,
 } from 'react-admin'
 
+import { Button } from '@/components/Button'
 import { BranchType } from '@/modules/register/types'
 
 import { branchToQuestion } from '../constants'
 import { useUser } from '../hook/user'
-import { registrationTransform, renderQuestion } from '../utils'
-
-const withContent = (title: string, content: ReactNode) => (
-  <div className="flex flex-row items-center gap-x-4">
-    <h3 className="font-bold inline text-lg">{title}</h3>
-    <div>{content}</div>
-  </div>
-)
+import { registrationTransform, renderAllQuestions, renderQuestion, withContent } from '../utils'
 
 const CommentsSection = () => {
   const [shown, setShown] = useState(false)
@@ -61,6 +56,10 @@ const UserEditToolbar = (props: any) => (
 
 export const CheckEdit = () => {
   const { user, isLoading, identity } = useUser()
+  const record = useRecordContext()
+  const [checkMode, setCheckMode] = useState(true)
+
+  const toggleMode = () => setCheckMode((c) => !c)
 
   const questions = useMemo(() => {
     return renderQuestion(
@@ -77,24 +76,41 @@ export const CheckEdit = () => {
   return (
     <Edit mutationMode="optimistic" transform={registrationTransform}>
       <SimpleForm toolbar={<UserEditToolbar />}>
+        <Button onClick={toggleMode}>{checkMode ? 'โหมดตรวจ' : 'โหมดคัดน้องเข้าค่าย'}</Button>
         <div className="flex flex-col gap-y-4 w-full border-2 p-4 rounded-md">
-          <FunctionField
-            render={(record: any) => withContent('รหัสอ้างอิง', record?.id.slice(0, 9))}
-          />
-          <FunctionField
-            label="confirmedBranch"
-            source="confirmedBranch"
-            render={(record: any) => withContent('ฝ่าย', record?.confirmedBranch)}
-          />
-          <FunctionField
-            render={(record: any) =>
-              withContent('คะแนนรวม', record?.totalScore ?? 'ยังไม่มีใครตรวจ')
-            }
-          />
-          <FunctionField
-            render={(record: any) => withContent('ที 0 ไหม', record?.hasZero ? 'ใช่' : 'ไม่ใช่')}
-          />
-          {questions}
+          {checkMode ? (
+            <>
+              <FunctionField
+                render={(record: any) => withContent('รหัสอ้างอิง', record?.id.slice(0, 9))}
+              />
+              <FunctionField
+                label="confirmedBranch"
+                source="confirmedBranch"
+                render={(record: any) => withContent('ฝ่าย', record?.confirmedBranch)}
+              />
+              <FunctionField
+                render={(record: any) =>
+                  withContent('คะแนนรวม', record?.totalScore ?? 'ยังไม่มีใครตรวจ')
+                }
+              />
+              <FunctionField
+                render={(record: any) =>
+                  withContent('ที 0 ไหม', record?.hasZero ? 'ใช่' : 'ไม่ใช่')
+                }
+              />
+              {questions}
+            </>
+          ) : (
+            <>
+              <h2 className="text-xl font-bold">กิจกรรมที่เคยเข้าร่วม</h2>
+              <TextField source="answers.additional.activity" />
+              <h2 className="text-xl font-bold">มีอะไรอยากบอกไหม</h2>
+              <TextField source="answers.additional.remark" />
+              <FunctionField
+                render={(record: any) => renderAllQuestions(record?.confirmedBranch)}
+              />
+            </>
+          )}
         </div>
         <NumberField source="score.total" />
         <div className="flex flex-col gap-y-2 my-5 w-full border-2 p-4 rounded-md">

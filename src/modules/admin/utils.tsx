@@ -1,6 +1,14 @@
-import { Fragment } from 'react'
-import { NumberInput, RaRecord, TextField, TextInput } from 'react-admin'
+import { Fragment, ReactNode } from 'react'
+import {
+  NumberField,
+  NumberInput,
+  RaRecord,
+  TextField,
+  TextInput,
+  useRecordContext,
+} from 'react-admin'
 
+import { branchToQuestion } from '../admin/constants'
 import { coreQuestions } from '../register/questions/core'
 import { BranchType, InputType, Question, SimpleInput } from '../register/types'
 import { UserAdmin } from './types'
@@ -159,4 +167,67 @@ export function renderQuestion(question: Question, branch: string, checker: User
   )
 }
 
-// export function renderAllQuestions()
+export const withContent = (title: string, content: ReactNode) => (
+  <div className="flex flex-row items-center gap-x-4">
+    <h3 className="font-bold inline text-lg">{title}</h3>
+    <div>{content}</div>
+  </div>
+)
+
+interface QuestionForIncludingProps {
+  question: ReactNode
+  source: string
+  key: any
+}
+export const QuestionForIncluding = ({ question, source }: QuestionForIncludingProps) => {
+  return (
+    <>
+      <h2 className="text-lg mb-3">{question}</h2>
+      <div className="mb-3">
+        <TextField className="whitespace-pre-wrap mb-3" source={source} />
+      </div>
+    </>
+  )
+}
+export function renderAllQuestions(branch: string) {
+  const coreQuestions = branchToQuestion.core.inputs
+    .filter((i) => i.type === InputType.TEXTAREA)
+    .map((x) => x as SimpleInput)
+    .map((it, index) => (
+      <>
+        <QuestionForIncluding
+          key={index}
+          question={it.question}
+          source={`answers.core.core_Q${index + 1}`}
+        />
+        <h2 className="text-xl font-bold mb-3">คะแนน</h2>
+        <div className="mb-3">
+          <NumberField source={`score.core_Q${index + 1}`} />
+        </div>
+      </>
+    ))
+  const branchQuestions = branchToQuestion[branch as BranchType].inputs
+    .filter((i) => i.type === InputType.TEXTAREA)
+    .map((x) => x as SimpleInput)
+    .map((it, index) => (
+      <>
+        <QuestionForIncluding
+          key={index}
+          question={it.question}
+          source={`answers.branch.${branch}_Q${index + 1}`}
+        />
+        <h2 className="text-xl font-bold mb-3">คะแนน</h2>
+        <div className="mb-3">
+          <NumberField source={`score.branch_Q${index + 1}`} />
+        </div>
+      </>
+    ))
+  return (
+    <>
+      <h2 className="font-bold text-xl">คำถามกลาง</h2>
+      {coreQuestions}
+      <h2 className="font-bold text-xl">คำถามสาขา</h2>
+      {branchQuestions}
+    </>
+  )
+}
