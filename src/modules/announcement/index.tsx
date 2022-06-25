@@ -110,7 +110,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     {
       headers: {
         // TODO: replce this thing to be something safe
-        Authorization: `Bearer keyH8sdRZBgysqDSz`,
+        // Authorization: `Bearer <secret-key>`,
       },
     }
   )
