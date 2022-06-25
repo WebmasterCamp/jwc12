@@ -65,11 +65,11 @@ export const onChange = functions.firestore
         let stepKey: any = {
           [step.toString()]: admin.firestore.FieldValue.increment(delta),
         }
-        if (step >= 3 && branch) {
+        if (step >= 3) {
           stepKey = {
             [step.toString()]: {
               ...oldData?.[step.toString()],
-              [branch]: (oldData?.[step.toString()][branch] ?? 0) + delta,
+              [branch ?? 'unknown']: (oldData?.[step.toString()][branch ?? 'unknown'] ?? 0) + delta,
             },
           }
         }
@@ -78,8 +78,8 @@ export const onChange = functions.firestore
 
       await stepStatsDoc.update({
         ...oldData,
-        ...getValue(newValue.furthestStep, 1, newValue.confirmedBranch, oldData),
         ...getValue(previousValue.furthestStep, -1, previousValue.confirmedBranch, oldData),
+        ...getValue(newValue.furthestStep, 1, newValue.confirmedBranch, oldData),
       })
     }
 
