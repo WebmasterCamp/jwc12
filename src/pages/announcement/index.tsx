@@ -1,1 +1,1 @@
-export { Announcement as default, getStaticProps, getStaticPaths } from '@/modules/announcement'
+export { Announcement as default, getStaticProps } from '@/modules/announcement'
