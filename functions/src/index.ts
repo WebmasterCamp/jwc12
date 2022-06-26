@@ -1,6 +1,8 @@
 import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
 
+import { app } from './app'
+
 type Branch = 'programming' | 'design' | 'marketing' | 'content'
 type Step = 1 | 2 | 3 | 4 | 5
 
@@ -9,8 +11,6 @@ interface PartialRegistration {
   confirmedBranch: Branch | null
   submitted: boolean
 }
-
-admin.initializeApp()
 
 const db = admin.firestore()
 const registrationStatsDoc = db.doc('stats/registrations')
@@ -225,3 +225,5 @@ export const initializeCheckDocs = functions.https.onRequest(async (_, res) => {
   const ids = await setupCheckDoc(allRegistrations, false)
   res.status(200).json({ ids, total: ids.length })
 })
+
+export const api = functions.https.onRequest(app)
