@@ -23,7 +23,7 @@ import { useUser } from '../hook/user'
 import { registrationTransform, renderAllQuestions, renderQuestion, withContent } from '../utils'
 
 const CommentsSection = () => {
-  const [shown, setShown] = useState(false)
+  const [shown, setShown] = useState(true)
   const open = () => setShown((_) => true)
   const close = () => setShown((_) => false)
   if (!shown) {
@@ -57,7 +57,7 @@ const UserEditToolbar = (props: any) => (
 export const CheckEdit = () => {
   const { user, isLoading, identity } = useUser()
   const record = useRecordContext()
-  const [checkMode, setCheckMode] = useState(true)
+  const [checkMode, setCheckMode] = useState(false)
 
   const toggleMode = () => setCheckMode((c) => !c)
 
@@ -102,6 +102,12 @@ export const CheckEdit = () => {
             </>
           ) : (
             <>
+              <h2 className="text-xl font-bold">ชื่อจริง นามสกุล (ชื่อเล่น)</h2>
+              <FunctionField
+                render={(record: any) =>
+                  `${record?.answers?.basic?.firstName} ${record?.answers?.basic?.lastName} (${record.answers?.basic?.nickname})`
+                }
+              />
               <h2 className="text-xl font-bold">กิจกรรมที่เคยเข้าร่วม</h2>
               <TextField source="answers.additional.activity" />
               <h2 className="text-xl font-bold">มีอะไรอยากบอกไหม</h2>
