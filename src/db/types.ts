@@ -41,3 +41,15 @@ export interface Check {
   totalScore: number
   hasZero: boolean
 }
+
+export interface InterviewCandidate {
+  id: string
+  branch: BranchType
+  firstName: string
+  lastName: string
+  interviewTime: string
+}
+
+export interface InterviewCandidatesDocument {
+  data: InterviewCandidate[]
+}

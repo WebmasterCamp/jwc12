@@ -50,14 +50,11 @@ const Home: NextPage = () => {
           </h1>
           <SponsorLogosOnHero />
           <div className="flex flex-col gap-4 sm:gap-8 sm:flex-row sm:justify-center">
-            <Link href="/#branch" passHref>
+            <Link href="/announcement" passHref>
               <LinkButton className="register-button" color="gold">
-                สมัครค่าย
+                ประกาศรายชื่อผู้มีสิทธิ์สัมภาษณ์
               </LinkButton>
             </Link>
-            <LinkButton href="/#about" color="gold" variant="outlined">
-              รู้จักกับค่าย
-            </LinkButton>
           </div>
           <MovingCards />
         </div>

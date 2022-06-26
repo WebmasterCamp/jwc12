@@ -52,11 +52,6 @@ export const Navbar: FunctionComponent<Props> = ({ className = '' }) => {
           <a href="https://www.facebook.com/jwcth" target="_blank" rel="noreferrer">
             ติดต่อเรา
           </a>
-          <Link href="/register" passHref>
-            <Button className="register-button" color="gold" disabled={true} variant="outlined">
-              ปิดรับสมัคร
-            </Button>
-          </Link>
         </div>
       </nav>
       <div

@@ -1,18 +1,15 @@
-import clsx from 'clsx'
+import { InterviewCandidate } from '@/db/types'
 
 interface TableItemProps {
-  id: string
-  name: string
-  surname: string
-  background: 'white' | 'gray'
+  candidate: InterviewCandidate
 }
 
-export const TableItem: React.FC<TableItemProps> = ({ id, name, surname, background }) => {
+export const TableItem: React.FC<TableItemProps> = ({ candidate }) => {
   return (
-    <tr className={clsx(background === 'gray' && 'bg-slate-100')}>
-      <td className="p-1 md:p-3 rounded-md">{id}</td>
-      <td className="p-1 md:p-3 rounded-md">{name}</td>
-      <td className="p-1 md:p-3 rounded-md">{surname}</td>
+    <tr className="even:bg-slate-100">
+      <td className="p-1 md:p-3">{candidate.id}</td>
+      <td className="p-1 md:p-3">{`${candidate.firstName} ${candidate.lastName}`}</td>
+      <td className="p-1 md:p-3">{candidate.interviewTime}</td>
     </tr>
   )
 }

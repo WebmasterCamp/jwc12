@@ -5,13 +5,15 @@ import Link from 'next/link'
 import { Dialog, Transition } from '@headlessui/react'
 import CrossIcon from '@iconify/icons-akar-icons/cross'
 import { Icon } from '@iconify/react'
-import { count } from 'console'
 
-import { Button } from './Button'
+import { BranchType } from '@/modules/register/types'
+
+import { Button, LinkButton } from './Button'
 
 interface Props {
   open: boolean
   onClose: () => void
+  branch: BranchType
   title: string
   description: string
   count: number
@@ -21,6 +23,7 @@ interface Props {
 export const BranchDialog: React.FunctionComponent<Props> = ({
   open,
   onClose,
+  branch,
   title,
   description,
   count,
@@ -68,9 +71,11 @@ export const BranchDialog: React.FunctionComponent<Props> = ({
                 <span className="font-bold text-2xl lg:text-3xl text-center text-brown-dark font-heading">
                   สมัครแล้ว {count} คน
                 </span>
-                <Button color="gold" variant="outlined">
-                  ปิดรับสมัคร
-                </Button>
+                <Link href={`/announcement/${branch}`} passHref>
+                  <LinkButton className="register-button" color="gold">
+                    ประกาศรายชื่อผู้มีสิทธิ์สัมภาษณ์
+                  </LinkButton>
+                </Link>
               </div>
             </Dialog.Panel>
           </div>

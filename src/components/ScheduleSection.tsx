@@ -22,9 +22,9 @@ const schedules = [
   },
   {
     title: 'สัมภาษณ์ออนไลน์',
-    date: '28 มิถุนายน',
+    date: '27 - 28 มิถุนายน',
     imageUrl: '/images/3-สัมออนไลน์.svg',
-    beginDate: new Date(Date.UTC(2022, 5, 28, -7, 0, 0)),
+    beginDate: new Date(Date.UTC(2022, 5, 27, -7, 0, 0)),
     endDate: new Date(Date.UTC(2022, 5, 28, 23 - 7, 59, 59)),
   },
   {
