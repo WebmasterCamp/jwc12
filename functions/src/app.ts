@@ -1,22 +1,19 @@
 import { json } from 'body-parser'
 import express from 'express'
-import * as admin from 'firebase-admin'
 
-import { authenticateMiddleware } from './middlewares'
+import { updateInterviewCandidates } from './functions/updateInterviewCandidates'
 
-admin.initializeApp()
-const db = admin.firestore()
+// import { authenticateMiddleware } from './middlewares'
 
 const app = express()
 
-app.use(authenticateMiddleware)
+// app.use(authenticateMiddleware)
 app.use(json())
 
 app.post('/updateInterviewCandidates', async (req, res) => {
   try {
     const data = req.body
-    const candidatesDoc = db.doc('stats/interviewCandidates')
-    await candidatesDoc.update(data)
+    updateInterviewCandidates(data.data)
     res.status(200).send('OK')
   } catch (e) {
     console.log(e)

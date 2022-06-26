@@ -2,6 +2,7 @@ import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
 
 import { app } from './app'
+import { db } from './db'
 
 type Branch = 'programming' | 'design' | 'marketing' | 'content'
 type Step = 1 | 2 | 3 | 4 | 5
@@ -12,7 +13,6 @@ interface PartialRegistration {
   submitted: boolean
 }
 
-const db = admin.firestore()
 const registrationStatsDoc = db.doc('stats/registrations')
 const branchStatsDoc = db.doc('stats/branchConfirmed')
 const stepStatsDoc = db.doc('stats/furthestStep')
