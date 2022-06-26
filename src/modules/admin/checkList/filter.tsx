@@ -25,6 +25,16 @@ const IsCheckedFilter = () => {
           [`checkedBy.${uid}`]: false,
         }}
       />
+      {['programming', 'marketing', 'design', 'content'].map((x) => (
+        <FilterListItem
+          label={`สาขา ${x}`}
+          value={{
+            [`checkedBy.${uid}`]: true,
+            confirmedBranch: x,
+          }}
+          key={x}
+        />
+      ))}
     </FilterList>
   )
 }
