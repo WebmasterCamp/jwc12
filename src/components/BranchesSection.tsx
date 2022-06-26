@@ -128,7 +128,7 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
 function Star() {
   return (
     <svg
-      className="absolute inline-block -mt-6"
+      className="absolute hidden sm:inline-block -mt-6"
       width="85"
       height="85"
       viewBox="0 0 85 85"
