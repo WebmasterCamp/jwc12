@@ -15,7 +15,7 @@ import { SquareBranchCard } from './components/SquareBranchCard'
 
 export function Announcement() {
   const router = useRouter()
-  const branch = router.query.branch as BranchType | undefined
+  const branch = router.query.branch?.[0] as BranchType | undefined
   const { pending, data } = useInterviewCandidates()
   const candidates = data?.data
 

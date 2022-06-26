@@ -10,7 +10,7 @@ export interface SquareBranchCardProps {
 export const SquareBranchCard: React.FC<SquareBranchCardProps> = ({ branch, selected }) => {
   return (
     <div className="flex flex-col items-center gap-4">
-      <Link passHref href={`/announcement?branch=${branch}`} scroll={false}>
+      <Link passHref href={`/announcement/${branch}`} scroll={false}>
         <a className="hover:scale-105 transition-transform duration-300">
           <img src={`/images/square/${branch}.png`} alt={branch} />
         </a>
