@@ -41,3 +41,4 @@ emulator-dump
 firebase-debug.log
 firestore-debug.log
 ui-debug.log
+data.csv
