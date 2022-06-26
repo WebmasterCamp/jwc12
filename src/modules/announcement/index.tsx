@@ -30,7 +30,7 @@ export function Announcement() {
 
   return (
     <div>
-      <div className="h-[72px] w-[146px] m-10">
+      <div className="h-[47px] w-[96px] mx-6 my-4 sm:h-[72px] sm:w-[146px] sm:mx-10 sm:mt-10">
         <Logo />
       </div>
       <Container maxWidth="3xl">
