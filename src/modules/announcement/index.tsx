@@ -53,11 +53,17 @@ export function Announcement() {
         {/* Branch selection */}
         <h1 className="text-center text-3xl text-white font-bold mb-8 mt-16">โปรดเลือกสาขา</h1>
 
-        <div className="flex flex-row gap-4 justify-between mb-8">
-          <SquareBranchCard branch={BranchType.CONTENT} />
-          <SquareBranchCard branch={BranchType.DESIGN} />
-          <SquareBranchCard branch={BranchType.MARKETING} />
-          <SquareBranchCard branch={BranchType.PROGRAMMING} />
+        <div className="flex flex-row gap-4 justify-between">
+          <SquareBranchCard branch={BranchType.CONTENT} selected={branch === BranchType.CONTENT} />
+          <SquareBranchCard branch={BranchType.DESIGN} selected={branch === BranchType.DESIGN} />
+          <SquareBranchCard
+            branch={BranchType.MARKETING}
+            selected={branch === BranchType.MARKETING}
+          />
+          <SquareBranchCard
+            branch={BranchType.PROGRAMMING}
+            selected={branch === BranchType.PROGRAMMING}
+          />
         </div>
 
         {branch && <CandidateList branch={branch} candidates={filteredDataByBranch} />}
