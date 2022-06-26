@@ -24,7 +24,8 @@ export async function updateInterviewCandidates(candidates: CandidateInput[]) {
 }
 
 async function getCandidateInfo(candidate: CandidateInput) {
-  const doc = db.doc(`check/${candidate.firebaseId}`)
+  const { firebaseId, ...info } = candidate
+  const doc = db.doc(`check/${firebaseId}`)
   const data = (await doc.get()).data() as CheckDocument
   const {
     confirmedBranch: branch,
@@ -32,5 +33,5 @@ async function getCandidateInfo(candidate: CandidateInput) {
       basic: { firstName, lastName },
     },
   } = data
-  return { ...candidate, branch, firstName, lastName }
+  return { ...info, branch, firstName, lastName }
 }

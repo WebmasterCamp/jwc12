@@ -2,18 +2,17 @@ import { json } from 'body-parser'
 import express from 'express'
 
 import { updateInterviewCandidates } from './functions/updateInterviewCandidates'
-
-// import { authenticateMiddleware } from './middlewares'
+import { authenticateMiddleware } from './middlewares'
 
 const app = express()
 
-// app.use(authenticateMiddleware)
+app.use(authenticateMiddleware)
 app.use(json())
 
 app.post('/updateInterviewCandidates', async (req, res) => {
   try {
     const data = req.body
-    updateInterviewCandidates(data.data)
+    await updateInterviewCandidates(data.data)
     res.status(200).send('OK')
   } catch (e) {
     console.log(e)
