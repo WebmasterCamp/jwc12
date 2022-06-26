@@ -53,7 +53,7 @@ export function Announcement() {
         {/* Branch selection */}
         <h1 className="text-center text-3xl text-white font-bold mb-8 mt-16">โปรดเลือกสาขา</h1>
 
-        <div className="flex flex-row gap-4 justify-between">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4 sm:mb-0">
           <SquareBranchCard branch={BranchType.CONTENT} selected={branch === BranchType.CONTENT} />
           <SquareBranchCard branch={BranchType.DESIGN} selected={branch === BranchType.DESIGN} />
           <SquareBranchCard
