@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Container } from '@/components/Container'
@@ -30,9 +31,11 @@ export function Announcement() {
 
   return (
     <div>
-      <div className="h-[47px] w-[96px] mx-6 my-4 sm:h-[72px] sm:w-[146px] sm:mx-10 sm:mt-10">
-        <Logo />
-      </div>
+      <Link href="/" passHref>
+        <a className="block h-[47px] w-[96px] mx-6 my-4 sm:h-[72px] sm:w-[146px] sm:mx-10 sm:mt-10">
+          <Logo />
+        </a>
+      </Link>
       <Container maxWidth="3xl">
         <h1 className="text-center text-3xl text-white font-bold mb-8">
           ประกาศรายชื่อผู้มีสิทธิ์สัมภาษณ์
