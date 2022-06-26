@@ -105,19 +105,19 @@ export const Announcement: React.FC<{ data: AirtableResponseData['records'] }> =
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const { data } = await axios.get<AirtableResponseData>(
-    'https://api.airtable.com/v0/app433thI9OO5vRGF/mock-interview',
-    {
-      headers: {
-        // TODO: replce this thing to be something safe
-        // Authorization: `Bearer <secret-key>`,
-      },
-    }
-  )
+  // const { data } = await axios.get<AirtableResponseData>(
+  //   'https://api.airtable.com/v0/app433thI9OO5vRGF/mock-interview',
+  //   {
+  //     headers: {
+  //       // TODO: replce this thing to be something safe
+  //       // Authorization: `Bearer <secret-key>`,
+  //     },
+  //   }
+  // )
 
   return {
     props: {
-      data: data.records,
+      data: [],
     },
   }
 }
