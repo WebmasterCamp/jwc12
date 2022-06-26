@@ -30,13 +30,13 @@ export function CandidateList({ branch, candidates }: CandidateListProps) {
         <thead>
           <tr className="w-full">
             <th className="text-left p-1 md:p-3">รหัส</th>
-            <th className="text-left p-1 md:p-3">ชื่อ</th>
-            <th className="text-left p-1 md:p-3">นามสกุล</th>
+            <th className="text-left p-1 md:p-3">ชื่อ - นามสกุล</th>
+            <th className="text-left p-1 md:p-3">วัน/เวลาการสัมภาษณ์</th>
           </tr>
         </thead>
         <tbody>
-          {candidates.map((item) => (
-            <TableItem key={item.id} id={item.id} name={item.firstName} surname={item.lastName} />
+          {candidates.map((candidate) => (
+            <TableItem key={candidate.id} candidate={candidate} />
           ))}
         </tbody>
       </table>

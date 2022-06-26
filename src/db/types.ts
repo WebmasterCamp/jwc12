@@ -47,6 +47,7 @@ export interface InterviewCandidate {
   branch: BranchType
   firstName: string
   lastName: string
+  datetime: string
 }
 
 export interface InterviewCandidatesDocument {
