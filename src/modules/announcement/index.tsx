@@ -66,7 +66,7 @@ export function Announcement() {
           />
         </div>
 
-        {branch && <CandidateList branch={branch} candidates={filteredDataByBranch} />}
+        {branch && <CandidateList key={branch} branch={branch} candidates={filteredDataByBranch} />}
       </Container>
       <Footer />
     </div>
