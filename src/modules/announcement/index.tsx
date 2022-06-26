@@ -59,9 +59,9 @@ export function Announcement() {
           </ol>
           <h2 className="text-lg font-bold mb-4">มีข้อสงสัยเพิ่มเติมสามารถติดต่อ</h2>
           <p className="mb-6">
-            <Emphasis>พี่สมิง</Emphasis> โทร. <PhoneNumber phoneNumber="082-245-5855" />
+            <Emphasis>พี่สมิง</Emphasis> โทร. <PhoneNumber phoneNumber="089-696-2432" />
             <br />
-            <Emphasis>พี่มูมู่</Emphasis> โทร. <PhoneNumber phoneNumber="082-245-5855" />
+            <Emphasis>พี่มูมู่</Emphasis> โทร. <PhoneNumber phoneNumber="086-834-3127" />
           </p>
         </Paper>
         {/* Branch selection */}
