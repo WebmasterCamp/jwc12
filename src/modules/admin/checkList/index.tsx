@@ -63,6 +63,7 @@ export const CheckList = () => {
         <TextField label="รหัสอ้างอิง" source="id" />
         <FunctionField
           label="ชื่อ"
+          source="answers.basic.firstName"
           render={(record: any) =>
             `${record?.answers?.basic?.firstName} ${record?.answers?.basic?.lastName} (${record?.answers?.basic?.nickname})`
           }
@@ -72,8 +73,8 @@ export const CheckList = () => {
         <TextField label="ชื่อเล่น" source="answers.basic.nickname" /> */}
         <TextField label="สาขา" source="confirmedBranch" />
         <TextField label="คะแนนรวม" source="totalScore" defaultValue={0} />
-        {source.length > 0 && <NumberField source={source} label="คะแนนที่ให้ล่าสุด" />}
-        <IncludeField label="เอาน้องคนนี้ไหม" />
+        {/* {source.length > 0 && <NumberField source={source} label="คะแนนที่ให้ล่าสุด" />}
+        ludeField label="เอาน้องคนนี้ไหม" /> */}
         <EditButton label="" />
       </Datagrid>
     </List>
