@@ -9,10 +9,9 @@ import { Logo } from '@/components/Logo'
 import { useInterviewCandidates } from '@/db/hooks'
 
 import { BranchType } from '../register/types'
+import { CandidateList } from './components/CandidateList'
 import { Paper } from './components/Paper'
 import { SquareBranchCard } from './components/SquareBranchCard'
-import { TableItem } from './components/TableItem'
-import { branchColorMapping } from './constants'
 
 export function Announcement() {
   const router = useRouter()
@@ -61,32 +60,7 @@ export function Announcement() {
           <SquareBranchCard branch={BranchType.PROGRAMMING} />
         </div>
 
-        <Paper className="mb-20">
-          <h6 className="font-bold">
-            รายชื่อผู้ผ่านการคัดเลือกเข้ารอบสัมภาษณ์ สาขา{' '}
-            <span className={branchColorMapping[branch ?? ''] ?? ''}>{branch}</span>
-          </h6>
-          <table className="w-full mt-4 rounded-md">
-            <thead>
-              <tr className="w-full">
-                <th className="text-left p-1 md:p-3">รหัส</th>
-                <th className="text-left p-1 md:p-3">ชื่อ</th>
-                <th className="text-left p-1 md:p-3">นามสกุล</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredDataByBranch.map((item, index) => (
-                <TableItem
-                  key={item.id}
-                  id={item.id}
-                  name={item.firstName}
-                  surname={item.lastName}
-                  background={index % 2 === 0 ? 'white' : 'gray'}
-                />
-              ))}
-            </tbody>
-          </table>
-        </Paper>
+        {branch && <CandidateList branch={branch} candidates={filteredDataByBranch} />}
       </Container>
       <Footer />
     </div>
