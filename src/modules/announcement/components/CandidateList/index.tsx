@@ -17,7 +17,7 @@ export function CandidateList({ branch, candidates }: CandidateListProps) {
     <Paper className="mb-20">
       <h6 className="font-bold">
         รายชื่อผู้ผ่านการคัดเลือกเข้ารอบสัมภาษณ์ สาขา{' '}
-        <span className={clsx(branchColorMapping[branch])}>{branch}</span>
+        <span className={clsx('capitalize', branchColorMapping[branch])}>{branch}</span>
       </h6>
       <table className="w-full mt-4 rounded-md">
         <thead>
