@@ -1,13 +1,12 @@
 import { useMemo } from 'react'
 
-import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-
-import axios from 'axios'
 
 import { Container } from '@/components/Container'
 import { Footer } from '@/components/Footer'
+import { Loading } from '@/components/Loading'
 import { Logo } from '@/components/Logo'
+import { useInterviewCandidates } from '@/db/hooks'
 
 import { BranchType } from '../register/types'
 import { Paper } from './components/Paper'
@@ -15,30 +14,20 @@ import { SquareBranchCard } from './components/SquareBranchCard'
 import { TableItem } from './components/TableItem'
 import { branchColorMapping } from './constants'
 
-interface AirtableResponseData {
-  records: {
-    id: string
-    createdTime: Date
-    fields: {
-      ID?: string
-      Branch?: BranchType
-      'First Name'?: string
-      'Last Name'?: string
-      Time?: Date
-    }
-  }[]
-}
-
-export const Announcement: React.FC<{ data: AirtableResponseData['records'] }> = ({ data }) => {
+export function Announcement() {
   const router = useRouter()
   const branch = router.query.branch as BranchType | undefined
+  const { pending, data } = useInterviewCandidates()
+  const candidates = data?.data
 
   const filteredDataByBranch = useMemo(() => {
-    const filteredData = data.filter(
-      ({ fields }) => fields.Branch?.toLowerCase() === branch?.toLocaleLowerCase()
-    )
+    const filteredData = candidates?.filter((candidate) => candidate.branch === branch) ?? []
     return filteredData
-  }, [data, branch])
+  }, [candidates, branch])
+
+  if (pending) {
+    return <Loading />
+  }
 
   return (
     <div>
@@ -89,9 +78,9 @@ export const Announcement: React.FC<{ data: AirtableResponseData['records'] }> =
               {filteredDataByBranch.map((item, index) => (
                 <TableItem
                   key={item.id}
-                  id={item.fields.ID ?? 'unknown'}
-                  name={item.fields['First Name'] ?? 'unknown'}
-                  surname={item.fields['Last Name'] ?? 'unknown'}
+                  id={item.id}
+                  name={item.firstName}
+                  surname={item.lastName}
                   background={index % 2 === 0 ? 'white' : 'gray'}
                 />
               ))}
@@ -102,22 +91,4 @@ export const Announcement: React.FC<{ data: AirtableResponseData['records'] }> =
       <Footer />
     </div>
   )
-}
-
-export const getStaticProps: GetStaticProps = async (context) => {
-  // const { data } = await axios.get<AirtableResponseData>(
-  //   'https://api.airtable.com/v0/app433thI9OO5vRGF/mock-interview',
-  //   {
-  //     headers: {
-  //       // TODO: replce this thing to be something safe
-  //       // Authorization: `Bearer <secret-key>`,
-  //     },
-  //   }
-  // )
-
-  return {
-    props: {
-      data: [],
-    },
-  }
 }

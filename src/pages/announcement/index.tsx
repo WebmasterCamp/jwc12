@@ -1,2 +1,1 @@
-// FIXME: Uncomment getStaticProps
-export { Announcement as default, getStaticProps } from '@/modules/announcement'
+export { Announcement as default } from '@/modules/announcement'

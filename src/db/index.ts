@@ -26,7 +26,7 @@ import { app } from '@/lib/firebase'
 import type { StepName } from '@/modules/register/questions'
 import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
-import { Answers, Check, Registration, RegistrationStats } from './types'
+import { Answers, InterviewCandidatesDocument, Registration, RegistrationStats } from './types'
 
 export * from './context'
 
@@ -38,6 +38,12 @@ export const registrationStatsRef = doc(
   'stats',
   'registrations'
 ) as DocumentReference<RegistrationStats>
+
+export const interviewCandidatesRef = doc(
+  db,
+  'stats',
+  'interviewCandidates'
+) as DocumentReference<InterviewCandidatesDocument>
 
 if (USE_FIRESTORE_EMULATOR) {
   connectFirestoreEmulator(db, 'localhost', 8080)
