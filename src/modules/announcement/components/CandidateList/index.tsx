@@ -28,14 +28,8 @@ export function CandidateList({ branch, candidates }: CandidateListProps) {
           </tr>
         </thead>
         <tbody>
-          {candidates.map((item, index) => (
-            <TableItem
-              key={item.id}
-              id={item.id}
-              name={item.firstName}
-              surname={item.lastName}
-              background={index % 2 === 0 ? 'white' : 'gray'}
-            />
+          {candidates.map((item) => (
+            <TableItem key={item.id} id={item.id} name={item.firstName} surname={item.lastName} />
           ))}
         </tbody>
       </table>
