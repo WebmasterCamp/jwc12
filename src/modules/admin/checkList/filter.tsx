@@ -35,6 +35,7 @@ const IsCheckedFilter = () => {
           key={x}
         />
       ))}
+      <FilterListItem label="คัดแล้ว" value={{ include: true }} />
     </FilterList>
   )
 }
