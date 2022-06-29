@@ -20,6 +20,10 @@ service cloud.firestore {
     match /stats/interviewCandidates {
       allow read;
     }
+
+    match /stats/campers {
+      allow read;
+    }
     
     match /users/{userId} {
       allow read: if isSuperAdmin();

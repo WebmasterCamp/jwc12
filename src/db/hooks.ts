@@ -4,7 +4,7 @@ import { DocumentReference, onSnapshot } from 'firebase/firestore'
 
 import { useAuthStore } from '@/auth/store'
 
-import { getRegistrationRef, interviewCandidatesRef, registrationStatsRef } from '.'
+import { campersRef, getRegistrationRef, interviewCandidatesRef, registrationStatsRef } from '.'
 
 export interface UseDocumentState<T> {
   pending: boolean
@@ -41,4 +41,8 @@ export function useRegistrationStats() {
 
 export function useInterviewCandidates() {
   return useDocument(interviewCandidatesRef)
+}
+
+export function useCampers() {
+  return useDocument(campersRef)
 }
