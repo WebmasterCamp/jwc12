@@ -16,6 +16,10 @@ const columns: AnnouncementColumn<Camper>[] = [
     key: 'name',
     label: 'ชื่อ - นามสกุล',
   },
+  {
+    key: 'confirmAmount',
+    label: 'ยอดโอน (บาท)',
+  },
 ]
 
 export function CampersAnnouncement() {

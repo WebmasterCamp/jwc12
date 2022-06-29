@@ -58,6 +58,7 @@ export interface Camper {
   id: string
   branch: BranchType
   name: string
+  confirmAmount: string
 }
 
 export interface CamperListDocument {
