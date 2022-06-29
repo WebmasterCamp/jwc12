@@ -1,15 +1,21 @@
-import { InterviewCandidate } from '@/db/types'
+import { AnnouncementCandidate, AnnouncementColumn } from '../../types'
 
-interface TableItemProps {
-  candidate: InterviewCandidate
+interface TableItemProps<T extends AnnouncementCandidate> {
+  candidate: T
+  columns: AnnouncementColumn<T>[]
 }
 
-export const TableItem: React.FC<TableItemProps> = ({ candidate }) => {
+export function TableItem<T extends AnnouncementCandidate>({
+  candidate,
+  columns,
+}: TableItemProps<T>) {
   return (
     <tr className="even:bg-slate-100">
-      <td className="p-1 md:p-3">{candidate.id}</td>
-      <td className="p-1 md:p-3">{`${candidate.firstName} ${candidate.lastName}`}</td>
-      <td className="p-1 md:p-3">{candidate.interviewTime}</td>
+      {columns.map((column) => (
+        <td key={column.key as string} className="p-1 md:p-3">
+          {candidate[column.key] as unknown as string}
+        </td>
+      ))}
     </tr>
   )
 }

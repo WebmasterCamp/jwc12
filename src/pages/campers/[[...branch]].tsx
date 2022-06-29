@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-export { InterviewCandidateAnnouncement as default } from '@/modules/announcement/interviewAnnouncement'
+export { CampersAnnouncement as default } from '@/modules/announcement/campersAnnouncement'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const branches = ['programming', 'design', 'marketing', 'content']

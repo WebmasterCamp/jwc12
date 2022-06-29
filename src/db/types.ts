@@ -53,3 +53,14 @@ export interface InterviewCandidate {
 export interface InterviewCandidatesDocument {
   data: InterviewCandidate[]
 }
+
+export interface Camper {
+  id: string
+  branch: BranchType
+  name: string
+  confirmAmount: string
+}
+
+export interface CamperListDocument {
+  data: Camper[]
+}

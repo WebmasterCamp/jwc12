@@ -1,6 +1,7 @@
 import { json } from 'body-parser'
 import express from 'express'
 
+import { updateCamperList } from './functions/updateCamperList'
 import { updateInterviewCandidates } from './functions/updateInterviewCandidates'
 import { authenticateMiddleware } from './middlewares'
 
@@ -13,6 +14,17 @@ app.post('/updateInterviewCandidates', async (req, res) => {
   try {
     const data = req.body
     await updateInterviewCandidates(data.data)
+    res.status(200).send('OK')
+  } catch (e) {
+    console.log(e)
+    res.status(500).send('Internal Server Error')
+  }
+})
+
+app.post('/updateCamperList', async (req, res) => {
+  try {
+    const data = req.body
+    await updateCamperList(data.data)
     res.status(200).send('OK')
   } catch (e) {
     console.log(e)
