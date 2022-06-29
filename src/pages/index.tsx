@@ -12,7 +12,6 @@ import { BranchesSection } from '@/components/BranchesSection'
 import { LinkButton } from '@/components/Button'
 import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
-import { Logo } from '@/components/Logo'
 import { MovingCards } from '@/components/MovingCards'
 import { Navbar } from '@/components/Navbar'
 import { ParticlesWidget } from '@/components/Particles'
@@ -36,7 +35,7 @@ const Home: NextPage = () => {
       <Navbar className="text-white" />
       <div className="flex min-h-screen overflow-x-hidden w-full flex-col px-5 text-white">
         <ParticlesWidget />
-        <div className="w-full lg:w-1/2 mx-auto pt-16">
+        <div className="w-full lg:w-3/4 mx-auto pt-16">
           <div className="flex gap-x-4 items-center justify-center">
             <Star />
             <p className="text-gold-dark whitespace-nowrap text-center">
@@ -136,10 +135,10 @@ const Home: NextPage = () => {
           <SponsorLogosOnBottom />
         </Section>
         {/* TODO: Media Partner images broken */}
-        {/* <Section className="text-center">
+        <Section className="text-center">
           <h2 className="text-3xl font-heading lg:text-4xl mb-16 font-semibold">พันธมิตร</h2>
           <MediaPartner />
-        </Section> */}
+        </Section>
         <Footer />
       </div>
     </>
@@ -147,94 +146,228 @@ const Home: NextPage = () => {
 }
 
 const withLink = (url: string, children: ReactNode) => (
-  <a href={url} target="_blank" rel="noreferrer">
+  <a
+    href={url}
+    target="_blank"
+    rel="noreferrer"
+    className="flex flex-row justify-center items-center"
+  >
     {children}
   </a>
 )
 
 function SponsorLogosOnHero() {
   return (
-    <div className="space-x-4 text-center mx-auto flex flex-row items-center justify-center gap-6 flex-wrap my-20">
-      {withLink(
-        'https://www.webmaster.or.th/',
-        <img
-          className="h-14 cursor-pointer"
-          src="/images/sponsors/01_TWA.svg"
-          alt="Thai Webmaster Association"
-        />
-      )}
-      {withLink(
-        'https://www.it.kmitl.ac.th/',
-        <img className="h-14 cursor-pointer" src="/images/sponsors/02_IT.svg" alt="IT KMITL" />
-      )}
-      {withLink(
-        'https://www.cpall.co.th/',
-        <img
-          className="h-[72px] cursor-pointer"
-          src="/images/sponsors/VIP_01_CP.svg"
-          alt="CP All"
-        />
-      )}
-      {withLink(
-        'https://www.scb.co.th/',
-        <img className="h-14 cursor-pointer" src="/images/sponsors/VIP_02_SCB.svg" alt="SCB" />
-      )}
+    <div className="space-x-4 text-center mx-auto flex flex-row items-center justify-center gap-x-6 flex-wrap my-20">
+      <div className="flex flex-row flex-wrap basis-full justify-center gap-x-[56px] gap-y-[56px] mb-[20px]">
+        {withLink(
+          'https://www.webmaster.or.th/',
+          <img
+            className="h-[36px] md:h-[72px] cursor-pointer"
+            src="/images/sponsors/VIP0A_TWA.svg"
+            alt="Thai Webmaster Association"
+          />
+        )}
+        {withLink(
+          'https://www.it.kmitl.ac.th/',
+          <img
+            className="h-[44px] md:h-[88px] cursor-pointer"
+            src="/images/sponsors/VIP0B_IT.svg"
+            alt="IT KMITL"
+          />
+        )}
+      </div>
+      <div className="flex flex-row flex-wrap basis-full justify-center items-end gap-x-[56px] gap-y-[56px] mb-[70px]">
+        {withLink(
+          'https://www.cpall.co.th/',
+          <img
+            className="h-[48px] md:h-[96px] cursor-pointer"
+            src="/images/sponsors/VIP_01_CP.svg"
+            alt="CP All"
+          />
+        )}
+        {withLink(
+          'https://www.scb.co.th/',
+          <img
+            className="h-[28px] md:h-[56px] cursor-pointer"
+            src="/images/sponsors/VIP_02_SCB.svg"
+            alt="SCB"
+          />
+        )}
+      </div>
+      <div className="flex flex-row flex-wrap basis-full justify-center items-end gap-x-[56px] gap-y-[56px]">
+        {withLink(
+          'https://foretoday.asia/ ',
+          <img
+            className="h-[30px] md:h-[60px] cursor-pointer"
+            src="/images/sponsors/VIP_03_ForeToday.svg"
+            alt="Fore Today"
+          />
+        )}
+        {withLink(
+          'https://www.shippop.com/',
+          <img
+            className="h-[24px] md:h-[48px] cursor-pointer"
+            src="/images/sponsors/VIP_04_Shippop.svg"
+            alt="Shippop"
+          />
+        )}
+      </div>
     </div>
   )
 }
 
 function SponsorLogosOnBottom() {
   return (
-    <div className="space-x-4 p-8 text-center mx-auto flex flex-col items-center justify-center gap-y-16">
-      <div className="flex flex-wrap flex-1 gap-x-20 justify-center items-center">
+    <div className="space-x-4 text-center mx-auto flex flex-col items-center justify-center gap-y-[112px]">
+      {/** VIP */}
+      <div className="flex flex-wrap flex-1 gap-x-[56px] gap-y-[72px] justify-center items-center">
         {withLink(
           'https://www.webmaster.or.th/',
           <img
-            className="h-20 cursor-pointer"
-            src="/images/sponsors/01_TWA.svg"
+            className="h-[48px] md:h-[96px] cursor-pointer"
+            src="/images/sponsors/VIP0A_TWA.svg"
             alt="Thai Webmaster Association"
           />
         )}
         {withLink(
           'https://www.it.kmitl.ac.th/',
-          <img className="h-20 cursor-pointer" src="/images/sponsors/02_IT.svg" alt="IT KMITL" />
+          <img
+            className="h-[52px] md:h-[104px] cursor-pointer"
+            src="/images/sponsors/VIP0B_IT.svg"
+            alt="IT KMITL"
+          />
         )}
-      </div>
-      <div className="flex flex-wrap flex-1 gap-x-20 justify-center items-center">
         {withLink(
           'https://www.cpall.co.th/',
-          <img className="h-20 cursor-pointer" src="/images/sponsors/VIP_01_CP.svg" alt="CP All" />
+          <img
+            className="h-[62px] md:h-[124px] cursor-pointer"
+            src="/images/sponsors/VIP_01_CP.svg"
+            alt="CP All"
+          />
         )}
         {withLink(
           'https://www.scb.co.th/',
-          <img className="h-20 cursor-pointer" src="/images/sponsors/VIP_02_SCB.svg" alt="SCB" />
+          <img
+            className="h-[36px] md:h-[72px] cursor-pointer"
+            src="/images/sponsors/VIP_02_SCB.svg"
+            alt="SCB"
+          />
+        )}
+        {withLink(
+          'https://foretoday.asia/ ',
+          <img
+            className="h-[39px] md:h-[78px] cursor-pointer"
+            src="/images/sponsors/VIP_03_ForeToday.svg"
+            alt="Fore Today"
+          />
+        )}
+        {withLink(
+          'https://www.shippop.com/',
+          <img
+            className="h-[35px] md:h-[70px] cursor-pointer"
+            src="/images/sponsors/VIP_04_Shippop.svg"
+            alt="Shippop"
+          />
         )}
       </div>
-      <div className="flex flex-wrap flex-1 gap-x-20 justify-center items-center">
+
+      {/** SP */}
+      <div className="flex flex-wrap flex-1 gap-x-[72px] gap-y-[64px] justify-center items-center">
+        {withLink(
+          'https://www.brikl.com/',
+          <img
+            className="h-[36px] md:h-[72px] cursor-pointer"
+            src="/images/sponsors/SP_01_Brikl.svg"
+            alt="Brikl"
+          />
+        )}
+        {withLink(
+          'https://cleverse.com/ ',
+          <img
+            className="h-[44px] md:h-[88px] cursor-pointer"
+            src="/images/sponsors/SP_02_Cleverse.svg"
+            alt="Cleverse"
+          />
+        )}
+        {withLink(
+          'https://www.microsoft.com/th-th',
+          <img
+            className="h-[36px] md:h-[72px] cursor-pointer"
+            src="/images/sponsors/SP_03_Microsoft.svg"
+            alt="Microsoft"
+          />
+        )}
+        {withLink(
+          'https://www.viabus.co/',
+          <img
+            className="h-[36px] md:h-[72px] cursor-pointer"
+            src="/images/sponsors/SP_04_VIABUS.svg"
+            alt="ViaBus"
+          />
+        )}
         {withLink(
           '/',
           <img
-            className="h-20 cursor-pointer"
-            src="/images/sponsors/Partner_01_Imagine.svg"
+            className="h-[36px] md:h-[72px] cursor-pointer"
+            src="/images/sponsors/SP_05_NUT.svg"
+            alt="NUT"
+          />
+        )}
+      </div>
+
+      {/** P */}
+      <div className="flex flex-wrap flex-1 gap-x-[48px] gap-y-[32px] justify-center items-center">
+        {withLink(
+          'https://www.facebook.com/imaginethailandmovement',
+          <img
+            className="h-[40px] md:h-[80px] cursor-pointer"
+            src="/images/sponsors/P_01_ImgTH.svg"
             alt="Imagine"
           />
         )}
         {withLink(
           'https://www.camphub.in.th/',
           <img
-            className="h-8 cursor-pointer"
-            src="/images/sponsors/Partner_02_camphub.svg"
+            className="h-[44px] md:h-[88px] cursor-pointer"
+            src="/images/sponsors/P_02_Camphub.svg"
             alt="camphub"
           />
         )}
+        {withLink(
+          'https://pantip.com/',
+          <img
+            className="h-[40px] md:h-[80px] cursor-pointer"
+            src="/images/sponsors/P_03_Pantip.svg"
+            alt="Pantip"
+          />
+        )}
+        {withLink(
+          '/',
+          <img
+            className="h-[40px] md:h-[80px] cursor-pointer"
+            src="/images/sponsors/P_04_YWC-Luxury.svg"
+            alt="YWC Luxury"
+          />
+        )}
+        {withLink(
+          'https://spaceth.co/',
+          <img
+            className="h-[40px] md:h-[80px] cursor-pointer"
+            src="/images/sponsors/P_05_Spaceth.svg"
+            alt="Spaceth"
+          />
+        )}
       </div>
-      <div className="flex flex-wrap flex-1 gap-x-20 justify-center items-center">
+
+      {/** S */}
+      <div className="flex flex-wrap flex-1 gap-x-[48px] justify-center items-center">
         {withLink(
           'https://www.dek-d.com/',
           <img
-            className="h-5 cursor-pointer"
-            src="/images/sponsors/Sponsor_01_Dekd.svg"
-            alt="camphub"
+            className="h-[40px] md:h-[60px] cursor-pointer"
+            src="/images/sponsors/S_01_Dek-d.svg"
+            alt="Dek-d"
           />
         )}
       </div>
@@ -244,67 +377,47 @@ function SponsorLogosOnBottom() {
 
 function MediaPartner() {
   return (
-    <div className="space-x-4 p-8 text-center mx-auto flex flex-col items-center justify-center gap-y-16">
-      <div className="flex flex-wrap flex-1 gap-x-20 justify-center items-center">
+    <div className="space-x-4 text-center mx-auto flex flex-col items-center justify-center gap-y-[48px]">
+      <div className="flex flex-wrap flex-1 gap-x-[60px] gap-y-[48px] justify-center items-center">
         {withLink(
-          'https://www.youtube.com/c/QueenH',
-          <img
-            className="h-10 cursor-pointer"
-            src="/images/mediaPartners/1_QueenH.png"
-            alt="QueenH"
-          />
-        )}
-        {withLink(
-          'https://www.facebook.com/learnlalen',
-          <img
-            className="h-10 cursor-pointer"
-            src="/images/mediaPartners/2_learnlalen.png"
-            alt="learnlalen"
-          />
+          'https://baseplayhouse.co/',
+          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_01.png" alt="" />
         )}
         {withLink(
           'https://www.modernist.life/',
-          <img
-            className="h-10 cursor-pointer"
-            src="/images/mediaPartners/3_Modernist.png"
-            alt="Modernist"
-          />
+          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_02.png" alt="" />
         )}
         {withLink(
-          'https://www.contentshifu.com/',
-          <img
-            className="h-10 cursor-pointer"
-            src="/images/mediaPartners/4_content-shifu.png"
-            alt="content-shifu"
-          />
+          'https://www.skooldio.com/ ',
+          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_03.png" alt="" />
         )}
         {withLink(
           'https://www.facebook.com/join.codebase/',
-          <img
-            className="h-10 cursor-pointer"
-            src="/images/mediaPartners/5_codebase.png"
-            alt="codebase"
-          />
+          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_04.png" alt="" />
         )}
         {withLink(
-          'https://baseplayhouse.co/',
-          <img className="h-10 cursor-pointer" src="/images/mediaPartners/6_BASE.png" alt="BASE" />
+          'https://www.mindground.world/',
+          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_05.png" alt="" />
+        )}
+        {withLink(
+          'https://www.contentshifu.com/',
+          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_06.png" alt="" />
+        )}
+        {withLink(
+          'https://www.youtube.com/c/QueenH',
+          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_07.png" alt="" />
+        )}
+        {withLink(
+          'https://www.facebook.com/learnlalen',
+          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_08.png" alt="" />
         )}
         {withLink(
           'https://www.facebook.com/dataholicth',
-          <img
-            className="h-10 cursor-pointer"
-            src="/images/mediaPartners/7_dataholic.png"
-            alt="dataholicth"
-          />
+          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_09.png" alt="" />
         )}
         {withLink(
           'https://adaddictth.com/',
-          <img
-            className="h-10 cursor-pointer"
-            src="/images/mediaPartners/8_AdAddict.png"
-            alt="AdAddict"
-          />
+          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_10.png" alt="" />
         )}
       </div>
     </div>

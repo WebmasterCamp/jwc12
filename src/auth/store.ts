@@ -81,11 +81,6 @@ export const useAuthStore = create<AuthStore>((set) => {
     })
   }
 
-  const confirmBranch = async (branch: BranchType) => {
-    await updateRegistration({ confirmedBranch: branch })
-    set((state) => ({ ...state, branch }))
-  }
-
   return {
     pending: true,
     uid: null,
