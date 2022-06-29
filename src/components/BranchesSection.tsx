@@ -77,9 +77,9 @@ export const BranchesSection: React.FunctionComponent<Props> = ({ statData }) =>
         เลือกสาขาที่ต้องการสมัคร
         <Star />
       </h2>
-      <Link href="/announcement" passHref>
+      <Link href="/campers" passHref>
         <LinkButton className="inline-block register-button mt-6 mb-16" color="gold">
-          ประกาศรายชื่อผู้มีสิทธิ์สัมภาษณ์
+          ประกาศผลผู้ผ่านการคัดเลือก
         </LinkButton>
       </Link>
       <div

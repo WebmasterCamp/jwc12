@@ -71,9 +71,9 @@ export const BranchDialog: React.FunctionComponent<Props> = ({
                 <span className="font-bold text-2xl lg:text-3xl text-center text-brown-dark font-heading">
                   สมัครแล้ว {count} คน
                 </span>
-                <Link href={`/announcement/${branch}`} passHref>
+                <Link href={`/campers/${branch}`} passHref>
                   <LinkButton className="register-button" color="gold">
-                    ประกาศรายชื่อผู้มีสิทธิ์สัมภาษณ์
+                    ประกาศผลผู้ผ่านการคัดเลือก
                   </LinkButton>
                 </Link>
               </div>
