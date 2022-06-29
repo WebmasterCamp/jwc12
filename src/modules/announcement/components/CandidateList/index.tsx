@@ -2,19 +2,26 @@ import { useEffect, useRef } from 'react'
 
 import clsx from 'clsx'
 
-import { InterviewCandidate } from '@/db/types'
 import { BranchType } from '@/modules/register/types'
 
 import { branchColorMapping } from '../../constants'
+import { AnnouncementCandidate, AnnouncementColumn } from '../../types'
 import { Paper } from '../Paper'
 import { TableItem } from '../TableItem'
 
-export interface CandidateListProps {
+export interface CandidateListProps<T extends AnnouncementCandidate> {
+  header: string
   branch: BranchType
-  candidates: InterviewCandidate[]
+  candidates: T[]
+  columns: AnnouncementColumn<T>[]
 }
 
-export function CandidateList({ branch, candidates }: CandidateListProps) {
+export function CandidateList<T extends AnnouncementCandidate>({
+  header,
+  branch,
+  candidates,
+  columns,
+}: CandidateListProps<T>) {
   const containerRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     containerRef.current?.scrollIntoView()
@@ -23,20 +30,22 @@ export function CandidateList({ branch, candidates }: CandidateListProps) {
   return (
     <Paper ref={containerRef}>
       <h6 className="font-bold">
-        รายชื่อผู้ผ่านการคัดเลือกเข้ารอบสัมภาษณ์ สาขา{' '}
+        {`${header} สาขา `}
         <span className={clsx('capitalize', branchColorMapping[branch])}>{branch}</span>
       </h6>
       <table className="w-full mt-4 rounded-md">
         <thead>
           <tr className="w-full">
-            <th className="text-left p-1 md:p-3">รหัส</th>
-            <th className="text-left p-1 md:p-3">ชื่อ - นามสกุล</th>
-            <th className="text-left p-1 md:p-3">วัน/เวลาการสัมภาษณ์</th>
+            {columns.map((column) => (
+              <th key={column.key as string} className="text-left p-1 md:p-3">
+                {column.label}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
           {candidates.map((candidate) => (
-            <TableItem key={candidate.id} candidate={candidate} />
+            <TableItem key={candidate.id} candidate={candidate} columns={columns} />
           ))}
         </tbody>
       </table>

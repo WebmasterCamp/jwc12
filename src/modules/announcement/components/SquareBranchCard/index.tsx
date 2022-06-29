@@ -3,14 +3,19 @@ import Link from 'next/link'
 import { BranchType } from '@/modules/register/types'
 
 export interface SquareBranchCardProps {
+  linkPrefix: string
   branch: BranchType
   selected: boolean
 }
 
-export const SquareBranchCard: React.FC<SquareBranchCardProps> = ({ branch, selected }) => {
+export const SquareBranchCard: React.FC<SquareBranchCardProps> = ({
+  linkPrefix,
+  branch,
+  selected,
+}) => {
   return (
     <div className="flex flex-col items-center gap-4">
-      <Link passHref href={`/announcement/${branch}`} scroll={false}>
+      <Link passHref href={`${linkPrefix}${branch}`} scroll={false}>
         <a className="hover:scale-105 transition-transform duration-300">
           <img src={`/images/square/${branch}.png`} alt={branch} />
         </a>
