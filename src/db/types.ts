@@ -59,6 +59,7 @@ export interface Camper {
   branch: BranchType
   name: string
   confirmAmount: string
+  discordLink: string
 }
 
 export interface CamperListDocument {

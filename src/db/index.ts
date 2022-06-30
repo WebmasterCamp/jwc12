@@ -104,6 +104,14 @@ export async function getRegistration(uid?: string): Promise<Registration> {
   return docSnap.data() as Registration
 }
 
+export async function getCamper(uid?: string): Promise<Camper | null> {
+  const docSnap = await getDoc(getCamperRef(uid))
+  if (!docSnap.exists()) {
+    return null
+  }
+  return docSnap.data()
+}
+
 export async function updateRegistration(data: Partial<Registration>) {
   try {
     return await updateDoc(getRegistrationRef(), {
