@@ -1,7 +1,7 @@
 import { json } from 'body-parser'
 import express from 'express'
 
-import { updateCamperList } from './functions/updateCamperList'
+import { updateInternalCamperList, updatePublicCamperList } from './functions/updateCamperList'
 import { updateInterviewCandidates } from './functions/updateInterviewCandidates'
 import { authenticateMiddleware } from './middlewares'
 
@@ -24,7 +24,8 @@ app.post('/updateInterviewCandidates', async (req, res) => {
 app.post('/updateCamperList', async (req, res) => {
   try {
     const data = req.body
-    await updateCamperList(data.data)
+    await updatePublicCamperList(data.data)
+    await updateInternalCamperList(data.data)
     res.status(200).send('OK')
   } catch (e) {
     console.log(e)

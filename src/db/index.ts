@@ -28,6 +28,7 @@ import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
 import {
   Answers,
+  Camper,
   CamperListDocument,
   InterviewCandidatesDocument,
   Registration,
@@ -63,6 +64,13 @@ export function getRegistrationRef(uid?: string) {
   return doc(db, target, uid ? uid : getUid()) as DocumentReference<Registration>
 }
 
+export function getCamperRef(uid?: string) {
+  if (process.env.MODE !== 'production') {
+    return doc(db, 'campers_staging', 'mock') as DocumentReference<Camper>
+  }
+  return doc(db, 'campers', uid ? uid : getUid()) as DocumentReference<Camper>
+}
+
 function getStorageRef(filename: string) {
   return ref(storage, filename)
 }
@@ -94,6 +102,14 @@ export async function getRegistration(uid?: string): Promise<Registration> {
     return await getRegistration(uid)
   }
   return docSnap.data() as Registration
+}
+
+export async function getCamper(uid?: string): Promise<Camper | null> {
+  const docSnap = await getDoc(getCamperRef(uid))
+  if (!docSnap.exists()) {
+    return null
+  }
+  return docSnap.data()
 }
 
 export async function updateRegistration(data: Partial<Registration>) {
