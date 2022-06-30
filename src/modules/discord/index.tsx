@@ -8,15 +8,17 @@ import useSWR from 'swr'
 
 import { useAuthStore } from '@/auth/store'
 import { Container } from '@/components/Container'
+import { Loading } from '@/components/Loading'
 import { Logo } from '@/components/Logo'
+import { Redirect } from '@/components/Redirect'
 import { getCamper } from '@/db'
 
 import { Paper } from '../announcement/components/Paper'
 
 export function DiscordPage() {
-  const { pending, uid } = useAuthStore()
+  const { uid } = useAuthStore()
 
-  const { data, error } = useSWR(['user', uid], async (_, uid: string) => {
+  const { data, isValidating, error } = useSWR(['camper', uid], async (_, uid: string) => {
     return await getCamper(uid)
   })
   const verifyCode = uid?.substring(0, 6) ?? ''
@@ -27,7 +29,10 @@ export function DiscordPage() {
   }, [verifyCode])
 
   if (error) return <div>failed to load</div>
-  if (pending || !data) return null
+  if (!data && !isValidating) {
+    return <Redirect to="/campers" replace />
+  }
+  if (!data) return <Loading />
 
   return (
     <div>
