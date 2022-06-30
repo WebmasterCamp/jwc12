@@ -89,6 +89,14 @@ service cloud.firestore {
     match /registrations/{userId} {
       allow read: if isOwner(userId);
     }
+
+    match /campers/{userId} {
+      allow read: if isOwner(userId);
+    }
+
+    match /campers_staging/mock {
+      allow read;
+    }
     
     match /registrations_staging/{userId} {
       // Allow admin because it is so difficult.

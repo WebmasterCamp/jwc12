@@ -28,6 +28,7 @@ import { USE_FIRESTORE_EMULATOR } from '@/utils/env'
 
 import {
   Answers,
+  Camper,
   CamperListDocument,
   InterviewCandidatesDocument,
   Registration,
@@ -61,6 +62,13 @@ if (USE_FIRESTORE_EMULATOR) {
 export function getRegistrationRef(uid?: string) {
   const target = process.env.MODE === 'PRODUCTION' ? 'registrations' : 'registrations_staging'
   return doc(db, target, uid ? uid : getUid()) as DocumentReference<Registration>
+}
+
+export function getCamperRef(uid?: string) {
+  if (process.env.MODE !== 'production') {
+    return doc(db, 'campers_staging', 'mock') as DocumentReference<Camper>
+  }
+  return doc(db, 'campers', uid ? uid : getUid()) as DocumentReference<Camper>
 }
 
 function getStorageRef(filename: string) {
