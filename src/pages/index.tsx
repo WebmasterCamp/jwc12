@@ -314,6 +314,14 @@ function SponsorLogosOnBottom() {
             alt="NUT"
           />
         )}
+        {withLink(
+          'https://www.facebook.com/oddsteam ',
+          <img
+            className="h-[36px] md:h-[72px] cursor-pointer"
+            src="/images/sponsors/SP_06_ODDS.svg"
+            alt="ODDS"
+          />
+        )}
       </div>
 
       {/** P */}
