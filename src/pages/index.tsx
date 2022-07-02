@@ -291,10 +291,10 @@ function SponsorLogosOnBottom() {
           />
         )}
         {withLink(
-          'https://www.microsoft.com/th-th',
+          'https://developer.microsoft.com',
           <img
-            className="h-[36px] md:h-[72px] cursor-pointer"
-            src="/images/sponsors/SP_03_Microsoft.svg"
+            className="h-[44px] md:h-[80px] cursor-pointer"
+            src="/images/sponsors/SP_03_Microsoft.png"
             alt="Microsoft"
           />
         )}
