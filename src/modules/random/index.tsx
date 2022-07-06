@@ -7,14 +7,25 @@ import styles from './index.module.css'
 interface CardProps {
   grow: boolean
   displaying?: boolean
-  key: any
+  key?: any
   selected?: boolean
+  showing?: boolean
 }
 
-const Card = ({ grow = false, displaying = false, selected = false }: CardProps) => {
+const Card = ({
+  grow = false,
+  displaying = false,
+  selected = false,
+  showing = false,
+}: CardProps) => {
   return (
     <div
-      className={clsx(grow && styles.grow, displaying && 'border-8', selected && 'animate-spin')}
+      className={clsx(
+        grow && styles.grow,
+        displaying && 'border-8',
+        selected && 'animate-spin',
+        showing && styles.showing
+      )}
     >
       <img src="/images/cards/generic.png" className="w-full" alt="" />
     </div>
@@ -64,19 +75,28 @@ export const Random = () => {
   }
 
   return (
-    <div onClick={randomize} className="flex h-screen">
-      <div className=" w-3/4 m-auto gap-8  p-8 grid grid-cols-5 grid-rows-2">
-        {/* TODO: Use actual array */}
-        {Array(remainingCards)
-          .fill(0)
-          .map((_, i) => (
-            <Card
-              key={i}
-              grow={i === selectedIndex}
-              selected={i === selectedIndex && animationState === AnimationState.Finish}
-            />
-          ))}
+    <>
+      <div onClick={randomize} className="flex h-screen">
+        <div className=" w-3/4 m-auto gap-8  p-8 grid grid-cols-5 grid-rows-2">
+          {/* TODO: Use actual array */}
+          {Array(remainingCards)
+            .fill(0)
+            .map((_, i) => (
+              <Card
+                key={i}
+                grow={i === selectedIndex}
+                selected={i === selectedIndex && animationState === AnimationState.Finish}
+              />
+            ))}
+        </div>
       </div>
-    </div>
+      {animationState === AnimationState.Finish && (
+        <div onClick={randomize} className="absolute flex inset-0 bg-black/75">
+          <div className="m-auto w-1/4">
+            <Card grow={true} showing={true} />
+          </div>
+        </div>
+      )}
+    </>
   )
 }

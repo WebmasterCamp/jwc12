@@ -1,3 +1,28 @@
 .grow {
   box-shadow: 1px 7px 55px -1px rgba(255, 255, 255, 0.78);
 }
+
+.showing {
+  animation-name: showing-card;
+  animation-duration: 2s;
+}
+
+@keyframes showing-card {
+  0% {
+    transform: translateY(9999px);
+  }
+  80% {
+    transform: rotateZ(0);
+  }
+  90% {
+    transform: translateY(0) rotateZ(30deg);
+  }
+
+  95$ {
+    transform: translateY(0) rotateZ(-30deg);
+  }
+
+  100% {
+    transform: translateY(0) rotateZ(0);
+  }
+}
