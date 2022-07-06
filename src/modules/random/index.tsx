@@ -24,7 +24,8 @@ const Card = ({
         grow && styles.grow,
         displaying && 'border-8',
         selected && 'animate-spin',
-        showing && styles.showing
+        showing && styles.showing,
+        'relative'
       )}
     >
       <img src="/images/cards/generic.png" className="w-full" alt="" />
@@ -46,7 +47,7 @@ export const Random = () => {
   const [animationState, setAnimationState] = useState(AnimationState.Pending)
   const [remainingCards, setRemainingCards] = useState(10)
   // Time to shift to each card
-  const interval = 500
+  const interval = 100
 
   const randomize = () => {
     // TODO: Find a better way to do this
@@ -91,9 +92,16 @@ export const Random = () => {
         </div>
       </div>
       {animationState === AnimationState.Finish && (
-        <div onClick={randomize} className="absolute flex inset-0 bg-black/75">
-          <div className="m-auto w-1/4">
-            <Card grow={true} showing={true} />
+        <div onClick={randomize} className="absolute overflow-hidden flex inset-0 bg-black/75">
+          <div className={clsx('m-auto w-1/4 relative')}>
+            <div className={styles.showing}>
+              <Card grow={true} />
+            </div>
+            <img
+              src="/images/Card_Content.png"
+              alt=""
+              className={clsx('w-full absolute top-0 z-[999]', styles.showingBack)}
+            />
           </div>
         </div>
       )}

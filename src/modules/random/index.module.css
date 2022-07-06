@@ -4,25 +4,71 @@
 
 .showing {
   animation-name: showing-card;
+  visibility: visible;
   animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.showingBack {
+  animation-name: showing-back;
+  visibility: hidden;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes showing-card {
   0% {
     transform: translateY(9999px);
+    z-index: 30;
+    visibility: visible;
   }
-  80% {
+  60% {
     transform: rotateZ(0);
   }
-  90% {
+  70% {
     transform: translateY(0) rotateZ(30deg);
   }
 
-  95$ {
+  80% {
     transform: translateY(0) rotateZ(-30deg);
+  }
+
+  90% {
+    background: white;
   }
 
   100% {
     transform: translateY(0) rotateZ(0);
+    visibility: hidden;
   }
+}
+
+/* Must be duplicated until there is another way to do this. */
+@keyframes showing-back {
+  0% {
+    transform: translateY(9999px);
+    visibility: hidden;
+  }
+  60% {
+    transform: rotateZ(0);
+  }
+  70% {
+    transform: translateY(0) rotateZ(30deg);
+  }
+
+  80% {
+    transform: translateY(0) rotateZ(-30deg);
+  }
+
+  90% {
+    background: white;
+  }
+
+  100% {
+    transform: translateY(0) rotateZ(0);
+    visibility: visible;
+  }
+}
+
+.backdrop {
 }
