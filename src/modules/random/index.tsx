@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import clsx from 'clsx'
 
+import { cards as initialCards } from './cards'
 import styles from './index.module.css'
 
 interface CardProps {
@@ -44,8 +45,8 @@ export const Random = () => {
   // TODO: Change style
   // selected card during randomization
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [cards, setCards] = useState(initialCards)
   const [animationState, setAnimationState] = useState(AnimationState.Pending)
-  const [remainingCards, setRemainingCards] = useState(10)
   // Time to shift to each card
   const interval = 100
 
@@ -57,7 +58,7 @@ export const Random = () => {
       for (let i = 0; i < timesToShift; i++) {
         setTimeout(() => {
           // Go through all cards
-          setSelectedIndex((index) => (index + 1) % remainingCards)
+          setSelectedIndex((index) => (index + 1) % cards.length)
           if (i === timesToShift - 1) {
             // Last one
             setAnimationState(AnimationState.Finish)
@@ -69,7 +70,10 @@ export const Random = () => {
       // Remove the card and set the index to -1
       // Note: Use something else for key
       // TODO: Use array
-      setRemainingCards((x) => x - 1)
+      setCards((oldCards) => [
+        ...oldCards.slice(0, selectedIndex),
+        ...oldCards.slice(selectedIndex + 1),
+      ])
       setSelectedIndex(-1)
       setAnimationState(AnimationState.Pending)
     }
@@ -80,15 +84,13 @@ export const Random = () => {
       <div onClick={randomize} className="flex h-screen">
         <div className=" w-3/4 m-auto gap-8  p-8 grid grid-cols-5 grid-rows-2">
           {/* TODO: Use actual array */}
-          {Array(remainingCards)
-            .fill(0)
-            .map((_, i) => (
-              <Card
-                key={i}
-                grow={i === selectedIndex}
-                selected={i === selectedIndex && animationState === AnimationState.Finish}
-              />
-            ))}
+          {cards.map((x, i) => (
+            <Card
+              key={x.name}
+              grow={i === selectedIndex}
+              selected={i === selectedIndex && animationState === AnimationState.Finish}
+            />
+          ))}
         </div>
       </div>
       {animationState === AnimationState.Finish && (

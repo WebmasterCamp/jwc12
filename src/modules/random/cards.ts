@@ -39,10 +39,10 @@ export const cards: Array<Card> = [
     },
     {
         imageUrl: '/images/Card_Content.png',
-        name: '1'
+        name: '1rsrstrrstkbifndhiyofnhoy'
     },
     {
         imageUrl: '/images/Card_Content.png',
-        name: '1'
+        name: '1rikiofbkyfekd4yoghiyofg lwfyogj y;'
     },
 ]
