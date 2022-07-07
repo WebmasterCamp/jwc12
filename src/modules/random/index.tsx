@@ -101,7 +101,9 @@ export const Random = () => {
             </div>
             <div className="w-full top-0 absolute">
               <img
-                src="/images/Card_Content.png"
+                src={
+                  selectedIndex != -1 ? cards[selectedIndex].imageUrl : '/images/cards/generic.png'
+                }
                 alt=""
                 className={clsx('top-0 z-[999]', styles.showingBack)}
               />

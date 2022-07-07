@@ -6,27 +6,27 @@ export interface Card {
 
 export const cards: Array<Card> = [
     {
-        imageUrl: '/images/Card_Content.png',
+        imageUrl: '/images/Card_Programming.png',
         name: '1'
     },
     {
-        imageUrl: '/images/Card_Content.png',
+        imageUrl: '/images/Card_Marketing.png',
         name: '12'
     },
     {
-        imageUrl: '/images/Card_Content.png',
+        imageUrl: '/images/Card_Design.png',
         name: 'a1'
     },
     {
-        imageUrl: '/images/Card_Content.png',
+        imageUrl: '/images/Card_Programming.png',
         name: '1rrrt'
     },
     {
-        imageUrl: '/images/Card_Content.png',
+        imageUrl: '/images/Card_Design.png',
         name: '1rstrstartr'
     },
     {
-        imageUrl: '/images/Card_Content.png',
+        imageUrl: '/images/Card_Marketing.png',
         name: '1rtarbrshgwj3hj34h34'
     },
     {
@@ -34,11 +34,11 @@ export const cards: Array<Card> = [
         name: 'rtrtarhfh4whifedhnyof1'
     },
     {
-        imageUrl: '/images/Card_Content.png',
+        imageUrl: '/images/Card_Design.png',
         name: '1wihnywfinkwfidky;dh'
     },
     {
-        imageUrl: '/images/Card_Content.png',
+        imageUrl: '/images/Card_Programming.png',
         name: '1rsrstrrstkbifndhiyofnhoy'
     },
     {
