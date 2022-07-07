@@ -4,14 +4,14 @@
 
 .showing {
   animation-name: showing-card;
-  visibility: visible;
+  opacity: 1;
   animation-duration: 2s;
   animation-fill-mode: forwards;
 }
 
 .showingBack {
   animation-name: showing-back;
-  visibility: hidden;
+  opacity: 0;
   animation-duration: 2s;
   animation-fill-mode: forwards;
 }
@@ -20,26 +20,30 @@
   0% {
     transform: translateY(9999px);
     z-index: 30;
-    visibility: visible;
+    opacity: 1;
   }
   60% {
     transform: rotateZ(0);
+    opacity: 1;
   }
   70% {
     transform: translateY(0) rotateZ(30deg);
+    opacity: 1;
   }
 
   80% {
     transform: translateY(0) rotateZ(-30deg);
+    opacity: 1;
   }
 
   90% {
     background: white;
+    opacity: 1;
   }
 
   100% {
     transform: translateY(0) rotateZ(0);
-    visibility: hidden;
+    opacity: 0;
   }
 }
 
@@ -47,26 +51,30 @@
 @keyframes showing-back {
   0% {
     transform: translateY(9999px);
-    visibility: hidden;
+    opacity: 0;
   }
   60% {
     transform: rotateZ(0);
+    opacity: 0;
   }
   70% {
     transform: translateY(0) rotateZ(30deg);
+    opacity: 0;
   }
 
   80% {
     transform: translateY(0) rotateZ(-30deg);
+    opacity: 0;
   }
 
   90% {
     background: white;
+    opacity: 0;
   }
 
   100% {
     transform: translateY(0) rotateZ(0);
-    visibility: visible;
+    opacity: 1;
   }
 }
 

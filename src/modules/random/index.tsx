@@ -97,11 +97,13 @@ export const Random = () => {
             <div className={styles.showing}>
               <Card grow={true} />
             </div>
-            <img
-              src="/images/Card_Content.png"
-              alt=""
-              className={clsx('w-full absolute top-0 z-[999]', styles.showingBack)}
-            />
+            <div className="w-full top-0 absolute">
+              <img
+                src="/images/Card_Content.png"
+                alt=""
+                className={clsx('top-0 z-[999]', styles.showingBack)}
+              />
+            </div>
           </div>
         </div>
       )}
