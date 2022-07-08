@@ -4,6 +4,8 @@ export interface Card {
     name: string // Must be unique
 }
 
+// Hard-code your cards here
+// TODO: Replace with actual cards
 export const cards: Array<Card> = [
     {
         imageUrl: '/images/Card_Programming.png',
@@ -19,11 +21,11 @@ export const cards: Array<Card> = [
     },
     {
         imageUrl: '/images/Card_Programming.png',
-        name: '1rrrt'
+        name: 'prog'
     },
     {
         imageUrl: '/images/Card_Design.png',
-        name: '1rstrstartr'
+        name: 'prog-2'
     },
     {
         imageUrl: '/images/Card_Marketing.png',
