@@ -74,7 +74,7 @@ export const Random = () => {
               // Last one
               setAnimationState(AnimationState.Finish)
               setDoc(doc(db, 'config', 'random'), { trigger: false }, { merge: true })
-              setTimeout(() => animate(AnimationState.Finish), 5000)
+              // setTimeout(() => animate(AnimationState.Finish), 5000)
               // Prepare to show the result
             }
           }, i * interval)
@@ -126,7 +126,10 @@ export const Random = () => {
         </div>
       </div>
       {animationState === AnimationState.Finish && (
-        <div className="absolute overflow-hidden flex inset-0 bg-black/75">
+        <div
+          onClick={() => animate(AnimationState.Finish)}
+          className="absolute overflow-hidden flex inset-0 bg-black/75"
+        >
           <div className={clsx('m-auto w-1/4 relative')}>
             <div className={styles.showing}>
               <Card grow={true} />
