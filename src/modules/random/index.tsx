@@ -56,13 +56,13 @@ export const Random = () => {
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <div className="flex justify-center items-center flex-col min-h-screen w-full gap-y-12">
         <h1 className="text-white font-heading text-3xl">บ้านต่อไปคืออ...</h1>
         <div className="w-[20vw]">
           <img src={url} alt="" className="w-full" />
         </div>
       </div>
-    </>
+    </div>
   )
 }
