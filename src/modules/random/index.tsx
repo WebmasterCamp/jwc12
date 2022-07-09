@@ -10,7 +10,7 @@ import { useDocument } from '@/db/hooks'
 import { RandomConfigDocument } from '@/db/types'
 import { app } from '@/lib/firebase'
 
-import { cards } from './cards'
+import { CARD_PATH_MAPPER } from './cards'
 import styles from './index.module.css'
 
 const sleep = (time: number) => {
@@ -30,21 +30,26 @@ export const Random = () => {
 
   const config = useMemo(() => {
     if (pending) return null
-    return data?.configMap?.[data?.currentOrder ?? '']
+    return data?.configMap?.[data?.currentOrder ?? 0]
   }, [data?.configMap, data?.currentOrder, pending])
 
   // console.log('data', data)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setUrl(cards[Math.floor(Math.random() * 6)].imageUrl)
+      setUrl(CARD_PATH_MAPPER[Math.floor(Math.random() * 6) as CARD_PATH_MAPPER])
       console.log(config?.duration)
     }, 100)
     const timeout = setTimeout(() => {
       clearInterval(interval)
-    }, config?.duration)
-    return () => clearTimeout(timeout)
-  }, [config])
+      setUrl(CARD_PATH_MAPPER[(config?.team ?? 0) as CARD_PATH_MAPPER])
+    }, config?.duration ?? 2000)
+    return () => {
+      clearTimeout(timeout)
+      clearInterval(interval)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.currentOrder])
 
   if (pending) {
     return <Loading />
@@ -52,9 +57,10 @@ export const Random = () => {
 
   return (
     <>
-      <div className="flex h-screen">
-        <div className=" w-3/4 m-auto gap-8  p-8 flex">
-          <img src={url} alt="" />
+      <div className="flex justify-center items-center flex-col min-h-screen w-full gap-y-12">
+        <h1 className="text-white font-heading text-3xl">บ้านต่อไปคืออ...</h1>
+        <div className="w-[20vw]">
+          <img src={url} alt="" className="w-full" />
         </div>
       </div>
     </>
