@@ -65,3 +65,12 @@ export interface Camper {
 export interface CamperListDocument {
   data: Camper[]
 }
+
+export interface ConfigMapValue {
+  team: number
+  duration: number
+}
+export interface RandomConfigDocument {
+  currentOrder: number
+  configMap: Record<number, ConfigMapValue>
+}

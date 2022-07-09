@@ -1,0 +1,82 @@
+.grow {
+  box-shadow: 1px 7px 55px -1px rgba(255, 255, 255, 0.78);
+}
+
+.showing {
+  animation-name: showing-card;
+  opacity: 1;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.showingBack {
+  animation-name: showing-back;
+  opacity: 0;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes showing-card {
+  0% {
+    transform: translateY(9999px);
+    z-index: 30;
+    opacity: 1;
+  }
+  60% {
+    transform: rotateZ(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(0) rotateZ(30deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: translateY(0) rotateZ(-30deg);
+    opacity: 1;
+  }
+
+  90% {
+    background: white;
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0) rotateZ(0);
+    opacity: 0;
+  }
+}
+
+/* Must be duplicated until there is another way to do this. */
+@keyframes showing-back {
+  0% {
+    transform: translateY(9999px);
+    opacity: 0;
+  }
+  60% {
+    transform: rotateZ(0);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(0) rotateZ(30deg);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateY(0) rotateZ(-30deg);
+    opacity: 0;
+  }
+
+  90% {
+    background: white;
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) rotateZ(0);
+    opacity: 1;
+  }
+}
+
+.backdrop {
+}
