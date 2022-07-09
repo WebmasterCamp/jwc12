@@ -31,6 +31,7 @@ import {
   Camper,
   CamperListDocument,
   InterviewCandidatesDocument,
+  RandomConfigDocument,
   Registration,
   RegistrationStats,
 } from './types'
@@ -53,6 +54,12 @@ export const interviewCandidatesRef = doc(
 ) as DocumentReference<InterviewCandidatesDocument>
 
 export const campersRef = doc(db, 'stats', 'campers') as DocumentReference<CamperListDocument>
+
+export const randomConfigRef = doc(
+  db,
+  'config',
+  'random'
+) as DocumentReference<RandomConfigDocument>
 
 if (USE_FIRESTORE_EMULATOR) {
   connectFirestoreEmulator(db, 'localhost', 8080)
