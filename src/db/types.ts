@@ -70,7 +70,7 @@ export interface ConfigMapValue {
   team: number
   duration: number
 }
-export interface RandomConfig {
+export interface RandomConfigDocument {
   currentOrder: number
   configMap: ConfigMapValue[]
 }
