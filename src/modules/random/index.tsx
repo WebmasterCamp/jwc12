@@ -37,9 +37,9 @@ export const Random = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setUrl(CARD_PATH_MAPPER[Math.floor(Math.random() * 6) as CARD_PATH_MAPPER])
+      setUrl(CARD_PATH_MAPPER[Math.floor(Math.random() * 7) as CARD_PATH_MAPPER])
       console.log(config?.duration)
-    }, 100)
+    }, 200)
     const timeout = setTimeout(() => {
       clearInterval(interval)
       setUrl(CARD_PATH_MAPPER[(config?.team ?? 0) as CARD_PATH_MAPPER])
