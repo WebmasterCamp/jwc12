@@ -1,3 +1,1 @@
-import { Random } from '@/modules/random'
-
-export default Random
+export { Random as default } from '@/modules/random'
