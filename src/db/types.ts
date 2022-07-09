@@ -72,5 +72,5 @@ export interface ConfigMapValue {
 }
 export interface RandomConfigDocument {
   currentOrder: number
-  configMap: ConfigMapValue[]
+  configMap: Record<number, ConfigMapValue>
 }
