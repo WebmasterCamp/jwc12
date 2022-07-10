@@ -63,7 +63,7 @@ export const Random = () => {
       <div className="flex justify-center items-center flex-col min-h-screen w-full gap-y-12">
         <h1 className="text-white font-heading text-3xl">บ้านต่อไปคืออ...</h1>
         <div className="w-[20vw]">
-          <img src={url} alt="" className={clsx('w-full', finish && 'animate-bounce')} />
+          <img src={url} alt="" className={clsx('w-full', finish && styles.showing)} />
         </div>
       </div>
     </div>
