@@ -2,7 +2,6 @@ import { useEffect, useMemo } from 'react'
 
 import { getDoc, updateDoc } from 'firebase/firestore'
 
-import { withAuth } from '@/auth/withAuth'
 import { Button } from '@/components/Button'
 import { randomConfigRef } from '@/db'
 import { useDocument } from '@/db/hooks'
@@ -80,4 +79,4 @@ function RandomAdminPage() {
   )
 }
 
-export default withAuth(RandomAdminPage)
+export default RandomAdminPage
