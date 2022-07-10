@@ -25,6 +25,7 @@ const randomConfigRef = doc(db, 'config', 'random') as DocumentReference<RandomC
 
 export const Random = () => {
   const [url, setUrl] = useState('/images/cards/generic.png')
+  const [finish, setFinish] = useState(false)
 
   const { pending, data } = useDocument(randomConfigRef)
 
@@ -39,10 +40,12 @@ export const Random = () => {
     const interval = setInterval(() => {
       setUrl(CARD_PATH_MAPPER[Math.floor(Math.random() * 7) as CARD_PATH_MAPPER])
       console.log(config?.duration)
+      setFinish(false)
     }, 200)
     const timeout = setTimeout(() => {
       clearInterval(interval)
       setUrl(CARD_PATH_MAPPER[(config?.team ?? 0) as CARD_PATH_MAPPER])
+      setFinish(true)
     }, config?.duration ?? 2000)
     return () => {
       clearTimeout(timeout)
@@ -60,7 +63,7 @@ export const Random = () => {
       <div className="flex justify-center items-center flex-col min-h-screen w-full gap-y-12">
         <h1 className="text-white font-heading text-3xl">บ้านต่อไปคืออ...</h1>
         <div className="w-[20vw]">
-          <img src={url} alt="" className="w-full" />
+          <img src={url} alt="" className={clsx('w-full', finish && 'animate-bounce')} />
         </div>
       </div>
     </div>
