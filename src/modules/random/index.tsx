@@ -1,11 +1,13 @@
-import { useMemo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 import { useEffect } from 'react'
 import { useCallback } from 'react'
+import Particles from 'react-tsparticles'
 
 import clsx from 'clsx'
-import { DocumentReference, doc, getFirestore, onSnapshot, setDoc } from 'firebase/firestore'
+import { DocumentReference, doc, getFirestore } from 'firebase/firestore'
 
 import { Loading } from '@/components/Loading'
+import { ParticlesWidget } from '@/components/Particles'
 import { useDocument } from '@/db/hooks'
 import { RandomConfigDocument } from '@/db/types'
 import { app } from '@/lib/firebase'
@@ -22,6 +24,8 @@ const sleep = (time: number) => {
 const db = getFirestore(app)
 
 const randomConfigRef = doc(db, 'config', 'random') as DocumentReference<RandomConfigDocument>
+
+const ParticlesWidgetMemoried = memo(ParticlesWidget)
 
 export const Random = () => {
   const [url, setUrl] = useState('/images/cards/generic.png')
@@ -66,6 +70,7 @@ export const Random = () => {
           <img src={url} alt="" className={clsx('w-full', finish && styles.showing)} />
         </div>
       </div>
+      <ParticlesWidgetMemoried />
     </div>
   )
 }
