@@ -366,14 +366,14 @@ function SponsorLogosOnBottom() {
             alt="Spaceth"
           />
         )}
-        {withLink(
+        {/* {withLink(
           'https://www.facebook.com/thumbtshirt/',
           <img
             className="h-[40px] md:h-[90px] cursor-pointer"
             src="/images/sponsors/P_06_Thumb.svg"
             alt="Thumb"
           />
-        )}
+        )} */}
       </div>
 
       {/** S */}
