@@ -163,7 +163,7 @@ function SponsorLogosOnHero() {
         {withLink(
           'https://www.webmaster.or.th/',
           <img
-            className="h-[36px] md:h-[72px] cursor-pointer"
+            className="h-[40px] md:h-[72px] cursor-pointer"
             src="/images/sponsors/VIP0A_TWA.svg"
             alt="Thai Webmaster Association"
           />
@@ -171,17 +171,17 @@ function SponsorLogosOnHero() {
         {withLink(
           'https://www.it.kmitl.ac.th/',
           <img
-            className="h-[44px] md:h-[88px] cursor-pointer"
+            className="h-[48px] md:h-[88px] cursor-pointer"
             src="/images/sponsors/VIP0B_IT.svg"
             alt="IT KMITL"
           />
         )}
       </div>
-      <div className="flex flex-row flex-wrap basis-full justify-center items-end gap-x-[56px] gap-y-[56px] mb-[70px]">
+      <div className="flex flex-row flex-wrap basis-full justify-center items-end gap-x-[56px] gap-y-[56px] mb-[50px] md:mb-[70px]">
         {withLink(
           'https://www.cpall.co.th/',
           <img
-            className="h-[48px] md:h-[96px] cursor-pointer"
+            className="h-[52px] md:h-[96px] cursor-pointer"
             src="/images/sponsors/VIP_01_CP.svg"
             alt="CP All"
           />
@@ -329,7 +329,7 @@ function SponsorLogosOnBottom() {
         {withLink(
           'https://www.facebook.com/imaginethailandmovement',
           <img
-            className="h-[40px] md:h-[80px] cursor-pointer"
+            className="h-[48px] md:h-[92px] cursor-pointer"
             src="/images/sponsors/P_01_ImgTH.svg"
             alt="Imagine"
           />
@@ -337,7 +337,7 @@ function SponsorLogosOnBottom() {
         {withLink(
           'https://www.camphub.in.th/',
           <img
-            className="h-[44px] md:h-[88px] cursor-pointer"
+            className="h-[44px] md:h-[96px] cursor-pointer"
             src="/images/sponsors/P_02_Camphub.svg"
             alt="camphub"
           />
@@ -345,7 +345,7 @@ function SponsorLogosOnBottom() {
         {withLink(
           'https://pantip.com/',
           <img
-            className="h-[40px] md:h-[80px] cursor-pointer"
+            className="h-[40px] md:h-[90px] cursor-pointer"
             src="/images/sponsors/P_03_Pantip.svg"
             alt="Pantip"
           />
@@ -353,7 +353,7 @@ function SponsorLogosOnBottom() {
         {withLink(
           '/',
           <img
-            className="h-[40px] md:h-[80px] cursor-pointer"
+            className="h-[40px] md:h-[90px] cursor-pointer"
             src="/images/sponsors/P_04_YWC-Luxury.svg"
             alt="YWC Luxury"
           />
@@ -361,9 +361,17 @@ function SponsorLogosOnBottom() {
         {withLink(
           'https://spaceth.co/',
           <img
-            className="h-[40px] md:h-[80px] cursor-pointer"
+            className="h-[40px] md:h-[90px] cursor-pointer"
             src="/images/sponsors/P_05_Spaceth.svg"
             alt="Spaceth"
+          />
+        )}
+        {withLink(
+          'https://www.facebook.com/thumbtshirt/',
+          <img
+            className="h-[40px] md:h-[90px] cursor-pointer"
+            src="/images/sponsors/P_06_Thumb.svg"
+            alt="Thumb"
           />
         )}
       </div>
@@ -373,9 +381,17 @@ function SponsorLogosOnBottom() {
         {withLink(
           'https://www.dek-d.com/',
           <img
-            className="h-[40px] md:h-[60px] cursor-pointer"
+            className="h-[30px] md:h-[72px] cursor-pointer"
             src="/images/sponsors/S_01_Dek-d.svg"
             alt="Dek-d"
+          />
+        )}
+        {withLink(
+          'https://grappik.com/',
+          <img
+            className="h-[30px] md:h-[64px] cursor-pointer"
+            src="/images/sponsors/S_02_Grappik.svg"
+            alt="Grappik"
           />
         )}
       </div>
@@ -389,43 +405,83 @@ function MediaPartner() {
       <div className="flex flex-wrap flex-1 gap-x-[60px] gap-y-[48px] justify-center items-center">
         {withLink(
           'https://baseplayhouse.co/',
-          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_01.png" alt="" />
+          <img
+            className="h-[28px] md:h-[40px] cursor-pointer"
+            src="/images/mediaPartners/MP_01.png"
+            alt=""
+          />
         )}
         {withLink(
           'https://www.modernist.life/',
-          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_02.png" alt="" />
+          <img
+            className="h-[28px] md:h-[40px] cursor-pointer"
+            src="/images/mediaPartners/MP_02.png"
+            alt=""
+          />
         )}
         {withLink(
           'https://www.skooldio.com/ ',
-          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_03.png" alt="" />
+          <img
+            className="h-[28px] md:h-[40px] cursor-pointer"
+            src="/images/mediaPartners/MP_03.png"
+            alt=""
+          />
         )}
         {withLink(
           'https://www.facebook.com/join.codebase/',
-          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_04.png" alt="" />
+          <img
+            className="h-[28px] md:h-[40px] cursor-pointer"
+            src="/images/mediaPartners/MP_04.png"
+            alt=""
+          />
         )}
         {withLink(
           'https://www.mindground.world/',
-          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_05.png" alt="" />
+          <img
+            className="h-[28px] md:h-[40px] cursor-pointer"
+            src="/images/mediaPartners/MP_05.png"
+            alt=""
+          />
         )}
         {withLink(
           'https://www.contentshifu.com/',
-          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_06.png" alt="" />
+          <img
+            className="h-[28px] md:h-[40px] cursor-pointer"
+            src="/images/mediaPartners/MP_06.png"
+            alt=""
+          />
         )}
         {withLink(
           'https://www.youtube.com/c/QueenH',
-          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_07.png" alt="" />
+          <img
+            className="h-[28px] md:h-[40px] cursor-pointer"
+            src="/images/mediaPartners/MP_07.png"
+            alt=""
+          />
         )}
         {withLink(
           'https://www.facebook.com/learnlalen',
-          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_08.png" alt="" />
+          <img
+            className="h-[28px] md:h-[40px] cursor-pointer"
+            src="/images/mediaPartners/MP_08.png"
+            alt=""
+          />
         )}
         {withLink(
           'https://www.facebook.com/dataholicth',
-          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_09.png" alt="" />
+          <img
+            className="h-[28px] md:h-[40px] cursor-pointer"
+            src="/images/mediaPartners/MP_09.png"
+            alt=""
+          />
         )}
         {withLink(
           'https://adaddictth.com/',
-          <img className="h-[60px] cursor-pointer" src="/images/mediaPartners/MP_10.png" alt="" />
+          <img
+            className="h-[28px] md:h-[40px] cursor-pointer"
+            src="/images/mediaPartners/MP_10.png"
+            alt=""
+          />
         )}
       </div>
     </div>
